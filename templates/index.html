@@ -9,14 +9,20 @@
       href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
       rel="stylesheet"
     />
-    <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=Playwrite+IE+Guides&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=Playwrite+IE+Guides&display=swap" rel="stylesheet"/>
+
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/landingpage.css' %}"/>
     <style>
        .custom-font {
             font-family: "Lavishly Yours";
             font-weight: 400;
         }
+        .button-color{
+          background-color: #3771c8;
+        }
     </style>
-    {% load static %}
   </head>
   <body>
     <!-- navbar section start -->
@@ -24,7 +30,7 @@
       <div
         class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
       >
-        <a href="#" class="flex relative left-2 2xl:-left-20 lg:-left-2 md:-left-5 sm:-left-3 items-start space-x-0 rtl:space-x-reverse">
+        <a href="#" class="flex relative left-2 2xl:-left-16 lg:-left-10 md:-left-5 sm:-left-3 items-start space-x-0 rtl:space-x-reverse">
           <span class="self-center text-4xl font-semibold whitespace-nowrap custom-font"
             >Lumiere</span
           >
@@ -34,13 +40,13 @@
         >
           <button
             type="button"
-            class="relative right-16 2xl:-right-2 lg:right-24 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 text-center"
+            class="relative right-16 2xl:-right-2 lg:right-24 text-white button-color hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 text-center"
           >
             Login
           </button>
           <button
             type="button"
-            class=" relative right-16 2xl:left-4 lg:-left-20 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 text-center"
+            class=" relative right-16 2xl:left-4 lg:-left-20 text-white button-color hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 text-center"
           >
             Register
           </button>
@@ -102,11 +108,90 @@
         </div>
       </div>
     </nav>
-
     <!-- navbar section end -->
+<!-- ------------Image Slider Section !!!!!!--------------------- -->
+ <div class="slider">
+  <!-- List Items -->
+   <div class="list">
+    <div class="item active">
+      <!-- to access static uploads -->
+      <img src="{% static 'uploads/Arabic.jpg' %}" alt="Arabic makeup">
+      <div class="slider-content">
+        <p>Makeup</p>
+        <h2>Arabic</h2>
+        <p>Arabic makeup is renowned for its dramatic and elegant look, emphasizing bold eyes and flawless skin. Characterized by intricate eyeliner styles, such as winged and kohl-lined designs, it accentuates the eyes as the focal point. Rich, smoky eyeshadows in jewel tones or metallic hues are commonly paired with voluminous lashes. The skin is perfected with full-coverage foundation, and lips are often kept neutral or adorned with rich, bold colors, creating a sophisticated and timeless allure.</p>
+        <button>View Artists</button>
+      </div>
+     </div>
+     <div class="item">
+      <!-- to access static uploads -->
+      <img src="{% static 'uploads/korean.jpg' %}" alt="korean makeup">
+      <div class="slider-content">
+        <p>Makeup</p>
+        <h2>Korean</h2>
+        <p>Korean makeup is celebrated for its natural and youthful aesthetic, focusing on glowing, dewy skin and minimalistic elegance. The "glass skin" look is achieved through lightweight foundations and illuminating products. Soft, gradient lips and flushed cheeks add a delicate charm. Eye makeup is subtle, with neutral tones, shimmery shadows, and gentle eyeliner to enhance the eyes naturally. This style emphasizes skincare and a fresh, radiant appearance, embodying a seamless blend of beauty and simplicity.</p>
+        <button>View Artists</button>
+      </div>
+     </div>
+     <div class="item">
+      <!-- to access static uploads -->
+      <img src="{% static 'uploads/Douyin.jpg' %}" alt="Douyin makeup">
+      <div class="slider-content">
+        <p>Makeup</p>
+        <h2>Douyin</h2>
+        <p>Douyin makeup, inspired by the popular Chinese app, emphasizes youthful and ethereal beauty. It features flawless, porcelain-like skin, bright under-eyes, and soft blush applied high on the cheeks for a lifted look. Glossy lips and shimmery eye shadows create a dreamy effect. The style often incorporates creative elements like subtle glitter or gradient colors, blending tradition with modern trends for a captivating aesthetic.</p>
+        <button>View Artists</button>
+      </div>
+     </div>
+     <div class="item">
+      <!-- to access static uploads -->
+      <img src="{% static 'uploads/Japanese.jpg' %}" alt="Japanese makeup">
+      <div class="slider-content">
+        <p>Makeup</p>
+        <h2>Igari</h2>
+        <p>Igari makeup, also known as the "hangover look," is a Japanese style that highlights a youthful, flushed appearance. The signature feature is rosy blush applied across the cheeks and nose, mimicking a natural flush. Dewy skin, soft pink or peachy lips, and minimal eye makeup complete the look. This playful and innocent style exudes a sweet, approachable vibe, ideal for a fresh and effortless beauty.</p>
+      </div>
+      <button>View Artists</button>
+     </div>
+     <div class="item">
+      <!-- to access static uploads -->
+      <img src="{% static 'uploads/Western.jpg' %}" alt="Western makeup">
+      <div class="slider-content">
+        <p>Makeup</p>
+        <h2>Western</h2>
+        <p>Western makeup emphasizes versatility and individuality, from bold, statement looks to natural, minimalist styles. Contoured cheekbones, defined brows, and striking eye makeup, including smoky eyes or winged eyeliner, are common features. Matte or glossy lips in a range of shades add personality. This approach often embraces experimentation, focusing on enhancing natural beauty while exploring diverse techniques and trends.</p>
+        <button>View Artists</button>
+      </div>
+     </div>
+     <div class="item">
+      <!-- to access static uploads -->
+      <img src="{% static 'uploads/Indian.jpg' %}" alt="Indian makeup">
+      <div class="slider-content">
+        <p>Makeup</p>
+        <h2>Indian</h2>
+        <p>Indian makeup is vibrant and regal, often highlighting bold eyes and rich tones. Dramatic eyeliner, kajal, and shimmery eyeshadows enhance the eyes, while warm-toned blush and highlighter create a radiant complexion. Lip colors range from deep reds to soft nudes, complementing intricate ethnic attire. This style celebrates cultural elegance and is perfect for festive occasions, blending tradition with contemporary trends.</p>
+        <button>View Artists</button>
+      </div>
+     </div>
+   </div>
+   <div class="arrows">
+    <button id="prev"><</button>
+    <button id="next">></button>
+   </div>  
+   <!-- thumbnail -->
+    <div class="thumbnail">
+      <div class="item active"><img src="{% static 'uploads/Arabic.jpg' %}" alt=""><div class="thumbnail-content">Arabic</div></div>
+      <div class="item"><img src="{% static 'uploads/korean.jpg' %}" alt=""><div class="thumbnail-content">Korean</div></div>
+      <div class="item"><img src="{% static 'uploads/Douyin.jpg' %}" alt=""><div class="thumbnail-content">Douyin</div></div>
+      <div class="item"><img src="{% static 'uploads/Japanese.jpg' %}" alt=""><div class="thumbnail-content">Igari</div></div>
+      <div class="item"><img src="{% static 'uploads/Western.jpg' %}" alt=""><div class="thumbnail-content">Western</div></div>
+      <div class="item"><img src="{% static 'uploads/Indian.jpg' %}" alt=""><div class="thumbnail-content">Indian</div></div>
+    </div>
+ </div>
 
+<!-- ------------Image Slider Section END !!!!!!--------------------- -->
     <!-- content section !!!! -->
-    <h1>Welcome to Hire a Makeup Artist</h1>
+    <!-- <h1>Welcome to Hire a Makeup Artist</h1>
     {% for m in makeup %}
     <img src="{{m.image}}" alt="{{m.artist_name}}" width="200px" />
     <p>Makeup Artist: <strong>{{m.artist_name}}</strong></p>
@@ -114,10 +199,11 @@
     <p>Category: <strong>{{m.category}}</strong></p>
     <p>Description: <strong>{{m.artist_description}}</strong></p>
     <p>Rate: <strong>{{m.rate}}</strong> per session</p>
-    {% endfor %}
+    {% endfor %} -->
 
     <!-- footer section !!!! -->
     <!-- if flowbite js is ever required, use the js link to access here !!!! -->
+    <script src="{% static 'js/imageslider.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
   </body>
 </html>
