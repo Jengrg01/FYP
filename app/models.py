@@ -17,9 +17,9 @@ class Category(models.Model):
 class Makeup(models.Model):
     artist_name = models.CharField(max_length=100)
     rate = models.IntegerField()
-    artist_description = models.CharField(max_length=100)
+    artist_description = models.CharField(max_length=300)
     speciality = models.ForeignKey(Speciality, on_delete = models.CASCADE, null = True)
-    image = models.URLField(null=True)
+    image = models.FileField(upload_to='static/uploads',null=True)
     category = models.ForeignKey(Category, on_delete = models.CASCADE, null = True)
     def __str__(self):
         return self.artist_name

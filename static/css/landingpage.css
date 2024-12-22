@@ -1,3 +1,4 @@
+ 
  /* ------For Slider------- */
  .slider{
     height: 100vh;
@@ -72,13 +73,13 @@
     transform: translateY(30px);
     filter: blur(20px);
     opacity: 0;
-    animation: showContent .5s .7s ease-in-out 1 forwards;
+    animation: showContent .025s .2s ease-in-out 1 forwards;
   }
   .slider .list .item.active h2{
-    animation-delay: 1s;
+    animation-delay: .1s;
   }
   .slider .list .item.active p:nth-child(3){
-    animation-duration: 1.3s;
+    animation-duration: .2s;
   }
 
   /* -----For prev and next buttons--------- */

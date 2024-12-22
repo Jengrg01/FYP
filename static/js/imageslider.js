@@ -27,7 +27,7 @@ prev.onclick = function(){
 //auto slide run
 let refreshInterval = setInterval(()=>{
     next.click();
-},10000)
+},3000)
 
 function showSlider(){
     //remove old item active
@@ -42,7 +42,7 @@ function showSlider(){
     clearInterval(refreshInterval);
     refreshInterval=setInterval(()=>{
         next.click();
-    },10000)
+    },3000)
 }
 
 //clicking thumbnails

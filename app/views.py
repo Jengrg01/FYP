@@ -10,8 +10,8 @@ def home(request):
     context ={
         "makeup": makeup
     }
-    return render(request, "index.html",context)
+    return render(request, "artists/index.html",context)
 
 
-def artist(self):
-    return HttpResponse("Welcome to Artist Page")
+def artist(request):
+    return render(request, "artists/artistpage.html")
