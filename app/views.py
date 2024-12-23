@@ -14,4 +14,9 @@ def home(request):
 
 
 def artist(request):
-    return render(request, "artists/artistpage.html")
+    makeup = Makeup.objects.all()#no limitations
+    #the context is in dictionary form
+    context ={
+        "artist": makeup
+    }
+    return render(request, "artists/artistpage.html",context)

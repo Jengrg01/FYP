@@ -4,6 +4,71 @@
 <title>Lumiere | ArtistsPage</title>
 {% endblock %}
 
- {% block main_content %}
- <h1>Artist Page</h1>
- {% endblock %}
+{% block main_content %}
+ <section class="artist-part">
+    <h1>Artist Page</h1>
+ <div class="flex justify-evenly gap-5 flex-wrap mb-2 px-6 py-7">
+    {% for a in artist %}
+    <div
+      class="max-w-[280px] bg-white border border-gray-200 rounded-lg shadow"
+      style="box-shadow: 2px 4px 6px #cecece;"
+    >
+      <a href="#">
+        <div class="w-full h-52">
+            <!-- Remember that without / the image cannot be accessed. -->
+            <img
+            class="rounded-t-lg w-full h-full object-fill"
+            src="/{{a.image}}"
+            alt="{{a.artist_name}}"
+          />
+        </div>
+      </a>
+      <div class="p-5">
+        <a href="#">
+          <h5
+            style="color: #5f6cb7; font-weight: 600"
+            class="mb-2 text-2xl text-center font-bold tracking-tight text-gray-900"
+          >
+            {{a.artist_name}}
+          </h5>
+        </a>
+        <div class="flex justify-evenly mb-3">
+          <p
+            class="font-normal border-2 px-2 text-sm rounded-md text-gray-700 bg-gray-100"
+          >
+            {{a.speciality}}
+          </p>
+          <p
+            class="font-normal border-2 px-2 text-sm rounded-md text-gray-700 bg-gray-100"
+          >
+            {{a.category}}
+          </p>
+        </div>
+        <div class="border-2 mb-2 px-2 rounded-md" style="box-shadow: 2px 4px 6px #cecece;">
+          <p class="text-left font-normal text-gray-700">
+              <strong>Description: </strong>
+            </p>
+            <p class="font-normal text-gray-700 w-full h-16" style="font-size: 13px;">
+              {{a.artist_description}}
+            </p>
+            <p class="mb-3 text-left text-md font-normal text-gray-700" style="font-family: Lora;">
+              <strong>Rate: </strong>{{a.rate}} per session
+            </p>
+        </div>
+       
+        <div class="text-center">
+          <a
+            href="#"
+            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center border-2 rounded-md bg-transparent rounded-lg text-[#5f6cb7] border-[#5f6cb7] hover:text-white hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300"
+          >
+            View Portfolio
+          </a>
+        </div>
+      </div>
+    </div>
+  
+    {% endfor %}
+  </div>
+ </section>
+ 
+{% endblock %}
