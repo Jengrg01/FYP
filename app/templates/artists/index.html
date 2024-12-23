@@ -1,46 +1,86 @@
-{% extends 'index.html' %}
-{% load static %}
-{% block title %}
+{% extends 'index.html' %} {% load static %} {% block title %}
 <title>Lumiere | HomePage</title>
 {% endblock %}
-
+<link
+  href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+  rel="stylesheet"
+/>
 {% block main_content %}
 <!-- ------------Image Slider Section !!!!!!--------------------- -->
 {% include 'artists/imageslider.html' %}
 <!-- ------------Image Slider Section END !!!!!!--------------------- -->
-  <!-- Latest artist card content section !!!! -->
-      <div class="flex justify-evenly gap-5 flex-wrap mt-12">
-        
-{% for m in makeup %}
-<div class="max-w-[280px] bg-white border border-gray-200 rounded-lg shadow">
+<!-- Latest artist card content section !!!! -->
+
+<h1
+  class="text-3xl text-center text-black mt-10 font-medium"
+  style="font-family: Lora"
+>
+  LATEST ARTIST EDITION
+</h1>
+<h1 class="text-center text-7xl font-bold -mt-12 mb-10">_____</h1>
+<div class="flex justify-evenly gap-5 flex-wrap mb-2">
+  {% for m in makeup %}
+  <div
+    class="max-w-[280px] bg-white border border-gray-200 rounded-lg shadow"
+    style="box-shadow: 2px 4px 6px #cecece;"
+  >
     <a href="#">
-        <div class="w-full h-52">
-            <img class="rounded-t-lg w-full h-full" src="{{m.image}}" alt="{{m.artist_name}}"/>
-        </div>
-        
+      <div class="w-full h-52">
+        <img
+          class="rounded-t-lg w-full h-full object-fill"
+          src="{{m.image}}"
+          alt="{{m.artist_name}}"
+        />
+      </div>
     </a>
     <div class="p-5">
-        <a href="#">
-            <h5 class="mb-2 text-2xl text-center font-bold tracking-tight text-gray-900">{{m.artist_name}}</h5>
+      <a href="#">
+        <h5
+          style="color: #5f6cb7; font-weight: 600"
+          class="mb-2 text-2xl text-center font-bold tracking-tight text-gray-900"
+        >
+          {{m.artist_name}}
+        </h5>
+      </a>
+      <div class="flex justify-evenly mb-3">
+        <p
+          class="font-normal border-2 px-2 text-sm rounded-md text-gray-700 bg-gray-100"
+        >
+          {{m.speciality}}
+        </p>
+        <p
+          class="font-normal border-2 px-2 text-sm rounded-md text-gray-700 bg-gray-100"
+        >
+          {{m.category}}
+        </p>
+      </div>
+      <div class="border-2 mb-2 px-2 rounded-md" style="box-shadow: 2px 4px 6px #cecece;">
+        <p class="text-left font-normal text-gray-700">
+            <strong>Description: </strong>
+          </p>
+          <p class="font-normal text-gray-700 w-full h-16" style="font-size: 13px;">
+            {{m.artist_description}}
+          </p>
+          <p class="mb-3 text-left text-md font-normal text-gray-700" style="font-family: Lora;">
+            <strong>Rate: </strong>{{m.rate}} per session
+          </p>
+      </div>
+     
+      <div class="text-center">
+        <a
+          href="#"
+          style="color: #5f6cb7; border-color: #5f6cb7"
+          class="inline-flex items-center px-3 py-2 text-sm font-medium text-center border-2 rounded-md bg-transparent rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
+        >
+          View Portfolio
         </a>
-        <div class="flex justify-evenly mb-2">
-            <p class="font-normal text-gray-700">{{m.speciality}}</p>
-            <p class="font-normal text-gray-700">{{m.category}}</p>
-        </div>
-        <p class="mb-3 font-normal text-gray-700">{{m.rate}}</p>
-        <p class="mb-3 font-normal text-sm text-gray-700 w-full h-36">{{m.artist_description}}</p>
-        <div class="text-center">
-            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                View Portfolio
-            </a>
-        </div>
-       
+      </div>
     </div>
+  </div>
+
+  {% endfor %}
 </div>
 
-{% endfor %}
-
-      </div>
-  <!-- Latest artist card content section END!!!! -->
+<!-- Latest artist card content section END!!!! -->
 
 {% endblock %}
