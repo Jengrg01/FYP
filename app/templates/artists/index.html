@@ -27,7 +27,7 @@
     <a href="#">
       <div class="w-full h-52">
         <img
-          class="rounded-t-lg w-full h-full object-fill"
+          class="rounded-t-lg w-full h-full object-cover"
           src="{{m.image}}"
           alt="{{m.artist_name}}"
         />
@@ -58,7 +58,7 @@
         <p class="text-left font-normal text-gray-700">
             <strong>Description: </strong>
           </p>
-          <p class="font-normal text-gray-700 w-full h-16" style="font-size: 13px;">
+          <p class="mb-1 font-normal text-justify text-gray-700 w-full h-20" style="font-size: 13.7px; ">
             {{m.artist_description}}
           </p>
           <p class="mb-3 text-left text-md font-normal text-gray-700" style="font-family: Lora;">
@@ -81,5 +81,7 @@
 </div>
 
 <!-- Latest artist card content section END!!!! -->
+ <!-- Makeup styles -->
+ {% include 'artists/cardslider.html' %}
 
 {% endblock %}
