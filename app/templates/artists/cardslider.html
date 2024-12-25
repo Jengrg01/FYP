@@ -1,19 +1,89 @@
+<!-- SwiperJS CSS Link for card slider -->
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
 {% load static %}
-<div class="card-body">
-    <div class="card-container mb-10 max-w-[1380px] w-full">
-        <div class="card-subcontainer">
+<link rel="stylesheet" href="{% static 'css/cardslider.css' %}">
+<body>
+    <div class="card-body mb-20 -mt-14">
+        <div class="container swiper">
             <div class="card-wrapper">
-                <div class="card ">
-                    <div class="image-box">
-                        <a href="#"><img src="{% static 'uploads/Arabic.jpg' %}" alt="Arabic makeup"></a>
-                    </div>
-                    <div class="artist-details py-2">
-                        <div class="artist-name">
-                            <h3 class="name">Arabic Makeup</h3>
-                        </div>    
-                    </div>
-                </div>
+                <ul class="card-list swiper-wrapper">
+                    <li class="card-item swiper-slide">
+                        <div class="image-box">
+                            <a href="#" class="card-link"><img src="{% static 'uploads/Arabic.jpg' %}" alt="Arabic makeup"></a>
+                        </div>
+                        <div class="artist-details py-2">
+                            <div class="artist-name">
+                                <h3 class="name">Arabic Makeup</h3>
+                            </div>    
+                        </div>
+                    </li>
+                    <li class="card-item swiper-slide">
+                        <div class="image-box">
+                            <a href="#" class="card-link"><img src="{% static 'uploads/Douyin.jpg' %}" alt="Douyin makeup"></a>
+                        </div>
+                        <div class="artist-details py-2">
+                            <div class="artist-name">
+                                <h3 class="name">Douyin Makeup</h3>
+                            </div>    
+                        </div>
+                    </li>
+                    <li class="card-item swiper-slide">
+                        <div class="image-box">
+                            <a href="#" class="card-link"><img src="{% static 'uploads/Indian.jpg' %}" alt="Indian makeup"></a>
+                        </div>
+                        <div class="artist-details py-2">
+                            <div class="artist-name">
+                                <h3 class="name">Indian Makeup</h3>
+                            </div>    
+                        </div>
+                    </li>
+                    <li class="card-item swiper-slide">
+                        <div class="image-box">
+                            <a href="#" class="card-link"><img src="{% static 'uploads/Japanese.jpg' %}" alt="Japanese makeup"></a>
+                        </div>
+                        <div class="artist-details py-2">
+                            <div class="artist-name">
+                                <h3 class="name">Japanese Makeup</h3>
+                            </div>    
+                        </div>
+                    </li>
+                    <li class="card-item swiper-slide" >
+                        <div class="image-box">
+                            <a href="#" class="card-link"><img src="{% static 'uploads/korean.jpg' %}" alt="korean makeup"></a>
+                        </div>
+                        <div class="artist-details py-2">
+                            <div class="artist-name">
+                                <h3 class="name">Korean Makeup</h3>
+                            </div>    
+                        </div>
+                    </li>
+                    <li class="card-item swiper-slide">
+                        <div class="image-box">
+                            <a href="#" class="card-link"><img src="{% static 'uploads/Western.jpg' %}" alt="Western makeup"></a>
+                        </div>
+                        <div class="artist-details py-2">
+                            <div class="artist-name">
+                                <h3 class="name">Western Makeup</h3>
+                            </div>    
+                        </div>
+                    </li>
+                </ul>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                
             </div>
-        </div>
     </div>
-</div>
+    </div>
+   
+    <!-- SwiperJs script Link -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{% static 'js/cardslider.js' %}"></script>
+</body>
+   
+   
+    
+
