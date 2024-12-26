@@ -51,12 +51,12 @@
       </a>
       <div class="flex justify-evenly mb-3">
         <p
-          class="font-normal border-2 px-2 text-sm rounded-md text-gray-700 bg-gray-100"
+          class="font-normal border-2 px-2 text-xs rounded-md text-gray-700 bg-gray-100"
         >
           {{m.speciality}}
         </p>
         <p
-          class="font-normal border-2 px-2 text-sm rounded-md text-gray-700 bg-gray-100"
+          class="font-normal border-2 px-2 text-xs rounded-md text-gray-700 bg-gray-100"
         >
           {{m.category}}
         </p>
@@ -103,5 +103,31 @@
  </svg>
 </div>
  {% include 'artists/cardslider.html' %}
-
+<!-- ---------Camera Upload-------- -->
+<h1
+class="text-3xl text-center text-black mt-20 font-normal"
+style="font-family: Lora"
+>
+Want to learn what suits you the best?
+</h1>
+<div class="flex justify-center mt-3 ml-20 ">
+<svg height="80" width="300" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" stroke="black">
+    <path stroke-width="3" d="M5 20 l215 0" />
+  </g>
+</svg>
+</div>
+<div class="flex items-center justify-center h-96 w-full bg-white mb-24">
+  <div style="box-shadow: 0px 1px 5px grey;" class="flex justify-center items-center h-full w-4/5 border-2 rounded-lg">
+    <div class="border-2 border-dashed h-5/6 w-[90%] border-gray-400">
+      <div class="flex flex-col justify-center items-center mt-20">
+        <div class="camera-icon h-24 w-24 mb-5">
+          <img class="w-full h-full" src="{% static 'uploads/camera.png' %}" alt="camera icon">
+        </div>
+        <button class="upload-btn px-3 py-1 bg-blue-900 rounded-md font-medium text-white hover:bg-blue-800">Upload Image</button>
+      </div>
+     
+    </div>
+  </div>
+</div>
 {% endblock %}
