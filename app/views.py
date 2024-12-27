@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from . models import Makeup #for entry to database
+from . forms import *
 # Create your views here.
 # write functions for database, based on function or class based views(api creations get easier), we apure working on mvt pattern
 
@@ -20,3 +21,6 @@ def artist(request):
         "artist": makeup
     }
     return render(request, "artists/artistpage.html",context)
+# adding a form 
+def addArtist(request):
+    return render(request,"artist/addartist.html",{"form": ArtistForm} )
