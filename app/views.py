@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . models import Makeup #for entry to database
 from . forms import *
@@ -21,6 +21,23 @@ def artist(request):
         "artist": makeup
     }
     return render(request, "artists/artistpage.html",context)
+
+def artistlist(request):
+     makeup = Makeup.objects.all()#no limitations
+    #the context is in dictionary form
+     context ={
+        "artist": makeup
+    }
+     return render(request, "artists/artistlist.html",context)
 # adding a form 
 def addArtist(request):
-    return render(request,"artist/addartist.html",{"form": ArtistForm} )
+    if request.method == "POST":
+        # to send the data sent from method post, we need .FILES as we have images to send too
+        form = ArtistForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # to send back to another list when form is saved.
+            return redirect('/artists/artistlist')
+        else:
+            return render(request,"artists/addartist.html", {"form": form} )
+    return render(request,"artists/addartist.html",{"form": ArtistForm} )
