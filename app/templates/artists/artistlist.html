@@ -6,10 +6,18 @@
 
 {% block main_content %}
  
-
+{% for msg in messages %}
+<div class="msg flex justify-center">
+  {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+<span class=" bg-blue-800  py-2 px-3 text-white text-center">
+  {{msg}}
+</span>
+{% endif %}
+</div>
+{% endfor %}
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     Artist name
@@ -35,28 +43,29 @@
             </tr>
         </thead>
         <tbody>
-            {% for m in makeup %}
-            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{m.artist_name}}
+            {% for a in artist %}
+            <tr class="odd:bg-white even:bg-gray-50 border-b">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    {{a.artist_name}}
                 </th>
                 <td class="px-6 py-4">
-                    {{m.speciality}}
+                    {{a.speciality}}
                 </td>
                 <td class="px-6 py-4">
-                    {{m.category}}
+                    {{a.category}}
                 </td>
                 <td class="px-6 py-4">
-                    {{m.rate}}
+                    {{a.rate}}
+                </td>
+                <td class="px-6 py-4 w-48">
+                    {{a.artist_description}}
                 </td>
                 <td class="px-6 py-4">
-                    {{m.description}}
+                    <img src="/{{a.image}}" alt="{{a.artist_name}}" width="200px">
                 </td>
-                <td class="px-6 py-4">
-                    <img src="/{{m.iamge}}" alt="{{m.artist_name}}" width="200px">
-                </td>
-                <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                <td class="px-6 py-4 ">
+                    <a href="{% url 'updateArtist' a.id %}" class="font-medium text-blue-600 hover:underline">Update</a>
+                    <a href="{% url 'deleteArtist' a.id %}" class="font-medium text-red-600 hover:underline">Delete</a>
                 </td>
             </tr>
             {% endfor %}

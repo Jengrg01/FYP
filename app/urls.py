@@ -6,5 +6,7 @@ urlpatterns = [
     path("", views.home, name='home'),
     path("artist/", views.artist, name='artist'),
     path("addartist/", views.addArtist, name='addArtist'),
-    path("artists/artistlist/", views.artistlist, name='artistlist'),
+    path("artistlist/", views.artistlist, name='artistlist'),
+    path("updateartist/<int:artist_id>", views.updateArtist, name='updateArtist'),
+    path("deleteartist/<int:artist_id>", views.deleteArtist, name='deleteArtist'),
 ]
