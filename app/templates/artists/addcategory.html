@@ -1,0 +1,38 @@
+{% extends 'index.html' %} 
+{% load static %} 
+{% load crispy_forms_tags %} 
+{% block title %}
+<title>Lumiere | Add Category Page</title>
+{% endblock %} 
+{% block main_content %}
+
+<div class="form-section my-16">
+  {% for msg in messages %}
+  <div class="msg flex justify-center">
+  {% if msg.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+  <span class=" bg-red-800  py-2 px-3 text-white text-center">
+    {{msg}}
+  </span>
+  {% endif %}
+  </div>
+  {% endfor %}
+  <div class="flex justify-center">
+    <div class="px-10 py-4 bg-gray-100 border-2 rounded-md my-6">
+      <!-- enctype multipart is required to post images as well -->
+      <form action="" method="POST" enctype="multipart/form-data">
+        <h2 class="text-center font-semibold text-xl  mb-3">
+          Add Category
+        </h2>
+        <!-- generated token for crispy -->
+        {% csrf_token %} 
+        {{ form | crispy }}
+        <div class="mb-2"><input type="submit" value="Add category" class="bg-blue-900 py-2 px-5 text-white rounded-md">
+        </div>
+      </form>
+    </div>
+    
+  </div>
+</div>
+
+
+{% endblock %}

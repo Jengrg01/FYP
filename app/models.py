@@ -3,13 +3,13 @@ from django.db import models
 # Create your models here.
 # create models through object relation mapping
 class Speciality(models.Model):
-    speciality_name = models.CharField(max_length=100)
+    speciality_name = models.CharField(max_length=100, unique=True)
     
     def __str__(self):
         return self.speciality_name
     
 class Category(models.Model):
-    category_name = models.CharField(max_length=100)
+    category_name = models.CharField(max_length=100, unique=True)
     
     def __str__(self):
         return self.category_name

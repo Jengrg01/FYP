@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+<title>Lumiere | Category List</title>
+{% endblock %}
+
+{% block main_content %}
+ 
+{% for msg in messages %}
+<div class="msg flex justify-center">
+  {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+<span class=" bg-blue-800  py-2 px-3 text-white text-center">
+  {{msg}}
+</span>
+{% endif %}
+</div>
+{% endfor %}
+<h1 class="text-center text-blue-900 font-bold text-3xl my-5">Category List</h1>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Category name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in category %}
+            <tr class="odd:bg-white even:bg-gray-50 border-b">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    {{c.category_name}}
+                </th>
+                <td class="px-6 py-4 ">
+                    <a href="{% url 'updatecategory' c.id %}" class="font-medium text-blue-600 hover:underline">Update</a>
+                    <a href="{% url 'deletecategory' c.id %}" class="font-medium text-red-600 hover:underline">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

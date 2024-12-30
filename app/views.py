@@ -52,7 +52,7 @@ def updateArtist(request, artist_id):
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.SUCCESS,"Artist data is updated successfully !")
-            return redirect('artistlist')#to pass artist_id through url 
+            return redirect('artistlist')# return redirect('updateArtist', artist_id=artist_id) to pass artist_id through url 
         else:
             messages.add_message(request, messages.ERROR, "Error ! Data could not be updated !")
             return render(request, 'artists/updateartist.html',{"form": form})
@@ -66,3 +66,83 @@ def deleteArtist(request, artist_id):
     artist.delete()
     messages.add_message(request, messages.SUCCESS, "Artist has been deleted successfully !")
     return redirect('artistlist')
+
+def categorylist(request):
+    category = Category.objects.all()
+    return render(request, 'artists/categorylist.html',{'category': category})
+
+def addcategory(request):
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, "Category has been added successfully !")
+            # to send back to another list when form is saved.
+            return redirect('categorylist')
+        else:
+            messages.add_message(request, messages.ERROR, "Please verify field correctly !")
+            return render(request,"artists/addcategory.html", {"form": form} )
+    return render(request,"artists/addcategory.html",{"form": CategoryForm} )
+
+def updatecategory(request,category_id):
+    instance = Category.objects.get(id=category_id)
+    if request.method == "POST":
+        form = CategoryForm(request.POST, instance=instance)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS,"Category is updated successfully !")
+            return redirect('categorylist')
+        else:
+            messages.add_message(request, messages.ERROR, "Error ! Data could not be updated !")
+            return render(request, 'artists/updatecategory.html',{"form": form})
+    # to pass both form and product id in order to update a specific artist.
+    context = {
+        "form": CategoryForm(instance=instance)
+    }
+    return render(request, 'artists/updatecategory.html', context)
+
+def deletecategory(request, category_id):
+    category = Category.objects.get(id = category_id)
+    category.delete()
+    messages.add_message(request, messages.SUCCESS, "Category has been deleted successfully !")
+    return redirect('categorylist')
+
+def specialitylist(request):
+    speciality = Speciality.objects.all()
+    return render(request, 'artists/specialitylist.html',{'speciality': speciality})
+
+def addspeciality(request):
+    if request.method == "POST":
+        form = SpecialityForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, "Speciality has been added successfully !")
+            return redirect('specialitylist')
+        else:
+            messages.add_message(request, messages.ERROR, "Please verify field correctly !")
+            return render(request,"artists/addspeciality.html", {"form": form} )
+    return render(request,"artists/addspeciality.html",{"form": SpecialityForm} )
+
+def updatespeciality(request,speciality_id):
+    instance = Speciality.objects.get(id=speciality_id)
+    if request.method == "POST":
+        form = SpecialityForm(request.POST, instance=instance)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS,"Speciality is updated successfully !")
+            return redirect('specialitylist')
+        else:
+            messages.add_message(request, messages.ERROR, "Error ! Data could not be updated !")
+            return render(request, 'artists/updatespeciality.html',{"form": form})
+    # to pass both form and product id in order to update a specific artist.
+    context = {
+        "form": SpecialityForm(instance=instance)
+    }
+    return render(request, 'artists/updatespeciality.html', context)
+
+def deletespeciality(request, speciality_id):
+    category = Speciality.objects.get(id = speciality_id)
+    category.delete()
+    messages.add_message(request, messages.SUCCESS, "Speciality has been deleted successfully !")
+    return redirect('specialitylist')
+

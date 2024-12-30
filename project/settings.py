@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "app",
     'crispy_forms',
     "crispy_tailwind",
+    'adminpage',
     # connecting app to project
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
