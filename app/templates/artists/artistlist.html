@@ -1,10 +1,10 @@
-{% extends 'index.html' %}
+{% extends 'adminpage/index.html' %}
 {% load static %}
 {% block title %}
-<title>Lumiere | Artists List</title>
+<title>Admin | Artists List</title>
 {% endblock %}
 
-{% block main_content %}
+{% block admin_content %}
  
 {% for msg in messages %}
 <div class="msg flex justify-center">
@@ -15,7 +15,10 @@
 {% endif %}
 </div>
 {% endfor %}
-<h1 class="text-center text-blue-900 font-bold text-3xl my-5">Artist List</h1>
+<div class="flex justify-evenly ml-72 gap-72">
+    <h1 class="text-center text-blue-900 font-bold text-3xl my-5">Artist List</h1>
+<a href="{% url 'addArtist' %}"><button class="mt-6 px-3 py-2 bg-blue-900 text-white text-center font-bold rounded-lg">+ Add Artist</button></a>
+</div>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -64,9 +67,12 @@
                 <td class="px-6 py-4">
                     <img src="/{{a.image}}" alt="{{a.artist_name}}" width="200px">
                 </td>
-                <td class="px-6 py-4 ">
-                    <a href="{% url 'updateArtist' a.id %}" class="font-medium text-blue-600 hover:underline">Update</a>
-                    <a href="{% url 'deleteArtist' a.id %}" class="font-medium text-red-600 hover:underline">Delete</a>
+                <td class="px-6 py-4">
+                    <div class="flex gap-x-5">
+                        <a href="{% url 'updateArtist' a.id %}" class="font-medium text-blue-600 hover:underline">Update</a>
+                        <a href="{% url 'deleteArtist' a.id %}" class="font-medium text-red-600 hover:underline">Delete</a>
+                    </div>
+                    
                 </td>
             </tr>
             {% endfor %}
