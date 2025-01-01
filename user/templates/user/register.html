@@ -1,0 +1,52 @@
+<style>
+    #id_username_helptext, #id_password1_helptext{
+        display: none;
+    }
+</style>
+{% extends 'index.html' %} 
+{% load static %} 
+{% load crispy_forms_tags %} 
+{% block title %}
+<title>Lumiere | Register Page</title>
+{% endblock %} 
+{% block main_content %}
+{% for msg in messages %}
+<div class="msg flex justify-center">
+  {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+  <span class=" bg-blue-800  py-2 px-3 text-white text-center">
+  {{msg}}
+</span>
+{% endif %}
+{% if msg.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+  <span class=" bg-red-800  py-2 px-3 text-white text-center">
+    {{msg}}
+  </span>
+  {% endif %}
+</div>
+{% endfor %}
+<div class="register-main">
+    <section class="bg-white">
+        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+            <a href="{% url 'home' %}" class="flex items-center mb-6 text-5xl font-semibold text-gray-900 custom-font">
+                Lumiere   
+            </a>
+            <div class="w-full bg-white rounded-lg shadow border sm:max-w-md xl:p-0">
+                <div class="p-6 space-y-4 sm:p-8">
+                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                        Create an account
+                    </h1>
+                    <form class="space-y-4" action="#" method="POST">
+                        {% csrf_token %}
+                        {{ form | crispy }}
+                        <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create an account</button>
+                        <p class="text-sm font-light text-gray-500">
+                            Already have an account? <a href="#" class="font-medium text-blue-600 hover:underline">Login here</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
