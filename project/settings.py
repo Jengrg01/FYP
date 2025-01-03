@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'user',
     # connecting app to project
 ]
+
+
+
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 
 CRISPY_TEMPLATE_PACK = "tailwind"

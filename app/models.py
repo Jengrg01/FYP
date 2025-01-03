@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 # create models through object relation mapping
 class Speciality(models.Model):
@@ -15,6 +15,7 @@ class Category(models.Model):
         return self.category_name
 
 class Makeup(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     artist_name = models.CharField(max_length=100)
     rate = models.IntegerField()
     artist_description = models.CharField(max_length=300)

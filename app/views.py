@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from . models import Makeup #for entry to database
 from . forms import *
 from django.contrib import messages
+from django.contrib.auth.models import User
 # Create your views here.
 # write functions for database, based on function or class based views(api creations get easier), we apure working on mvt pattern
 
@@ -36,7 +37,16 @@ def addArtist(request):
         # to send the data sent from method post, we need .FILES as we have images to send too
         form = ArtistForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+             # Create a User object for the artist
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = User.objects.create_user(username=username, password=password)
+            
+            # Create a Makeup (Artist) object and associate it with the user
+            artist = form.save(commit=False)
+            artist.user = user
+            artist.save()
+            
             messages.add_message(request, messages.SUCCESS, "Artist has been added successfully !")
             # to send back to another list when form is saved.
             return redirect('artistlist')
