@@ -22,19 +22,26 @@ def register_user(request):
     }
     return render(request, 'user/register.html', context)
 
-def login(request):
+def loginUser(request):
     if request.method == "POST":
-        form = LoginForm(request.POST)
+        print(request.POST)
+        form = LoginForm(request=request,data=request.POST)
+        print(form.data)
+        if not form.is_valid():
+            print("Form errors:", form.errors)
         if form.is_valid():
             # to read the data
             data = form.cleaned_data
+            print("cleaned data:", data)
             user = authenticate(request, username = data['username'], password = data['password'])
+            print(user)
             if user is not None:
                 login(request, user)
                 # User is authenticated, check for profile and user type
                 try:
                     # Check if the user has a profile and if they are an artist
                     user_profile = UserProfile.objects.get(user=user)
+                    print(user_profile.is_artist)
                     if user_profile.is_artist:
                         messages.add_message(request, messages.SUCCESS, "Successfully logged in as artist!")
                         return redirect('artist')  # Redirect to artist dashboard
@@ -46,8 +53,8 @@ def login(request):
                 # If user is superuser (admin)
                 if user.is_superuser:
                     messages.add_message(request, messages.SUCCESS, "Successfully logged in as admin!")
-                    return redirect('adminpage')  # Redirect to admin dashboard
+                    return redirect('leader')  # Redirect to admin dashboard
             else:
                 messages.add_message(request, messages.ERROR, "Please verify all the fields.")
                 return render (request, 'user/login.html',{"form": form})
-    return render(request, 'user/login.html', {"form": LoginForm()})
+    return render(request, 'user/login.html', {"form": LoginForm(request=request)})

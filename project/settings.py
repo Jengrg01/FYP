@@ -41,8 +41,9 @@ INSTALLED_APPS = [
     "app",
     'crispy_forms',
     "crispy_tailwind",
-    'adminpage',
+    'leader',
     'user',
+
     # connecting app to project
 ]
 

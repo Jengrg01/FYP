@@ -4,6 +4,7 @@ from . models import Makeup #for entry to database
 from . forms import *
 from django.contrib import messages
 from django.contrib.auth.models import User
+from user.models import UserProfile  
 # Create your views here.
 # write functions for database, based on function or class based views(api creations get easier), we apure working on mvt pattern
 
@@ -46,6 +47,8 @@ def addArtist(request):
             artist = form.save(commit=False)
             artist.user = user
             artist.save()
+
+            user_profile = UserProfile.objects.create(user=user, is_artist=True)
             
             messages.add_message(request, messages.SUCCESS, "Artist has been added successfully !")
             # to send back to another list when form is saved.

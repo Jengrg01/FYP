@@ -9,5 +9,8 @@ class UserRegistrationForm(UserCreationForm):
         fields = ['username', 'password1', 'password2']
     
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+    def __init__(self, request=None,*args, **kwargs):
+        print(request)
+        super().__init__(request=request,*args, **kwargs)
+        self.fields['username'].widget.attrs.update({'placeholder': 'Username'})
+        self.fields['password'].widget.attrs.update({'placeholder': 'Password'})
