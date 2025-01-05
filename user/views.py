@@ -37,6 +37,10 @@ def loginUser(request):
             print(user)
             if user is not None:
                 login(request, user)
+                 # If user is superuser (admin)
+                if user.is_superuser:
+                    messages.add_message(request, messages.SUCCESS, "Successfully logged in as admin!")
+                    return redirect('leader')  # Redirect to admin dashboard
                 # User is authenticated, check for profile and user type
                 try:
                     # Check if the user has a profile and if they are an artist
@@ -45,16 +49,29 @@ def loginUser(request):
                     if user_profile.is_artist:
                         messages.add_message(request, messages.SUCCESS, "Successfully logged in as artist!")
                         return redirect('artist')  # Redirect to artist dashboard
-                except UserProfile.DoesNotExist:
-                    # If the user doesn't have a profile, proceed as a regular user
-                    messages.add_message(request, messages.SUCCESS, "Successfully logged in!")
-                    return redirect('home')  # Redirect to regular user dashboard
+                    else:
+                        # If the user doesn't have a profile, proceed as a regular user
+                        messages.add_message(request, messages.SUCCESS, "Successfully logged in!")
+                        return redirect('home')  # Redirect to regular user dashboard
+                except UserProfile.DoesNotExist as e:
+                    # Handle the case where the user profile does not exist
+                    print(e)
+                    messages.add_message(request, messages.WARNING, "User profile not found.")
+                    return redirect('login')
                 
-                # If user is superuser (admin)
-                if user.is_superuser:
-                    messages.add_message(request, messages.SUCCESS, "Successfully logged in as admin!")
-                    return redirect('leader')  # Redirect to admin dashboard
+               
             else:
                 messages.add_message(request, messages.ERROR, "Please verify all the fields.")
                 return render (request, 'user/login.html',{"form": form})
     return render(request, 'user/login.html', {"form": LoginForm(request=request)})
+
+def Userlist(request):
+     # Get all UserProfile objects where is_artist is False
+    non_artist_users = UserProfile.objects.filter(is_artist=False)
+
+# To get the corresponding user objects
+    non_artist_user_list = [user_profile.user for user_profile in non_artist_users]
+
+
+   
+    return render(request, "artists/userlist.html",non_artist_user_list)
