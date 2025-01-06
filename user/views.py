@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -66,12 +66,16 @@ def loginUser(request):
     return render(request, 'user/login.html', {"form": LoginForm(request=request)})
 
 def Userlist(request):
-     # Get all UserProfile objects where is_artist is False
+    # Get all UserProfile objects where is_artist is False
     non_artist_users = UserProfile.objects.filter(is_artist=False)
-
-# To get the corresponding user objects
+    # To get the corresponding user objects
     non_artist_user_list = [user_profile.user for user_profile in non_artist_users]
+    context = {'user_list': non_artist_user_list}
+    return render(request, "artists/userlist.html", context)
 
-
-   
-    return render(request, "artists/userlist.html",non_artist_user_list)
+def deleteUser(request, user_id):
+    # Get the UserProfile object with the given ID or return a 404 error
+    user_profile = get_object_or_404(UserProfile, user_id=user_id)
+    user_profile.user.delete()
+    messages.add_message(request, messages.SUCCESS, "User has been deleted successfully!")
+    return redirect('userlist')

@@ -59,21 +59,49 @@ def addArtist(request):
     return render(request,"artists/addartist.html",{"form": ArtistForm} )
 
 def updateArtist(request, artist_id):
-    instance = Makeup.objects.get(id=artist_id)
+    # Retrieve the artist's Makeup object and associated User object
+    artist = Makeup.objects.get(id=artist_id)
+    user = artist.user  # This is the associated User object for this artist
+
     if request.method == "POST":
-        form = ArtistForm(request.POST, request.FILES, instance=instance)
+        form = ArtistForm(request.POST, request.FILES, instance=artist)
+
         if form.is_valid():
+            # Get the cleaned data from the form
+            cleaned_data = form.cleaned_data
+
+            # If username or password is being changed, update the User object
+            new_username = cleaned_data.get('username')
+            new_password = cleaned_data.get('password')
+
+            # Update User object (username and password)
+            if new_username != user.username:
+                user.username = new_username
+
+            if new_password:  # Only update password if it's provided
+                user.set_password(new_password)  # Don't store plain password
+                user.save()  # Save the updated user object
+
+            # Save the updated Makeup (artist) object
             form.save()
-            messages.add_message(request, messages.SUCCESS,"Artist data is updated successfully !")
-            return redirect('artistlist')# return redirect('updateArtist', artist_id=artist_id) to pass artist_id through url 
+
+            # Optional: Update UserProfile if necessary (e.g., is_artist)
+            user_profile, created = UserProfile.objects.get_or_create(user=user)
+            user_profile.is_artist = True  # Ensure the user is marked as an artist
+            user_profile.save()
+
+            messages.add_message(request, messages.SUCCESS, "Artist data is updated successfully!")
+            return redirect('artistlist')  # Redirect to the artist list after update
         else:
-            messages.add_message(request, messages.ERROR, "Error ! Data could not be updated !")
-            return render(request, 'artists/updateartist.html',{"form": form})
-    # to pass both form and product id in order to update a specific artist.
+            messages.add_message(request, messages.ERROR, "Error! Data could not be updated!")
+            return render(request, 'artists/updateartist.html', {"form": form})
+
+    # If not a POST request, display the form with the existing data
     context = {
-        "form": ArtistForm(instance=instance)
+        "form": ArtistForm(instance=artist)
     }
     return render(request, 'artists/updateartist.html', context)
+
 def deleteArtist(request, artist_id):
     artist = Makeup.objects.get(id = artist_id)
     artist.delete()
