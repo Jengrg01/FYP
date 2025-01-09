@@ -1,0 +1,40 @@
+1. Padding:
+
+ - Definition: Padding involves adding extra pixels around the input image's border.
+
+ - Purpose:
+
+	Preserve Spatial Dimensions: Ensures the output feature map maintains the same width and height as the input, preventing reduction in size after convolution.
+
+	Edge Feature Detection: Allows filters to process edge and corner pixels effectively, ensuring features near the image boundaries are captured.
+
+ - Types of Padding:
+ 
+	Valid Padding (No Padding): No additional pixels are added. The output size decreases after convolution.
+
+	Same Padding (Zero Padding): Zeros are added to the input's border to maintain the same output dimensions as the input.
+
+2. Strides:
+
+ - Definition: Strides refer to the number of pixels the filter moves (or "strides") over the input matrix during convolution.
+
+ - Purpose:
+
+	Control Output Size: Adjusting stride length influences the spatial dimensions of the output feature map.
+
+	Computational Efficiency: Larger strides reduce the output size, decreasing computational load and memory usage.
+
+ - Stride Values:
+
+	Stride of 1: The filter moves one pixel at a time, resulting in a highly detailed feature map.
+
+	Stride of 2 or More: The filter moves two or more pixels at a time, producing a smaller output feature map with reduced spatial resolution.
+
+
+4. Considerations:
+
+ - Information Loss: Larger strides can lead to loss of detailed information due to reduced feature map size.
+
+ - Computational Load: Smaller strides and larger padding increase computational requirements due to larger output sizes.
+
+ - Design Choices: Selecting appropriate padding and stride values is crucial for balancing computational efficiency and the model's ability to capture relevant features
