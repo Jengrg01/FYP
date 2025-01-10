@@ -1,0 +1,87 @@
+1. Introduction to LeNet-5:
+
+	Developed by: Yann LeCun and his colleagues in 1998.
+
+	Purpose: Designed for handwritten digit recognition, particularly on the MNIST dataset.
+
+	Significance: One of the pioneering CNN architectures that demonstrated the effectiveness of deep learning in image recognition tasks.
+
+2. Architecture Overview:
+
+	LeNet-5 consists of seven layers (excluding the input) with learnable parameters:
+	
+	Input Layer: Accepts a 32x32 pixel grayscale image.
+
+    Layer 1 - Convolutional Layer (C1):
+
+	Filter Size: 6 filters of size 5x5.
+
+	Output: 6 feature maps of size 28x28.
+
+	Activation: Sigmoid function.
+
+    Layer 2 - Subsampling Layer (S2):
+
+	Type: Average pooling.
+
+	Filter Size: 2x2 with a stride of 2.
+
+	Output: 6 feature maps of size 14x14.
+
+    Layer 3 - Convolutional Layer (C3):
+
+	Filter Size: 16 filters of size 5x5.
+
+	Output: 16 feature maps of size 10x10.
+
+	Activation: Sigmoid function.
+	
+    Layer 4 - Subsampling Layer (S4):
+
+	Type: Average pooling.
+
+	Filter Size: 2x2 with a stride of 2.
+
+	Output: 16 feature maps of size 5x5.
+
+     Layer 5 - Convolutional Layer (C5):
+
+	Filter Size: 120 filters of size 5x5.
+
+	Output: 120 feature maps of size 1x1.
+
+	Activation: Sigmoid function.
+
+     Layer 6 - Fully Connected Layer (F6):
+
+	Neurons: 84.
+
+	Activation: Sigmoid function.
+
+     Output Layer:
+
+	Neurons: 10 (one for each digit 0-9).
+
+	Activation: Softmax function to produce probability distribution.
+
+3. Key Features:
+
+	Convolutional Layers: Extract spatial features through learned filters.
+
+	Subsampling (Pooling) Layers: Reduce dimensionality and computation, and provide translation invariance.
+
+	Fully Connected Layers: Integrate features for classification.
+
+4. Training Details:
+
+	Dataset: MNIST handwritten digits.
+
+	Loss Function: Mean Squared Error (MSE).
+
+	Optimizer: Stochastic Gradient Descent (SGD).
+
+5. Impact and Legacy:
+
+	Foundation for Modern CNNs: LeNet-5's architecture influenced subsequent deep learning models.
+	
+	Demonstrated Feasibility: Showed that neural networks could effectively perform image recognition tasks.
