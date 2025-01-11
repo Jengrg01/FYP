@@ -1,0 +1,60 @@
+- ANN (Artificial Neural Network):
+	General-purpose network for structured data.
+	Made up of fully connected layers (input, hidden, output).
+
+- CNN (Convolutional Neural Network):
+	Specialized for processing spatial data (e.g., images).
+	Uses convolutional, pooling, and fully connected layers.
+
+ - Key Differences:
+
+Input Data:
+
+ANN: Works well with structured, tabular data.
+CNN: Handles image data and spatial information effectively.
+	Feature Extraction:
+
+ANN: Requires manual feature extraction (features need to be predefined).
+CNN: Automatically extracts features (e.g., edges, textures, patterns).
+	Architecture:
+
+ANN: Fully connected neurons in every layer.
+CNN: Convolutional layers scan input images with filters to extract spatial features.
+-Layers in CNN:
+
+Convolutional Layer:
+	Detects features in the image using filters.
+	Each filter extracts specific patterns (e.g., edges, curves).
+Pooling Layer:
+	Reduces the spatial dimensions of the feature maps.
+	Helps retain important features while reducing computations.
+Fully Connected Layer:
+	Similar to ANN, used for classification or regression tasks.
+
+ - Applications:
+ANN:
+Structured data tasks like fraud detection, recommendation systems.
+Time series and NLP tasks.
+CNN:
+Image recognition, object detection, facial recognition.
+Medical imaging and self-driving cars.
+Advantages:
+
+ANN:
+Flexible and works on different types of input data.
+CNN:
+Automatically learns spatial hierarchies of features (low-level to high-level).
+Reduces the need for manual preprocessing in image tasks.
+Limitations:
+
+ANN:
+Struggles with high-dimensional data like images.
+CNN:
+Computationally expensive due to heavy operations.
+Performance:
+
+CNN outperforms ANN in image-related tasks because it understands spatial hierarchies (e.g., pixels close to each other are analyzed together).
+Conclusion:
+
+ANN is a general-purpose neural network.
+CNN is designed specifically for image data, utilizing convolutional and pooling layers to extract features effectively.
