@@ -17,7 +17,7 @@ urlpatterns = [
     path("updatespeciality/<int:speciality_id>", views.updatespeciality, name='updatespeciality'),
     path("deletespeciality/<int:speciality_id>", views.deletespeciality, name='deletespeciality'),
     path('contact/', views.contact, name='contact'),
-    path('contact/', views.contact_submit, name='contact'),
+    path('contact/submit/', views.contact_submit, name='contact_submit'),
     path('policy-terms/', views.policy_terms, name='policy_terms'),
     path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
 ]
