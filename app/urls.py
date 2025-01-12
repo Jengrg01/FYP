@@ -16,4 +16,7 @@ urlpatterns = [
     path("specialitylist/", views.specialitylist, name='specialitylist'),
     path("updatespeciality/<int:speciality_id>", views.updatespeciality, name='updatespeciality'),
     path("deletespeciality/<int:speciality_id>", views.deletespeciality, name='deletespeciality'),
+    path('contact/', views.contact, name='contact'),        
+    path('policy-terms/', views.policy_terms, name='policy_terms'), 
+    path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
 ]
