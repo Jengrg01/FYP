@@ -1,0 +1,119 @@
+{% extends 'index.html' %}
+
+{% block main_content %}
+<!-- Include Bootstrap CSS -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+
+<div class="container mt-5 mb-5">
+  <!-- Page Header -->
+  <div class="text-center">
+    <h1 class="display-4 text-primary animate__animated animate__fadeInDown">Privacy Policy</h1>
+    <p class="lead text-muted animate__animated animate__fadeInUp">
+      Learn about how we handle your data responsibly.
+    </p>
+  </div>
+
+  <!-- Privacy Policy Content -->
+  <div class="row mt-4">
+    <div class="col-lg-10 offset-lg-1">
+      <div class="card shadow animate__animated animate__fadeIn">
+        <div class="card-body">
+          <h3 class="card-title text-center text-primary">Our Commitment to Privacy</h3>
+          <p class="card-text">
+            At <strong>Lumiere</strong>, your privacy is our top priority. This
+            Privacy Policy outlines how we collect, use, and protect your personal
+            information.
+          </p>
+
+          <!-- Information Collection Section -->
+          <h5 class="mt-4 text-secondary">1. Information We Collect</h5>
+          <p>
+            We collect the following information to provide and improve our
+            services:
+          </p>
+          <ul>
+            <li>Personal details, such as your name, email address, and phone number.</li>
+            <li>Appointment preferences and service history.</li>
+            <li>Payment information, securely processed through third-party services.</li>
+          </ul>
+
+          <!-- Use of Information Section -->
+          <h5 class="mt-4 text-secondary">2. How We Use Your Information</h5>
+          <p>We use your information for purposes such as:</p>
+          <ul>
+            <li>Scheduling and managing appointments.</li>
+            <li>Communicating updates and promotional offers.</li>
+            <li>Improving our services and website functionality.</li>
+          </ul>
+
+          <!-- Data Sharing Section -->
+          <h5 class="mt-4 text-secondary">3. Sharing Your Information</h5>
+          <p>
+            We do not sell or share your personal information with third parties
+            except:
+          </p>
+          <ul>
+            <li>When required by law or legal proceedings.</li>
+            <li>To trusted partners essential for providing our services (e.g.,
+              payment processors).</li>
+          </ul>
+
+          <!-- Data Security Section -->
+          <h5 class="mt-4 text-secondary">4. Data Security</h5>
+          <p>
+            We implement industry-standard security measures to protect your data
+            from unauthorized access, loss, or misuse. However, no method of data
+            transmission or storage is completely secure.
+          </p>
+
+          <!-- Cookies Section -->
+          <h5 class="mt-4 text-secondary">5. Cookies</h5>
+          <p>
+            Our website uses cookies to enhance your browsing experience. Cookies
+            are small text files stored on your device that help us understand your
+            preferences and improve our website.
+          </p>
+
+          <!-- Your Rights Section -->
+          <h5 class="mt-4 text-secondary">6. Your Rights</h5>
+          <p>You have the right to:</p>
+          <ul>
+            <li>Access, update, or delete your personal data.</li>
+            <li>Opt-out of receiving promotional emails.</li>
+            <li>Withdraw consent for data processing at any time.</li>
+          </ul>
+
+          <!-- Contact Us Section -->
+          <h5 class="mt-4 text-secondary">7. Contact Us</h5>
+          <p>
+            If you have questions or concerns about this Privacy Policy, please
+            <a href="{% url 'contact' %}" class="text-primary">contact us</a>.
+          </p>
+
+          <!-- Footer Message -->
+          <div class="text-center mt-5">
+            <p class="text-muted">
+              By using our website, you agree to the terms outlined in this Privacy
+              Policy.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Include Animate.css -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+/>
+
+<!-- Include Bootstrap JS -->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"
+></script>
+{% endblock %}
