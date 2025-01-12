@@ -32,6 +32,18 @@ def artistlist(request):
         "artist": makeup
     }
      return render(request, "artists/artistlist.html",context)
+
+
+def contact(request):
+    return render(request, 'contact.html')
+
+def policy_terms(request):
+    return render(request, 'policy_terms.html')
+
+def privacy_policy(request):
+    return render(request, 'privacy_policy.html')
+
+
 # adding a form 
 def addArtist(request):
     if request.method == "POST":
@@ -187,3 +199,16 @@ def deletespeciality(request, speciality_id):
     messages.add_message(request, messages.SUCCESS, "Speciality has been deleted successfully !")
     return redirect('specialitylist')
 
+
+def contact_submit(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your message has been submitted successfully!')
+            return redirect('contact')  # Redirect to the Contact page after submission
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        form = ContactForm()
+    return render(request, 'contact.html', {'form': form})
