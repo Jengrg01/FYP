@@ -206,9 +206,9 @@ def contact_submit(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Your message has been submitted successfully!')
-            return redirect('contact')  # Redirect to the Contact page after submission
+            return redirect('contact_submit')
         else:
             messages.error(request, 'Please correct the errors below.')
     else:
-        form = ContactForm()
+        form = ContactForm() 
     return render(request, 'contact.html', {'form': form})
