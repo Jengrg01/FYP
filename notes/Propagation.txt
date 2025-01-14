@@ -1,0 +1,50 @@
+Backpropagation is a fundamental process in training neural networks, including CNNs.
+It involves calculating gradients of the loss function with respect to weights to optimize the model.
+Steps in Backpropagation:
+
+Forward Pass:
+Input data is passed through the network.
+The output is computed layer by layer, and the loss is calculated at the end.
+Backward Pass:
+Gradients are computed using the chain rule, starting from the output layer back to the input layer.
+Gradients of weights and biases are calculated to minimize the loss.
+Key Components:
+
+Loss Function:
+Measures the difference between predicted and actual values.
+Examples: Mean Squared Error (MSE), Cross-Entropy Loss.
+Gradient:
+The rate of change of the loss function with respect to weights.
+Helps in updating the weights to minimize the loss.
+Learning Rate:
+Determines the size of the steps taken to update weights.
+A smaller learning rate leads to slower convergence, while a larger one risks overshooting.
+Backpropagation in CNNs:
+
+Convolutional Layers:
+Gradients are calculated for the filter weights and biases.
+These are updated during training to improve feature detection.
+Pooling Layers:
+Gradients are passed back, but pooling has no parameters to learn.
+Fully Connected Layers:
+Similar to traditional neural networks, gradients are calculated for all weights and biases.
+Mathematics Behind Backpropagation:
+
+Chain rule is used to compute partial derivatives layer by layer.
+Gradients flow backward through the network, ensuring all layers are adjusted.
+Importance of Backpropagation:
+
+Ensures that the network learns by updating weights to reduce the loss.
+Makes the network efficient in recognizing patterns and improving predictions.
+Challenges:
+
+Vanishing Gradient Problem:
+Gradients become very small in deeper networks, slowing down learning.
+Solutions include using activation functions like ReLU.
+Exploding Gradient Problem:
+Gradients become too large, destabilizing the training process.
+Gradient clipping is a common solution.
+Conclusion:
+
+Backpropagation is essential for training CNNs.
+Proper gradient computation and updates enable the network to learn and generalize effectively.
