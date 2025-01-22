@@ -5,10 +5,12 @@ from . forms import *
 from django.contrib import messages
 from django.contrib.auth.models import User
 from user.models import UserProfile  
+from user.auth import admin_only
 # Create your views here.
 # write functions for database, based on function or class based views(api creations get easier), we apure working on mvt pattern
 
 def home(request):
+    user = request.user
     makeup = Makeup.objects.all().order_by('-id')[:4]#creating of 4 artists to be displayed in the card, shows the latest added artist at first
     #the context is in dictionary form
     context ={
@@ -25,6 +27,7 @@ def artist(request):
     }
     return render(request, "artists/artistpage.html",context)
 
+@admin_only
 def artistlist(request):
      makeup = Makeup.objects.all()#no limitations
     #the context is in dictionary form
@@ -33,6 +36,7 @@ def artistlist(request):
     }
      return render(request, "artists/artistlist.html",context)
 # adding a form 
+@admin_only
 def addArtist(request):
     if request.method == "POST":
         # to send the data sent from method post, we need .FILES as we have images to send too
@@ -58,6 +62,7 @@ def addArtist(request):
             return render(request,"artists/addartist.html", {"form": form} )
     return render(request,"artists/addartist.html",{"form": ArtistForm} )
 
+@admin_only
 def updateArtist(request, artist_id):
     # Retrieve the artist's Makeup object and associated User object
     artist = Makeup.objects.get(id=artist_id)
@@ -101,17 +106,17 @@ def updateArtist(request, artist_id):
         "form": ArtistForm(instance=artist)
     }
     return render(request, 'artists/updateartist.html', context)
-
+@admin_only
 def deleteArtist(request, artist_id):
     artist = Makeup.objects.get(id = artist_id)
     artist.delete()
     messages.add_message(request, messages.SUCCESS, "Artist has been deleted successfully !")
     return redirect('artistlist')
-
+@admin_only
 def categorylist(request):
     category = Category.objects.all()
     return render(request, 'artists/categorylist.html',{'category': category})
-
+@admin_only
 def addcategory(request):
     if request.method == "POST":
         form = CategoryForm(request.POST)
@@ -124,7 +129,7 @@ def addcategory(request):
             messages.add_message(request, messages.ERROR, "Please verify field correctly !")
             return render(request,"artists/addcategory.html", {"form": form} )
     return render(request,"artists/addcategory.html",{"form": CategoryForm} )
-
+@admin_only
 def updatecategory(request,category_id):
     instance = Category.objects.get(id=category_id)
     if request.method == "POST":
@@ -141,17 +146,17 @@ def updatecategory(request,category_id):
         "form": CategoryForm(instance=instance)
     }
     return render(request, 'artists/updatecategory.html', context)
-
+@admin_only
 def deletecategory(request, category_id):
     category = Category.objects.get(id = category_id)
     category.delete()
     messages.add_message(request, messages.SUCCESS, "Category has been deleted successfully !")
     return redirect('categorylist')
-
+@admin_only
 def specialitylist(request):
     speciality = Speciality.objects.all()
     return render(request, 'artists/specialitylist.html',{'speciality': speciality})
-
+@admin_only
 def addspeciality(request):
     if request.method == "POST":
         form = SpecialityForm(request.POST)
@@ -163,7 +168,7 @@ def addspeciality(request):
             messages.add_message(request, messages.ERROR, "Please verify field correctly !")
             return render(request,"artists/addspeciality.html", {"form": form} )
     return render(request,"artists/addspeciality.html",{"form": SpecialityForm} )
-
+@admin_only
 def updatespeciality(request,speciality_id):
     instance = Speciality.objects.get(id=speciality_id)
     if request.method == "POST":
@@ -180,7 +185,7 @@ def updatespeciality(request,speciality_id):
         "form": SpecialityForm(instance=instance)
     }
     return render(request, 'artists/updatespeciality.html', context)
-
+@admin_only
 def deletespeciality(request, speciality_id):
     category = Speciality.objects.get(id = speciality_id)
     category.delete()
