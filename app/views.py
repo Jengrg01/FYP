@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from user.models import UserProfile  
 from user.auth import admin_only
+from .utils import send_email_to_artist
 # Create your views here.
 # write functions for database, based on function or class based views(api creations get easier), we apure working on mvt pattern
 
@@ -45,7 +46,8 @@ def addArtist(request):
              # Create a User object for the artist
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = User.objects.create_user(username=username, password=password)
+            email = form.cleaned_data['email']
+            user = User.objects.create_user(username=username, password=password, email=email)
             
             # Create a Makeup (Artist) object and associate it with the user
             artist = form.save(commit=False)
@@ -56,6 +58,7 @@ def addArtist(request):
             
             messages.add_message(request, messages.SUCCESS, "Artist has been added successfully !")
             # to send back to another list when form is saved.
+            send_email_to_artist(username, password, email)
             return redirect('artistlist')
         else:
             messages.add_message(request, messages.ERROR, "Please verify all the fields !")
@@ -78,6 +81,7 @@ def updateArtist(request, artist_id):
             # If username or password is being changed, update the User object
             new_username = cleaned_data.get('username')
             new_password = cleaned_data.get('password')
+            new_email = cleaned_data.get('email')
 
             # Update User object (username and password)
             if new_username != user.username:
@@ -86,6 +90,8 @@ def updateArtist(request, artist_id):
             if new_password:  # Only update password if it's provided
                 user.set_password(new_password)  # Don't store plain password
                 user.save()  # Save the updated user object
+            if new_email != user.email:
+                user.email = new_email
 
             # Save the updated Makeup (artist) object
             form.save()
@@ -94,7 +100,7 @@ def updateArtist(request, artist_id):
             user_profile, created = UserProfile.objects.get_or_create(user=user)
             user_profile.is_artist = True  # Ensure the user is marked as an artist
             user_profile.save()
-
+            
             messages.add_message(request, messages.SUCCESS, "Artist data is updated successfully!")
             return redirect('artistlist')  # Redirect to the artist list after update
         else:

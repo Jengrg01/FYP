@@ -7,6 +7,7 @@ from . models import *
 class ArtistForm(ModelForm):
     username = forms.CharField(max_length=100, required=True)
     password = forms.CharField(widget=forms.PasswordInput, required=True)
+    email = forms.EmailField(max_length=200)
     class Meta:
         model = Makeup
         exclude = ['user'] 
