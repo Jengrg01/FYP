@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from . models import Makeup #for entry to database
+from . models import * #for entry to database
 from . forms import *
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -22,9 +22,35 @@ def home(request):
 
 def artist(request):
     makeup = Makeup.objects.all()#no limitations
-    #the context is in dictionary form
-    context ={
-        "artist": makeup
+    
+    categories = Category.objects.all()
+    specialities = Speciality.objects.all()
+
+       # Get query parameters for sorting and filtering
+    sort_by = request.GET.get('sort_by', None)  # Sorting (default: None) 
+    category_filter = request.GET.get('category', None)
+    speciality_filter = request.GET.get('speciality', None)
+
+    # Apply category filter
+    if category_filter:
+        makeup = makeup.filter(category__category_name=category_filter)
+    
+    # Apply speciality filter
+    if speciality_filter:
+        makeup = makeup.filter(speciality__speciality_name=speciality_filter)
+
+    # Apply sorting if a valid sorting parameter is provided
+    if sort_by:
+        makeup = makeup.order_by(sort_by)
+
+    # Pass everything to the template
+    context = {
+        "artist": makeup,
+        "sort_by": sort_by,
+        'categories': categories,
+        'specialities': specialities,
+        'category_filter': category_filter,
+        'speciality_filter': speciality_filter,
     }
     return render(request, "artists/artistpage.html",context)
 

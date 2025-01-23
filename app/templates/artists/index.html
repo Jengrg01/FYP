@@ -31,7 +31,6 @@
     class="max-w-[280px] bg-white border border-gray-200 rounded-lg shadow"
     style="box-shadow: 2px 4px 6px #cecece;"
   >
-    <a href="#">
       <div class="w-full h-52">
         <img
           class="rounded-t-lg w-full h-full object-cover"
@@ -39,16 +38,14 @@
           alt="{{m.artist_name}}"
         />
       </div>
-    </a>
+
     <div class="p-5">
-      <a href="#">
         <h5
           style="color: #5f6cb7; font-weight: 600"
           class="mb-2 text-2xl text-center font-bold tracking-tight text-gray-900"
         >
           {{m.artist_name}}
         </h5>
-      </a>
       <div class="flex justify-evenly mb-3">
         <p
           class="font-normal border-2 px-2 text-xs rounded-md text-gray-700 bg-gray-100"
@@ -75,7 +72,7 @@
      
       <div class="text-center">
         <a
-          href="#"
+          href="{% url 'artistDetail' m.id %}"
           class="inline-flex items-center px-3 py-2 text-sm font-medium text-center border-2 rounded-md bg-transparent rounded-lg text-[#5f6cb7] border-[#5f6cb7] hover:text-white hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300"
         >
           View Portfolio

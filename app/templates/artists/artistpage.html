@@ -7,6 +7,40 @@
 {% block main_content %}
  <section class="artist-part">
     <h1>Artist Page</h1>
+    <!-- HTML -->
+<form method="get" class="flex gap-4 mb-5">
+  <!-- Sort By -->
+  <select name="sort_by" class="border p-2 custom-select">
+      <option value="" disabled selected>Sort By</option>
+      <option value="artist_name" {% if sort_by == "artist_name" %}selected{% endif %}>Name (A-Z)</option>
+      <option value="-artist_name" {% if sort_by == "-artist_name" %}selected{% endif %}>Name (Z-A)</option>
+      <option value="rate" {% if sort_by == "rate" %}selected{% endif %}>Rate (Low to High)</option>
+      <option value="-rate" {% if sort_by == "-rate" %}selected{% endif %}>Rate (High to Low)</option>
+  </select>
+
+  <!-- Filter by Category -->
+  <!-- Filter by Category -->
+<select name="category" class="border p-2">
+  <option value="" disabled selected>Filter by Category</option>
+  {% for c in categories %}
+  <option value="{{ c.category_name }}" {% if category_filter == c.category_name %}selected{% endif %}>{{ c.category_name }}</option>
+  {% endfor %}
+</select>
+
+<!-- Filter by Speciality -->
+<select name="speciality" class="border p-2">
+  <option value="" disabled selected>Filter by Speciality</option>
+  {% for s in specialities %}
+  <option value="{{ s.speciality_name }}" {% if speciality_filter == s.speciality_name %}selected{% endif %}>{{ s.speciality_name }}</option>
+  {% endfor %}
+</select>
+
+
+  <button type="submit" class="p-2 bg-blue-500 text-white">Apply</button>
+  <a href="{% url 'artist' %}" class="p-2 bg-gray-300 text-black">Reset</a>
+</form>
+
+  
  <div class="flex justify-evenly gap-5 flex-wrap mb-2 px-6 py-7">
     {% for a in artist %}
     <div
@@ -58,7 +92,7 @@
        
         <div class="text-center">
           <a
-            href="#"
+            href="{% url 'artistDetail' a.id %}"
             class="inline-flex items-center px-3 py-2 text-sm font-medium text-center border-2 rounded-md bg-transparent rounded-lg text-[#5f6cb7] border-[#5f6cb7] hover:text-white hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300"
           >
             View Portfolio

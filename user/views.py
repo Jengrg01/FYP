@@ -5,6 +5,7 @@ from django.contrib import messages
 from .forms import *
 from .models import *
 from .auth import admin_only
+from app.models import *
 # Create your views here.
 
 def register_user(request):
@@ -85,3 +86,11 @@ def deleteUser(request, user_id):
     user_profile.user.delete()
     messages.add_message(request, messages.SUCCESS, "User has been deleted successfully!")
     return redirect('userlist')
+
+
+def artist_detail(request, artist_id):
+    artist = Makeup.objects.get(id=artist_id)
+    context = {
+        'artist':artist
+    }
+    return render(request,"user/artistdetail.html",context)
