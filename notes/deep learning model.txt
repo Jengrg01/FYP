@@ -1,0 +1,27 @@
+CNNs are a type of neural network. Neural networks try to mimic the human brain and its learning process. Like a brain takes the input, processes it, and generates some output, so does the neural network by passing it through different layers.
+
+what makes CNNs a special form of neural networks? The answer: Their specific types and architecture of hidden layers, namely
+
+Convolutional layers
+ReLU layers
+Pooling layers
+Fully connected layer (the final layer)
+Each layer type can occur several times. The order of the layers is not fixed but follows some rules: The network starts with a convolutional layer and ends with a fully connected layer. The fully connected layer is preceded by a final pooling layer. Therefore, an exemplary CNN could look something like this:
+
+Input ->Convolution ->ReLU ->Convolution ->ReLU ->Pooling ->
+
+ReLU ->Convolution ->ReLU ->Pooling ->Fully Connected -> Output
+
+An image classifier takes the numerical pixel values of an image, passes it through its CNN, and gets a final output. As explained earlier, this output can be a single class or a probability of classes that best describes the image. Inside the hidden layers of the CNN is where the "magic" happens. On the journey from inputting a picture to outputting a class, each CNN layer type performs a specific task.
+
+Convolution layers are the major building blocks in image classifiers. The mathematical term convolution refers to the combination of two functions (f and g) that produce a third function (z). The convolutional layer takes an input, applies a filter, and outputs a feature map. The feature map (z) is a combination of input and filter (f and g), hence the name convolution layer.
+
+The objective of convolution is to extract the features of an image. A feature is a specific characteristic of the original image, such as points, edges, or the shape of the dog's nose. Similar to the image being processed as numerics, a feature translates into a box of numeric pixel values. This matrix serves as a feature detector.
+
+ReLU is short for rectified linear units and a so-called activation function. The main goal of using an activation function is to add non-linearity to the computation. A ReLU layer takes **the feature map (i.e. the output of the convolution layer) and rectifies any negative values to zero. Positive numbers stay the same.
+
+In the process of pooling, a filter runs over the input matrix and assigns a single value per subregion to a new output matrix. The main objective of pooling is to downsize an image. This will increase the computational speed of your image classifier. The most common pooling approach is max pooling.
+
+The fully connected layer concludes with a CNN. Taking the output of the last pooling layer as an input, it aggregates all information and generates the final classification.
+
+At this stage, each value of the input vector represents the likelihood of a feature belonging to a specific class. For instance, one value might suggest the paw belongs to a dog at a 90% likelihood. Another value might correspond to the nose. The fully connected layer takes all the information, applies it to weight, and outputs a final classification.
