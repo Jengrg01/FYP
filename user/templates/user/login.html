@@ -7,6 +7,30 @@
       height: 100vh; /* Height of the line */
       background-color: lightgray; /* Color of the line */
     }
+    .grid-gallery{
+        display: grid;
+        grid-template-rows: 200px 100px 150px 125px;
+        grid-template-columns: 50% 40%;
+        gap:20px;
+    }
+    .gallery1{
+        background-color: antiquewhite;
+        grid-row-start: 1;
+        grid-row-end: 3 ;
+    }
+    .gallery2{
+        background-color:#663DC6
+    }
+    .gallery3{
+        background-color:aquamarine;
+        grid-row-start: 1;
+        grid-row-end: 4 ;
+        grid-column-start: 2;
+    }
+    .login-font{
+        font-family: "Poppins";
+        font-weight: 400;
+    }
 </style>
 {% extends 'index.html' %} 
 {% load static %} 
@@ -56,9 +80,21 @@
         </div>
     </div>
     <div class="vertical-line"></div>
-    <div class="w-[45%] absolute right-0 h-[85%] bg-red-100">
-        <h1 class="text-xl font-semibold mt-5">Welcome to Lumiere!</h1>
-        <h1 class="text-xl font-semibold">Find the new you!</h1>
+    <div class="w-[45%] absolute right-0 h-[85%]">
+        <h1 class="text-xl font-semibold mt-5 login-font">Welcome to Lumiere!</h1>
+        <h1 class="text-xl font-semibold login-font">Find the new you!</h1>
+        <p class="text-sm login-font font-light mb-5">Your one place for makeup and self care!</p>
+        <div class="grid-gallery h-[90%] w-full">
+            <div class="gallery1">
+                <img class="h-full w-full object-cover" src="{% static 'uploads/loginimg.jpg' %}" alt="image">
+            </div>
+            <div class="gallery2">
+                <img class="h-full w-full object-cover" src="{% static 'uploads/loginimg1.jpg' %}" alt="image1">
+            </div>
+            <div class="gallery3">
+                <img class="h-full w-full object-cover" src="{% static 'uploads/loginimg2.jpg' %}" alt="image2">
+            </div>
+        </div>
     </div>
 </section>
   

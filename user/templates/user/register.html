@@ -1,7 +1,36 @@
 <style>
-    #id_username_helptext, #id_password1_helptext{
-        display: none;
-    }
+  #id_username_helptext, #id_password1_helptext{
+      display: none;
+  }
+  .vertical-line {
+    width: 1px; /* Thickness of the line */
+    height: 100vh; /* Height of the line */
+    background-color: lightgray; /* Color of the line */
+  }
+  .grid-gallery{
+      display: grid;
+      grid-template-rows: 200px 100px 150px 125px;
+      grid-template-columns: 50% 40%;
+      gap:20px;
+  }
+  .gallery1{
+      background-color: antiquewhite;
+      grid-row-start: 1;
+      grid-row-end: 3 ;
+  }
+  .gallery2{
+      background-color:#663DC6
+  }
+  .gallery3{
+      background-color:aquamarine;
+      grid-row-start: 1;
+      grid-row-end: 4 ;
+      grid-column-start: 2;
+  }
+  .login-font{
+      font-family: "Poppins";
+      font-weight: 400;
+  }
 </style>
 {% extends 'index.html' %} 
 {% load static %} 
@@ -25,38 +54,54 @@
 </div>
 {% endfor %}
 <div class="register-main">
-    <section class="bg-white">
-        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-            <a href="{% url 'home' %}" class="flex items-center mb-6 text-5xl font-semibold text-gray-900 custom-font">
-                Lumiere   
-            </a>
-            <div class="w-full bg-white rounded-lg shadow border sm:max-w-md xl:p-0">
-                <div class="p-6 space-y-4 sm:p-8">
-                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-                        Create an account
-                    </h1>
-                    <form class="space-y-4" action="#" method="POST">
-                        {% csrf_token %}
-                        {{ form | crispy }}
-                        <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create an account</button>
-                        <div class="flex items-start">
-                            <div class="flex items-center h-5">
-                              <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300" required="">
-                            </div>
-                            <div class="ml-3 text-sm">
-                              <label for="terms" class="font-light text-gray-500">
-                                I accept the <a class="font-medium text-primary-600 hover:underline" href="#">Terms and Conditions</a>
-                              </label>
-                            </div>
+    <section class="h-screen bg-white flex">
+      <div class="w-[50%]">
+        <div class="flex flex-col items-center justify-center px-6 pb-8 mx-auto md:h-screen lg:py-0">
+          <div class="w-full bg-white shadow 2xl:relative 2xl:-left-20 rounded-lg md:mt-0 sm:max-w-md xl:p-0 2xl:-mt-32">
+              <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                  <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                      Create an account
+                  </h1>
+                  <form class="space-y-4" action="#" method="POST">
+                      {% csrf_token %}
+                      {{ form | crispy }}
+                      <button type="submit" class="w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" style="background-color: #663DC6;">Create an account</button>
+                      <div class="flex items-start">
+                          <div class="flex items-center h-5">
+                            <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300" required="">
                           </div>
-                          
-                        <p class="text-sm font-light text-gray-500">
-                            Already have an account? <a href="{% url 'login' %}" class="font-medium text-blue-600 hover:underline">Login here</a>
-                        </p>
-                    </form>
-                </div>
-            </div>
-        </div>
+                          <div class="ml-3 text-sm">
+                            <label for="terms" class="font-light text-gray-500">
+                              I accept the <a class="font-medium text-primary-600 hover:underline" href="#">Terms and Conditions</a>
+                            </label>
+                          </div>
+                        </div>
+                        
+                      <p class="text-sm font-light text-gray-500">
+                          Already have an account? <a href="{% url 'login' %}" class="font-medium hover:underline" style="color: #663DC6;">Login here</a>
+                      </p>
+                  </form>
+              </div>
+          </div>
+      </div>
+      </div>
+      <div class="vertical-line"></div>
+      <div class="w-[45%] absolute right-0 h-[85%]">
+          <h1 class="text-xl font-semibold mt-5 login-font">Welcome to Lumiere!</h1>
+          <h1 class="text-xl font-semibold login-font">Find the new you!</h1>
+          <p class="text-sm login-font font-light mb-5">Your one place for makeup and self care!</p>
+          <div class="grid-gallery h-[90%] w-full">
+              <div class="gallery1">
+                  <img class="h-full w-full object-cover" src="{% static 'uploads/loginimg.jpg' %}" alt="image">
+              </div>
+              <div class="gallery2">
+                  <img class="h-full w-full object-cover" src="{% static 'uploads/loginimg1.jpg' %}" alt="image1">
+              </div>
+              <div class="gallery3">
+                  <img class="h-full w-full object-cover" src="{% static 'uploads/loginimg2.jpg' %}" alt="image2">
+              </div>
+          </div>
+      </div>
     </section>
 </div>
 
