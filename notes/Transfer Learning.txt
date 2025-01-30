@@ -1,0 +1,16 @@
+Transfer learning is a machine learning technique in which a model trained on one task is adapted for a second related task. In the context of neural networks, transfer learning involves using a pre-trained model as a starting point for a new task, rather than training a model from scratch. Compared to a normally trained model, a pre-trained model has the benefit of being trained on a vast amount of data, and often, the optimal values of all trainable parameters are known.
+
+How Transfer Learning Works
+neural networks usually try to detect edges in the earlier layers, shapes in the middle layer and some task-specific features in the later layers. In transfer learning, the early and middle layers are used and we only retrain the latter layers. It helps leverage the labeled data of the task it was initially trained on.
+
+Approaches to Transfer Learning
+ -Training a Model to Reuse it
+ - Using a Pre-Trained Model
+ - Feature Extraction
+
+Transfer learning offers several benefits over training a model from scratch, especially when dealing with limited labeled data or computational resources. Here are some key advantages of transfer learning:
+Reduced Training Time:
+Training a deep neural network from scratch can be computationally expensive and time-consuming, especially for large models. Transfer learning allows you to start with a pre-trained model, which has already learned useful features from a vast dataset, thereby reducing the training time for your specific task.
+Improved Generalization: Pre-trained models are often trained on large and diverse datasets, enabling them to learn generic features that can be useful for a wide range of tasks. Transfer learning leverages this knowledge, leading to better generalization performance, especially when you have limited task-specific data.
+Avoiding Local Minima: Training a deep neural network from scratch may sometimes lead to convergence to local minima. Transfer learning helps to overcome this challenge by initializing the model with weights already optimized on a larger dataset, which can help the model converge more quickly and to a better solution.
+Reduced Data Annotation Costs: Manually annotating large datasets for training can be costly and time-consuming. By leveraging pre-trained models, you can reduce the need for extensive labeled data, making transfer learning an attractive option for scenarios where data annotation is a bottleneck.
