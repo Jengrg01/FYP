@@ -1,0 +1,30 @@
+1. Convolution Layer
+The main building block of CNNs.
+Uses filters (kernels) to extract features from an image.
+Each filter scans the image and detects patterns like edges, shapes, or textures.
+The output is called a feature map.
+Example: A filter detecting vertical lines looks for specific pixel arrangements.
+
+2. ReLU Layer (Rectified Linear Unit)
+An activation function that introduces non-linearity.
+Converts all negative values in the feature map to zero, while positive values remain unchanged.
+Ensures the model can handle complex patterns instead of only linear relationships.
+
+3. Pooling Layer
+Reduces the image size while preserving important information.
+Speeds up computation and makes the model more efficient.
+The most common type is Max Pooling, which selects the highest value from a region of pixels.
+
+
+4. Fully Connected Layer
+The final stage of CNN.
+Takes the extracted features and weights them to generate a final classification.
+
+
+Summary of CNN Process
+The image is converted into numerical pixel values.
+Convolutional layers extract features by scanning the image with filters.
+ReLU layers introduce non-linearity by rectifying negative values.
+Pooling layers reduce image size to improve efficiency.
+Fully connected layers classify the image based on extracted features.
+CNNs allow computers to classify images with high accuracy and are widely used in AI applications.
