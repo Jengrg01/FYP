@@ -1,0 +1,21 @@
+The various deep learning methods use data to train neural network algorithms to do a variety of machine learning tasks, such as the classification of different classes of objects. Convolutional neural networks are deep learning algorithms that are very powerful for the analysis of images. This article will explain to you how to construct, train and evaluate convolutional neural networks.
+
+So image processing in this context refers to the analysis, manipulation, or extraction of information from image data using techniques like convolutional neural networks.
+
+CNN is a powerful algorithm for image processing. These algorithms are currently the best algorithms we have for the automated processing of images. Many companies use these algorithms to do things like identifying the objects in an image.
+
+Images contain data of RGB combination. Matplotlib can be used to import an image into memory from a file. The computer doesn’t see an image, all it sees is an array of numbers. Color images are stored in 3-dimensional arrays. The first two dimensions correspond to the height and width of the image (the number of pixels). The last dimension corresponds to the red, green, and blue colors present in each pixel.
+
+Three Layers of CNN
+Convolutional Neural Networks specialized for applications in image & video recognition. CNN is mainly used in image analysis tasks like Image recognition, Object detection & Segmentation.
+
+There are three types of layers in Convolutional Neural Networks:
+
+Convolutional Layer
+In a typical neural network each input neuron is connected to the next hidden layer. In CNN, only a small region of the input layer neurons connect to the neuron hidden layer.
+
+Pooling Layer
+The pooling layer is used to reduce the dimensionality of the feature map. There will be multiple activation & pooling layers inside the hidden layer of the CNN.
+
+Fully-Connected layer
+Fully Connected Layers form the last few layers in the network. The input to the fully connected layer is the output from the final Pooling or Convolutional Layer, which is flattened and then fed into the fully connected layer.
