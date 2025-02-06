@@ -1,0 +1,20 @@
+Transfer learning is a machine learning technique where a model developed for a particular task is reused as the starting
+ point for a model on a second task. In the context of Convolutional Neural Networks (CNNs), 
+transfer learning is often used to leverage pre-trained models, typically trained on large datasets like ImageNet,
+ and fine-tune them on smaller, task-specific datasets. This approach is especially useful when there is limited data 
+available for the new task, as the model can retain the general features learned from the original dataset.
+
+CNNs, with their hierarchical structure, excel in learning spatial hierarchies of features such as edges, 
+textures, and objects. The first layers of CNNs typically capture low-level features, while the deeper layers c
+apture more abstract, high-level representations. When applying transfer learning, the lower layers of a pre-trained 
+CNN often provide generalized features that are useful across different domains, while the higher layers can be fine-tuned to adapt to the specific task.
+
+Using transfer learning in CNNs significantly reduces training time and computational resources.
+ It also improves model performance, particularly when there is limited labeled data for the target task,
+ by utilizing the rich feature representations already learned by the pre-trained model.
+
+in the context of Convolutional Neural Networks (CNNs) involves taking a pre-trained model, 
+which has been trained on a large dataset, and adapting it for a different but related task. This technique is highly beneficial when 
+the target task has limited data available, allowing the model to capitalize on the general features learned during the pre-training phase. 
+Instead of training a CNN from scratch, which requires large datasets and significant computational power, transfer learning allows for faster 
+convergence and improved performance with fewer data.
