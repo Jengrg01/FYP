@@ -1,0 +1,31 @@
+I learned that the convolution operation is a process where two functions combine to form a third one, showing how one function affects the other. In CNNs, it’s when a filter (or kernel) slides over an image to create feature maps that highlight specific patterns.
+
+Key Components I Learned About:
+Input Image:
+It's represented as a matrix of pixel values. For grayscale images, it’s a 2D matrix, while for RGB images, it’s a 3D matrix with the depth corresponding to the color channels.
+
+Filter (Kernel):
+A small matrix (usually 3x3 or 5x5) that helps the network detect patterns like edges or textures in the image.
+
+Feature Map:
+This is the output of the convolution process, a matrix that shows where the filter detects specific features in the image.
+
+The Convolution Process:
+Sliding the Filter:
+The filter moves across the image in steps determined by the stride. At each step, the filter multiplies with the image region and computes a result.
+
+Summation:
+After multiplying, all the values are summed up to get a single value, which forms a pixel in the feature map.
+
+Activation Function:
+A non-linear function like ReLU (Rectified Linear Unit) is applied to add complexity and enable the network to learn more intricate patterns.
+
+Padding and Stride:
+Padding:
+This adds extra pixels around the image to control the feature map’s size. I learned that valid padding means no padding, which makes the output smaller, while same padding ensures the output is the same size as the input.
+
+Stride:
+This refers to the step size of the filter when moving across the image. Larger strides make the feature map smaller, helping to reduce the computational load.
+
+Why It's Important in CNNs:
+I learned that convolutions are essential because they allow CNNs to detect local patterns and progressively build up more complex representations across layers. It also makes CNNs efficient through parameter sharing and sparse connections, which is why they’re so great for tasks like image recognition and signal processing.
