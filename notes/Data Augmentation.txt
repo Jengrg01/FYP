@@ -1,0 +1,43 @@
+Image Data Augmentation
+What is Image Data Augmentation?
+Image data augmentation is the process of applying transformations to existing images in a dataset to create new, slightly modified versions.
+It helps improve the generalization ability of machine learning models, especially in computer vision tasks.
+Used to increase dataset size, reduce overfitting, and make models more robust to variations in real-world data.
+
+Why is Image Data Augmentation Important?
+Helps when there is limited data
+Prevents overfitting by exposing the model to diverse variations
+Makes models more robust to changes in lighting, orientation, scale, etc.
+Reduces data collection costs
+
+Common Image Augmentation Techniques
+1. Geometric Transformations
+Flipping: Mirror images horizontally or vertically.
+Rotation: Rotate images by a fixed/random degree (e.g., 90°, 180°).
+Scaling: Resize images while maintaining aspect ratio.
+Cropping: Extract smaller portions of an image.
+Translation (Shifting): Move images horizontally or vertically.
+2. Color-Based Transformations
+Brightness Adjustment: Increase or decrease image brightness.
+Contrast Enhancement: Make colors more distinct.
+Saturation & Hue Adjustment: Modify color intensity.
+Grayscale Conversion: Convert images to black and white.
+3. Noise Addition & Blurring
+Gaussian Noise: Adds random noise to the image.
+Salt-and-Pepper Noise: Random black-and-white pixel disturbances.
+Blurring (Gaussian, Motion, Median): Reduces image sharpness.
+4. Occlusion & Random Erasing
+Cutout: Mask random parts of the image with black or white patches.
+Grid Masking: Apply a grid-like mask over the image.
+5. Mixing & Advanced Techniques
+MixUp: Blends two images together.
+CutMix: Cuts a portion from one image and pastes it onto another.
+Style Transfer: Changes the artistic style of an image.
+
+Image Augmentation Libraries
+TensorFlow/Keras (ImageDataGenerator)
+OpenCV (Basic image processing)
+
+Image data augmentation is essential for improving model performance in computer vision.
+Choosing the right augmentations depends on the task (e.g., object detection, classification).
+Helps create more diverse training data without manually collecting new images.
