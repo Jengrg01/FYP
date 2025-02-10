@@ -1,0 +1,14 @@
+Data augmentation can address a variety of challenges when 
+training a CNN model, such as limited or imbalanced data,
+ overfitting, and variation and complexity. This technique 
+can increase the size of the dataset and balance the classes by 
+applying different transformations. It can also introduce 
+randomness and noise to the training data to prevent overfitting.
+ Additionally, data augmentation can simulate various scenarios 
+and situations that your model may encounter in the real world, 
+allowing it to capture all relevant features and patterns.
+
+Data augmentation techniques can be classified into two categories: geometric and photometric. Geometric techniques modify the shape or position of the image, such as cropping, flipping, rotating, scaling, or shifting. Photometric techniques modify the appearance or color of the image, such as changing the brightness, contrast, saturation, hue, or adding noise or blur. Depending on your problem domain and data characteristics, you may want to use different combinations of geometric and photometric techniques. For example, if you are working on a face recognition problem, you may want to use geometric techniques such as flipping or rotating to account for different poses and orientations, but avoid photometric techniques that may alter the facial features or expressions. On the other hand, if you are working on a natural scene classification problem, you may want to use both geometric
+ and photometric techniques to account for different weather conditions, seasons, or times of the day.
+
+OpenCV is a library for computer vision and image processing, and it offers various functions and methods for manipulating images, such as cv2.resize, cv2.flip, cv2.rotate, cv2.cvtColor, cv2.addWeighted, and so on. You can use these functions and methods to create your own custom data augmentation functions that can apply different transformations to your images according to your needs and preferences.
