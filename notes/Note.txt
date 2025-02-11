@@ -1,14 +1,20 @@
-Data augmentation can address a variety of challenges when 
-training a CNN model, such as limited or imbalanced data,
- overfitting, and variation and complexity. This technique 
-can increase the size of the dataset and balance the classes by 
-applying different transformations. It can also introduce 
-randomness and noise to the training data to prevent overfitting.
- Additionally, data augmentation can simulate various scenarios 
-and situations that your model may encounter in the real world, 
-allowing it to capture all relevant features and patterns.
+Transfer learning generally refers to a process where a model trained on one problem is used in some way on a second related problem. For example, the knowledge gained while learning to recognize oranges could apply when trying to recognize mangos. In deep learning, transfer learning is a technique whereby a neural network model is first trained on a problem similar to the problem that is being solved. Transfer learning has the advantage of decreasing the training time for a learning model and can result in lower generalization error.
 
-Data augmentation techniques can be classified into two categories: geometric and photometric. Geometric techniques modify the shape or position of the image, such as cropping, flipping, rotating, scaling, or shifting. Photometric techniques modify the appearance or color of the image, such as changing the brightness, contrast, saturation, hue, or adding noise or blur. Depending on your problem domain and data characteristics, you may want to use different combinations of geometric and photometric techniques. For example, if you are working on a face recognition problem, you may want to use geometric techniques such as flipping or rotating to account for different poses and orientations, but avoid photometric techniques that may alter the facial features or expressions. On the other hand, if you are working on a natural scene classification problem, you may want to use both geometric
- and photometric techniques to account for different weather conditions, seasons, or times of the day.
+The CNN model leverages convolution and pooling layers to automatically extract different hierarchies of features, from very generic features like edges and corners to very specific features like the facial structure, whiskers and ears of the tiger depicted as an input image in figure 3. The feature maps are usually flattened using a flatten or global pooling operator to obtain a 1-dimensional feature vector. This vector is then sent as an input through a few fully-connected dense layers, and the output class is finally predicted using a softmax output layer.
 
-OpenCV is a library for computer vision and image processing, and it offers various functions and methods for manipulating images, such as cv2.resize, cv2.flip, cv2.rotate, cv2.cvtColor, cv2.addWeighted, and so on. You can use these functions and methods to create your own custom data augmentation functions that can apply different transformations to your images according to your needs and preferences.
+The key objective of this multi-stage hierarchical architecture is to learn spatial hierarchies of patterns which are also translation invariant. This is possible through two main layers in the CNN architecture: the convolution and pooling layers.
+
+Convolution Layers: The secret sauce of CNNs are its convolution layers! These layers are created by convolving multiple filters or kernels with patches of the input image, which help in extracting specific features from the input image automatically. 
+
+Pooling Layers: We typically downsample the feature maps from the convolutional layers in the pooling layers using an aggregation operation like max, min or mean. Usually max-pooling is preferred, which means we take in patches of image pixels (e.g. a 2x2 patch) and reduce it to its maximum value (giving one pixel with the max value). Max-pooling is preferred because of its lower computation time as well as its ability to encode the enhanced aspects of the feature maps (by taking the maximal pixel values of image patches rather than the average). Pooling also helps in reducing overfitting, decreasing computation time and enables the CNN to learn translation-invariant features.
+
+Common Data Augmentation Techniques
+Rotation: Rotate the image by a certain angle (e.g., 90 degrees, 180 degrees).
+Translation: Shift the image horizontally or vertically by a certain distance.
+Scaling: Enlarge or shrink the image by a certain factor.
+Flipping: Flip the image horizontally or vertically.
+Shearing: Skew the image along the x or y-axis.
+Zooming: Zoom in or out of the image.
+Brightness Adjustment: Increase or decrease the brightness of the image.
+Contrast Adjustment: Increase or decrease the contrast of the image.
+Noise Addition: Add random noise to the image.
