@@ -16,4 +16,5 @@ urlpatterns = [
     path("specialitylist/", views.specialitylist, name='specialitylist'),
     path("updatespeciality/<int:speciality_id>", views.updatespeciality, name='updatespeciality'),
     path("deletespeciality/<int:speciality_id>", views.deletespeciality, name='deletespeciality'),
+    path("policy/", views.policy, name='policy'),
 ]

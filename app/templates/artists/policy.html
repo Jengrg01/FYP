@@ -1,0 +1,93 @@
+<style>
+     .privacy-container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 30px;
+        background: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+      .title {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .section-title {
+        color: #34495e;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 5px;
+      }
+      .text,
+      .list {
+        line-height: 1.8;
+      }
+      .list {
+        padding-left: 20px;
+      }
+      .list-item {
+        margin-bottom: 5px;
+      }
+      .last-updated {
+        font-weight: bold;
+        color: #e74c3c;
+      }
+</style>
+{% extends 'index.html' %} {% load static %} {% block title %}
+<title>Lumiere | Privacy Policy</title>
+{% endblock %}
+{% block main_content %}
+<div class="privacy-container">
+  <h1 class="title text-2xl text-gray-700 font-bold">Privacy Policy</h1>
+  <p class="last-updated">Last Updated: <span id="last-updated"></span></p>
+
+  <h2 class="section-title">1. Introduction</h2>
+  <p class="text">
+    Welcome to Lumiere. Your privacy is important to us, and this Privacy Policy
+    explains how we collect, use, and protect your personal information.
+  </p>
+
+  <h2 class="section-title">2. Information We Collect</h2>
+  <p class="text">We may collect the following types of information:</p>
+  <ul class="list">
+    <li class="list-item">
+      Personal information (e.g., name, email address, phone number)
+    </li>
+    <li class="list-item">
+      Usage data (e.g., pages visited, time spent on site)
+    </li>
+    <li class="list-item">Cookies and tracking technologies</li>
+  </ul>
+
+  <h2 class="section-title">3. How We Use Your Information</h2>
+  <p class="text">We use your information for the following purposes:</p>
+  <ul class="list">
+    <li class="list-item">To provide and maintain our services</li>
+    <li class="list-item">To improve user experience</li>
+    <li class="list-item">To communicate with you</li>
+    <li class="list-item">To ensure security and prevent fraud</li>
+  </ul>
+
+  <h2 class="section-title">4. Third-Party Services</h2>
+  <p class="text">
+    We may use third-party services for analytics, advertising, and payment
+    processing. These services have their own privacy policies.
+  </p>
+
+  <h2 class="section-title">5. Your Rights</h2>
+  <p class="text">
+    You have the right to access, update, or delete your personal data. Contact
+    us for any requests.
+  </p>
+
+  <h2 class="section-title">6. Contact Information</h2>
+  <p class="text">
+    If you have any questions about this Privacy Policy, please contact us at
+    jengrg003@gmail.com.
+  </p>
+</div>
+
+<script>
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  document.getElementById("last-updated").innerText =
+    new Date().toLocaleDateString("en-US", options);
+</script>
+{% endblock %}

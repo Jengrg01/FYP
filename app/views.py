@@ -10,6 +10,9 @@ from .utils import send_email_to_artist
 # Create your views here.
 # write functions for database, based on function or class based views(api creations get easier), we apure working on mvt pattern
 
+def policy(request):
+    return render(request,"artists/policy.html")
+
 def home(request):
     user = request.user
     makeup = Makeup.objects.all().order_by('-id')[:4]#creating of 4 artists to be displayed in the card, shows the latest added artist at first
