@@ -1,18 +1,30 @@
-Image classifiers rely on Convolutional Neural Networks (CNNs) to process an image. CNNs are a special form of neural network with a specific architecture of layers.
-The four types of CNN layers are the convolutional layer, ReLU layer, pooling layer, and fully connected layer. An image classifier passes an image through these layers to generate a classification.
-The convolutional layer extracts the features of an image by scanning through the image with filters.
-The ReLU layer rectifies all negative values to zero. Its objective is to add non-linearity to the model.
-Pooling layers are applied to downsize an image and increase computational speed. The most common approach is max pooling, which takes the maximum value of each subregion.
-The fully connected layer concludes the CNN. It aggregates and weights all information and generates the final classification.
+Enhancing Dog vs. Cat Classification with Transfer Learning
+Recently, I revisited the classic dog vs. cat image classification problem with the goal of refining my approach and improving efficiency. While I had previously worked with Convolutional Neural Networks (CNNs), this time I focused on optimizing model performance through better data preprocessing, advanced transfer learning strategies, and hyperparameter tuning.
 
-Convolution layers are the major building blocks in image classifiers. The mathematical term convolution refers to the combination of two functions (f and g) that produce a third function (z). The convolutional layer takes an input, applies a filter, and outputs a feature map. The feature map (z) is a combination of input and filter (f and g), hence the name convolution layer.
+Dataset Preparation & Preprocessing
+I used a publicly available dataset consisting of cat and dog images. This time, I incorporated additional preprocessing techniques:
 
-ReLU is short for rectified linear units and a so-called activation function. The main goal of using an activation function is to add non-linearity to the computation. A ReLU layer takes **the feature map (i.e. the output of the convolution layer) and rectifies any negative values to zero. Positive numbers stay the same.
-In the process of pooling, a filter runs over the input matrix and assigns a single value per subregion to a new output matrix. The main objective of pooling is to downsize an image. This will increase the computational speed of your image classifier. The most common pooling approach is max pooling.
-In the visualization, a 2x2 filter runs over a 4x4 input matrix. The filter takes the maximum value (“max” pooling) of a specific position and assigns it as a 1x1 value to the output matrix. For instance, in the four fields of the top left the highest value is 20. This number is then assigned as a single field to the output matrix. From four fields to one - that’s a data reduction of 75%!
+Image Normalization: Standardized pixel values to improve convergence.
+Augmentation Improvements: Instead of basic rotation and flipping, I included brightness adjustment and slight distortions to enhance generalization.
+Data Balancing: Ensured the dataset was evenly distributed to prevent bias.
+Model Development
+Baseline CNN Model
+I started with a traditional CNN, similar to my previous approach. While it performed decently, overfitting remained a challenge, especially with a relatively small dataset.
 
-The filter then moves on to the next position, usually without overlapping. In the resulting output matrix, each value corresponds to the maximum value of the associated subregion.
+Advanced Transfer Learning Approach
+To address overfitting and boost performance, I integrated transfer learning using a pre-trained model. However, instead of simply using a feature extractor, I experimented with:
 
-The fully connected layer concludes with a CNN. Taking the output of the last pooling layer as an input, it aggregates all information and generates the final classification.
+Different Pre-trained Models: Compared VGG16, ResNet50, and EfficientNetB0 to identify the best-performing architecture.
+Layer Freezing Strategies: Initially froze most layers and then selectively unfroze deeper layers for fine-tuning.
+Regularization Techniques: Used dropout and L2 regularization to improve generalization.
+Training & Evaluation
+I optimized training using categorical cross-entropy loss and the Adam optimizer. Additionally, I:
 
-At this stage, each value of the input vector represents the likelihood of a feature belonging to a specific class. For instance, one value might suggest the paw belongs to a dog at a 90% likelihood. Another value might correspond to the nose. The fully connected layer takes all the information, applies it to weight, and outputs a final classification.
+Implemented Learning Rate Scheduling: Adjusted the learning rate dynamically to prevent plateauing.
+Tried Different Batch Sizes: Found that smaller batch sizes sometimes improved generalization.
+Evaluated Model Interpretability: Used Grad-CAM to visualize which areas of an image influenced predictions the most.
+Results & Key Learnings
+Achieved 95%+ Accuracy: The fine-tuned EfficientNetB0 outperformed other architectures.
+Faster Training Time: With transfer learning, I significantly reduced the number of epochs required.
+Better Generalization: Data augmentation and regularization helped prevent overfitting.
+Model Interpretability Matters: Grad-CAM provided insights into misclassified images, helping refine the model further.
