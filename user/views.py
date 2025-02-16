@@ -94,3 +94,13 @@ def artist_detail(request, artist_id):
         'artist':artist
     }
     return render(request,"user/artistdetail.html",context)
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
+from .models import UserProfile
+
+def user_detail(request, user_id):
+    # Fetch UserProfile using user_id from the User model
+    user = get_object_or_404(User, id=user_id)
+    user_profile = get_object_or_404(UserProfile, user=user)  # Fetch profile linked to user
+    context = {'current_user': user_profile}  # Pass user_profile, not just user
+    return render(request, "user/userdetail.html", context)
