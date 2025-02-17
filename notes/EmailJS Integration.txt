@@ -1,0 +1,28 @@
+
+Setting Up EmailJS
+I integrated EmailJS to send form data via email without needing a backend. The process involved setting up an EmailJS account, configuring an email service, and linking it to my form using JavaScript.
+
+Steps I Followed
+ Step 1: Added EmailJS Script
+Instead of installing EmailJS as a package, I included it directly via a CDN link in the HTML file. This made it easy to use EmailJS functions without additional setup.
+
+ Step 2: Initialized EmailJS
+I initialized EmailJS using my public key, which allows the front-end to communicate with the EmailJS service. This step is crucial for authentication and ensures my form data can be processed securely.
+
+ Step 3: Created a Contact Form
+I designed a simple contact form with fields for the user's name, email, phone number, topic selection, and message. The form collects user input, which is later sent through EmailJS.
+
+Step 4: Implemented Form Validation
+To prevent errors, I added validation to ensure:
+
+All required fields are filled before submission.
+Names contain only letters, with the first letter automatically capitalized.
+Phone numbers only accept digits and have a fixed length.
+ Step 5: Sent Form Data via EmailJS
+When the form is submitted, the user inputs are collected and formatted into an object. This data is then passed to EmailJS, which sends it to the predefined email template.
+
+ Step 6: Added User Feedback with Toastify
+Instead of using basic alerts, I integrated Toastify for better user experience. A success message appears if the email is sent successfully, and an error message is displayed if it fails.
+
+Summary
+By following these steps, I successfully integrated EmailJS to handle contact form submissions. This method is efficient because it eliminates the need for a backend, improves user experience with validation, and ensures smooth email delivery through a trusted service.
