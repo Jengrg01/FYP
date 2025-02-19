@@ -1,0 +1,18 @@
+Feature Extraction vs. Fine-Tuning in CNNs
+Feature Extraction
+A pre-trained CNN is used to extract features from images.
+All convolutional layers remain frozen, and only a new classifier is trained on top.
+Works well for small datasets when the new task is similar to the original dataset of the pre-trained model.
+Faster and requires fewer computational resources.
+Used when:
+
+Data is limited, and a quick, efficient solution is needed.
+The new task is similar to the pre-trained model’s original task (e.g., using ImageNet features for general object recognition).
+Fine-Tuning
+Some or all layers of the pre-trained CNN are unfrozen and retrained on the new dataset.
+Helps adapt the model to task-specific features.
+Requires more data and computational power but improves accuracy for domain-specific tasks.
+Used when:
+
+A larger dataset is available, and higher accuracy is required.
+The new task differs significantly from the original dataset (e.g., fine-tuning a model trained on ImageNet for medical imaging).
