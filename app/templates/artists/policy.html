@@ -1,34 +1,94 @@
 <style>
      .privacy-container {
         max-width: 800px;
-        margin: 50px auto;
-        padding: 30px;
+        margin: 0;
+        padding: 0;
+        background: white;
+        font-family: Arial, sans-serif;
+        display: flex;
+        scroll-behavior: smooth;
+      }
+
+      .privacy-sidebar {
+        width: 280px;
+        height: 100vh;
+        background: white;
+        padding: 20px;
+        border-right: 1px solid #ddd;
+        position: fixed;
+        overflow-y: auto;
+      }
+      .privacy-sidebar h2 {
+        font-size: 18px;
+        color: #e20074;
+        margin-bottom: 15px;
+      }
+      .privacy-sidebar ul {
+        list-style: none;
+        padding: 0;
+      }
+      .privacy-sidebar ul li {
+        margin: 10px 0;
+      }
+      .privacy-sidebar ul li a {
+        text-decoration: none;
+        color: #333;
+        font-size: 16px;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+      .privacy-sidebar ul li a:hover {
+        color: #e20074;
+      }
+
+      .privacy-content {
+        margin-left: 300px;
+        padding: 40px;
+        max-width: 980px;
         background: white;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
       }
-      .title {
-        text-align: center;
-        margin-bottom: 20px;
+
+      .privacy-header {
+        background: linear-gradient(to right, #f8dce4, #ffffff);
+        padding: 20px;
+        text-align: left;
+        border-radius: 8px;
       }
-      .section-title {
-        color: #34495e;
-        border-bottom: 2px solid #ddd;
-        padding-bottom: 5px;
+      .privacy-header h1 {
+        margin: 0;
+        font-size: 28px;
+        color: #000;
       }
-      .text,
-      .list {
-        line-height: 1.8;
-      }
-      .list {
-        padding-left: 20px;
-      }
-      .list-item {
-        margin-bottom: 5px;
+      .privacy-header p {
+        margin: 5px 0;
+        font-size: 14px;
+        color: #555;
       }
       .last-updated {
         font-weight: bold;
-        color: #e74c3c;
+        color: #e20074;
+      }
+
+      h2 {
+        color: #000;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 5px;
+      }
+      p,
+      ul {
+        line-height: 1.8;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      a {
+        color: #e20074;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
       }
 </style>
 {% extends 'index.html' %} {% load static %} {% block title %}
@@ -36,58 +96,86 @@
 {% endblock %}
 {% block main_content %}
 <div class="privacy-container">
-  <h1 class="title text-2xl text-gray-700 font-bold">Privacy Policy</h1>
-  <p class="last-updated">Last Updated: <span id="last-updated"></span></p>
+  <div class="privacy-sidebar">
+    <h2>Privacy Notices</h2>
+    <ul>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#info-collect">Information We Collect</a></li>
+      <li><a href="#use-info">How We Use Your Information</a></li>
+      <li><a href="#data-protection">Data Protection</a></li>
+      <li><a href="#third-party">Third-Party Services</a></li>
+      <li><a href="#rights">Your Rights</a></li>
+      <li><a href="#contact">Contact Information</a></li>
+    </ul>
+  </div>
 
-  <h2 class="section-title">1. Introduction</h2>
-  <p class="text">
-    Welcome to Lumiere. Your privacy is important to us, and this Privacy Policy
-    explains how we collect, use, and protect your personal information.
-  </p>
+  <div class="privacy-content">
+    <div class="privacy-header">
+      <h1>Lumiere</h1>
+      <p><strong>PRIVACY NOTICE</strong></p>
+      <p>Last updated: <span class="last-updated">February 18, 2025</span></p>
+    </div>
 
-  <h2 class="section-title">2. Information We Collect</h2>
-  <p class="text">We may collect the following types of information:</p>
-  <ul class="list">
-    <li class="list-item">
-      Personal information (e.g., name, email address, phone number)
-    </li>
-    <li class="list-item">
-      Usage data (e.g., pages visited, time spent on site)
-    </li>
-    <li class="list-item">Cookies and tracking technologies</li>
-  </ul>
+    <h2 id="intro">1. Introduction</h2>
+    <p>
+      Welcome to our website. Your privacy is important to us, and this
+      Privacy Policy explains how we collect, use, and protect your personal
+      information.
+    </p>
 
-  <h2 class="section-title">3. How We Use Your Information</h2>
-  <p class="text">We use your information for the following purposes:</p>
-  <ul class="list">
-    <li class="list-item">To provide and maintain our services</li>
-    <li class="list-item">To improve user experience</li>
-    <li class="list-item">To communicate with you</li>
-    <li class="list-item">To ensure security and prevent fraud</li>
-  </ul>
+    <h2 id="info-collect">2. Information We Collect</h2>
+    <p>We may collect the following types of information:</p>
+    <ul>
+      <li>Personal information (e.g., name, email address, phone number)</li>
+      <li>Usage data (e.g., pages visited, time spent on site)</li>
+      <li>Cookies and tracking technologies</li>
+    </ul>
 
-  <h2 class="section-title">4. Third-Party Services</h2>
-  <p class="text">
-    We may use third-party services for analytics, advertising, and payment
-    processing. These services have their own privacy policies.
-  </p>
+    <h2 id="use-info">3. How We Use Your Information</h2>
+    <p>We use your information for the following purposes:</p>
+    <ul>
+      <li>To provide and maintain our services</li>
+      <li>To improve user experience</li>
+      <li>To communicate with you</li>
+      <li>To ensure security and prevent fraud</li>
+    </ul>
 
-  <h2 class="section-title">5. Your Rights</h2>
-  <p class="text">
-    You have the right to access, update, or delete your personal data. Contact
-    us for any requests.
-  </p>
+    <h2 id="data-protection">4. Data Protection</h2>
+    <p>
+      We implement security measures to protect your personal data. However,
+      no method of transmission over the internet is 100% secure.
+    </p>
 
-  <h2 class="section-title">6. Contact Information</h2>
-  <p class="text">
-    If you have any questions about this Privacy Policy, please contact us at
-    jengrg003@gmail.com.
-  </p>
+    <h2 id="third-party">5. Third-Party Services</h2>
+    <p>
+      We may use third-party services for analytics, advertising, and payment
+      processing. These services have their own privacy policies.
+    </p>
+
+    <h2 id="rights">6. Your Rights</h2>
+    <p>
+      You have the right to access, update, or delete your personal data.
+      Contact us for any requests.
+    </p>
+
+    <h2 id="contact">7. Contact Information</h2>
+    <p>
+      If you have any questions about this Privacy Policy, please contact us
+      at jengrg003@gmail.com.
+    </p>
+  </div>
 </div>
-
-<script>
-  const options = { year: "numeric", month: "long", day: "numeric" };
-  document.getElementById("last-updated").innerText =
-    new Date().toLocaleDateString("en-US", options);
-</script>
+  <script>
+    document.querySelectorAll(".privacy-sidebar ul li a").forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute("href").substring(1);
+        const targetElement = document.getElementById(targetId);
+        window.scrollTo({
+          top: targetElement.offsetTop - 20,
+          behavior: "smooth",
+        });
+      });
+    });
+  </script>
 {% endblock %}

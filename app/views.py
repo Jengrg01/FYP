@@ -13,6 +13,9 @@ from .utils import send_email_to_artist
 def policy(request):
     return render(request,"artists/policy.html")
 
+def contactpage(request):
+    return render(request,"artists/contact.html")
+
 def home(request):
     user = request.user
     makeup = Makeup.objects.all().order_by('-id')[:4]#creating of 4 artists to be displayed in the card, shows the latest added artist at first
