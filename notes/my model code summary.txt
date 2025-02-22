@@ -1,0 +1,60 @@
+I set up TensorFlow and checked if my GPU is available
+First, I imported TensorFlow and printed the version to ensure it was correctly installed. Then, I checked how many GPUs were available and whether TensorFlow was using CUDA for GPU acceleration.
+
+Code I ran:
+import tensorflow as tf
+print("TensorFlow Version:", tf.__version__)
+print("Num GPUs Available:", len(tf.config.list_physical_devices('GPU')))
+print("Is TensorFlow using GPU?", tf.test.is_built_with_cuda())
+
+What I found out:
+I confirmed my TensorFlow version.
+I checked if my system had a GPU available for deep learning tasks.
+I verified whether CUDA was properly installed so that TensorFlow could utilize GPU power.
+I listed the available GPUs and enabled memory growth
+Since TensorFlow sometimes tries to allocate all available GPU memory at once (which can cause issues), I listed my GPUs and enabled memory growth to allow TensorFlow to use memory dynamically.
+
+Code I ran:
+gpus = tf.config.list_physical_devices('GPU')
+if gpus:
+    for gpu in gpus:
+        print("GPU Name:", gpu)
+
+    # Enable memory growth to prevent allocation issues
+    try:
+        for gpu in gpus:
+            tf.config.experimental.set_memory_growth(gpu, True)
+        print("GPU memory growth enabled.")
+    except RuntimeError as e:
+        print(e)
+
+What I did here:
+I listed all the GPUs available on my system.
+I printed out their names to verify they were detected.
+I enabled memory growth to prevent TensorFlow from consuming all GPU memory at once.
+I checked if cuDNN was available and retrieved GPU details
+Since cuDNN is essential for running deep learning models efficiently on an NVIDIA GPU, I checked if it was properly installed. I also printed the details of my GPU.
+
+Code I ran:
+print("Is cuDNN available?", tf.test.is_built_with_cuda())
+print("GPU Details:", tf.config.experimental.get_device_details(tf.config.list_physical_devices('GPU')[0]))
+
+What I learned:
+I verified that TensorFlow was built with CUDA and cuDNN support.
+I checked my GPU details, such as memory size and compute capability.
+I cleared GPU memory using Numba
+To free up GPU memory after running TensorFlow, I used Numba to release the allocated resources.
+
+Code I ran:
+from numba import cuda
+cuda.select_device(0)
+cuda.close()
+print("Cleared GPU memory.")
+What I did:
+
+I selected the GPU I wanted to release memory from.
+I cleared the memory so that future processes wouldn’t run into allocation issues.
+
+
+I went through the steps of setting up TensorFlow, checking GPU availability, ensuring CUDA and cuDNN were working, and managing GPU memory efficiently. This setup ensures that deep learning models run smoothly without memory issues.
+
