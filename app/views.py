@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from user.models import UserProfile  
 from user.auth import admin_only
-from .utils import send_email_to_artist
+from .utils import *
 # Create your views here.
 # write functions for database, based on function or class based views(api creations get easier), we apure working on mvt pattern
 
@@ -132,8 +132,8 @@ def updateArtist(request, artist_id):
             user_profile, created = UserProfile.objects.get_or_create(user=user)
             user_profile.is_artist = True  # Ensure the user is marked as an artist
             user_profile.save()
-            
             messages.add_message(request, messages.SUCCESS, "Artist data is updated successfully!")
+            send_email_to_artist_update(new_username, new_password, new_email)
             return redirect('artistlist')  # Redirect to the artist list after update
         else:
             messages.add_message(request, messages.ERROR, "Error! Data could not be updated!")

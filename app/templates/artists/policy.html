@@ -1,22 +1,17 @@
 <style>
      .privacy-container {
-        max-width: 800px;
         margin: 0;
         padding: 0;
         background: white;
         font-family: Arial, sans-serif;
         display: flex;
-        scroll-behavior: smooth;
       }
 
       .privacy-sidebar {
-        width: 280px;
-        height: 100vh;
         background: white;
         padding: 20px;
         border-right: 1px solid #ddd;
-        position: fixed;
-        overflow-y: auto;
+        overflow-y: hidden;
       }
       .privacy-sidebar h2 {
         font-size: 18px;
@@ -42,7 +37,6 @@
       }
 
       .privacy-content {
-        margin-left: 300px;
         padding: 40px;
         max-width: 980px;
         background: white;
@@ -95,8 +89,8 @@
 <title>Lumiere | Privacy Policy</title>
 {% endblock %}
 {% block main_content %}
-<div class="privacy-container">
-  <div class="privacy-sidebar">
+<div class="privacy-container gap-16">
+  <div class="privacy-sidebar h-full w-1/5">
     <h2>Privacy Notices</h2>
     <ul>
       <li><a href="#intro">Introduction</a></li>
