@@ -104,3 +104,13 @@ def user_detail(request, user_id):
     user_profile = get_object_or_404(UserProfile, user=user)  # Fetch profile linked to user
     context = {'current_user': user_profile}  # Pass user_profile, not just user
     return render(request, "user/userdetail.html", context)
+
+def user_acc_settings(request):
+    user = request.user
+    form = ProfileForm(instance=user.userprofile)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=user.userprofile)
+        if form.is_valid():
+            form.save()
+    context = {'form': form}
+    return render(request,"user/accountsettings.html",context)

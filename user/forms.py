@@ -17,8 +17,8 @@ class LoginForm(AuthenticationForm):
         self.fields['username'].widget.attrs.update({'placeholder': 'Username'})
         self.fields['password'].widget.attrs.update({'placeholder': 'Password'})
 
-def ProfileForm(ModelForm):
+class ProfileForm(ModelForm):
     class Meta:
         model = UserProfile
         fields = '__all__'
-        exclude = []
+        exclude = ['user','is_artist']
