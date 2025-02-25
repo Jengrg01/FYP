@@ -7,10 +7,18 @@
 {% block main_content %}
 <style>
 	.profile-pic{
-		max-width: 200px;
-		max-height:200px;
 		margin: 0 auto;
 		border-radius: 50%;
+		max-height: 160px
+	}
+	#div_id_last_name label,#div_id_phone label,#div_id_email label,#div_id_profile_pic label{
+		font-size: 18px;
+	}
+	#div_id_first_name input,#div_id_last_name input,#div_id_phone input,#div_id_email input{
+		background-color: rgb(245, 243, 243);
+	}
+	#div_id_first_name label{
+		font-size: 18px;
 	}
 </style>
 
@@ -18,22 +26,20 @@
 <div class="row">
 	<div class="col-md-3">
 		<div class="card card-body">
-			<a class="btn btn-warning" href="{% url 'userprofile' user.id %}"> &#8592; Back to Profile</a>
-			<hr>
-			<h3 style="text-align: center">Account Settings</h3>
-			<hr>
-			<img class="profile-pic" src="{{request.user.userprofile.profile_pic.url}}" >
+			<a class="btn text-md font-semibold text-gray-900 ml-16 " href="{% url 'userprofile' user.id %}"> &#8592; Back to Profile</a>
+			<h3 style="text-align: center" class="font-semibold text-xl mb-5">Account Settings</h3>
+			<img class="profile-pic " width="150" src="{{request.user.userprofile.profile_pic.url}}" >
 		
 		</div>
 	</div>
 	<div class="col-md-9">
 		<div class="card card-body">
 			
-			<form method="POST" action="" enctype="multipart/form-data">
+			<form method="POST" class="w-1/3 mb-12 m-auto" action="" enctype="multipart/form-data">
 				{% csrf_token %}
                 {{ form | crispy }}
 		
-			<input class="btn btn-primary" type="submit" name="Update Information">
+			<input class="btn bg-gray-800 text-md font-semibold text-white px-4 py-2" type="submit" name="Update Information">
 			</form>
 		</div>
 	</div>

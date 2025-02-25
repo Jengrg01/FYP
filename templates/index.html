@@ -49,15 +49,25 @@
         >
 
         {% if user.is_authenticated %}
-        <a href="{% url 'userprofile' user.id %}">Welcome, {{user.username}}</a>
-        <a href="{% url 'logout' %}">
-          <button
-          type="button"
-          class="relative right-16 2xl:-right-2 lg:right-24 text-white button-color hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-8 py-2 text-center"
-        >
-          Logout
-        </button>
-        </a>
+        <img src="{{user.userprofile.profile_pic.url}}" id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" width="45" class="rounded-full cursor-pointer z-10" alt="{{user.username}}">
+        <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
+          <div class="px-4 py-3 text-sm text-gray-900">
+            <div>{{user.userprofile.first_name}} {{user.userprofile.last_name}}</div>
+            <div class="font-medium truncate">{{user.userprofile.email}}</div>
+          </div>
+          <ul class="py-2 text-sm text-gray-700" aria-labelledby="avatarButton">
+            <li>
+              <a href="{% url 'userprofile' user.id %}" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
+            </li>
+            <li>
+              <a href="{% url 'usersettings' %}" class="block px-4 py-2 hover:bg-gray-100">Settings</a>
+            </li>
+          </ul>
+          <div class="py-1">
+            <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
+          </div>
+        </div>        
+
         {% else %}
         <a href="{% url 'login' %}">
           <button
