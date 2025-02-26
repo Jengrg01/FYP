@@ -15,35 +15,42 @@
 {% endif %}
 </div>
 {% endfor %}
-<div class="flex justify-evenly ml-72 gap-72">
-    <h1 class="text-center text-blue-900 font-bold text-3xl my-5">Category List</h1>
-<a href="{% url 'addcategory' %}"><button class="mt-6 px-3 py-2 bg-blue-900 text-white text-center font-bold rounded-lg">+ Add Category</button></a>
+<div class="border-4 border-[rgba(176,152,152,0.3)] rounded-lg w-[98%] mx-auto mb-5">
+    <h1 class="font-semibold text-2xl text-black my-5 ml-5">Category List</h1>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-[99%] mx-auto text-sm text-left rtl:text-right text-gray-500 mb-4">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3 text-gray-500 font-normal">
+                        Category name
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-gray-500 font-normal">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in category %}
+                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        {{c.category_name}}
+                    </th>
+                    <td class="px-6 py-4 flex gap-5 font-normal text-black whitespace-nowrap">
+                        <a href="{% url 'updatecategory' c.id %}" class="font-medium bg-[#663DC6] text-white font-normal px-3 rounded-md py-0.5">Update</a>
+                        <a href="{% url 'deletecategory' c.id %}" class="font-medium bg-[#FF543E] text-white font-normal px-3 rounded-md py-0.5">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Category name
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Action
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for c in category %}
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    {{c.category_name}}
-                </th>
-                <td class="px-6 py-4 flex gap-5">
-                    <a href="{% url 'updatecategory' c.id %}" class="font-medium text-blue-600 hover:underline">Update</a>
-                    <a href="{% url 'deletecategory' c.id %}" class="font-medium text-red-600 hover:underline">Delete</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+<div class="flex justify-end w-[98%] mx-auto">
+    <a href="{% url 'addcategory' %}">
+        <button class="mb-20 px-20 py-2 text-md bg-[#663DC6] text-white text-center font-semibold rounded-sm">
+            + Add Category
+        </button>
+    </a>
 </div>
 {% endblock %}

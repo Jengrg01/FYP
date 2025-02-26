@@ -15,6 +15,7 @@
       href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=Playwrite+IE+Guides&display=swap" rel="stylesheet"/>
 <!-- static files upload and is accessed to index using this -->
@@ -49,7 +50,7 @@
         >
 
         {% if user.is_authenticated %}
-        <img src="{{user.userprofile.profile_pic.url}}" id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" width="45" class="rounded-full cursor-pointer z-10" alt="{{user.username}}">
+        <img src="{{user.userprofile.profile_pic.url}}" id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start"  class=" w-10 h-10 object-cover rounded-full cursor-pointer z-10" alt="{{user.username}}">
         <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
           <div class="px-4 py-3 text-sm text-gray-900">
             <div>{{user.userprofile.first_name}} {{user.userprofile.last_name}}</div>
@@ -179,7 +180,7 @@
                   <ul class="text-black font-medium">
                       <li class="mb-4"><a href="#" class="hover:underline">Portfolio</a></li>
                       <li class="mb-4"><a href="#" class="hover:underline">FAQ</a></li>
-                      <li class="mb-4"><a href="#" class="hover:underline">Contact Us</a></li>
+                      <li class="mb-4"><a href="{% url 'contact' %}" class="hover:underline">Contact Us</a></li>
                   </ul>
               </div>
           </div>

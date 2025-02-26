@@ -12,15 +12,45 @@
         <div class="user-info w-[43%] h-4/6">
             <div class="user-header flex border-2 border-gray-300 rounded-md w-full h-1/4 mb-5">
                 <img src="{{request.user.userprofile.profile_pic.url}}" class="mt-1 relative left-[10%] w-14 h-14 rounded-full" alt="{{user.userprofile.first_name}}">
-                <div class="flex gap-3 relative left-[13%] mt-3">
+                <div class="flex gap-3 relative left-[13%] mt-4">
                     <h3 class="text-2xl font-semibold text-black">{{user.userprofile.first_name}}</h3>
                     <h3 class="text-2xl font-semibold text-black">{{user.userprofile.last_name}}</h3>
                 </div>
             </div>
-            <div class="user-perinfo flex border-2 border-gray-300 rounded-md w-full h-2/3"></div>
+            <div class="user-perinfo flex flex-col border-2 border-gray-300 rounded-md w-full h-2/3">
+                <div class="h-1/5 w-full flex">
+                    <h1 class="text-xl font-semibold ml-5 mt-2">Personal Information</h1>
+                    <a href="{% url 'usersettings' %}" class="mt-3 relative left-[60%]"><i class="fa-solid fa-gear" style="font-size: 22px;"></i></a>
+                </div>
+                <div class="h-4/5 w-full flex">
+                    <div class="w-1/2 h-full flex flex-col">
+                        <div class="h-1/2 w-full ">
+                            <h3 class="font-semibold text-lg text-black ml-5 mt-2">First Name</h3>
+                            <h2 class="ml-5 text-lg font-semibold text-gray-700">{{user.userprofile.first_name}}</h2>
+                        </div>
+                        <div class="h-1/2 w-full ">
+                            <h3 class="font-semibold text-lg text-black ml-5">Email Address</h3>
+                            <h2 class="ml-5 text-lg font-semibold text-gray-700">{{user.userprofile.email}}</h2>
+                        </div>
+                    </div>
+                    <div class="w-1/2 h-full flex flex-col ">
+                        <div class="h-1/2 w-full ">
+                            <h3 class="font-semibold text-lg text-black ml-5 mt-2">Last Name</h3>
+                            <h2 class="ml-5 text-lg font-semibold text-gray-700">{{user.userprofile.last_name}}</h2>
+                        </div>
+                        <div class="h-1/2 w-full ">
+                            <h3 class="font-semibold text-lg text-black ml-5">Phone</h3>
+                            <h2 class="ml-5 text-lg font-semibold text-gray-700">{{user.userprofile.phone}}</h2>
+                        </div>
+                    </div>
+                </div> 
+            </div>
         </div>
-        <div class="reviews w-[43%] h-4/6 bg-blue-100"></div>
+        <div class="reviews w-[43%] h-4/6 border-2 border-gray-200 rounded-md flex flex-col">
+            <h1 class="text-lg text-gray-700 ml-10 mt-4 font-semibold">Reviews from you</h1>
+        </div>
     </div>
-    <a href="{% url 'home' %}" class="border-2 border-gray-300 rounded-md text-xl text-black font-semibold px-24 py-2">Explore Lumiere</a>
+    <button class="absolute bottom-[27%] left-[38%] px-24 py-2 border-2 border-gray-300 rounded-md "><a href="{% url 'home' %}" class=" text-xl text-black font-semibold">Explore Lumiere <i class="fa-solid fa-arrow-up-right-from-square ml-4"  style="font-size: 16px;"></i></a></button>
+    
 </section>
 {% endblock %}

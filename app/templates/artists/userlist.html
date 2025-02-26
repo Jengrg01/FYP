@@ -15,36 +15,66 @@
 {% endif %}
 </div>
 {% endfor %}
-<div class="flex justify-evenly ml-72 gap-72">
-    <h1 class="text-center text-blue-900 font-bold text-3xl my-5">User List</h1>
-</div>
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    Username
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Action
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for u in user_list %}
-            <tr class="odd:bg-white even:bg-gray-50 border-b">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    {{u.username}}
-                </th>
-                <td class="px-6 py-4">
-                    <div class="flex gap-x-5">
-                        <a href="{% url 'deleteUser' u.id %}" class="font-medium text-red-600 hover:underline">Delete</a>
-                    </div>
-                    
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="border-4 border-[rgba(176,152,152,0.3)] rounded-lg w-[98%] mx-auto"> 
+    <h1 class="font-semibold text-2xl text-black my-5 ml-5">User Information</h1>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-[99%] mx-auto text-sm text-left rtl:text-right text-gray-500 mb-4">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                    <th scope="col" class="px-6 py-3 text-gray-500 font-normal">
+                       
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-gray-500 font-normal">
+                        User Name
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-gray-500 font-normal">
+                        First Name
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-gray-500 font-normal">
+                        Last Name
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-gray-500 font-normal">
+                        Email 
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-gray-500 font-normal">
+                        Phone
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-gray-500 font-normal">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in user_list %}
+                <tr class="odd:bg-white even:bg-gray-50 border-b">
+                    <th scope="row" class="px-6 py-4 font-normal text-black whitespace-nowrap">
+                        <img src="{{u.userprofile.profile_pic.url}}" class="w-10 h-10 rounded-full" alt="">
+                    </th>
+                    <th scope="row" class="px-6 py-4 font-normal text-black whitespace-nowrap">
+                        {{u.username}}
+                    </th>
+                    <th scope="row" class="px-6 py-4 font-normal text-black whitespace-nowrap">
+                        {{u.userprofile.first_name}}
+                    </th>
+                    <th scope="row" class="px-6 py-4 font-normal text-black whitespace-nowrap">
+                        {{u.userprofile.last_name}}
+                    </th>
+                    <th scope="row" class="px-6 py-4 font-normal text-black whitespace-nowrap">
+                        {{u.userprofile.email}}
+                    </th>
+                    <th scope="row" class="px-6 py-4 font-normal text-black whitespace-nowrap">
+                        {{u.userprofile.phone}}
+                    </th>
+                    <td class="px-6 py-4">
+                        <div class="flex gap-x-5">
+                            <button class="bg-red-500 text-white px-3 rounded-md"><a href="{% url 'deleteUser' u.id %}" class="font-light">Delete</a></button> 
+                        </div>
+                        
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}

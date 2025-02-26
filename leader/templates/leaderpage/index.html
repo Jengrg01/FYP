@@ -14,55 +14,65 @@
       href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=Playwrite+IE+Guides&display=swap" rel="stylesheet"/>
+    <style>
+        .custom-font {
+            font-family: "Lavishly Yours";
+            font-weight: 400;
+        }
+    </style>
 </head>
 <body>
    <!-- drawer component -->
    <div class="flex">
     <!-- Drawer -->
     <div id="drawer-navigation" class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto bg-white w-64 border-2 lg:block hidden" tabindex="-1" aria-labelledby="drawer-navigation-label">
-        <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 uppercase">Menu</h5>
+        <h2 class="custom-font font-semibold text-3xl text-gray-800 ml-2 my-5">Lumiere</h2>
+        <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 uppercase"></h5>
         <div class="py-4 overflow-y-auto">
             <ul class="space-y-2 font-medium">
                 <li>
                     <a href="{% url 'artistlist' %}" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-                        <svg class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
+                        <i class="fa-solid fa-circle-user text-gray-500 group-hover:text-gray-900 w-5 h-5 flex-shrink-0 transition duration-75" style="font-size: 20px;">
                             <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
                             <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
-                        </svg>
-                        <span class="ms-3">Artists</span>
+                        </i>
+                        <span class="ms-3 pl-2 font-normal text-black text-md">Artists</span>
                     </a>
                 </li>
                 <li>
                     <a href="{% url 'userlist' %}" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
+                        <i class="fa-solid fa-user text-gray-500 group-hover:text-gray-900 w-5 h-5 flex-shrink-0 transition duration-75" style="font-size: 18px;">
                             <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
-                        </svg>
-                        <span class="ms-3">Users</span>
+                        </i>
+                        <span class="ms-3 pl-2 font-normal text-black text-md">Users</span>
                     </a>
                 </li>
                 <li>
                     <a href="{% url 'categorylist' %}" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
+                        <i class="fa-solid fa-table-list text-gray-500 group-hover:text-gray-900 w-5 h-5 flex-shrink-0 transition duration-75" style="font-size: 18px;">
                             <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
-                        </svg>
-                        <span class="ms-3">Category</span>
+                        </i>
+                        <span class="ms-3 pl-2 font-normal text-black text-md">Category</span>
                     </a>
                 </li>
                 <li>
                     <a href="{% url 'specialitylist' %}" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
+                        <i class="fa-solid fa-list text-gray-500 group-hover:text-gray-900 w-5 h-5 flex-shrink-0 transition duration-75" style="font-size: 18px;">
                             <path d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
-                        </svg>
-                        <span class="ms-3">Specialty</span>
+                        </i>
+                        <span class="ms-3 pl-2 font-normal text-black text-md">Specialty</span>
                     </a>
                 </li>
-                <div class="bg-red-700 px-3 py-2">
+                <div class=" text-black absolute bottom-[10%] px-3 py-2">
                     <a href="{% url 'logout' %}">
                         <button
                         type="button"
-                        class="flex-shrink-0 w-5 h-5 text-white transition duration-75"
+                        class="flex flex-shrink-0 w-5 h-5 text-black transition duration-75"
                       >
-                        Logout
+                      <i class="fa-solid fa-arrow-right-from-bracket mt-1" style="font-size: 18px;"></i>
+                      <p class="font-normal text-md ml-8">Logout</p>
                       </button>
                     </a>
                 </div>
@@ -73,10 +83,12 @@
     </div>
 
     <!-- Content Area -->
-    <div class="flex-1 ml-64 p-4" id="content-area">
-        <button class="lg:hidden fixed top-4 left-4 z-50 bg-gray-400 text-white p-2 rounded" onclick="toggleDrawer()">☰</button>
-        <h1 class="text-3xl font-bold">Welcome to Admin Dashboard</h1>
-        <p class="text-lg font-normal">Please click on the links in the menu to load content!</p>
+    <div class="flex flex-col ml-64 w-full" id="content-area">
+        <div class="border-b-2 border-gray-200 mb-5 p-4">
+            <button class="lg:hidden fixed top-4 left-4 z-50 bg-gray-400 text-white p-2 rounded" onclick="toggleDrawer()">☰</button>
+            <h1 class="text-3xl font-bold">Admin Dashboard</h1>
+            <p class="text-lg font-normal mb-3">Please click on the links in the menu to load content!</p>
+        </div>
         {% block admin_content %}
         {% endblock %}
     </div>
