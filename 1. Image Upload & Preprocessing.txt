@@ -1,0 +1,29 @@
+1. Image Upload & Preprocessing
+Frontend: Users upload an image via a form or webcam.
+Backend (process_image in app/views.py):
+Receives the uploaded image.
+Uses PIL.Image.open() to open the image.
+Logs image properties (format, mode).
+Converts non-RGB images (e.g., RGBA, CMYK) to RGB.
+Converts the image to a NumPy array (np.array(image)).
+Ensures it is in an appropriate format for OpenCV & Dlib (handles grayscale/RGBA).
+Added normalization: Scales pixel values to the [0,1] range (image_np.astype(np.float32) / 255.0).
+Logs final processed shape & pixel value range.
+2. Image Processing & Prediction
+Backend (uploadphoto/views.py):
+preprocess_image(image_np): Processes the normalized image.
+Calls extract_facial_features(image_path), which uses Dlib to detect faces.
+If the image format is incorrect, Dlib raises "Unsupported image type" errors.
+We debugged this by printing image.shape and dtype to ensure it's in the correct format.
+Extracted features are passed to a CNN + SVM classifier to predict makeup styles.
+3. Error Handling & Debugging
+Fixed issues related to:
+Incorrect image formats (grayscale, RGBA).
+Image mode compatibility with OpenCV and Dlib.
+Internal server errors (500 due to improper image format handling).
+JSON response errors in the frontend.
+4. Deployment Plan
+Expose as an API (process_image returns a JSON response).
+Django integration: The frontend (app) calls this API, and predictions are displayed dynamically.
+Real-time processing: Users upload/capture an image, and the backend predicts the best makeup style.
+This is the full pipeline we've built so far! Let me know if you want to add anything else.
