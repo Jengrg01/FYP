@@ -1,0 +1,7 @@
+# Ignore Dlib shape predictor model  
+ml_models/shape_predictor_68_face_landmarks.dat  
+ml_models/shape_predictor_68_face_landmarks.dat.bz2 
+__pycache__/   
+*.pyc 
+ml_models/*.keras 
+ml_models/*.pkl 
