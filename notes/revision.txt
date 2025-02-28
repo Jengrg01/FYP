@@ -1,0 +1,40 @@
+Transfer Learning in CNNs
+What is Transfer Learning?
+Transfer learning is a deep learning technique where a pre-trained model (trained on a large dataset) is used as a starting point for a new but related task.
+It reduces training time, improves accuracy, and requires fewer labeled data points.
+Why Use CNN for Transfer Learning?
+Convolutional Neural Networks (CNNs) are widely used for image-related tasks due to their ability to detect spatial hierarchies in images.
+Instead of training from scratch, a pre-trained CNN (like ResNet, VGG, or MobileNet) can be fine-tuned for a new task, such as makeup style recommendation.
+Steps for Transfer Learning in CNN
+Choose a Pre-trained Model
+
+Common options: VGG16, ResNet50, InceptionV3, MobileNet.
+Select based on speed vs. accuracy trade-offs.
+Freeze Initial Layers
+
+The early layers of a CNN extract general features (edges, textures, patterns).
+These layers are frozen (weights remain unchanged) to retain useful features.
+Replace Final Layers
+
+The last few layers (specific to original classification) are replaced with custom layers.
+Fully connected layers are modified for the new classification task (e.g., identifying makeup styles).
+Fine-Tuning
+
+Optionally, unfreeze some higher layers and train on the new dataset to adapt the model further.
+Train on New Dataset
+
+Use a dataset of makeup styles labeled with categories (e.g., natural, glam, bold, casual).
+Apply data augmentation to improve generalization.
+
+How CNN Can Predict Makeup Style
+Feature Extraction
+The CNN learns patterns such as skin tone, eye shape, lip color, and overall makeup features.
+Classification
+The model categorizes the image into predefined makeup styles (e.g., natural, party, professional, bridal).
+Factors Influencing Recommendations
+Skin Tone & Face Shape
+CNN can analyze undertones and recommend shades accordingly.
+Occasion-Based Recommendations
+Different styles for casual, party, formal, and artistic looks.
+User Preferences
+Personalized recommendations based on past selections or user input.
