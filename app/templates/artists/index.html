@@ -29,23 +29,23 @@
   {% for m in makeup %}
   <div
     class="w-[280px] bg-white border border-gray-200 rounded-lg shadow"
-    style="box-shadow: 2px 4px 6px #cecece;"
+    style="box-shadow: 2px 4px 6px #cecece"
   >
-      <div class="w-full h-52">
-        <img
-          class="rounded-t-lg w-full h-full object-cover"
-          src="{{m.image}}"
-          alt="{{m.artist_name}}"
-        />
-      </div>
+    <div class="w-full h-52">
+      <img
+        class="rounded-t-lg w-full h-full object-cover"
+        src="{{m.image}}"
+        alt="{{m.artist_name}}"
+      />
+    </div>
 
     <div class="p-5">
-        <h5
-          style="color: #5f6cb7; font-weight: 600"
-          class="mb-2 text-2xl text-center font-bold tracking-tight text-gray-900"
-        >
-          {{m.artist_name}}
-        </h5>
+      <h5
+        style="color: #5f6cb7; font-weight: 600"
+        class="mb-2 text-2xl text-center font-bold tracking-tight text-gray-900"
+      >
+        {{m.artist_name}}
+      </h5>
       <div class="flex justify-evenly mb-3">
         <p
           class="font-normal border-2 px-2 text-xs rounded-md text-gray-700 bg-gray-100"
@@ -60,16 +60,22 @@
       </div>
       <div class="mb-2 px-2 rounded-md">
         <p class="text-left font-normal text-gray-700">
-            <strong>Description: </strong>
-          </p>
-          <p class="mb-1 font-normal text-justify text-gray-700 w-full h-20" style="font-size: 13.7px; ">
-            {{m.artist_description}}
-          </p>
-          <p class="mb-3 text-left text-md font-normal text-gray-700" style="font-family: Lora;">
-            <strong>Rate: </strong>{{m.rate}} per session
-          </p>
+          <strong>Description: </strong>
+        </p>
+        <p
+          class="mb-1 font-normal text-justify text-gray-700 w-full h-20"
+          style="font-size: 13.7px"
+        >
+          {{m.artist_description}}
+        </p>
+        <p
+          class="mb-3 text-left text-md font-normal text-gray-700"
+          style="font-family: Lora"
+        >
+          <strong>Rate: </strong>{{m.rate}} per session
+        </p>
       </div>
-     
+
       <div class="text-center">
         <a
           href="{% url 'artistDetail' m.id %}"
@@ -85,50 +91,221 @@
 </div>
 
 <!-- Latest artist card content section END!!!! -->
- <!-- Makeup styles -->
- <h1
- class="text-3xl text-center text-black mt-20 font-normal"
- style="font-family: Lora"
+<!-- Makeup styles -->
+<h1
+  class="text-3xl text-center text-black mt-20 font-normal"
+  style="font-family: Lora"
 >
- MAKEUP STYLES TO CHOOSE FROM
+  MAKEUP STYLES TO CHOOSE FROM
 </h1>
-<div class="flex justify-center mt-3 ml-20 ">
- <svg height="80" width="300" xmlns="http://www.w3.org/2000/svg">
-   <g fill="none" stroke="black">
-     <path stroke-width="3" d="M5 20 l215 0" />
-   </g>
- </svg>
+<div class="flex justify-center mt-3 ml-20">
+  <svg height="80" width="300" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="black">
+      <path stroke-width="3" d="M5 20 l215 0" />
+    </g>
+  </svg>
 </div>
- {% include 'artists/cardslider.html' %}
+{% include 'artists/cardslider.html' %}
 <!-- ---------Camera Upload-------- -->
 <h1
-class="text-3xl text-center text-black mt-20 font-normal"
-style="font-family: Lora"
+  class="text-3xl text-center text-black mt-20 font-normal"
+  style="font-family: Lora"
 >
-Want to learn what suits you the best?
+  Want to learn what suits you the best?
 </h1>
-<div class="flex justify-center mt-3 ml-20 ">
-<svg height="80" width="300" xmlns="http://www.w3.org/2000/svg">
-  <g fill="none" stroke="black">
-    <path stroke-width="3" d="M5 20 l215 0" />
-  </g>
-</svg>
+<div class="flex justify-center mt-3 ml-20">
+  <svg height="80" width="300" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="black">
+      <path stroke-width="3" d="M5 20 l215 0" />
+    </g>
+  </svg>
 </div>
 <div class="flex items-center justify-center h-96 w-full bg-white mb-24">
-  <div style="box-shadow: 0px 1px 5px grey;" class="flex justify-center items-center h-full w-4/5 border-2 rounded-lg">
+  <div
+    style="box-shadow: 0px 1px 5px grey"
+    class="flex justify-center items-center h-full w-4/5 border-2 rounded-lg"
+  >
     <div class="border-2 border-dashed h-5/6 w-[90%] border-gray-400">
       <div class="flex flex-col justify-center items-center mt-20">
         <div class="camera-icon h-24 w-24 mb-5">
-          <img class="w-full h-full" src="{% static 'uploads/camera.png' %}" alt="camera icon">
+          <img
+            class="w-full h-full"
+            src="{% static 'uploads/camera.png' %}"
+            alt="camera icon"
+          />
         </div>
-        <div class="flex justify-evenly gap-2">
-          <button class="upload-btn px-2 text-md py-1 bg-blue-900 rounded-md font-medium text-white hover:bg-blue-800">Upload Image</button>
-          <p class="text-center text-sm text-gray-400 mt-1">or</p>
-          <button class="upload-btn px-2 py-1 text-md bg-blue-900 rounded-md font-medium text-white hover:bg-blue-800">Capture Image</button>
+
+        <form
+          id="imageForm"
+          enctype="multipart/form-data"
+          class="flex flex-col items-center gap-4"
+        >
+          {% csrf_token %}
+          <input type="file" id="imageInput" name="image" class="hidden" />
+          <button
+            type="button"
+            id="upload-btn"
+            class="px-4 py-2 bg-blue-900 rounded-md font-medium text-white hover:bg-blue-800"
+          >
+            Upload Image
+          </button>
+        </form>
+
+        <!-- Capture Image Section -->
+        <div class="flex justify-evenly gap-2 mt-4">
+          <button
+            id="capture-btn"
+            class="px-4 py-2 bg-blue-900 rounded-md font-medium text-white hover:bg-blue-800"
+          >
+            Capture Image
+          </button>
+        </div>
+
+        <!-- Camera Modal -->
+        <div
+          id="cameraModal"
+          class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden"
+        >
+          <div
+            class="bg-white p-4 rounded-lg shadow-lg flex flex-col items-center"
+          >
+            <video
+              id="video"
+              width="320"
+              height="240"
+              autoplay
+              class="border rounded-md"
+            ></video>
+            <canvas
+              id="canvas"
+              width="320"
+              height="240"
+              class="hidden"
+            ></canvas>
+            <button
+              id="take-photo"
+              class="mt-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500"
+            >
+              Take Photo
+            </button>
+            <button
+              id="upload-photo"
+              class="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 hidden"
+            >
+              Upload Photo
+            </button>
+            <button
+              id="close-camera"
+              class="mt-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500"
+            >
+              Close
+            </button>
+          </div>
         </div>
       </div>
-     
     </div>
   </div>
+  <script>
+    const csrfToken = document.querySelector(
+      "[name=csrfmiddlewaretoken]"
+    ).value;
+
+    function uploadImage(file) {
+      let formData = new FormData();
+      formData.append("image", file);
+
+      fetch("{% url 'predict_makeup' %}", {
+        method: "POST",
+        body: formData,
+        headers: {
+          "X-CSRFToken": csrfToken,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.error) {
+            alert("Error: " + data.error);
+          } else {
+            document.getElementById(
+              "result"
+            ).innerHTML = ` **Face Shape:** ${data.face_shape}`;
+          }
+        })
+        .catch((error) => console.error("Error:", error));
+    }
+
+    // Handle file upload button click
+    document
+      .getElementById("upload-btn")
+      .addEventListener("click", function () {
+        document.getElementById("imageInput").click();
+      });
+
+    document
+      .getElementById("imageInput")
+      .addEventListener("change", function () {
+        let file = this.files[0];
+        if (file) {
+          uploadImage(file);
+        }
+      });
+
+    // Show camera modal when clicking Capture Image
+    document
+      .getElementById("capture-btn")
+      .addEventListener("click", function () {
+        document.getElementById("cameraModal").classList.remove("hidden");
+        startCamera();
+      });
+
+    // Close camera modal
+    document
+      .getElementById("close-camera")
+      .addEventListener("click", function () {
+        document.getElementById("cameraModal").classList.add("hidden");
+        stopCamera();
+      });
+
+    const video = document.getElementById("video");
+    const canvas = document.getElementById("canvas");
+    const takePhotoBtn = document.getElementById("take-photo");
+    const uploadPhotoBtn = document.getElementById("upload-photo");
+
+    function startCamera() {
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then((stream) => {
+          video.srcObject = stream;
+        })
+        .catch((err) => {
+          console.error("Error accessing camera: ", err);
+        });
+    }
+
+    function stopCamera() {
+      const stream = video.srcObject;
+      if (stream) {
+        stream.getTracks().forEach((track) => track.stop());
+      }
+    }
+
+    takePhotoBtn.addEventListener("click", function () {
+      const context = canvas.getContext("2d");
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      canvas.classList.remove("hidden");
+      video.classList.add("hidden");
+      uploadPhotoBtn.classList.remove("hidden");
+    });
+
+    uploadPhotoBtn.addEventListener("click", function () {
+      canvas.toBlob((blob) => {
+        let file = new File([blob], "captured_image.jpg", {
+          type: "image/jpeg",
+        });
+        uploadImage(file);
+      }, "image/jpeg");
+    });
+  </script>
+
+  {% endblock %}
 </div>
-{% endblock %}

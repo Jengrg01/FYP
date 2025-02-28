@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     "crispy_tailwind",
     'leader',
     'user',
-
+    'prediction',
     # connecting app to project
 ]
 
