@@ -1,0 +1,17 @@
+Model Training for Image Classification
+When training a model for image classification, we typically use Convolutional Neural Networks (CNNs). The process consists of multiple steps:
+
+1. Data Preparation
+a. Collecting the Dataset
+Images should be relevant to the problem (e.g., cats vs. dogs).
+Large datasets help improve model generalization (e.g., ImageNet, CIFAR-10, MNIST).
+More diverse images (different angles, lighting, backgrounds) improve performance.
+b. Data Preprocessing
+Resizing: Ensure all images have the same size (e.g., 224x224 for ResNet).
+Normalization: Scale pixel values between [0,1] or [-1,1] (e.g., divide by 255).
+Data Augmentation: Helps prevent overfitting by generating variations of images.
+Rotation, flipping, zooming, brightness changes, etc.
+c. Splitting the Dataset
+Training Set (70-80%) → Used to train the model.
+Validation Set (10-15%) → Used to tune hyperparameters.
+Test Set (10-15%) → Used to evaluate final performance.
