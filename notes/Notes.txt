@@ -1,13 +1,51 @@
-A Convolutional Neural Network (CNN) is a powerful deep-learning model used for image analysis tasks, including facial recognition and makeup recommendations. It consists of convolutional layers that extract spatial features, followed by fully connected layers for classification.
+1. Model Training
+Model training refers to the process of teaching a machine learning model how to make predictions based on input data.
 
-Transfer Learning for Makeup Recommendation
-Instead of training a CNN from scratch, transfer learning can be applied using a pre-trained model like VGG16, ResNet, or MobileNet. These models have already learned general image features and can be fine-tuned for makeup classification. The key advantages of transfer learning include:
+Steps in Model Training
+Data Collection: Gather relevant data for training.
+Preprocessing: Clean and normalize the data to improve model performance.
+Splitting Data: Typically, data is divided into:
+Training Set (used to train the model)
+Validation Set (used to tune hyperparameters)
+Test Set (used to evaluate performance)
+Model Selection: Choose an appropriate model architecture (e.g., CNN, RNN, Transformer).
+Forward Propagation: Compute predictions using initial model parameters.
+Loss Function: Measures the error between predicted and actual values (e.g., MSE, Cross-Entropy).
+Backward Propagation: Adjust model parameters using gradients to minimize loss.
+Optimization Algorithm: Uses techniques like SGD (Stochastic Gradient Descent) or Adam to update weights.
+Evaluation: Assess model performance using metrics like accuracy, precision, recall, F1-score.
+2. Fine-Tuning
+Fine-tuning is a technique where a pre-trained model is adjusted for a specific task by training it further on a new dataset.
 
-Faster training since the model already knows how to detect shapes, colors, and textures.
-Better accuracy with limited data, as pre-trained models have been trained on large datasets.
-Customization by adding new layers to classify different makeup styles (e.g., natural, bold, glam).
-How It Works in a Makeup Recommendation System
-Feature Extraction – The CNN extracts facial features such as skin tone, face shape, and prominent facial regions (eyes, lips, etc.).
-Style Classification – Using transfer learning, the model classifies different makeup styles based on trained datasets.
-Personalized Recommendation – The system suggests suitable makeup styles based on detected facial features and user preferences.
-By leveraging CNNs and transfer learning, a makeup recommendation system can efficiently analyze faces and provide accurate, personalized suggestions.
+Steps in Fine-Tuning
+Select a Pre-trained Model (e.g., ResNet, VGG, BERT).
+Freeze Lower Layers: Keep early layers unchanged (they capture general features).
+Train Higher Layers: Modify and retrain later layers to adapt to new data.
+Adjust Learning Rate: Use a smaller learning rate to avoid destroying pre-trained knowledge.
+Regularization: Prevent overfitting using techniques like dropout or weight decay.
+Evaluation & Deployment: Test the model and deploy it for real-world tasks.
+Fine-tuning is commonly used in transfer learning, where a model trained on a large dataset (like ImageNet) is adapted for smaller datasets.
+
+3. Convolutional Neural Networks (CNNs)
+CNNs are a type of neural network used primarily for image processing and computer vision tasks. They automatically detect patterns and features in images.
+
+Key Components of CNNs
+Convolutional Layers
+Extract features from input images using filters/kernels.
+Each filter detects edges, textures, or objects.
+Activation Function (ReLU)
+Introduces non-linearity to help detect complex patterns.
+Pooling Layers
+Reduce feature map size and computation.
+Max Pooling: Selects the maximum value in a region.
+Average Pooling: Takes the average of values in a region.
+Fully Connected Layers (FC)
+Flatten feature maps and connect to output neurons for classification.
+Dropout
+Randomly disables neurons during training to prevent overfitting.
+Common CNN Architectures
+LeNet-5: Early CNN model for digit recognition.
+AlexNet: Popularized deep learning for image classification.
+VGG16/VGG19: Uses deeper layers for better accuracy.
+ResNet: Introduces residual connections to solve vanishing gradient problems.
+EfficientNet: Optimized for performance with fewer parameters.
