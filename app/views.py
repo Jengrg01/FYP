@@ -13,6 +13,9 @@ from .utils import *
 def policy(request):
     return render(request,"artists/policy.html")
 
+def terms(request):
+    return render(request,"artists/terms.html")
+
 def contactpage(request):
     return render(request,"artists/contact.html")
 

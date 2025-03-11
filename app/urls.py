@@ -18,4 +18,5 @@ urlpatterns = [
     path("deletespeciality/<int:speciality_id>", views.deletespeciality, name='deletespeciality'),
     path("policy/", views.policy, name='policy'),
     path("contact/", views.contactpage, name='contact'),
+    path("terms/", views.terms, name='terms'),
 ]

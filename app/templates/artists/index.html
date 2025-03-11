@@ -194,6 +194,7 @@
             >
               Upload Photo
             </button>
+            <div id="result" class="mt-4 text-center"></div>
             <button
               id="close-camera"
               class="mt-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500"
@@ -206,106 +207,101 @@
     </div>
   </div>
   <script>
-    const csrfToken = document.querySelector(
-      "[name=csrfmiddlewaretoken]"
-    ).value;
-
-    function uploadImage(file) {
-      let formData = new FormData();
-      formData.append("image", file);
-
-      fetch("{% url 'predict_makeup' %}", {
-        method: "POST",
-        body: formData,
-        headers: {
-          "X-CSRFToken": csrfToken,
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.error) {
-            alert("Error: " + data.error);
-          } else {
-            document.getElementById(
-              "result"
-            ).innerHTML = ` **Face Shape:** ${data.face_shape}`;
-          }
+    document.addEventListener("DOMContentLoaded", function () {
+      const csrfToken = document.querySelector("[name=csrfmiddlewaretoken]")?.value;
+  
+      function uploadImage(file) {
+        let formData = new FormData();
+        formData.append("image", file);
+  
+        fetch("/predictmakeup/", {
+          method: "POST",
+          body: formData,
+          headers: {
+            "X-CSRFToken": csrfToken,
+          },
         })
-        .catch((error) => console.error("Error:", error));
-    }
-
-    // Handle file upload button click
-    document
-      .getElementById("upload-btn")
-      .addEventListener("click", function () {
-        document.getElementById("imageInput").click();
-      });
-
-    document
-      .getElementById("imageInput")
-      .addEventListener("change", function () {
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.error) {
+              document.getElementById("result").innerHTML = `<p class="text-red-500">${data.error}</p>`;
+            } else {
+              document.getElementById("result").innerHTML = `
+                <div class="p-4 border rounded-lg shadow-md bg-white">
+                  <p><strong>Recommended Makeup:</strong> ${data.recommended_makeup}</p>
+                </div>`;
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            document.getElementById("result").innerHTML = `<p class="text-red-500">An error occurred while processing the image.</p>`;
+          });
+      }
+  
+      // Handle file upload from input
+      document.getElementById("imageInput").addEventListener("change", function () {
         let file = this.files[0];
         if (file) {
           uploadImage(file);
         }
       });
-
-    // Show camera modal when clicking Capture Image
-    document
-      .getElementById("capture-btn")
-      .addEventListener("click", function () {
+  
+      // File upload button
+      document.getElementById("upload-btn").addEventListener("click", function () {
+        document.getElementById("imageInput").click();
+      });
+  
+      // Camera modal handling
+      document.getElementById("capture-btn").addEventListener("click", function () {
         document.getElementById("cameraModal").classList.remove("hidden");
         startCamera();
       });
-
-    // Close camera modal
-    document
-      .getElementById("close-camera")
-      .addEventListener("click", function () {
+  
+      document.getElementById("close-camera").addEventListener("click", function () {
         document.getElementById("cameraModal").classList.add("hidden");
         stopCamera();
       });
-
-    const video = document.getElementById("video");
-    const canvas = document.getElementById("canvas");
-    const takePhotoBtn = document.getElementById("take-photo");
-    const uploadPhotoBtn = document.getElementById("upload-photo");
-
-    function startCamera() {
-      navigator.mediaDevices
-        .getUserMedia({ video: true })
-        .then((stream) => {
-          video.srcObject = stream;
-        })
-        .catch((err) => {
-          console.error("Error accessing camera: ", err);
-        });
-    }
-
-    function stopCamera() {
-      const stream = video.srcObject;
-      if (stream) {
-        stream.getTracks().forEach((track) => track.stop());
+  
+      const video = document.getElementById("video");
+      const canvas = document.getElementById("canvas");
+      const takePhotoBtn = document.getElementById("take-photo");
+      const uploadPhotoBtn = document.getElementById("upload-photo");
+  
+      function startCamera() {
+        navigator.mediaDevices
+          .getUserMedia({ video: true })
+          .then((stream) => {
+            video.srcObject = stream;
+          })
+          .catch((err) => {
+            console.error("Error accessing camera: ", err);
+          });
       }
-    }
-
-    takePhotoBtn.addEventListener("click", function () {
-      const context = canvas.getContext("2d");
-      context.drawImage(video, 0, 0, canvas.width, canvas.height);
-      canvas.classList.remove("hidden");
-      video.classList.add("hidden");
-      uploadPhotoBtn.classList.remove("hidden");
-    });
-
-    uploadPhotoBtn.addEventListener("click", function () {
-      canvas.toBlob((blob) => {
-        let file = new File([blob], "captured_image.jpg", {
-          type: "image/jpeg",
-        });
-        uploadImage(file);
-      }, "image/jpeg");
+  
+      function stopCamera() {
+        const stream = video.srcObject;
+        if (stream) {
+          stream.getTracks().forEach((track) => track.stop());
+        }
+      }
+  
+      takePhotoBtn.addEventListener("click", function () {
+        const context = canvas.getContext("2d");
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        canvas.classList.remove("hidden");
+        video.classList.add("hidden");
+        uploadPhotoBtn.classList.remove("hidden");
+      });
+  
+      uploadPhotoBtn.addEventListener("click", function () {
+        canvas.toBlob((blob) => {
+          let file = new File([blob], "captured_image.jpg", { type: "image/jpeg" });
+          uploadImage(file);
+        }, "image/jpeg");
+      });
     });
   </script>
+  
 
   {% endblock %}
 </div>
