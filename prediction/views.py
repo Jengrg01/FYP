@@ -62,6 +62,10 @@ def preprocess_image(image_path):
     img_array /=255.0
     return img_array
 
+AVG_EYE_SIZE = 15.0
+AVG_LIP_THICKNESS = 8.0
+AVG_NOSE_SIZE = 20.0
+
 def extract_facial_features(image_path):
     detector = dlib.get_frontal_face_detector()
     predictor = dlib.shape_predictor(landmark_model_path)
@@ -69,21 +73,27 @@ def extract_facial_features(image_path):
     img = cv2.imread(image_path)
     if img is None:
         raise ValueError("Image not found or unable to read")
-    
+
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = detector(gray)
-    
+
     if len(faces) == 0:
         raise RuntimeError("No face detected in the image")
-    
+
     face = faces[0]  # Assume one face per image
     landmarks = predictor(gray, face)
-    
+
+    # Extract Features
     eye_size = np.linalg.norm([landmarks.part(42).x - landmarks.part(45).x])  # Eye width
     lip_thickness = np.linalg.norm([landmarks.part(62).y - landmarks.part(66).y])  # Lip thickness
     nose_size = np.linalg.norm([landmarks.part(30).y - landmarks.part(33).y])  # Nose height
 
-    return np.array([eye_size, lip_thickness, nose_size])
+    # **Normalize and classify features (convert to 0 or 1)**
+    eye_class = 1 if eye_size > AVG_EYE_SIZE else 0
+    lip_class = 1 if lip_thickness > AVG_LIP_THICKNESS else 0
+    nose_class = 1 if nose_size > AVG_NOSE_SIZE else 0
+
+    return np.array([eye_class, lip_class, nose_class])  # Ensure output matches SVM input
 
 
 
@@ -129,7 +139,7 @@ def upload_image(request):
             # Get model predictions
             skin_class = predict_skin_tone(image_path)
             face_class = predict_face_shape(image_path)
-            extracted_features = extract_facial_features(image_path)  # Get numerical feature values
+            extracted_features = extract_facial_features(image_path)  # Get classified 0/1 values
 
             # Validate feature extraction
             if extracted_features is None or len(extracted_features) != 3:
@@ -146,7 +156,7 @@ def upload_image(request):
             if -1 in (skin_val, face_val):
                 return JsonResponse({"error": "Invalid classification results"}, status=400)
 
-            # Prepare features for SVM (Correct 5 features: skin, face, eye_size, lip_thickness, nose_size)
+            # Prepare features for SVM (Correct 5 features: skin, face, eye_class, nose_class, lip_class)
             features_for_svm = np.array([[skin_val, face_val, extracted_features[0], extracted_features[1], extracted_features[2]]])
 
             # Predict makeup style
@@ -159,16 +169,16 @@ def upload_image(request):
             # Debug logs
             print(f"Skin Tone: {skin_class} -> {skin_val}")
             print(f"Face Shape: {face_class} -> {face_val}")
-            print(f"Extracted Features: {extracted_features}")
+            print(f"Extracted Features (Binary): {extracted_features}")  # Should now be 0/1
             print(f"Predicted Makeup: {final_makeup}")
 
             return JsonResponse({
                 "face_shape": face_class,
                 "skin_tone": skin_class,
                 "facial_features": {
-                    "eye_size": extracted_features[0],
-                    "lip_thickness": extracted_features[1],
-                    "nose_size": extracted_features[2],
+                    "eye_size": "Big" if extracted_features[0] == 1 else "Small",
+                    "lip_thickness": "Thick" if extracted_features[1] == 1 else "Thin",
+                    "nose_size": "Big" if extracted_features[2] == 1 else "Small",
                 },
                 "recommended_makeup": final_makeup
             })

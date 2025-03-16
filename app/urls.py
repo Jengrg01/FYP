@@ -19,4 +19,6 @@ urlpatterns = [
     path("policy/", views.policy, name='policy'),
     path("contact/", views.contactpage, name='contact'),
     path("terms/", views.terms, name='terms'),
+    path("aboutus/", views.aboutus, name='aboutus'),
+    path("services/", views.services, name='services'),
 ]

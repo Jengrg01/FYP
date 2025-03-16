@@ -1,0 +1,468 @@
+<style>
+    .services-body {
+      font-family: "Poppins", sans-serif;
+      line-height: 1.7;
+      color: #333333;
+      background-color: #fef7fa;
+      background-image: radial-gradient(
+          circle at 100% 0%,
+          #fdf0f7 0%,
+          transparent 25%
+        ),
+        radial-gradient(circle at 0% 100%, #fdf0f7 0%, transparent 25%);
+      background-attachment: fixed;
+      padding-bottom: 30px;
+    }
+
+    .services-page-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+
+    .services-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #d87093;
+    }
+
+    h1 {
+      font-size: 48px;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: 36px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    h3 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: #e091a9;
+    }
+
+    h4 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #e091a9;
+    }
+
+    p {
+      margin-bottom: 24px;
+      font-size: 16px;
+      color: #666666;
+      font-weight: 400;
+    }
+
+    .text-lg {
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: 80px;
+      position: relative;
+    }
+
+    .services-header::after {
+      content: "";
+      display: block;
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, #f5c4d3, rgba(245, 196, 211, 0));
+      position: absolute;
+      bottom: -60px;
+      left: 50%;
+    }
+
+    .services-header h1 {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 40px;
+    }
+
+    .services-header h1::after {
+      content: "";
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(to right, #f5c4d3, #d87093);
+    }
+
+    .services-subtitle {
+      font-size: 18px;
+      color: #666666;
+      max-width: 700px;
+      margin: 0 auto;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .main-content {
+      position: relative;
+    }
+
+    .service-section {
+      margin-bottom: 100px;
+      position: relative;
+    }
+
+    .service-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .service-services-header {
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+    }
+
+    .service-services-header h2 {
+      display: inline-block;
+    }
+
+    .service-services-header h2::after {
+      content: "";
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(to right, #f5c4d3, #d87093);
+    }
+
+    .service-card {
+      background-color: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(245, 196, 211, 0.15);
+      position: relative;
+      z-index: 1;
+      margin-bottom: 60px;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(to right, #f5c4d3, #d87093);
+      z-index: 2;
+    }
+
+    .service-content {
+      padding: 60px;
+    }
+
+    .service-description {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 40px;
+    }
+
+    .service-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    @media (min-width: 768px) {
+      .features-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .feature-card {
+      background-color: #fef7fa;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 20px rgba(245, 196, 211, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 3px solid #f5c4d3;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(245, 196, 211, 0.15);
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(to right, #f5c4d3, #e091a9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: #ffffff;
+      font-size: 20px;
+    }
+
+    .decorative-line {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        rgba(245, 196, 211, 0),
+        rgba(245, 196, 211, 0.5),
+        rgba(245, 196, 211, 0)
+      );
+      margin: 60px 0;
+    }
+
+    .decorative-circle {
+      position: absolute;
+      border-radius: 50%;
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    .circle-1 {
+      width: 300px;
+      height: 300px;
+      background-color: #f5c4d3;
+      top: 100px;
+      right: -150px;
+    }
+
+    .circle-2 {
+      width: 200px;
+      height: 200px;
+      background-color: #e091a9;
+      bottom: 100px;
+      left: -100px;
+    }
+
+    .cta {
+      background: linear-gradient(to right, #f5c4d3, #e091a9);
+      border-radius: 12px;
+      padding: 50px;
+      margin-bottom: 50px;
+      text-align: center;
+      color: #ffffff;
+      box-shadow: 0 20px 40px rgba(245, 196, 211, 0.3);
+    }
+
+    .cta h3 {
+      color: #ffffff;
+      font-size: 28px;
+      margin-bottom: 20px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .cta p {
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 12px 30px;
+      background-color: #ffffff;
+      color: #d87093;
+      border-radius: 30px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    @media (max-width: 768px) {
+      .page-wrapper {
+        padding: 40px 20px;
+      }
+
+      .services-header {
+        margin-bottom: 60px;
+      }
+
+      .services-header::after {
+        height: 40px;
+        bottom: -40px;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      h2 {
+        font-size: 28px;
+      }
+
+      h3 {
+        font-size: 22px;
+      }
+
+      .service-content {
+        padding: 40px 30px;
+      }
+
+      .cta {
+        padding: 30px;
+      }
+    }
+</style>
+{% extends 'index.html' %} {% load static %} {% block title %}
+<title>Lumiere | Our Services </title>
+{% endblock %}
+<link
+rel="stylesheet"
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+/>
+{% block main_content %}
+<div class="services-body">
+    <div class="services-age-wrapper">
+        <services-header class="services-services-header">
+          <div class="services-container">
+            <h1 class="text-center py-5 text-xl">Our Services</h1>
+            <p class="services-subtitle">
+              Discover how Lumiere can transform your beauty experience with our
+              professional makeup artist hiring and personalized style
+              recommendations.
+            </p>
+          </div>
+        </services-header>
+    
+        <div class="services-container">
+          <main class="main-content">
+            <div class="decorative-circle circle-1"></div>
+            <div class="decorative-circle circle-2"></div>
+    
+            <section class="service-section">
+              <div class="service-services-header">
+                <h2>Makeup Artist Hiring</h2>
+              </div>
+    
+              <div class="service-card">
+                <div class="service-content">
+                  <div class="service-description">
+                    <span class="service-icon">✨</span>
+                    <h3>Find Your Perfect Makeup Artist</h3>
+                    <p class="text-lg">
+                      Connect with talented, verified makeup artists for any
+                      occasion. From weddings and special events to photoshoots
+                      and everyday glam, we've got you covered.
+                    </p>
+                    <p>
+                      Our platform makes it easy to browse portfolios of makeup
+                      artists according to your needs! All artists on our platform
+                      are vetted for quality, professionalism, and hygiene
+                      standards.
+                    </p>
+                  </div>
+    
+                  <div class="features-grid">
+                    <div class="feature-card">
+                      <div class="feature-icon">👩‍🎨</div>
+                      <h4>Verified Artists</h4>
+                      <p>
+                        All makeup artists on our platform are professionals and
+                        are monitored throughly.
+                      </p>
+                    </div>
+    
+                    <div class="feature-card">
+                      <div class="feature-icon">📅</div>
+                      <h4>Easy Hiring</h4>
+                      <p>Hire Makeup Artist easily.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+    
+            <div class="decorative-line"></div>
+    
+            <section class="service-section">
+              <div class="service-services-header">
+                <h2>Makeup Style Recommendations</h2>
+              </div>
+    
+              <div class="service-card">
+                <div class="service-content">
+                  <div class="service-description">
+                    <span class="service-icon">🔍</span>
+                    <h3>Discover Your Perfect Look</h3>
+                    <p class="text-lg">
+                      Not sure which makeup styles would enhance your natural
+                      features? Our technology helps you find makeup styles that
+                      complement your unique characteristics.
+                    </p>
+                    <p>
+                      Simply upload a photo, and we'll suggest makeup styles that
+                      will complement your natural beauty based on your facial
+                      features and skin tone.
+                    </p>
+                  </div>
+    
+                  <div class="features-grid">
+                    <div class="feature-card">
+                      <div class="feature-icon">📱</div>
+                      <h4>Easy Photo Upload</h4>
+                      <p>
+                        Upload a clear photo of yourself through our secure
+                        platform. Your privacy is our priority, and all uploads
+                        are handled with the utmost confidentiality.
+                      </p>
+                    </div>
+    
+                    <div class="feature-card">
+                      <div class="feature-icon">🎨</div>
+                      <h4>Personalized Suggestions</h4>
+                      <p>
+                        Receive makeup style recommendations that enhance your
+                        natural beauty!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+    
+            <div class="cta ">
+              <h3>Ready to Transform Your Beauty Experience?</h3>
+              <p>
+                Join Lumiere today to discover makeup styles that enhance your
+                natural beauty and connect with professional makeup artists for
+                any occasion.
+              </p>
+              <a href="{% url 'register' %}" class="button mb-3">Get Started</a>
+            </div>
+          </main>
+        </div>
+      </div>
+</div>
+
+{% endblock %}

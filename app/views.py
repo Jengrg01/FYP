@@ -16,6 +16,12 @@ def policy(request):
 def terms(request):
     return render(request,"artists/terms.html")
 
+def aboutus(request):
+    return render(request,"artists/aboutus.html")
+
+def services(request):
+    return render(request,"artists/services.html")
+
 def contactpage(request):
     return render(request,"artists/contact.html")
 
