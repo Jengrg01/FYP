@@ -1,51 +1,33 @@
-Introduction to LeNet-5
-Developed by: Yann LeCun and his team in 1998.
-Purpose: Created for handwritten digit recognition, primarily using the MNIST dataset.
-Significance: One of the first convolutional neural network (CNN) architectures that showcased the potential of deep learning in image recognition.
-Architecture Overview
-LeNet-5 comprises seven layers (excluding the input) with trainable parameters.
+Backpropagation in Neural Networks and CNNs
+Introduction:
+Backpropagation is a crucial process in training neural networks, including Convolutional Neural Networks (CNNs). It involves computing gradients of the loss function concerning model weights to optimize performance.
 
-Input Layer: Accepts 32x32 grayscale images.
-Layer 1 - Convolutional Layer (C1)
-Filters: 6 filters of size 5x5.
-Output: 6 feature maps of 28x28.
-Activation Function: Sigmoid.
-Layer 2 - Subsampling Layer (S2)
-Type: Average pooling.
-Filter Size: 2x2 with a stride of 2.
-Output: 6 feature maps of 14x14.
-Layer 3 - Convolutional Layer (C3)
-Filters: 16 filters of size 5x5.
-Output: 16 feature maps of 10x10.
-Activation Function: Sigmoid.
-Layer 4 - Subsampling Layer (S4)
-Type: Average pooling.
-Filter Size: 2x2 with a stride of 2.
-Output: 16 feature maps of 5x5.
-Layer 5 - Convolutional Layer (C5)
-Filters: 120 filters of size 5x5.
-Output: 120 feature maps of 1x1.
-Activation Function: Sigmoid.
-Layer 6 - Fully Connected Layer (F6)
-Neurons: 84.
-Activation Function: Sigmoid.
-Output Layer
-Neurons: 10 (corresponding to digits 0-9).
-Activation Function: Softmax, providing a probability distribution over the classes.
-Key Features
-Convolutional Layers: Learn spatial hierarchies of features from input images.
-Subsampling (Pooling) Layers: Reduce computational complexity while enhancing translation invariance.
-Fully Connected Layers: Aggregate extracted features for classification.
-Training Details
-Dataset: MNIST handwritten digits.
-Loss Function: Mean Squared Error (MSE).
-Optimizer: Stochastic Gradient Descent (SGD).
-Impact and Legacy
-Pioneering CNN Architecture: Laid the groundwork for modern deep learning models.
-Proved Practicality of Neural Networks: Demonstrated that deep learning could effectively handle image recognition tasks.
-
-
-
-
-
-
+Steps in Backpropagation
+1. Forward Pass:
+Input data is processed through the network.
+Each layer computes an output, leading to a final prediction.
+The loss function evaluates the difference between predicted and actual values.
+2. Backward Pass:
+Using the chain rule, gradients are computed from the output layer back to the input layer.
+These gradients guide the adjustments of weights and biases to minimize the loss.
+Key Components of Backpropagation
+Loss Function: Quantifies the error between predicted and actual values (e.g., Mean Squared Error, Cross-Entropy Loss).
+Gradient: Measures the rate of change of the loss function with respect to weights, enabling optimization.
+Learning Rate: Determines the step size for weight updates—too small leads to slow convergence, while too large may cause instability.
+Backpropagation in CNNs
+Convolutional Layers: Gradients are computed for filter weights and biases, refining feature extraction.
+Pooling Layers: While gradients are propagated, pooling layers lack learnable parameters.
+Fully Connected Layers: Similar to traditional neural networks, gradients update all weights and biases.
+Mathematical Foundation
+The chain rule computes partial derivatives for each layer.
+Gradients propagate backward, ensuring all layers adjust accordingly.
+Significance of Backpropagation
+Enables networks to learn by optimizing weights and reducing loss.
+Enhances pattern recognition and predictive accuracy.
+Challenges and Solutions
+Vanishing Gradient Problem: Small gradients in deep networks slow learning.
+Solution: Use activation functions like ReLU.
+Exploding Gradient Problem: Excessively large gradients destabilize training.
+Solution: Apply gradient clipping.
+Conclusion
+Backpropagation is fundamental in training CNNs, ensuring efficient learning and generalization through proper gradient computation and weight updates.
