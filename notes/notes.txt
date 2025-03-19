@@ -1,5 +1,26 @@
-Transfer learning is a machine learning technique where a model trained for one task is repurposed as the foundation for a new, related task. In Convolutional Neural Networks (CNNs), this method is widely used by leveraging pre-trained models, often trained on large datasets like ImageNet, and fine-tuning them for specific tasks with smaller datasets. This approach is particularly beneficial when data for the new task is limited, as it enables the model to retain and utilize the general features learned from the original dataset.
+Convolutional Neural Networks (CNNs) are a specialized type of neural network designed for tasks like image classification. Neural networks, in general, aim to replicate the human brain's learning process by taking input, processing it through multiple layers, and generating an output. CNNs stand out due to their unique architecture, which consists of specific types of hidden layers:
 
-CNNs are effective at capturing spatial hierarchies of features, with early layers detecting basic patterns such as edges and textures, while deeper layers extract more complex, high-level representations. In transfer learning, the lower layers of a pre-trained CNN typically contain generalized features applicable across various domains, whereas the upper layers can be fine-tuned to suit the specific needs of the target task.
+Convolutional Layers
+ReLU (Rectified Linear Unit) Layers
+Pooling Layers
+Fully Connected Layer (Final Layer)
+These layers can appear multiple times in different sequences but follow a general structure. A CNN always begins with a convolutional layer and ends with a fully connected layer, which is preceded by a final pooling layer. A typical CNN architecture might look like this:
 
-By employing transfer learning, training time and computational costs are significantly reduced. Additionally, it enhances model performance, especially in scenarios with limited labeled data, by leveraging the rich feature representations already acquired during pre-training. Rather than building a CNN from scratch—which demands extensive data and computational resources—transfer learning enables quicker convergence and improved accuracy with fewer data points.
+Input → Convolution → ReLU → Convolution → ReLU → Pooling → ReLU → Convolution → ReLU → Pooling → Fully Connected → Output
+
+When an image is fed into a CNN for classification, it undergoes a series of transformations within these layers. Each layer serves a specific function in processing the image data.
+
+Breakdown of CNN Layers:
+Convolutional Layers
+These layers are the core building blocks of a CNN. The mathematical concept of convolution involves combining two functions to produce a third function. In a CNN, the convolutional layer applies a filter to an input image, producing a feature map that highlights key characteristics such as edges, textures, and shapes. These extracted features help identify objects within an image.
+
+ReLU Layers
+Short for Rectified Linear Unit, ReLU is an activation function that introduces non-linearity into the network. It processes the feature map by converting all negative values to zero while keeping positive values unchanged.
+
+Pooling Layers
+Pooling is used to reduce the dimensions of an image while preserving its essential features. A filter scans over the input matrix, selecting a single representative value from each subregion to create a smaller output matrix. The most commonly used method is max pooling, which selects the highest value from each subregion. Pooling improves computational efficiency and helps reduce overfitting.
+
+Fully Connected Layer
+This is the final stage of the CNN. It takes the processed features from the last pooling layer, aggregates the information, and generates the final classification. Each value in the input vector represents the likelihood of a particular feature belonging to a specific class. For example, one value might indicate a 90% probability that a detected feature is a dog’s paw. The fully connected layer applies weights to these probabilities and determines the final classification output.
+
+In summary, CNNs process images step by step, extracting features, reducing complexity, and ultimately classifying the input based on learned patterns.
