@@ -1,26 +1,45 @@
-Convolutional Neural Networks (CNNs) are a specialized type of neural network designed for tasks like image classification. Neural networks, in general, aim to replicate the human brain's learning process by taking input, processing it through multiple layers, and generating an output. CNNs stand out due to their unique architecture, which consists of specific types of hidden layers:
+1. Introduction to LeNet-5
+Developed by: Yann LeCun and his team in 1998.
+Purpose: Created for recognizing handwritten digits, primarily using the MNIST dataset.
+Significance: One of the earliest CNN architectures that showcased the potential of deep learning in image classification.
+2. Architectural Overview
+LeNet-5 comprises seven trainable layers (excluding the input layer):
 
-Convolutional Layers
-ReLU (Rectified Linear Unit) Layers
-Pooling Layers
-Fully Connected Layer (Final Layer)
-These layers can appear multiple times in different sequences but follow a general structure. A CNN always begins with a convolutional layer and ends with a fully connected layer, which is preceded by a final pooling layer. A typical CNN architecture might look like this:
-
-Input → Convolution → ReLU → Convolution → ReLU → Pooling → ReLU → Convolution → ReLU → Pooling → Fully Connected → Output
-
-When an image is fed into a CNN for classification, it undergoes a series of transformations within these layers. Each layer serves a specific function in processing the image data.
-
-Breakdown of CNN Layers:
-Convolutional Layers
-These layers are the core building blocks of a CNN. The mathematical concept of convolution involves combining two functions to produce a third function. In a CNN, the convolutional layer applies a filter to an input image, producing a feature map that highlights key characteristics such as edges, textures, and shapes. These extracted features help identify objects within an image.
-
-ReLU Layers
-Short for Rectified Linear Unit, ReLU is an activation function that introduces non-linearity into the network. It processes the feature map by converting all negative values to zero while keeping positive values unchanged.
-
-Pooling Layers
-Pooling is used to reduce the dimensions of an image while preserving its essential features. A filter scans over the input matrix, selecting a single representative value from each subregion to create a smaller output matrix. The most commonly used method is max pooling, which selects the highest value from each subregion. Pooling improves computational efficiency and helps reduce overfitting.
-
-Fully Connected Layer
-This is the final stage of the CNN. It takes the processed features from the last pooling layer, aggregates the information, and generates the final classification. Each value in the input vector represents the likelihood of a particular feature belonging to a specific class. For example, one value might indicate a 90% probability that a detected feature is a dog’s paw. The fully connected layer applies weights to these probabilities and determines the final classification output.
-
-In summary, CNNs process images step by step, extracting features, reducing complexity, and ultimately classifying the input based on learned patterns.
+Input Layer: Accepts a 32x32 grayscale image.
+Layer 1 - Convolutional Layer (C1)
+Filters: 6 filters, each of size 5x5.
+Output: 6 feature maps of 28x28.
+Activation Function: Sigmoid.
+Layer 2 - Subsampling Layer (S2)
+Type: Average pooling.
+Filter Size: 2x2, stride of 2.
+Output: 6 feature maps of 14x14.
+Layer 3 - Convolutional Layer (C3)
+Filters: 16 filters of size 5x5.
+Output: 16 feature maps of 10x10.
+Activation Function: Sigmoid.
+Layer 4 - Subsampling Layer (S4)
+Type: Average pooling.
+Filter Size: 2x2, stride of 2.
+Output: 16 feature maps of 5x5.
+Layer 5 - Convolutional Layer (C5)
+Filters: 120 filters of size 5x5.
+Output: 120 feature maps of 1x1.
+Activation Function: Sigmoid.
+Layer 6 - Fully Connected Layer (F6)
+Neurons: 84.
+Activation Function: Sigmoid.
+Output Layer
+Neurons: 10 (corresponding to digits 0-9).
+Activation Function: Softmax (for probability distribution).
+3. Key Features
+Convolutional Layers: Capture spatial features from images using learnable filters.
+Pooling (Subsampling) Layers: Reduce dimensions and computational complexity while improving robustness.
+Fully Connected Layers: Integrate extracted features to make the final classification.
+4. Training Details
+Dataset: MNIST handwritten digit dataset.
+Loss Function: Mean Squared Error (MSE).
+Optimizer: Stochastic Gradient Descent (SGD).
+5. Impact and Legacy
+Foundation for Modern CNNs: Inspired many advanced deep learning models.
+Pioneered Deep Learning in Vision: Proved that neural networks could efficiently perform image recognition.
