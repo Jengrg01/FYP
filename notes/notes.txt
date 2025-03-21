@@ -1,45 +1,33 @@
-1. Introduction to LeNet-5
-Developed by: Yann LeCun and his team in 1998.
-Purpose: Created for recognizing handwritten digits, primarily using the MNIST dataset.
-Significance: One of the earliest CNN architectures that showcased the potential of deep learning in image classification.
-2. Architectural Overview
-LeNet-5 comprises seven trainable layers (excluding the input layer):
+Padding
+Definition: Padding involves adding extra pixels around the edges of an input image before applying convolution.
 
-Input Layer: Accepts a 32x32 grayscale image.
-Layer 1 - Convolutional Layer (C1)
-Filters: 6 filters, each of size 5x5.
-Output: 6 feature maps of 28x28.
-Activation Function: Sigmoid.
-Layer 2 - Subsampling Layer (S2)
-Type: Average pooling.
-Filter Size: 2x2, stride of 2.
-Output: 6 feature maps of 14x14.
-Layer 3 - Convolutional Layer (C3)
-Filters: 16 filters of size 5x5.
-Output: 16 feature maps of 10x10.
-Activation Function: Sigmoid.
-Layer 4 - Subsampling Layer (S4)
-Type: Average pooling.
-Filter Size: 2x2, stride of 2.
-Output: 16 feature maps of 5x5.
-Layer 5 - Convolutional Layer (C5)
-Filters: 120 filters of size 5x5.
-Output: 120 feature maps of 1x1.
-Activation Function: Sigmoid.
-Layer 6 - Fully Connected Layer (F6)
-Neurons: 84.
-Activation Function: Sigmoid.
-Output Layer
-Neurons: 10 (corresponding to digits 0-9).
-Activation Function: Softmax (for probability distribution).
-3. Key Features
-Convolutional Layers: Capture spatial features from images using learnable filters.
-Pooling (Subsampling) Layers: Reduce dimensions and computational complexity while improving robustness.
-Fully Connected Layers: Integrate extracted features to make the final classification.
-4. Training Details
-Dataset: MNIST handwritten digit dataset.
-Loss Function: Mean Squared Error (MSE).
-Optimizer: Stochastic Gradient Descent (SGD).
-5. Impact and Legacy
-Foundation for Modern CNNs: Inspired many advanced deep learning models.
-Pioneered Deep Learning in Vision: Proved that neural networks could efficiently perform image recognition.
+Purpose:
+
+Maintains Spatial Dimensions: Helps retain the input image’s width and height, preventing size reduction after convolution.
+Enhances Edge Detection: Ensures filters can effectively process features near the image’s borders, capturing important details.
+Types of Padding:
+
+Valid Padding (No Padding): No extra pixels are added, resulting in a smaller output after convolution.
+Same Padding (Zero Padding): Zeros are added to the image borders to maintain the same input and output dimensions.
+2. Strides
+Definition: Stride refers to the number of pixels a filter moves over the input matrix during convolution.
+
+Purpose:
+
+Controls Output Size: Adjusting stride length influences the spatial dimensions of the resulting feature map.
+Improves Efficiency: Larger strides reduce output size, lowering computational complexity and memory usage.
+Stride Values:
+
+Stride of 1: The filter moves one pixel at a time, generating a highly detailed feature map.
+Stride of 2 or More: The filter shifts by multiple pixels, producing a smaller feature map with reduced resolution.
+3. Key Considerations
+Information Retention: Larger strides may cause a loss of fine details in the feature map.
+Computational Cost: Smaller strides and more padding increase processing requirements due to larger output sizes.
+Optimal Design: Choosing appropriate padding and stride values is essential for balancing computational efficiency and feature extraction.
+
+
+
+
+
+
+
