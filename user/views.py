@@ -6,6 +6,9 @@ from .forms import *
 from .models import *
 from .auth import admin_only
 from app.models import *
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
+from .models import UserProfile
 # Create your views here.
 
 def register_user(request):
@@ -94,9 +97,7 @@ def artist_detail(request, artist_id):
         'artist':artist
     }
     return render(request,"user/artistdetail.html",context)
-from django.shortcuts import get_object_or_404
-from django.contrib.auth.models import User
-from .models import UserProfile
+
 
 def user_detail(request, user_id):
     # Fetch UserProfile using user_id from the User model
