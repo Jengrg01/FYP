@@ -20,8 +20,22 @@ class Makeup(models.Model):
     rate = models.IntegerField()
     artist_description = models.CharField(max_length=300)
     speciality = models.ForeignKey(Speciality, on_delete = models.CASCADE, null = True)
-    image = models.FileField(upload_to='static/uploads',null=True)
+    image = models.ImageField(upload_to='static/uploads',null=True,default = "profilepic.png" ,blank=True)
     category = models.ForeignKey(Category, on_delete = models.CASCADE, null = True)
+    cover_pic = models.ImageField(
+        upload_to='static/uploads/',
+        default='profilepic.png', null=True,blank=True
+    )
+    created_at = models.DateTimeField(auto_now_add=True, blank= True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, blank= True, null = True)
     def __str__(self):
         return self.artist_name
     
+class ArtistPortfolio(models.Model):
+    artist = models.ForeignKey(Makeup, on_delete=models.CASCADE, related_name='portfolio')
+    gallery = models.ImageField(upload_to='static/portfolio/') 
+    caption = models.CharField(max_length=200, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Portfolio item for {self.artist.artist_name}"

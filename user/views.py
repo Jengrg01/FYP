@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import *
 from .models import *
-from .auth import admin_only
+from .auth import *
 from app.models import *
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
@@ -90,7 +90,7 @@ def deleteUser(request, user_id):
     messages.add_message(request, messages.SUCCESS, "User has been deleted successfully!")
     return redirect('userlist')
 
-
+@artist_required
 def artist_detail(request, artist_id):
     artist = Makeup.objects.get(id=artist_id)
     context = {
@@ -98,7 +98,7 @@ def artist_detail(request, artist_id):
     }
     return render(request,"user/artistdetail.html",context)
 
-
+@user_required
 def user_detail(request, user_id):
     # Fetch UserProfile using user_id from the User model
     user = get_object_or_404(User, id=user_id)
@@ -106,6 +106,7 @@ def user_detail(request, user_id):
     context = {'current_user': user_profile}  # Pass user_profile, not just user
     return render(request, "user/userdetail.html", context)
 
+@user_required
 def user_acc_settings(request):
     user = request.user
     form = ProfileForm(instance=user.userprofile)
