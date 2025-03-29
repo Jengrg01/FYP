@@ -88,14 +88,20 @@ def addArtist(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             email = form.cleaned_data['email']
-            user = User.objects.create_user(username=username, password=password, email=email)
+
+            user = User.objects.create_user(
+                username=username,
+                password=password,
+                email=email  # This is the primary email storage
+            )
+            
             
             # Create a Makeup (Artist) object and associate it with the user
             artist = form.save(commit=False)
             artist.user = user
             artist.save()
 
-            user_profile = UserProfile.objects.create(user=user, is_artist=True)
+            UserProfile.objects.create(user=user, is_artist=True)
             
             messages.add_message(request, messages.SUCCESS, "Artist has been added successfully !")
             # to send back to another list when form is saved.

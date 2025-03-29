@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from . models import *
+from app.models import *
 
 class UserRegistrationForm(UserCreationForm):
 
@@ -22,3 +23,9 @@ class ProfileForm(ModelForm):
         model = UserProfile
         fields = '__all__'
         exclude = ['user','is_artist']
+
+
+class ArtistProfileForm(ModelForm):
+    class Meta:
+        model = Makeup
+        exclude = ['created_at', 'updated_at']

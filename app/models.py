@@ -24,7 +24,7 @@ class Makeup(models.Model):
     category = models.ForeignKey(Category, on_delete = models.CASCADE, null = True)
     cover_pic = models.ImageField(
         upload_to='static/uploads/',
-        default='profilepic.png', null=True,blank=True
+        default="default-cover.jpg", null=True,blank=True
     )
     created_at = models.DateTimeField(auto_now_add=True, blank= True, null=True)
     updated_at = models.DateTimeField(auto_now=True, blank= True, null = True)
