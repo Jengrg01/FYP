@@ -90,13 +90,21 @@ def deleteUser(request, user_id):
     messages.add_message(request, messages.SUCCESS, "User has been deleted successfully!")
     return redirect('userlist')
 
-@artist_required
+
 def artist_detail(request, artist_id):
     artist = Makeup.objects.get(id=artist_id)
     context = {
         'artist':artist
     }
     return render(request,"user/artistdetail.html",context)
+
+@artist_required
+def artist_profile(request, artist_id):
+    artist = Makeup.objects.get(id=artist_id)
+    context = {
+        'artist':artist
+    }
+    return render(request,"user/artistprofile.html",context)
 
 @user_required
 def user_detail(request, user_id):

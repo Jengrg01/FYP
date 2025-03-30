@@ -22,6 +22,10 @@
    
     <link rel="stylesheet" href="{% static 'css/landingpage.css' %}"/>
     <style>
+      .custom-font_1 {
+            font-family: "Poppins";
+            font-weight: 400;
+        }
        .custom-font {
             font-family: "Lavishly Yours";
             font-weight: 400;
@@ -72,7 +76,7 @@
               <ul class="py-2 text-sm text-gray-700" aria-labelledby="avatarButton">
                 <li>
                   {% if user.userprofile.is_artist %}
-                    <a href="{% url 'artistDetail' user.makeup.id %}" class="block px-4 py-2 hover:bg-gray-100">Artist Profile</a>
+                    <a href="{% url 'artistprofile' user.makeup.id %}" class="block px-4 py-2 hover:bg-gray-100">Artist Profile</a>
                   {% else %}
                     <a href="{% url 'userprofile' user.id %}" class="block px-4 py-2 hover:bg-gray-100">Profile</a>
                   {% endif %}

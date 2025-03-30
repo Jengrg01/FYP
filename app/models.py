@@ -18,7 +18,7 @@ class Makeup(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     artist_name = models.CharField(max_length=100)
     rate = models.IntegerField()
-    artist_description = models.CharField(max_length=300)
+    artist_description = models.CharField(max_length=5000, blank=True, null=True)
     speciality = models.ForeignKey(Speciality, on_delete = models.CASCADE, null = True)
     image = models.ImageField(upload_to='static/uploads',null=True,default = "profilepic.png" ,blank=True)
     category = models.ForeignKey(Category, on_delete = models.CASCADE, null = True)
