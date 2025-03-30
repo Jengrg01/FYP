@@ -1,16 +1,36 @@
-{% extends 'index.html' %} 
-{% load static %} 
-{% load crispy_forms_tags %} 
+{% extends 'index.html' %} {% load static %} {% load crispy_forms_tags %} 
 {% block title %}
 <title>Lumiere | Artist Detail</title>
 {% endblock %} 
 {% block main_content %}
 
-<section class="bg-white h-screen max-w-[1920px] p-0 m-0" style="width: 100% !important; height: 100vh !important;">
-    <div 
+<section
+  class="bg-white h-screen max-w-[1920px] p-0 m-0"
+  style="width: 100% !important; height: 100vh !important"
+>
+  <div
     class="h-56 w-full bg-red-200 p-0 m-0"
     style="background-image: url('{{ artist.cover_pic.url }}'); background-size: cover; background-position: center;"
-></div>
+  >
+    <div
+      class="md:h-40 md:w-36 border-4 border-white rounded-md absolute xl:left-9 xl:top-[16%] xl:left-24 2xl:left-24 2xl:top-[23%] sm:h-28 sm:w-28 sm:left-3 sm:top-[19%] md:left-5 md:top-[16%] mb-4"
+    >
+      <img
+        src="{{artist.image.url}}"
+        class="h-full w-full object-cover rounded-sm"
+        alt=""
+      />
+    </div>
+  </div>
+  <div class="flex justify-center mt-12">
+    <div class="artist-bio bg-red-200 h-28 w-[88%] flex ">
+        <div class="artist-self-info bg-blue-200 h-full w-[65%]">
+            <h1 class="font-bold">{{artist.artist_name}}</h1>
+        </div>
+        <div class="hire-mebtn"></div>
+    </div>
+  </div>
+  
 </section>
 
 {% endblock %}

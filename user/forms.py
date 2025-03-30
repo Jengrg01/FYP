@@ -28,4 +28,4 @@ class ProfileForm(ModelForm):
 class ArtistProfileForm(ModelForm):
     class Meta:
         model = Makeup
-        exclude = ['created_at', 'updated_at']
+        exclude = ['user','created_at', 'updated_at']

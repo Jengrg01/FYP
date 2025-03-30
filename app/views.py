@@ -114,51 +114,44 @@ def addArtist(request):
 
 @admin_only
 def updateArtist(request, artist_id):
-    # Retrieve the artist's Makeup object and associated User object
     artist = Makeup.objects.get(id=artist_id)
-    user = artist.user  # This is the associated User object for this artist
+    user = artist.user
 
     if request.method == "POST":
         form = ArtistForm(request.POST, request.FILES, instance=artist)
 
         if form.is_valid():
-            # Get the cleaned data from the form
+            # Get cleaned data
             cleaned_data = form.cleaned_data
+            
+            # Update User fields
+            user.username = cleaned_data.get('username', user.username)
+            user.email = cleaned_data.get('email', user.email)  # Always update User.email
+            
+            if cleaned_data.get('password'):  # Only update if password changed
+                user.set_password(cleaned_data['password'])
+            
+            user.save()  # Save user changes first
 
-            # If username or password is being changed, update the User object
-            new_username = cleaned_data.get('username')
-            new_password = cleaned_data.get('password')
-            new_email = cleaned_data.get('email')
+            # Save artist profile
+            artist = form.save(commit=False)
+            artist.user = user  # Ensure relationship is maintained
+            artist.save()
 
-            # Update User object (username and password)
-            if new_username != user.username:
-                user.username = new_username
-
-            if new_password:  # Only update password if it's provided
-                user.set_password(new_password)  # Don't store plain password
-                user.save()  # Save the updated user object
-            if new_email != user.email:
-                user.email = new_email
-
-            # Save the updated Makeup (artist) object
-            form.save()
-
-            # Optional: Update UserProfile if necessary (e.g., is_artist)
+            # Update UserProfile (only is_artist flag, no email)
             user_profile, created = UserProfile.objects.get_or_create(user=user)
-            user_profile.is_artist = True  # Ensure the user is marked as an artist
+            user_profile.is_artist = True
             user_profile.save()
-            messages.add_message(request, messages.SUCCESS, "Artist data is updated successfully!")
-            send_email_to_artist_update(new_username, new_password, new_email)
-            return redirect('artistlist')  # Redirect to the artist list after update
-        else:
-            messages.add_message(request, messages.ERROR, "Error! Data could not be updated!")
-            return render(request, 'artists/updateartist.html', {"form": form})
 
-    # If not a POST request, display the form with the existing data
-    context = {
-        "form": ArtistForm(instance=artist)
-    }
-    return render(request, 'artists/updateartist.html', context)
+            messages.success(request, "Artist updated successfully!")
+            send_email_to_artist_update(user.username, cleaned_data.get('password'), user.email)
+            return redirect('artistlist')
+        else:
+            messages.error(request, "Please correct the errors below!")
+    else:
+        form = ArtistForm(instance=artist)
+
+    return render(request, 'artists/updateartist.html', {"form": form})
 @admin_only
 def deleteArtist(request, artist_id):
     artist = Makeup.objects.get(id = artist_id)
