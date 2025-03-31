@@ -13,10 +13,10 @@ from .models import UserProfile
 
 def register_user(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            UserProfile.objects.create(user=user)
+            print("User Registered:", user.username, user.email)
             messages.add_message(request, messages.SUCCESS, "User has been registered successfully")
             return redirect('login')
         else:
@@ -108,19 +108,26 @@ def artist_profile(request, artist_id):
 
 @user_required
 def user_detail(request, user_id):
-    # Fetch UserProfile using user_id from the User model
     user = get_object_or_404(User, id=user_id)
-    user_profile = get_object_or_404(UserProfile, user=user)  # Fetch profile linked to user
-    context = {'current_user': user_profile}  # Pass user_profile, not just user
+    user_profile = get_object_or_404(UserProfile, user=user) 
+    context = {
+        'user':user,
+        'current_user': user_profile
+        }  
     return render(request, "user/userdetail.html", context)
 
 @user_required
 def user_acc_settings(request):
     user = request.user
-    form = ProfileForm(instance=user.userprofile)
+    profile = user.userprofile 
+    form = ProfileForm(instance=profile)
+
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=user.userprofile)
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            form.save()
+            form.save() 
+            messages.success(request, "Your profile has been updated successfully!")
+            return redirect("usersettings") 
+
     context = {'form': form}
-    return render(request,"user/accountsettings.html",context)
+    return render(request, "user/accountsettings.html", context)

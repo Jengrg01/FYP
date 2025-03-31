@@ -1,4 +1,11 @@
 <style>
+  #div_id_first_name, #div_id_last_name{
+    width: 100%;
+    
+  }
+  #id_password1, #id_password2, #id_phone_number, #id_email, #id_username, #id_first_name, #id_last_name{
+    height: 35px;
+  }
   #id_username_helptext, #id_password1_helptext{
       display: none;
   }
@@ -56,15 +63,38 @@
 <div class="register-main">
     <section class="h-screen bg-white flex">
       <div class="w-[50%]">
-        <div class="flex flex-col items-center justify-center px-6 pb-8 mx-auto md:h-screen lg:py-0">
-          <div class="w-full bg-white shadow 2xl:relative 2xl:-left-20 rounded-lg md:mt-0 sm:max-w-md xl:p-0 2xl:-mt-32">
-              <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <div class="flex flex-col bg-white items-center justify-center px-6 pb-8 mx-auto md:h-screen lg:py-0">
+          <div class="w-full  bg-white shadow 2xl:relative 2xl:-left-20 2xl:top-16 rounded-lg md:mt-0 sm:max-w-md xl:p-0 2xl:-mt-32">
+              <div class="p-6 -mt-4 space-y-4 md:space-y-6 sm:p-8">
                   <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                       Create an account
                   </h1>
-                  <form class="space-y-4" action="#" method="POST">
-                      {% csrf_token %}
-                      {{ form | crispy }}
+                  <form class="space-y-4 h-auto" action="#" method="POST">
+                    {% csrf_token %}
+                    <div class="text-md gap-0">
+                      {{ form.username|as_crispy_field }}
+                    <!-- First Name & Last Name Side by Side -->
+                    <div class="flex gap-4">
+                        <div class="w-1/2">
+                            {{ form.first_name|as_crispy_field }}
+                        </div>
+                        <div class="w-1/2">
+                            {{ form.last_name|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                      <div class="w-1/2">
+                        {{ form.email|as_crispy_field }}
+                    </div>
+                    <div class="w-1/2">
+                      {{ form.phone_number|as_crispy_field }}
+                    </div>
+                    </div>
+                    {{ form.password1|as_crispy_field }}
+                    {{ form.password2|as_crispy_field }}
+                    </div>
+                    
+
                       <button type="submit" class="w-full text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" style="background-color: #663DC6;">Create an account</button>
                       <div class="flex items-start">
                           <div class="flex items-center h-5">

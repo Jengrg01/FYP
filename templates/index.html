@@ -62,14 +62,14 @@
                   {% if user.userprofile.is_artist %}
                     {{ user.makeup.artist_name }}
                   {% else %}
-                    {{ user.userprofile.first_name }} {{ user.userprofile.last_name }}
+                    {{ user.first_name }} {{ user.last_name }}
                   {% endif %}
                 </div>
                 <div class="font-medium truncate">
                   {% if user.userprofile.is_artist %}
                     {{ user.email }}  
                   {% else %}
-                    {{ user.userprofile.email }} 
+                    {{ user.email }} 
                   {% endif %}
                 </div>
               </div>
