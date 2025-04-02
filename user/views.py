@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from django.urls import reverse
 from django.contrib import messages
 from .forms import *
 from .models import *
@@ -120,14 +121,17 @@ def user_detail(request, user_id):
 def user_acc_settings(request):
     user = request.user
     profile = user.userprofile 
-    form = ProfileForm(instance=profile)
+    user_form = UserUpdateForm(instance=user)
+    profile_form = ProfileForm(instance=profile)
 
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES, instance=profile)
-        if form.is_valid():
-            form.save() 
+        user_form = UserUpdateForm(request.POST, instance=user)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
             messages.success(request, "Your profile has been updated successfully!")
-            return redirect("usersettings") 
+            return redirect(reverse("userprofile", kwargs={"user_id": user.id})) 
 
-    context = {'form': form}
+    context = {'user_form': user_form, 'profile_form': profile_form}
     return render(request, "user/accountsettings.html", context)

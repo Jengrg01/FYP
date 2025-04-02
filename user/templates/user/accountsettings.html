@@ -37,7 +37,8 @@
 			
 			<form method="POST" class="w-1/3 mb-12 m-auto" action="" enctype="multipart/form-data">
 				{% csrf_token %}
-                {{ form | crispy }}
+                {{ user_form | crispy }}
+				{{ profile_form | crispy }}
 		
 			<input class="btn bg-gray-800 text-md font-semibold text-white px-4 py-2" type="submit" name="Update Information">
 			</form>

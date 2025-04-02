@@ -43,6 +43,11 @@ class ProfileForm(ModelForm):
         fields = '__all__'
         exclude = ['user','is_artist']
 
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username','first_name', 'last_name', 'email']
+
 class ArtistProfileForm(ModelForm):
     class Meta:
         model = Makeup

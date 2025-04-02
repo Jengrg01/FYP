@@ -10,6 +10,7 @@ from django.http import JsonResponse
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from django.views.decorators.csrf import csrf_exempt
+from user.auth import user_required
 
 # Store models in `src/ml_models/`
 MODEL_DIR = os.path.join(settings.BASE_DIR, "ml_models")
@@ -128,6 +129,7 @@ def predict_facial_features(image_path):
     return feature_labels[np.argmax(prediction)]
 
 
+@user_required
 @csrf_exempt
 def upload_image(request):
     if request.method == 'POST' and request.FILES.get('image'):
