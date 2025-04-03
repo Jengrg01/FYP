@@ -48,7 +48,16 @@ class UserUpdateForm(forms.ModelForm):
         model = User
         fields = ['username','first_name', 'last_name', 'email']
 
-class ArtistProfileForm(ModelForm):
+class ArtistProfileForm(forms.ModelForm):
     class Meta:
         model = Makeup
-        exclude = ['user','created_at', 'updated_at']
+        fields = ['artist_name', 'rate', 'artist_description', 'speciality', 'category', 'image', 'cover_pic']
+        widgets = {
+            'artist_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter artist name'}),
+            'rate': forms.NumberInput(attrs={'class': 'form-control', 'min': 0}),
+            'artist_description': forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Describe your work...'}),
+            'speciality': forms.Select(attrs={'class': 'form-control'}),
+            'category': forms.Select(attrs={'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'class': 'form-control'}),
+            'cover_pic': forms.FileInput(attrs={'class': 'form-control'}),
+        }

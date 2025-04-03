@@ -12,4 +12,6 @@ urlpatterns = [
     path("userdetail/<int:user_id>/", user_detail, name='userprofile'),
     path("usersettings/", user_acc_settings, name='usersettings'),
     path("artistprofile/<int:artist_id>/", artist_profile, name='artistprofile'),
+    path("artistsettings/", artist_acc_settings, name='artistsettings'),
+    
 ]

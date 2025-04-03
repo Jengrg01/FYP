@@ -107,6 +107,22 @@ def artist_profile(request, artist_id):
     }
     return render(request,"user/artistprofile.html",context)
 
+@artist_required
+def artist_acc_settings(request):
+    artist = Makeup.objects.get(user=request.user)
+    if request.method == "POST":
+        form = ArtistProfileForm(request.POST, request.FILES, instance=artist)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your profile has been updated successfully!")
+            return redirect("artistprofile", artist_id=artist.id)
+    else:
+        form = ArtistProfileForm(instance=artist)
+    context = {
+        'form': form
+    }
+    return render(request, "user/artistsettings.html",context)
+
 @user_required
 def user_detail(request, user_id):
     user = get_object_or_404(User, id=user_id)
