@@ -32,10 +32,10 @@ class Makeup(models.Model):
         return self.artist_name
     
 class ArtistPortfolio(models.Model):
-    artist = models.ForeignKey(Makeup, on_delete=models.CASCADE, related_name='portfolio')
-    gallery = models.ImageField(upload_to='static/portfolio/') 
+    artist = models.ForeignKey(Makeup, on_delete=models.CASCADE, related_name='gallery_images')
+    image = models.ImageField(upload_to='static/portfolio/') 
     caption = models.CharField(max_length=200, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return f"Portfolio item for {self.artist.artist_name}"

@@ -22,10 +22,7 @@ class SpecialityForm(ModelForm):
         model = Speciality
         fields = "__all__"
 
-class PortfolioForm(forms.ModelForm):
+class GalleryImageForm(forms.ModelForm):
     class Meta:
         model = ArtistPortfolio
-        fields = ['gallery', 'caption']
-        widgets = {
-            'caption': forms.TextInput(attrs={'placeholder': 'Add a caption (optional)'}),
-        }
+        fields = ['image', 'caption']

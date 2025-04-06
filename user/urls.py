@@ -13,5 +13,5 @@ urlpatterns = [
     path("usersettings/", user_acc_settings, name='usersettings'),
     path("artistprofile/<int:artist_id>/", artist_profile, name='artistprofile'),
     path("artistsettings/", artist_acc_settings, name='artistsettings'),
-    
+    path('upload-image/', upload_gallery_image, name='upload_gallery_image'),
 ]

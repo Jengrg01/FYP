@@ -46,7 +46,18 @@
     <h1 class="custom-font_1 font-semibold text-xl my-4 w-[87%] justify-center">Portfolio</h1>
   </div>
   <div class="flex justify-center">
-    <div class="border-2 border-grey-200 h-[50vh] w-[87%]"></div>
+    <div class="border-2 border-grey-200 h-auto w-[87%]">
+      <div class="gallery">
+        {% for image in gallery_images %}
+          <div class="gallery-item">
+            <img src="{{ image.image.url }}" alt="Gallery Image" style="width:200px;height:auto;">
+            <p>{{ image.caption }}</p>
+          </div>
+        {% empty %}
+          <p>No images in gallery yet.</p>
+        {% endfor %}
+      </div>
+    </div>
   </div>
 </section>
 

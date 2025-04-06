@@ -95,16 +95,20 @@ def deleteUser(request, user_id):
 
 def artist_detail(request, artist_id):
     artist = Makeup.objects.get(id=artist_id)
+    gallery_images = artist.gallery_images.all()
     context = {
         'artist': artist,
+        'gallery_images': gallery_images
     }
     return render(request,"user/artistdetail.html",context)
 
 @artist_required
 def artist_profile(request, artist_id):
     artist = Makeup.objects.get(id=artist_id)
+    gallery_images = artist.gallery_images.all()
     context = {
-        'artist':artist
+        'artist':artist,
+        'gallery_images': gallery_images
     }
     return render(request,"user/artistprofile.html",context)
 
@@ -125,6 +129,21 @@ def artist_acc_settings(request):
     }
     return render(request, "user/artistsettings.html",context)
 
+@artist_required
+def upload_gallery_image(request):
+    artist = Makeup.objects.get(user=request.user)
+
+    if request.method == 'POST':
+        form = GalleryImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            gallery_image = form.save(commit=False)
+            gallery_image.artist = artist
+            gallery_image.save()
+            return redirect('artistprofile', artist_id=artist.id)
+    else:
+        form = GalleryImageForm()
+
+    return render(request, 'user/upload_gallery_image.html', {'form': form})
 
 @user_required
 def user_detail(request, user_id):
