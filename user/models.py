@@ -8,4 +8,4 @@ class UserProfile(models.Model):
     phone_number = models.CharField(max_length=15, blank=True, null=True) 
     def __str__(self):
         return self.user.username if self.user else "No User Assigned"
-    
+ 

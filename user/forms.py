@@ -61,3 +61,4 @@ class ArtistProfileForm(forms.ModelForm):
             'image': forms.FileInput(attrs={'class': 'form-control'}),
             'cover_pic': forms.FileInput(attrs={'class': 'form-control'}),
         }
+

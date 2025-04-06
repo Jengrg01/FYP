@@ -1,0 +1,197 @@
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .wrapper {
+      max-width: 70%;
+      margin: auto;
+      padding: 2rem 0;
+    }
+
+    .wrapper > h1 {
+      margin-bottom: 2rem;
+      text-align: center;
+      letter-spacing: 2px;
+      font-size: 2rem;
+      color: #333;
+    }
+
+    .accordion {
+      background-color: white;
+      color: #333;
+      cursor: pointer;
+      font-size: 1.1rem;
+      width: 100%;
+      padding: 1.5rem 2rem;
+      border: none;
+      outline: none;
+      transition: all 0.3s ease-in-out;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+    }
+
+    .accordion i {
+      font-size: 1.4rem;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .faq {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .faq.active .accordion {
+      background: #f1f7f5;
+    }
+
+    .faq.active i {
+      transform: rotate(180deg);
+    }
+
+    .pannel {
+      padding: 0 2rem;
+      background: #f9f9f9;
+      display: none;
+      border-top: 1px solid #ddd;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .pannel p {
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.6;
+      padding: 1rem 0;
+    }
+</style>
+{% extends 'index.html' %} {% load static %} {% block title %}
+<title>Lumiere | FAQ </title>
+{% endblock %}
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+crossorigin="anonymous"
+referrerpolicy="no-referrer"
+/>
+{% block main_content %}
+<div class="wrapper">
+    <h1>Frequently Asked Questions</h1>
+
+    <div class="faq">
+      <button class="accordion">
+        What is Lumiere?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          Lumiere is a platform that connects users with professional makeup
+          artists and provides AI-powered makeup style suggestions based on
+          uploaded images.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <button class="accordion">
+        How does Lumiere work?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          Users can browse through verified makeup artists, book appointments,
+          and upload images to receive AI-generated makeup recommendations.
+          Artists are added and managed by the admin.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <button class="accordion">
+        Can I upload my picture for makeup suggestions?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          Yes! Lumiere allows users to upload images, and our AI analyzes them
+          to suggest makeup styles that best suit their facial features.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <button class="accordion">
+        Are all makeup artists on Lumiere verified?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          Yes, all makeup artists on Lumiere are verified by our team to
+          ensure quality service and professionalism.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <button class="accordion">
+        How can I book a makeup artist?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          Simply browse the available artists, check their profiles, and book
+          an appointment at your convenience through the Lumiere platform.
+        </p>
+      </div>
+    </div>
+
+    <div class="faq">
+      <button class="accordion">
+        How can makeup artists join Lumiere?
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="pannel">
+        <p>
+          Currently, artists can only be added by the admin. If you're a
+          professional makeup artist interested in joining, please contact us
+          for verification.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        this.parentElement.classList.toggle("active");
+
+        var pannel = this.nextElementSibling;
+
+        if (pannel.style.display === "block") {
+          pannel.style.display = "none";
+        } else {
+          pannel.style.display = "block";
+        }
+      });
+    }
+  </script>
+
+{% endblock %}

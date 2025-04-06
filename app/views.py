@@ -10,6 +10,9 @@ from .utils import *
 # Create your views here.
 # write functions for database, based on function or class based views(api creations get easier), we apure working on mvt pattern
 
+def faq(request):
+    return render(request,"artists/faq.html")
+
 def policy(request):
     return render(request,"artists/policy.html")
 

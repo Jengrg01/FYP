@@ -7,6 +7,7 @@ from .forms import *
 from .models import *
 from .auth import *
 from app.models import *
+from app.forms import *
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from .models import UserProfile
@@ -95,7 +96,7 @@ def deleteUser(request, user_id):
 def artist_detail(request, artist_id):
     artist = Makeup.objects.get(id=artist_id)
     context = {
-        'artist':artist
+        'artist': artist,
     }
     return render(request,"user/artistdetail.html",context)
 
@@ -107,6 +108,7 @@ def artist_profile(request, artist_id):
     }
     return render(request,"user/artistprofile.html",context)
 
+
 @artist_required
 def artist_acc_settings(request):
     artist = Makeup.objects.get(user=request.user)
@@ -114,7 +116,7 @@ def artist_acc_settings(request):
         form = ArtistProfileForm(request.POST, request.FILES, instance=artist)
         if form.is_valid():
             form.save()
-            messages.success(request, "Your profile has been updated successfully!")
+            messages.add_message(request,messages.SUCCESS, "Your profile has been updated successfully!")
             return redirect("artistprofile", artist_id=artist.id)
     else:
         form = ArtistProfileForm(instance=artist)
@@ -122,6 +124,7 @@ def artist_acc_settings(request):
         'form': form
     }
     return render(request, "user/artistsettings.html",context)
+
 
 @user_required
 def user_detail(request, user_id):
