@@ -1,9 +1,24 @@
-{% extends 'index.html' %} {% load static %} {% load crispy_forms_tags %} 
+{% extends 'artistindex.html' %} 
+{% load static %}
+ {% load crispy_forms_tags %} 
 {% block title %}
-<title>Lumiere | Artist Detail</title>
+<title>Lumiere | Artist Profile</title>
 {% endblock %} 
-{% block main_content %}
-
+{% block artist_content %}
+{% for msg in messages %}
+<div class="msg absolute top-20 left-[47%] flex justify-center">
+  {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+  <span class=" bg-blue-800  py-2 px-3 text-white text-center">
+  {{msg}}
+</span>
+{% endif %}
+{% if msg.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+  <span class=" bg-red-800  py-2 px-3 text-white text-center">
+    {{msg}}
+  </span>
+  {% endif %}
+</div>
+{% endfor %}
 <section
   class="bg-white h-screen max-w-[1920px] p-0 m-0"
   style="width: 100% !important; height: auto !important"
@@ -46,22 +61,50 @@
   </div>
   <div class="artist-portfolio-section flex justify-center">
     <h1 class="custom-font_1 font-semibold text-xl my-4 w-[87%] justify-center">Portfolio</h1>
+    <a href="{% url 'upload_gallery_image' %}"><button class="button-color px-4 py-1 mt-3 rounded-sm text-white custom-font_1 text-lg font-normal absolute right-[8%]">Upload</button></a>
   </div>
   <div class="flex justify-center">
-    <div class="border-2 border-grey-200 h-auto w-[87%]">
-      <div class="gallery">
-  {% for image in gallery_images %}
-    <div class="gallery-item">
-      <img src="{{ image.image.url }}" alt="Gallery Image" style="width:200px;height:auto;">
-      <p>{{ image.caption }}</p>
+    <div class="w-[87%]">
+      <h5 class="custom-font_1 font-light text-gray-400 text-sm mb-2">Please click on the images to view the full length</h5>
     </div>
-  {% empty %}
-    <p>No images in gallery yet.</p>
-  {% endfor %}
-</div>
+  </div>  
+  
+  <div class="flex justify-center">
+    <div class="border-2 border-grey-200 h-auto w-[87%] py-4 mb-20">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {% for image in gallery_images %}
+          <div class="bg-white rounded shadow p-2 cursor-pointer" onclick="openModal('{{ image.image.url }}')">
+            <img src="{{ image.image.url }}" alt="Gallery Image" class="w-full h-48 object-cover rounded mb-2">
+            <p class="text-center text-sm custom-font_1">{{ image.caption }}</p>
+          </div>
+        {% empty %}
+          <p class="text-lg custom-font_1 font-normal col-span-full">No images in gallery yet.</p>
+        {% endfor %}
+      </div>
+      <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="fixed inset-0 bg-black bg-opacity-80 hidden justify-center items-center z-50">
+     <div class="relative max-w-3xl w-full mx-auto">
+      <button onclick="closeModal()" class="absolute top-2 right-2 text-white text-3xl">&times;</button>
+      <img id="lightboxImage" src="" class="w-full max-h-[90vh] object-contain rounded">
+     </div>
+    </div>
+      
+      
     </div>
   </div>
   
 </section>
+<script>
+  function openModal(imageUrl) {
+    document.getElementById('lightboxImage').src = imageUrl;
+    document.getElementById('lightboxModal').classList.remove('hidden');
+    document.getElementById('lightboxModal').classList.add('flex');
+  }
+
+  function closeModal() {
+    document.getElementById('lightboxModal').classList.add('hidden');
+    document.getElementById('lightboxModal').classList.remove('flex');
+  }
+</script>
 
 {% endblock %}

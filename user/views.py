@@ -54,12 +54,18 @@ def loginUser(request):
                     user_profile = UserProfile.objects.get(user=user)
                     print(user_profile.is_artist)
                     if user_profile.is_artist:
-                        messages.add_message(request, messages.SUCCESS, "Successfully logged in as artist!")
-                        return redirect('artist')  # Redirect to artist dashboard
+                        try:
+                            artist = Makeup.objects.get(user=user)
+                            messages.add_message(request, messages.SUCCESS, "Successfully logged in as artist!")
+                            return redirect('artistprofile', artist_id=artist.id) 
+                        except Makeup.DoesNotExist:
+                            messages.add_message(request, messages.ERROR, "Artist profile not found.")
+                            return redirect('login')
                     else:
                         # If the user doesn't have a profile, proceed as a regular user
                         messages.add_message(request, messages.SUCCESS, "Successfully logged in!")
                         return redirect('home')  # Redirect to regular user dashboard
+
                 except UserProfile.DoesNotExist as e:
                     # Handle the case where the user profile does not exist
                     print(e)
