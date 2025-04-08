@@ -39,3 +39,38 @@ class ArtistPortfolio(models.Model):
     
     def __str__(self):
         return f"Portfolio item for {self.artist.artist_name}"
+    
+
+
+#The timeslot model for the artist to add their availabilty time
+class TimeSlot(models.Model):
+    artist = models.ForeignKey(Makeup, on_delete=models.CASCADE)
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    is_booked = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.artist.artist_name} - {self.date} ({self.start_time} to {self.end_time})"
+    
+
+
+#The model for user to book an artist through the time slot that is chosen by the artist
+class Booking(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Makeup, on_delete=models.CASCADE)
+    time_slot = models.OneToOneField(TimeSlot, on_delete=models.CASCADE)
+    booked_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} booked {self.artist.artist_name} on {self.time_slot.date} at {self.time_slot.start_time}"
+    
+
+
+
+#Model for the notification feature on artist side 
+class Notification(models.Model):
+    artist = models.ForeignKey(Makeup, on_delete=models.CASCADE)
+    message = models.CharField(max_length=255)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)

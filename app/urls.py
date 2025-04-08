@@ -22,4 +22,5 @@ urlpatterns = [
     path("aboutus/", views.aboutus, name='aboutus'),
     path("services/", views.services, name='services'),
     path("faq/", views.faq, name='faq'),
+    path("timeslot/", views.add_availability, name='timeslot'),
 ]

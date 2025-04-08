@@ -5,7 +5,7 @@ from . forms import *
 from django.contrib import messages
 from django.contrib.auth.models import User
 from user.models import UserProfile  
-from user.auth import admin_only
+from user.auth import *
 from .utils import *
 # Create your views here.
 # write functions for database, based on function or class based views(api creations get easier), we apure working on mvt pattern
@@ -241,3 +241,30 @@ def deletespeciality(request, speciality_id):
     messages.add_message(request, messages.SUCCESS, "Speciality has been deleted successfully !")
     return redirect('specialitylist')
 
+
+@artist_required
+def add_availability(request):
+    try:
+        artist = Makeup.objects.get(user=request.user)
+    except Makeup.DoesNotExist:
+        return HttpResponse("You are not registered as an artist.")
+
+    if request.method == "POST":
+        form = TimeSlotForm(request.POST, artist=artist)
+        if form.is_valid():
+            slot = form.save(commit=False)
+            slot.artist = artist
+            slot.end_time = form.cleaned_data['end_time']
+            slot.save()
+            messages.add_message(request, messages.SUCCESS,"You have added the time slot successfully !")
+        else:
+            messages.add_message(request, messages.ERROR, "Error ! Time Slot could not be added!")
+            return render(request, 'artists/timeslot.html',{"form": form})
+    else:
+        form = TimeSlotForm(artist = artist)
+
+    context = {
+        'form' : form
+    }
+         
+    return render(request, 'artists/timeslot.html', context)

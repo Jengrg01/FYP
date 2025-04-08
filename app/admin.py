@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(Makeup)
 admin.site.register(Category)
 admin.site.register(Speciality)
+admin.site.register(TimeSlot)

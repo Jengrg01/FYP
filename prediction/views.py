@@ -187,6 +187,6 @@ def upload_image(request):
 
         except Exception as e:
             print(f"Error during processing: {e}")
-            return JsonResponse({"error": "Internal server error"}, status=500)
+            return JsonResponse({"error": "Error!!! The picture was not in a suitable condition! Please try again!!!"}, status=500)
 
     return JsonResponse({"error": "No image uploaded"}, status=400)

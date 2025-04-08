@@ -48,7 +48,7 @@
                 {% for a in artist %}
                 <tr class="odd:bg-white even:bg-gray-50 border-b">
                     <td class="px-6 py-4">
-                        <img src="/{{a.image}}" alt="{{a.artist_name}}" class="w-16 h-16 object-cover rounded-full">
+                        <img src="{{a.image.url}}" alt="{{a.artist_name}}" class="w-16 h-16 object-cover rounded-full">
                     </td>
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                         {{a.artist_name}}
