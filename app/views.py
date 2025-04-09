@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from user.models import UserProfile  
 from user.auth import *
 from .utils import *
+from datetime import datetime, timedelta, time
+
 # Create your views here.
 # write functions for database, based on function or class based views(api creations get easier), we apure working on mvt pattern
 
@@ -241,6 +243,7 @@ def deletespeciality(request, speciality_id):
     messages.add_message(request, messages.SUCCESS, "Speciality has been deleted successfully !")
     return redirect('specialitylist')
 
+#This function is used to add the form from which artist can reserve the available timeslots they have for their clients
 
 @artist_required
 def add_availability(request):
@@ -250,21 +253,43 @@ def add_availability(request):
         return HttpResponse("You are not registered as an artist.")
 
     if request.method == "POST":
-        form = TimeSlotForm(request.POST, artist=artist)
+        form = TimeSlotForm(request.POST)
         if form.is_valid():
-            slot = form.save(commit=False)
-            slot.artist = artist
-            slot.end_time = form.cleaned_data['end_time']
-            slot.save()
-            messages.add_message(request, messages.SUCCESS,"You have added the time slot successfully !")
-        else:
-            messages.add_message(request, messages.ERROR, "Error ! Time Slot could not be added!")
-            return render(request, 'artists/timeslot.html',{"form": form})
+            date = form.cleaned_data['date']
+            time_slot = form.cleaned_data['time_slot']
+            now = datetime.now()
+            
+            # To convert time slot to actual times
+            if time_slot == 'full_day':
+                start_time = time(9, 0)   # 9:00 AM
+                end_time = time(19, 0)    # 7:00 PM
+            else:
+                start_time = datetime.strptime(time_slot, "%H:%M").time()
+                end_time = (datetime.combine(date, start_time) + timedelta(hours=2)).time()
+            
+            #This is to check if time slot is in the past, so that the artist may not be able to book already past date and time
+            if date < now.date() or (date == now.date() and end_time <= now.time()):
+                messages.error(request, "You can't add time slots that have already passed.")
+                return render(request, 'artists/timeslot.html', {'form': form})
+            
+            # Checking for duplicate slots in the database
+            if TimeSlot.objects.filter(artist=artist, date=date, start_time=start_time).exists():
+                messages.error(request, "This time slot is already added.")
+                return render(request, 'artists/timeslot.html', {'form': form})
+            
+            # Creating the time slot which is stored in db
+            TimeSlot.objects.create(
+                artist=artist,
+                date=date,
+                start_time=start_time,
+                end_time=end_time,
+                is_booked=False
+            )
+            
+            messages.success(request, "Time slot added successfully!")
+            return redirect('timeslot')
+    
     else:
-        form = TimeSlotForm(artist = artist)
-
-    context = {
-        'form' : form
-    }
-         
-    return render(request, 'artists/timeslot.html', context)
+        form = TimeSlotForm()
+    
+    return render(request, 'artists/timeslot.html', {'form': form})

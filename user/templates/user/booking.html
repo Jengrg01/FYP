@@ -1,0 +1,31 @@
+{% extends 'index.html' %} 
+{% load static %} 
+{% load crispy_forms_tags %} 
+{% block title %}
+<title>Lumiere | Booking Page</title>
+{% endblock %} 
+{% block main_content %}
+{% for msg in messages %}
+<div class="msg flex justify-center">
+{% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+  <span class=" bg-red-800  py-2 px-3 text-white text-center">
+    {{msg}}
+  </span>
+  {% endif %}
+</div>
+{% endfor %}
+<section
+  class="bg-white h-screen max-w-[1920px] p-0 m-0"
+  style="width: 100% !important; height: auto !important"
+>
+<h2>Book a Slot with {{ artist.artist_name }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Book Slot</button>
+</form>
+
+</section>
+
+{% endblock %}

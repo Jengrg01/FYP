@@ -62,3 +62,13 @@ class ArtistProfileForm(forms.ModelForm):
             'cover_pic': forms.FileInput(attrs={'class': 'form-control'}),
         }
 
+
+#For user to book an artist
+class BookingForm(forms.Form):
+    time_slot = forms.ModelChoiceField(queryset=None, label="Select Time Slot", empty_label=None)
+
+    def __init__(self, artist=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if artist:
+            # /this is to filter the available time slots for the specific artist
+            self.fields['time_slot'].queryset = TimeSlot.objects.filter(artist=artist, is_booked=False)

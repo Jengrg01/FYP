@@ -6,7 +6,7 @@
 {% endblock %} 
 {% block artist_content %}
 {% for msg in messages %}
-<div class="msg flex justify-center">
+<div class="msg flex justify-center mt-3">
   {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
 <span class=" bg-blue-800  py-2 px-3 text-white text-center">
   {{msg}}
@@ -19,7 +19,7 @@
   {% endif %}
 </div>
 {% endfor %}
-<div class="row mt-5">
+<div class="row mt-10">
 	<div class="col-md-3">
 		<div class="card card-body">
 			<h3 style="text-align: center" class="font-semibold custom-font_1 text-xl mb-5">Upload Timeslots</h3>

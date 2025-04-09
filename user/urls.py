@@ -14,4 +14,6 @@ urlpatterns = [
     path("artistprofile/<int:artist_id>/", artist_profile, name='artistprofile'),
     path("artistsettings/", artist_acc_settings, name='artistsettings'),
     path('upload-image/', upload_gallery_image, name='upload_gallery_image'),
+    path('booking/<int:artist_id>/', book_time_slot, name='booking'),
+    path('bookhistory/', booking_history, name='bookhistory'),
 ]

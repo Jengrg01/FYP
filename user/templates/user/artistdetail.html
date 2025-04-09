@@ -38,7 +38,10 @@
           <p class="w-full custom-font_1 text-md font-light pl-3">{{artist.artist_description}}</p>
         </div>
         <div class="hire-mebtn">
-          <button class="button-color px-4 py-1 mt-1 rounded-sm text-white custom-font_1 text-lg font-normal absolute right-[8%]">Hire me</button>
+          <a href="{%  url 'booking' artist.id %}">
+            <button class="button-color px-4 py-1 mt-1 rounded-sm text-white custom-font_1 text-lg font-normal absolute right-[8%]">Hire me</button>
+          </a>
+          
         </div>
     </div>
   </div>

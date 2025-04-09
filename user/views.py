@@ -11,6 +11,7 @@ from app.forms import *
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from .models import UserProfile
+from django.utils.timezone import now
 # Create your views here.
 
 def register_user(request):
@@ -179,3 +180,46 @@ def user_acc_settings(request):
 
     context = {'user_form': user_form, 'profile_form': profile_form}
     return render(request, "user/accountsettings.html", context)
+
+
+@user_required
+def book_time_slot(request, artist_id):
+    artist = Makeup.objects.get(id=artist_id)
+
+    # The user can only book one artist at a time, so to ensure user hasn't already booked a slot
+    if Booking.objects.filter(user=request.user).exists():
+        messages.error(request, "You have already booked a slot with another artist.")
+        return redirect('bookhistory')
+
+    if request.method == "POST":
+        form = BookingForm(artist=artist, data=request.POST)
+        if form.is_valid():
+            time_slot = form.cleaned_data['time_slot']
+
+            # Check if the time slot is already booked
+            if time_slot.is_booked:
+                messages.error(request, "This time slot has already been booked.")
+                return redirect('booking', artist_id=artist_id)
+
+            # Mark the time slot as booked
+            time_slot.is_booked = True
+            time_slot.save()
+
+            # Create the booking record
+            Booking.objects.create(
+                user=request.user,
+                artist=artist,
+                time_slot=time_slot
+            )
+
+            messages.success(request, f"You have successfully booked a slot on {time_slot.date} at {time_slot.start_time}.")
+            return redirect('booking', artist_id=artist.id) 
+    else:
+        form = BookingForm(artist=artist)
+
+    return render(request, 'user/booking.html', {'form': form, 'artist': artist})
+
+@user_required
+def booking_history(request):
+    bookings = Booking.objects.filter(user=request.user).order_by('-booked_at')
+    return render(request, 'user/bookhistory.html', {'bookings': bookings})
