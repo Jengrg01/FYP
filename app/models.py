@@ -57,16 +57,23 @@ class TimeSlot(models.Model):
 
 #The model for user to book an artist through the time slot that is chosen by the artist
 class Booking(models.Model):
+    STATUS_CHOICES = [
+        ('active', 'Active'),
+        ('completed', 'Completed'),
+        ('cancelled', 'Cancelled'),
+    ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     artist = models.ForeignKey(Makeup, on_delete=models.CASCADE)
-    time_slot = models.OneToOneField(TimeSlot, on_delete=models.CASCADE)
+    time_slot = models.ForeignKey(TimeSlot, on_delete=models.CASCADE)
     booked_at = models.DateTimeField(auto_now_add=True)
-
+    status = models.CharField(
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default='active'
+    )
     def __str__(self):
-        return f"{self.user.username} booked {self.artist.artist_name} on {self.time_slot.date} at {self.time_slot.start_time}"
+        return f"{self.user.username} booked {self.artist.artist_name} on {self.time_slot.date} at {self.time_slot.start_time} ({self.status})"
     
-
-
 
 #Model for the notification feature on artist side 
 class Notification(models.Model):

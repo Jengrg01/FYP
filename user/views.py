@@ -11,7 +11,8 @@ from app.forms import *
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from .models import UserProfile
-from django.utils.timezone import now
+from django.utils.timezone import make_aware, is_naive, now
+from datetime import datetime
 # Create your views here.
 
 def register_user(request):
@@ -32,52 +33,77 @@ def register_user(request):
 
 def loginUser(request):
     if request.method == "POST":
-        print(request.POST)
-        form = LoginForm(request=request,data=request.POST)
-        print(form.data)
-        if not form.is_valid():
-            print("Form errors:", form.errors)
+        form = LoginForm(request=request, data=request.POST)
+        
         if form.is_valid():
-            # to read the data
             data = form.cleaned_data
-            print("cleaned data:", data)
-            user = authenticate(request, username = data['username'], password = data['password'])
-            print(user)
+            username = data['username']
+            password = data['password']
+            user_type = request.POST.get('user_type', 'user')  # Get the selected user type
+
+            # First check: if the user selected 'artist' but the account is not an artist, block it.
+            user = authenticate(request, username=username, password=password)
+            
             if user is not None:
                 login(request, user)
-                 # If user is superuser (admin)
-                if user.is_superuser:
-                    messages.add_message(request, messages.SUCCESS, "Successfully logged in as admin!")
-                    return redirect('leader')  # Redirect to admin dashboard
-                # User is authenticated, check for profile and user type
+
                 try:
-                    # Check if the user has a profile and if they are an artist
                     user_profile = UserProfile.objects.get(user=user)
-                    print(user_profile.is_artist)
+
+                    # If they selected 'Artist' but the user is not an artist, show this alert box
+                    if user_type == 'artist' and not user_profile.is_artist:
+                        messages.error(request, "This account is not an artist. Please try again.")
+                        return redirect('login')
+                    
+                    if user_type == 'user' and user_profile.is_artist:
+                        messages.error(request, "This account is not a user. Please try again.")
+                        return redirect('login')
+
+                    # If the account matches the selected user type, proceed with the appropriate action
                     if user_profile.is_artist:
                         try:
                             artist = Makeup.objects.get(user=user)
-                            messages.add_message(request, messages.SUCCESS, "Successfully logged in as artist!")
-                            return redirect('artistprofile', artist_id=artist.id) 
+                            messages.success(request, "Successfully logged in as artist!")
+                            return redirect('artistprofile', artist_id=artist.id)
                         except Makeup.DoesNotExist:
-                            messages.add_message(request, messages.ERROR, "Artist profile not found.")
+                            messages.error(request, "Artist profile not found.")
                             return redirect('login')
                     else:
-                        # If the user doesn't have a profile, proceed as a regular user
-                        messages.add_message(request, messages.SUCCESS, "Successfully logged in!")
-                        return redirect('home')  # Redirect to regular user dashboard
+                        messages.success(request, "Successfully logged in!")
+                        return redirect('home')
 
-                except UserProfile.DoesNotExist as e:
-                    # Handle the case where the user profile does not exist
-                    print(e)
-                    messages.add_message(request, messages.WARNING, "User profile not found.")
+                except UserProfile.DoesNotExist:
+                    messages.warning(request, "User profile not found.")
                     return redirect('login')
-                
-               
             else:
-                messages.add_message(request, messages.ERROR, "Please verify all the fields.")
-                return render (request, 'user/login.html',{"form": form})
-    return render(request, 'user/login.html', {"form": LoginForm(request=request)})
+                messages.error(request, "Invalid username or password.")
+
+    else:
+        form = LoginForm(request=request)
+
+    return render(request, 'user/login.html', {"form": form})
+
+
+def admin_login(request):
+    if request.user.is_authenticated:
+        if not request.user.is_superuser:
+            return redirect('login')  
+    if request.method == "POST":
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None and user.is_superuser:
+                login(request, user)
+                messages.success(request, "Successfully logged in as admin!")
+                return redirect('leader')  
+            else:
+                messages.error(request, "Invalid credentials or you are not an admin.")
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'leaderpage/adminlogin.html', {'form': form})
 
 def logout_user(request):
     logout(request)
@@ -186,9 +212,9 @@ def user_acc_settings(request):
 def book_time_slot(request, artist_id):
     artist = Makeup.objects.get(id=artist_id)
 
-    # The user can only book one artist at a time, so to ensure user hasn't already booked a slot
-    if Booking.objects.filter(user=request.user).exists():
-        messages.error(request, "You have already booked a slot with another artist.")
+    # Prevent double booking only if there's an active booking for any artist
+    if Booking.objects.filter(user=request.user, status='active').exists():
+        messages.error(request, "You already have an active booking. Complete or cancel it before booking another.")
         return redirect('bookhistory')
 
     if request.method == "POST":
@@ -196,8 +222,9 @@ def book_time_slot(request, artist_id):
         if form.is_valid():
             time_slot = form.cleaned_data['time_slot']
 
-            # Check if the time slot is already booked
-            if time_slot.is_booked:
+            # Check if the selected time slot is already booked by another active booking
+            existing_active_booking = Booking.objects.filter(time_slot=time_slot, status='active').exists()
+            if existing_active_booking:
                 messages.error(request, "This time slot has already been booked.")
                 return redirect('booking', artist_id=artist_id)
 
@@ -205,21 +232,64 @@ def book_time_slot(request, artist_id):
             time_slot.is_booked = True
             time_slot.save()
 
-            # Create the booking record
+            # Create a new active booking
             Booking.objects.create(
                 user=request.user,
                 artist=artist,
-                time_slot=time_slot
+                time_slot=time_slot,
+                status='active'
             )
 
             messages.success(request, f"You have successfully booked a slot on {time_slot.date} at {time_slot.start_time}.")
-            return redirect('booking', artist_id=artist.id) 
+            return redirect('bookhistory')
     else:
         form = BookingForm(artist=artist)
 
     return render(request, 'user/booking.html', {'form': form, 'artist': artist})
 
-@user_required
+
+
 def booking_history(request):
     bookings = Booking.objects.filter(user=request.user).order_by('-booked_at')
-    return render(request, 'user/bookhistory.html', {'bookings': bookings})
+    return render(request, 'user/bookhistory.html', {
+        'bookings': bookings,
+        'today': now().date()
+    })
+
+@user_required
+def cancel_booking(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id, user=request.user)
+
+    # Combining the date and start_time into a datetime object
+    slot_datetime = datetime.combine(booking.time_slot.date, booking.time_slot.start_time)
+
+    # To ensure it's timezone-aware
+    if is_naive(slot_datetime):
+        slot_datetime = make_aware(slot_datetime)
+
+    # Only allow cancelling if the slot time hasn't passed
+    if slot_datetime > now():
+        booking.status = 'cancelled'
+        booking.save()
+
+        # Free up the time slot
+        booking.time_slot.is_booked = False
+        booking.time_slot.save()
+
+        messages.success(request, "Your booking has been cancelled and the slot is now available.")
+    else:
+        messages.error(request, "You can't cancel a booking for a past time slot.")
+
+    return redirect('bookhistory')
+
+
+
+@user_required
+def complete_booking(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id, user=request.user)
+    if booking.status == 'active':
+        booking.status = 'completed'
+        booking.save()
+        messages.success(request, "Your booking has been marked as completed.")
+    return redirect('bookhistory')
+

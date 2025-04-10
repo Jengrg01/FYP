@@ -5,36 +5,56 @@
 <title>Lumiere | Booking History</title>
 {% endblock %} 
 {% block main_content %}
+
 {% for msg in messages %}
 <div class="msg flex justify-center">
-{% if msg.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-  <span class=" bg-red-800  py-2 px-3 text-white text-center">
-    {{msg}}
-  </span>
+  {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+    <span class="bg-green-600 py-2 px-3 text-white text-center">
+      {{ msg }}
+    </span>
+  {% elif msg.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+    <span class="bg-red-600 py-2 px-3 text-white text-center">
+      {{ msg }}
+    </span>
   {% endif %}
 </div>
 {% endfor %}
-<section
-  class="bg-white h-screen max-w-[1920px] p-0 m-0"
-  style="width: 100% !important; height: auto !important"
->
-<h2>Your Booking History</h2>
 
-{% if bookings %}
-    <ul>
-        {% for booking in bookings %}
-            <li>
-                <strong>{{ booking.artist.artist_name }}</strong> - 
-                {{ booking.time_slot.date }} at {{ booking.time_slot.start_time }} 
-                (Booked on {{ booking.booked_at }})
-            </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>You haven't booked any slots yet.</p>
-{% endif %}
+<section class="bg-white min-h-screen max-w-[1920px] p-5">
+  <h2 class="text-xl font-semibold mb-5">Your Booking History</h2>
 
+  {% for booking in bookings %}
+    <div class="booking-entry mb-4 p-4 border rounded shadow-sm">
+      <p><strong>Artist:</strong> {{ booking.artist.artist_name }}</p>
+      <p><strong>Date:</strong> {{ booking.time_slot.date }}</p>
+      <p><strong>Time:</strong> {{ booking.time_slot.start_time }} - {{ booking.time_slot.end_time }}</p>
+      
+      <p>
+        <strong>Status:</strong>
+        {% if booking.status == 'active' %}
+          <span class="text-yellow-600 font-medium">Active</span>
+        {% elif booking.status == 'completed' %}
+          <span class="text-green-600 font-medium">Completed</span>
+        {% elif booking.status == 'cancelled' %}
+          <span class="text-red-600 font-medium">Cancelled</span>
+        {% endif %}
+      </p>
 
+      {% comment %} Show Cancel only if future time slot {% endcomment %}
+      {% if booking.status == 'active' and booking.time_slot.date > today %}
+        <div class="flex gap-x-3 mt-2">
+          <a href="{% url 'cancel_booking' booking.id %}" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm">
+            Cancel
+          </a>
+          <a href="{% url 'complete_booking' booking.id %}" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm">
+            Mark as Completed
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  {% empty %}
+    <p>You have no bookings yet.</p>
+  {% endfor %}
 </section>
 
 {% endblock %}

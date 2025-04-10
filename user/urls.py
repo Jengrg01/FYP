@@ -16,4 +16,7 @@ urlpatterns = [
     path('upload-image/', upload_gallery_image, name='upload_gallery_image'),
     path('booking/<int:artist_id>/', book_time_slot, name='booking'),
     path('bookhistory/', booking_history, name='bookhistory'),
+    path('cancelbooking/<int:booking_id>/', cancel_booking, name='cancel_booking'),
+    path('completebooking/<int:booking_id>/', complete_booking, name='complete_booking'),
+
 ]

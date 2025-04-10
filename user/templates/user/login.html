@@ -51,7 +51,7 @@
 <section class="h-screen bg-white flex">
     <div class="w-[50%]">
         <div class="flex flex-col items-center justify-center px-6 pb-8 mx-auto md:h-screen lg:py-0">
-            <div class="w-full bg-white shadow 2xl:relative 2xl:-left-20 rounded-lg md:mt-0 sm:max-w-md xl:p-0 2xl:-mt-32">
+            <div class="w-full bg-white shadow 2xl:relative 2xl:-left-20 rounded-lg md:mt-0 sm:max-w-md xl:p-0 2xl:-mt-30">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                     <h1 class="text-xl -mb-5 font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                         Login to your Account
@@ -60,6 +60,17 @@
                     <form class="space-y-4 md:space-y-6" method="POST">
                         {% csrf_token %}
                         {{ form | crispy }}
+                        
+                        <h3 class="text-md font-bold custom-font_1">Are you a ....?</h3>
+                        <div class="flex gap-4">
+                            <label>
+                                <input type="radio" name="user_type" value="user" checked> Regular User
+                            </label>
+                            <label>
+                                <input type="radio" name="user_type" value="artist"> Artist
+                            </label>
+                        </div>
+
                         <div class="flex items-center justify-between">
                             <div class="flex items-start">
                                 <div class="flex items-center h-5">
@@ -70,6 +81,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <button type="submit" class="w-full text-white focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-xl text-sm px-5 py-2.5 text-center" style="background-color: #663DC6;">Sign in</button>
                         <p class="text-sm font-light text-gray-500">
                             Don’t have an account yet? <a href="{% url 'register' %}" class="font-medium text-primary-600 hover:underline" style="color: #663DC6;">Sign up</a>
@@ -97,6 +109,6 @@
         </div>
     </div>
 </section>
-  
+
 
 {% endblock %}

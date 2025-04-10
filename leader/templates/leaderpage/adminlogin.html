@@ -1,0 +1,44 @@
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=Playwrite+IE+Guides&display=swap" rel="stylesheet"/>
+<style>
+    .custom-font_1 {
+            font-family: "Poppins";
+            font-weight: 400;
+        }
+    .custom-font {
+            font-family: "Lavishly Yours";
+            font-weight: 400;
+        }
+    .button-color{
+          background-color: #663DC6;
+        }
+</style>
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+<title>Lumiere | Admin Login</title>
+{% endblock %}
+{% block main_content %}
+<section class="h-screen flex">
+    <div class="w-full flex justify-center items-center ">
+        <div class="border-2 border-gray-200 rounded-lg w-[30%] h-[45%]">
+            <div class="w-full h-full">
+                <h1 class="text-xl font-semibold mb-4 custom-font_1 text-center mt-4">Admin Login</h1>
+                <div class="flex justify-center">
+                    <form method="POST" class="w-[90%]">
+                        {% csrf_token %}
+                        {{ form | crispy }}
+                        <div class="flex justify-center">
+                            <button type="submit" class="w-[50%] text-white focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-xl text-sm px-5 py-2.5 text-center flex justify-center mt-6" style="background-color: #663DC6;">Sign in</button>
+                        </div>
+                       
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</section>
+{% endblock %}

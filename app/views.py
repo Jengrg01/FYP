@@ -86,36 +86,36 @@ def artistlist(request):
 @admin_only
 def addArtist(request):
     if request.method == "POST":
-        # to send the data sent from method post, we need .FILES as we have images to send too
         form = ArtistForm(request.POST, request.FILES)
         if form.is_valid():
-             # Create a User object for the artist
+            # Check if the username already exists
             username = form.cleaned_data['username']
+            if User.objects.filter(username=username).exists():
+                messages.error(request, "Username is already taken, please try again with a different one.")
+                return render(request, "artists/addartist.html", {"form": form})
+
             password = form.cleaned_data['password']
             email = form.cleaned_data['email']
 
             user = User.objects.create_user(
                 username=username,
                 password=password,
-                email=email  # This is the primary email storage
+                email=email  
             )
-            
-            
-            # Create a Makeup (Artist) object and associate it with the user
+
             artist = form.save(commit=False)
             artist.user = user
             artist.save()
 
             UserProfile.objects.create(user=user, is_artist=True)
             
-            messages.add_message(request, messages.SUCCESS, "Artist has been added successfully !")
-            # to send back to another list when form is saved.
+            messages.add_message(request, messages.SUCCESS, "Artist has been added successfully!")
             send_email_to_artist(username, password, email)
             return redirect('artistlist')
         else:
-            messages.add_message(request, messages.ERROR, "Please verify all the fields !")
-            return render(request,"artists/addartist.html", {"form": form} )
-    return render(request,"artists/addartist.html",{"form": ArtistForm} )
+            messages.add_message(request, messages.ERROR, "Please verify all the fields!")
+            return render(request, "artists/addartist.html", {"form": form})
+    return render(request, "artists/addartist.html", {"form": ArtistForm})
 
 @admin_only
 def updateArtist(request, artist_id):
@@ -126,16 +126,21 @@ def updateArtist(request, artist_id):
         form = ArtistForm(request.POST, request.FILES, instance=artist)
 
         if form.is_valid():
-            # Get cleaned data
+            # Check if the username already exists and is different from the current user's username
             cleaned_data = form.cleaned_data
-            
+            username = cleaned_data.get('username', user.username)
+
+            if username != user.username and User.objects.filter(username=username).exists():
+                messages.error(request, "Username is already taken, please try again with a different one.")
+                return render(request, 'artists/updateartist.html', {"form": form})
+
             # Update User fields
-            user.username = cleaned_data.get('username', user.username)
+            user.username = username
             user.email = cleaned_data.get('email', user.email)  # Always update User.email
             
             if cleaned_data.get('password'):  # Only update if password changed
                 user.set_password(cleaned_data['password'])
-            
+
             user.save()  # Save user changes first
 
             # Save artist profile
@@ -157,6 +162,8 @@ def updateArtist(request, artist_id):
         form = ArtistForm(instance=artist)
 
     return render(request, 'artists/updateartist.html', {"form": form})
+
+
 @admin_only
 def deleteArtist(request, artist_id):
     artist = Makeup.objects.get(id = artist_id)
