@@ -1,6 +1,7 @@
 # must make urls in app by yourself, it is not a given file by django in app
 from django.urls import path
 from . import views
+# from .views import *
 
 urlpatterns = [
     path("artist/", views.artist, name='artist'),
@@ -25,5 +26,6 @@ urlpatterns = [
     path("timeslot/", views.add_availability, name='timeslot'),
     path('dashboard/', views.artist_dashboard, name='artistdashboard'),
     path('deleteslot/<int:slot_id>/', views.delete_time_slot, name='delete_slot'),
-
+    path('notifications/', views.notifications_view, name='artist_notifications'),
+    path('guidelines/', views.guidelines, name='guidelines'),
 ]

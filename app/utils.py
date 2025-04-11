@@ -1,5 +1,7 @@
 from django.core.mail import send_mail
 from django.conf import settings
+from .models import Notification
+
 
 def send_email_to_artist(username, password, email):
     subject = "Welcome to Lumiere"
@@ -44,3 +46,6 @@ def send_email_to_artist_update(username, password, email):
         recipient_list,
         fail_silently=False,  # Set to False to raise an error if email fails to send
     )
+
+def create_notification(artist, message):
+    Notification.objects.create(artist=artist, message=message)

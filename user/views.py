@@ -14,6 +14,7 @@ from .models import UserProfile
 from django.utils import timezone
 from django.utils.timezone import make_aware, is_naive, now
 from datetime import datetime
+from app.utils import *
 # Create your views here.
 
 def register_user(request):
@@ -239,6 +240,8 @@ def book_time_slot(request, artist_id):
                 time_slot=time_slot,
                 status='active'
             )
+            message = f"{request.user.username} has booked you for {time_slot.date} at {time_slot.start_time}."
+            create_notification(artist, message)
 
             messages.success(request, f"You have successfully booked a slot on {time_slot.date} at {time_slot.start_time}.")
             return redirect('bookhistory')
@@ -300,6 +303,8 @@ def cancel_booking(request, booking_id):
 
         booking.time_slot.is_booked = False
         booking.time_slot.save()
+        message = f"{request.user.username} has cancelled the booking for {booking.time_slot.date} at {booking.time_slot.start_time}."
+        create_notification(booking.artist, message)
 
         messages.success(request, "Your booking has been cancelled and the slot is now available.")
     else:
@@ -338,6 +343,8 @@ def complete_booking(request, booking_id):
         print("Updating booking status to completed.")
         booking.status = 'completed'
         booking.save()
+        message = f"{request.user.username} has marked the booking for {booking.time_slot.date} at {booking.time_slot.start_time} as completed."
+        create_notification(booking.artist, message)
         messages.success(request, "Your booking has been marked as completed.")
     else:
         messages.error(request, "You can only mark a booking as completed after its start time.")

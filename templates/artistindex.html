@@ -49,10 +49,15 @@
             >Lumiere</span
           >
         </a>
-        <div class="flex relative left-16 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <div class="flex relative left-16 gap-16 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           {% if user.is_authenticated %}
             {% if user.userprofile.is_artist %}
-            <img src="{{user.makeup.image.url}}" id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="w-10 h-10 object-cover rounded-full cursor-pointer z-10 lg:relative lg:right-20 xl:-left-12 md:relative md:-left-16" alt="{{user.makeup.artist_name}}">
+              <a
+                href="{% url 'artist_notifications' %}"
+                class="block mx-6 mt-3 py-2 px-3 md:p-0 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#663DC6]"
+                ><i class="fa-regular fa-bell "></i></a
+              >
+            <img src="{{user.makeup.image.url}}" id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="w-10 mt-1 h-10 object-cover rounded-full cursor-pointer z-10 lg:relative lg:right-20 xl:-left-12 md:relative md:-left-16" alt="{{user.makeup.artist_name}}">
             {% else %}
             <img src="{{user.userprofile.profile_pic.url}}" id="avatarButton" type="button" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-start" class="w-10 h-10 object-cover rounded-full cursor-pointer z-10 lg:relative lg:right-20 xl:-left-12 md:relative md:-left-16" alt="{{user.username}}">
             {% endif %}
@@ -92,7 +97,7 @@
               <div class="py-1">
                 <a href="{% url 'logout' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
               </div>
-            </div>        
+            </div>     
           {% else %}
             <a href="{% url 'login' %}">
               <button
@@ -161,9 +166,9 @@
             </li>
             <li>
               <a
-                href="#"
+                href="{% url 'guidelines' %}"
                 class="block mx-6 py-2 px-3 md:p-0 text-xl text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#663DC6]"
-                >Notifications</a
+                >Guidelines</a
               >
             </li>
           </ul>

@@ -13,6 +13,8 @@ from django.utils.timezone import make_aware, is_naive, now
 
 # Create your views here.
 # write functions for database, based on function or class based views(api creations get easier), we apure working on mvt pattern
+def guidelines(request):
+    return render(request,"artists/guidelines.html")
 
 def faq(request):
     return render(request,"artists/faq.html")
@@ -360,3 +362,14 @@ def delete_time_slot(request, slot_id):
         messages.error(request, "Cannot delete a booked or past time slot.")
 
     return redirect('artistdashboard')
+
+
+@artist_required
+def notifications_view(request):
+    artist = get_object_or_404(Makeup, user=request.user)
+    notifications = Notification.objects.filter(artist=artist).order_by('-timestamp')
+
+    # Optional: mark all unread notifications as read
+    notifications.filter(is_read=False).update(is_read=True)
+
+    return render(request, 'artists/notifications.html', {'notifications': notifications})
