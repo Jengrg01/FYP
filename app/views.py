@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from . models import * #for entry to database
+from . models import * 
 from . forms import *
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -8,6 +8,8 @@ from user.models import UserProfile
 from user.auth import *
 from .utils import *
 from datetime import datetime, timedelta, time
+from django.utils import timezone
+from django.utils.timezone import make_aware, is_naive, now
 
 # Create your views here.
 # write functions for database, based on function or class based views(api creations get easier), we apure working on mvt pattern
@@ -300,3 +302,61 @@ def add_availability(request):
         form = TimeSlotForm()
     
     return render(request, 'artists/timeslot.html', {'form': form})
+
+
+@artist_required
+def artist_dashboard(request):
+    artist = get_object_or_404(Makeup, user=request.user)
+    today = now().date()
+    days = [today + timedelta(days=i) for i in range(3)]
+
+    # Get all relevant slots
+    time_slots = TimeSlot.objects.filter(artist=artist, date__in=days).order_by('date', 'start_time')
+
+    # Get all relevant bookings
+    bookings = Booking.objects.filter(time_slot__in=time_slots).select_related('time_slot', 'user')
+
+    booking_map = {b.time_slot.id: b for b in bookings}
+    current_time = now()
+
+    # Prepare schedule data
+    schedule = []
+    for slot in time_slots:
+        slot_start = datetime.combine(slot.date, slot.start_time)
+        if is_naive(slot_start):
+            slot_start = make_aware(slot_start)
+
+        booking = booking_map.get(slot.id)
+        can_delete = current_time < slot_start and (not booking or booking.status == 'cancelled')
+
+        schedule.append({
+            'slot_id': slot.id,
+            'date': slot.date,
+            'time': f"{slot.start_time} - {slot.end_time}",
+            'user': booking.user.username if booking else None,
+            'status': booking.status if booking else 'available',
+            'is_booked': bool(booking),
+            'can_delete': can_delete
+        })
+
+    return render(request, 'artists/dashboard.html', {'schedule': schedule, 'today': today})
+
+
+
+@artist_required
+def delete_time_slot(request, slot_id):
+    slot = get_object_or_404(TimeSlot, id=slot_id, artist__user=request.user)
+
+    slot_start = datetime.combine(slot.date, slot.start_time)
+    if is_naive(slot_start):
+        slot_start = make_aware(slot_start)
+
+    # Check if the slot can be deleted (either it's available, or the booking is cancelled)
+    if now() < slot_start and (not Booking.objects.filter(time_slot=slot).exists() or 
+                               Booking.objects.filter(time_slot=slot, status='cancelled').exists()):
+        slot.delete()
+        messages.success(request, "Time slot deleted successfully.")
+    else:
+        messages.error(request, "Cannot delete a booked or past time slot.")
+
+    return redirect('artistdashboard')

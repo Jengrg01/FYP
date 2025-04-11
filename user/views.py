@@ -11,6 +11,7 @@ from app.forms import *
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from .models import UserProfile
+from django.utils import timezone
 from django.utils.timezone import make_aware, is_naive, now
 from datetime import datetime
 # Create your views here.
@@ -64,7 +65,7 @@ def loginUser(request):
                         try:
                             artist = Makeup.objects.get(user=user)
                             messages.success(request, "Successfully logged in as artist!")
-                            return redirect('artistprofile', artist_id=artist.id)
+                            return redirect('artistdashboard')
                         except Makeup.DoesNotExist:
                             messages.error(request, "Artist profile not found.")
                             return redirect('login')
@@ -207,13 +208,12 @@ def user_acc_settings(request):
     context = {'user_form': user_form, 'profile_form': profile_form}
     return render(request, "user/accountsettings.html", context)
 
-
 @user_required
 def book_time_slot(request, artist_id):
     artist = Makeup.objects.get(id=artist_id)
 
     # Prevent double booking only if there's an active booking for any artist
-    if Booking.objects.filter(user=request.user, status='active').exists():
+    if Booking.objects.filter(user=request.user, status='active', time_slot__isnull=False).exists():
         messages.error(request, "You already have an active booking. Complete or cancel it before booking another.")
         return redirect('bookhistory')
 
@@ -247,49 +247,99 @@ def book_time_slot(request, artist_id):
 
     return render(request, 'user/booking.html', {'form': form, 'artist': artist})
 
-
-
+@user_required
 def booking_history(request):
-    bookings = Booking.objects.filter(user=request.user).order_by('-booked_at')
-    return render(request, 'user/bookhistory.html', {
-        'bookings': bookings,
-        'today': now().date()
-    })
+    bookings = Booking.objects.filter(user=request.user).order_by('-booked_at').select_related('time_slot')
+    updated_bookings = []
+    current_time = now()
+
+    for booking in bookings:
+        if not booking.time_slot:
+            continue  # skip if related TimeSlot doesn't exist
+
+        try:
+            start_dt = datetime.combine(booking.time_slot.date, booking.time_slot.start_time)
+            end_dt = datetime.combine(booking.time_slot.date, booking.time_slot.end_time)
+
+            if is_naive(start_dt):
+                start_dt = make_aware(start_dt)
+            if is_naive(end_dt):
+                end_dt = make_aware(end_dt)
+
+            booking.can_cancel = booking.status == 'active' and start_dt > current_time
+            booking.can_complete = booking.status == 'active' and start_dt <= current_time < end_dt
+            if end_dt < current_time and booking.status == 'active':
+                booking.status = 'completed'
+                booking.save()
+
+
+            updated_bookings.append(booking)
+        except Exception as e:
+            print(f"Error processing booking {booking.id}: {e}")
+            continue
+
+    return render(request, 'user/bookhistory.html', {'bookings': updated_bookings,})
+
 
 @user_required
 def cancel_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id, user=request.user)
 
-    # Combining the date and start_time into a datetime object
+    if not booking.time_slot:
+        messages.error(request, "This booking no longer has an associated time slot.")
+        return redirect('bookhistory')
+
     slot_datetime = datetime.combine(booking.time_slot.date, booking.time_slot.start_time)
 
-    # To ensure it's timezone-aware
     if is_naive(slot_datetime):
         slot_datetime = make_aware(slot_datetime)
 
-    # Only allow cancelling if the slot time hasn't passed
     if slot_datetime > now():
         booking.status = 'cancelled'
         booking.save()
 
-        # Free up the time slot
         booking.time_slot.is_booked = False
         booking.time_slot.save()
 
         messages.success(request, "Your booking has been cancelled and the slot is now available.")
     else:
-        messages.error(request, "You can't cancel a booking for a past time slot.")
+        messages.error(request, "This booking has already started or passed and cannot be cancelled.")
 
     return redirect('bookhistory')
+
 
 
 
 @user_required
 def complete_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id, user=request.user)
-    if booking.status == 'active':
+
+    if not booking.time_slot:
+        messages.error(request, "This booking no longer has an associated time slot.")
+        return redirect('bookhistory')
+
+    start_datetime = datetime.combine(booking.time_slot.date, booking.time_slot.start_time)
+    
+    # Make sure start_datetime is timezone-aware
+    if is_naive(start_datetime):
+        start_datetime = make_aware(start_datetime)
+
+    current_time = timezone.now()  # timezone-aware now() as per Django's timezone support
+
+    # Ensure current_time is timezone-aware, if not, make it aware
+    if is_naive(current_time):
+        current_time = make_aware(current_time)
+
+    # Debugging logs to check the actual datetime values
+    print("Start datetime:", start_datetime)
+    print("Current time:", current_time)
+
+    if booking.status == 'active' and start_datetime <= current_time:
+        print("Updating booking status to completed.")
         booking.status = 'completed'
         booking.save()
         messages.success(request, "Your booking has been marked as completed.")
-    return redirect('bookhistory')
+    else:
+        messages.error(request, "You can only mark a booking as completed after its start time.")
 
+    return redirect('bookhistory')

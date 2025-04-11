@@ -23,4 +23,7 @@ urlpatterns = [
     path("services/", views.services, name='services'),
     path("faq/", views.faq, name='faq'),
     path("timeslot/", views.add_availability, name='timeslot'),
+    path('dashboard/', views.artist_dashboard, name='artistdashboard'),
+    path('deleteslot/<int:slot_id>/', views.delete_time_slot, name='delete_slot'),
+
 ]

@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm
 from . models import *
 import datetime
-from datetime import datetime, timedelta, time, date
+from datetime import datetime
+from django.utils.timezone import now
 
 class ArtistForm(ModelForm):
     username = forms.CharField(max_length=100, required=True)

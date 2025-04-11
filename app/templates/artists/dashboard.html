@@ -1,0 +1,55 @@
+{% extends 'artistindex.html' %}
+{% load static %}
+{% block title %}
+<title>Lumiere | Artist Dashboard</title>
+{% endblock %}
+
+{% block artist_content %}
+{% for msg in messages %}
+<div class="msg flex justify-center">
+  {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+  <span class=" bg-blue-800  py-2 px-3 text-white text-center">
+    {{msg}}
+  </span>
+  {% endif %}
+</div>
+{% endfor %}
+
+<h2 class="text-xl font-semibold mb-4 text-center">Your Schedule for {{ today }} and Next 2 Days</h2>
+
+<table class="w-full border-collapse border text-center">
+    <thead class="bg-gray-200">
+        <tr>
+            <th class="border p-2">Date</th>
+            <th class="border p-2">Time Slot</th>
+            <th class="border p-2">Booked By</th>
+            <th class="border p-2">Status</th>
+            <th class="border p-2">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for slot in schedule %}
+        <tr>
+            <td class="border p-2">{{ slot.date }}</td>
+            <td class="border p-2">{{ slot.time }}</td>
+            <td class="border p-2">{% if slot.user %}{{ slot.user }}{% else %}-{% endif %}</td>
+            <td class="border p-2">{{ slot.status }}</td>
+            <td class="border p-2">
+                {% if slot.can_delete %}
+                    <form method="post" action="{% url 'delete_slot' slot.slot_id %}">
+                        {% csrf_token %}
+                        <button class="text-red-600 hover:underline">Delete</button>
+                    </form>
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="p-4 text-gray-600">No time slots scheduled for the next 3 days.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
