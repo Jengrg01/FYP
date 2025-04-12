@@ -30,7 +30,13 @@ class Makeup(models.Model):
     updated_at = models.DateTimeField(auto_now=True, blank= True, null = True)
     def __str__(self):
         return self.artist_name
-    
+    #the reason for this function is that deleting an artist, does not mean that the user itself will be deleted so using this, Django will first delete the associated User instance and then proceed to delete the Makeup instance itself
+    def delete(self, *args, **kwargs):
+        if self.user:
+            self.user.delete()
+        super().delete(*args, **kwargs)
+
+
 class ArtistPortfolio(models.Model):
     artist = models.ForeignKey(Makeup, on_delete=models.CASCADE, related_name='gallery_images')
     image = models.ImageField(upload_to='static/portfolio/') 

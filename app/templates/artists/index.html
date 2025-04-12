@@ -299,7 +299,6 @@
 
     function hideLoading() {
       loadingOverlay.classList.add("hidden");
-      // Don't toggle scroll here - we'll handle it when showing results
     }
 
     function uploadImage(file) {
@@ -321,17 +320,16 @@
           } else {
             resultImage.src = URL.createObjectURL(file);
             resultText.innerHTML = `
-              Since you have a ${data.skin_tone} skin tone and  
-              your face shape is ${data.face_shape} in structure.
-              You also have ${data.eye_size === "big" ? "Big" : "Small"} eyes, 
-              ${data.nose_size === "big" ? "Big" : "Small"} nose, and 
-              ${data.lip_thickness === "Thick" ? "Thick" : "Thin"} lips. <br>
-              So, we recommend ${data.recommended_makeup} .
-            `;
+            Since you have a ${data.skin_tone} skin tone and  
+            your face shape is ${data.face_shape} in structure.
+            You also have ${data.facial_features.eye_size} eyes, 
+            ${data.facial_features.nose_size} nose, and 
+            ${data.facial_features.lip_thickness} lips. <br>
+            So, we recommend ${data.recommended_makeup} .
+          `;
           }
           cameraModal.classList.add("hidden");
           resultPopup.classList.remove("hidden");
-          // Keep scroll locked when showing results
         })
         .catch((error) => {
           hideLoading();

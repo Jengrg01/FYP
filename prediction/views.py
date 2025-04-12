@@ -171,7 +171,7 @@ def upload_image(request):
             # Debug logs
             print(f"Skin Tone: {skin_class} -> {skin_val}")
             print(f"Face Shape: {face_class} -> {face_val}")
-            print(f"Extracted Features (Binary): {extracted_features}")  # Should now be 0/1
+            print(f"Extracted Features (Binary): {extracted_features}")
             print(f"Predicted Makeup: {final_makeup}")
 
             return JsonResponse({
