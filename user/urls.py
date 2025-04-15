@@ -18,5 +18,6 @@ urlpatterns = [
     path('bookhistory/', booking_history, name='bookhistory'),
     path('cancelbooking/<int:booking_id>/', cancel_booking, name='cancel_booking'),
     path('completebooking/<int:booking_id>/', complete_booking, name='complete_booking'),
-
+    path('activate/<uidb64>/<token>/', activate_account, name='activate_account'),
+    path('review/<int:artist_id>/', submit_review, name='submit_review'),
 ]

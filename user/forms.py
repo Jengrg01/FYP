@@ -24,6 +24,8 @@ class UserRegistrationForm(UserCreationForm):
         user.first_name = self.cleaned_data["first_name"]
         user.last_name = self.cleaned_data["last_name"]
         user.email = self.cleaned_data["email"]
+        # this for email authentication, so that after the account is made the user will be set as inactive until the email is confirmed, this is for security reasons
+        user.is_active = False
         if commit:
             user.save()
             UserProfile.objects.create(user=user, phone_number=self.cleaned_data["phone_number"])
@@ -76,3 +78,16 @@ class BookingForm(forms.Form):
         if artist:
             # this is to filter the available time slots for the specific artist
             self.fields['time_slot'].queryset = TimeSlot.objects.filter(artist=artist, is_booked=False)
+
+
+
+
+#for user to leave review
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'review_text']
+        widgets = {
+            'rating': forms.RadioSelect(choices=[(i, f'{i} ⭐') for i in range(1, 6)]),
+            'review_text': forms.Textarea(attrs={'placeholder': 'Write your review...'}),
+        }

@@ -49,6 +49,26 @@
         </div>
         <div class="reviews w-[43%] h-4/6 border-2 border-gray-200 rounded-md flex flex-col">
             <h1 class="text-lg text-gray-700 ml-10 mt-4 font-semibold">Reviews from you</h1>
+            {% if reviews %}
+            <div class="px-8 py-4 space-y-4 overflow-y-auto">
+                {% for review in reviews %}
+                    <div class="bg-gray-100 p-4 rounded-md shadow-sm">
+                        <h2 class="text-md font-semibold text-gray-800">
+                            You reviewed <span class="text-pink-600">{{ review.artist.artist_name }}</span>
+                        </h2>
+                        <p class="text-sm text-gray-700 mt-1">{{ review.review_text }}</p>
+                        <p class="text-sm text-yellow-500 mt-1">
+                            {% for i in "12345"|slice:":review.rating" %}
+                                ★
+                            {% endfor %}
+                        </p>
+                        <p class="text-xs text-gray-500 mt-1">{{ review.created_at|date:"F j, Y, g:i a" }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-sm text-gray-500 px-8 py-4">You haven't left any reviews yet.</p>
+        {% endif %}
         </div>
     </div>
     <button class="absolute bottom-[27%] left-[38%] px-24 py-2 border-2 border-gray-300 rounded-md "><a href="{% url 'home' %}" class=" text-xl text-black font-semibold">Explore Lumiere <i class="fa-solid fa-arrow-up-right-from-square ml-4"  style="font-size: 16px;"></i></a></button>

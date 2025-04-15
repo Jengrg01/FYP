@@ -1,4 +1,28 @@
-{% extends 'index.html' %} {% load static %} {% load crispy_forms_tags %} 
+<style>
+  /* Star rating styles */
+.rating-stars input[type="radio"] {
+    display: none;
+}
+
+.rating-stars label {
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: color 0.2s;
+}
+
+/* Review text area */
+#id_review_text {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+</style>
+{% extends 'index.html' %}
+{% load static %}
+{% load crispy_forms_tags %} 
 {% block title %}
 <title>Lumiere | Artist Detail</title>
 {% endblock %} 
@@ -77,6 +101,14 @@
       
     </div>
   </div>
+  <section class="flex justify-center">
+    <div class="w-[87%]">
+      {% include 'user/submit_review.html' %}
+      {% if not request.user.is_authenticated %}
+        <p class="text-gray-600 mt-4">You must be <a href="{% url 'login' %}" class="text-pink-500 underline">logged in</a> to leave a review.</p>
+      {% endif %}
+    </div>
+</section>
 </section>
 <script>
   function openModal(imageUrl) {

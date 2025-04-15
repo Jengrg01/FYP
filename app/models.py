@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Avg, Count
+
 # Create your models here.
 # create models through object relation mapping
 class Speciality(models.Model):
@@ -35,6 +37,15 @@ class Makeup(models.Model):
         if self.user:
             self.user.delete()
         super().delete(*args, **kwargs)
+# this to call a method without using parentheses
+    @property
+    def average_rating(self):
+        avg = self.reviews.aggregate(Avg('rating'))['rating__avg']
+        return round(avg, 1) if avg else 0
+
+    @property
+    def total_reviews(self):
+        return self.reviews.aggregate(Count('id'))['id__count']
 
 
 class ArtistPortfolio(models.Model):
@@ -46,6 +57,19 @@ class ArtistPortfolio(models.Model):
     def __str__(self):
         return f"Portfolio item for {self.artist.artist_name}"
     
+#Ratings and Review
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Reviewer
+    artist = models.ForeignKey('Makeup', on_delete=models.CASCADE, related_name='reviews')
+    rating = models.PositiveSmallIntegerField(choices=[(i, str(i)) for i in range(1, 6)])
+    review_text = models.TextField(max_length=2000, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'artist')  # 1 review per user per artist
+
+    def __str__(self):
+        return f"{self.user.username} - {self.artist.artist_name} - {self.rating}⭐"
 
 
 #The timeslot model for the artist to add their availabilty time

@@ -15,13 +15,19 @@ from django.utils import timezone
 from django.utils.timezone import make_aware, is_naive, now
 from datetime import datetime
 from app.utils import *
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_decode
 # Create your views here.
+# for email authentication, urlsafe_base64_encode and decode are used which are utility functions that safely encode and decode data in my case was uid for activation links in url which is sent to the user's email, encode occurs in utils.py decode in activate account view
+
+
 
 def register_user(request):
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
+            send_activation_email(request, user)
             print("User Registered:", user.username, user.email)
             messages.add_message(request, messages.SUCCESS, "User has been registered successfully")
             return redirect('login')
@@ -32,6 +38,24 @@ def register_user(request):
         'form': UserRegistrationForm
     }
     return render(request, 'user/register.html', context)
+
+#email authentication view after registration
+def activate_account(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        messages.success(request, "Your account has been activated! You can now log in.")
+        return redirect('login')
+    else:
+        messages.error(request, "Activation link is invalid or expired.")
+        return redirect('register')
+
 
 def loginUser(request):
     if request.method == "POST":
@@ -47,6 +71,9 @@ def loginUser(request):
             user = authenticate(request, username=username, password=password)
             
             if user is not None:
+                if not user.is_active:
+                    messages.error(request, "Account inactive. Please check your email to activate your account.")
+                    return redirect('login')
                 login(request, user)
 
                 try:
@@ -129,21 +156,35 @@ def deleteUser(request, user_id):
 
 
 def artist_detail(request, artist_id):
-    artist = Makeup.objects.get(id=artist_id)
+    artist = get_object_or_404(Makeup, id=artist_id)
     gallery_images = artist.gallery_images.all()
+    reviews = artist.reviews.select_related('user').all().order_by('-created_at')  
+    
+    existing_review = None
+    if request.user.is_authenticated:
+        existing_review = Review.objects.filter(user=request.user, artist=artist).first()
+
+    form = ReviewForm(instance=existing_review) if request.user.is_authenticated else None
+    
     context = {
         'artist': artist,
-        'gallery_images': gallery_images
+        'gallery_images': gallery_images,
+        'reviews': reviews,
+        'form': form,
+        'existing_review': existing_review,
     }
-    return render(request,"user/artistdetail.html",context)
+    return render(request, "user/artistdetail.html", context)
+
 
 @artist_required
 def artist_profile(request, artist_id):
     artist = Makeup.objects.get(id=artist_id)
     gallery_images = artist.gallery_images.all()
+    reviews = artist.reviews.select_related('user').all()
     context = {
         'artist':artist,
-        'gallery_images': gallery_images
+        'gallery_images': gallery_images,
+        'reviews' : reviews
     }
     return render(request,"user/artistprofile.html",context)
 
@@ -184,9 +225,11 @@ def upload_gallery_image(request):
 def user_detail(request, user_id):
     user = get_object_or_404(User, id=user_id)
     user_profile = get_object_or_404(UserProfile, user=user) 
+    reviews = Review.objects.filter(user=request.user).select_related('artist')
     context = {
         'user':user,
-        'current_user': user_profile
+        'current_user': user_profile,
+        'reviews': reviews,
         }  
     return render(request, "user/userdetail.html", context)
 
@@ -350,3 +393,38 @@ def complete_booking(request, booking_id):
         messages.error(request, "You can only mark a booking as completed after its start time.")
 
     return redirect('bookhistory')
+
+
+
+@user_required
+def submit_review(request, artist_id):
+    artist = get_object_or_404(Makeup, id=artist_id)
+    
+    try:
+        existing_review = Review.objects.get(user=request.user, artist=artist)
+    except Review.DoesNotExist:
+        existing_review = None
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, instance=existing_review)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user
+            review.artist = artist
+            review.save()
+            messages.success(request, "Your review has been published.")
+            return redirect('artistDetail', artist_id=artist.id)
+        else:
+            print("Form errors:", form.errors)
+            messages.error(request, "There was an error with your review.")
+    else:
+        form = ReviewForm(instance=existing_review)
+
+    context = {
+        'form': form,
+        'artist': artist,
+        'existing_review': existing_review 
+    }
+    return render(request, 'user/submit_review.html', context)
+
+

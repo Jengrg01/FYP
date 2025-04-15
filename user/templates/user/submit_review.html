@@ -1,0 +1,144 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<div class="review-section w-[87%] mx-auto my-8">
+    <h2 class="text-2xl font-semibold mb-4">Reviews</h2>
+    
+    <!-- Average Rating -->
+    <div class="avg-rating mb-6">
+        <div class="flex items-center">
+            <span class="text-3xl font-bold mr-2">{{ artist.average_rating }}</span>
+            <div class="flex">
+                {% for i in "12345" %}
+                    {% if i|add:0 <= artist.average_rating|floatformat:0 %}
+                        <span class="text-yellow-400 text-2xl">★</span>
+                    {% else %}
+                        <span class="text-gray-300 text-2xl">★</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <span class="ml-2 text-gray-600">({{ artist.total_reviews }} reviews)</span>
+        </div>
+    </div>
+    
+    <!-- Existing Reviews -->
+    <div class="existing-reviews mb-8">
+        {% for review in artist.reviews.all %}
+        <div class="review-item border-b border-gray-200 py-4">
+            <div class="flex justify-between">
+                <div class="flex items-center">
+                    <span class="font-semibold">{{ review.user.username }}</span>
+                    <div class="flex ml-2">
+                        {% for i in "12345" %}
+                            {% if i|add:0 <= review.rating %}
+                                <span class="text-yellow-400">★</span>
+                            {% else %}
+                                <span class="text-gray-300">★</span>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <span class="text-gray-500 text-sm">{{ review.created_at|date:"M d, Y" }}</span>
+            </div>
+            {% if review.review_text %}
+                <p class="mt-2 text-gray-700">{{ review.review_text }}</p>
+            {% endif %}
+        </div>
+        {% empty %}
+        <p class="text-gray-500">No reviews yet.</p>
+        {% endfor %}
+    </div>
+    {% if user.is_authenticated %}
+    <!-- Review Form -->
+    <div class="review-form bg-gray-50 p-6 rounded-lg">
+        <h3 class="text-xl font-semibold mb-4">Leave a Review</h3>
+        <form method="POST" action="{% url 'submit_review' artist.id %}" class="space-y-4">
+            {% csrf_token %}
+            
+            <!-- Rating Stars -->
+            <div class="rating-stars flex items-center mb-4">
+                <span class="mr-3">Your Rating:</span>
+                <div class="flex space-x-1" id="star-rating">
+                    {% for i in "12345" %}
+                    <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}" 
+                           class="hidden" {% if form.rating.value == i %}checked{% endif %}>
+                    <label for="star{{ i }}" 
+                           class="cursor-pointer text-3xl text-gray-400 transition">
+                        ★
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- Review Text -->
+            <div class="review-text">
+                {{ form.review_text|as_crispy_field }}
+            </div>
+            
+            <button type="submit" class="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600 transition">
+                Submit Review
+            </button>
+        </form>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+    // Highlight stars on hover
+    function highlightStars(count) {
+        const stars = document.querySelectorAll('#star-rating label');
+        stars.forEach((star, index) => {
+            if (index < count) {
+                star.style.color = '#fbbf24'; // yellow-400
+            }
+        });
+    }
+    
+    // Reset stars to default state
+    function resetStars() {
+        const stars = document.querySelectorAll('#star-rating label');
+        const checkedInput = document.querySelector('#star-rating input[type="radio"]:checked');
+        
+        stars.forEach(star => {
+            star.style.color = '#9ca3af'; // gray-400
+        });
+        
+        if (checkedInput) {
+            const checkedValue = parseInt(checkedInput.value);
+            highlightStars(checkedValue);
+        }
+    }
+    
+    // Set the rating when a star is clicked
+    function setRating(value) {
+        const stars = document.querySelectorAll('#star-rating label');
+        stars.forEach((star, index) => {
+            if (index < value) {
+                star.style.color = '#fbbf24'; // when clicked on star
+            } else {
+                star.style.color = '#9ca3af'; // default
+            }
+        });
+    }
+    
+    // Initialize stars on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkedInput = document.querySelector('#star-rating input[type="radio"]:checked');
+        if (checkedInput) {
+            setRating(parseInt(checkedInput.value));
+        }
+        
+        // Add event listeners to all star labels
+        const stars = document.querySelectorAll('#star-rating label');
+        stars.forEach((star, index) => {
+            const value = index + 1;
+            star.addEventListener('mouseover', function() {
+                highlightStars(value);
+            });
+            star.addEventListener('mouseout', resetStars);
+            star.addEventListener('click', function() {
+                setRating(value);
+            });
+        });
+    });
+</script>
