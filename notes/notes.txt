@@ -1,21 +1,86 @@
-Transfer learning is a technique in machine learning where a model trained for one task is repurposed for a different but related task. Instead of building a model from the ground up, especially in neural networks, transfer learning starts with an already trained model. This pre-trained model benefits from being exposed to large datasets, and its parameters are already fine-tuned for learning efficiency.
+Setting Up TensorFlow and Verifying GPU Support
+I began by setting up TensorFlow and checking whether my system was ready for GPU-accelerated deep learning tasks.
 
-How Transfer Learning Operates
-In neural networks, the early layers typically learn to detect simple patterns like edges, the middle layers recognize more complex shapes, and the later layers focus on task-specific features. Transfer learning retains the early and middle layers and only fine-tunes the later layers for the new task. This approach utilizes the labeled data from the original training task effectively.
+Step 1: Verifying TensorFlow Installation and GPU Availability
+To start, I imported TensorFlow, printed the installed version to confirm it was set up correctly, and then checked the number of available GPUs. I also confirmed whether TensorFlow was built with CUDA support for GPU acceleration.
 
-Common Transfer Learning Methods
-Training Once, Reusing Later: Train a model and adapt it for different but related tasks.
+Code used:
 
-Using Pre-Trained Models: Employ models trained on large datasets like ImageNet as a base.
+python
+Copy
+Edit
+import tensorflow as tf
+print("TensorFlow Version:", tf.__version__)
+print("Num GPUs Available:", len(tf.config.list_physical_devices('GPU')))
+print("Is TensorFlow using GPU?", tf.test.is_built_with_cuda())
+What I confirmed:
 
-Feature Extraction: Use the learned features of a model for a new classification or regression task.
+TensorFlow was successfully installed.
 
-Advantages of Transfer Learning
-Faster Training: Since the model has already learned useful patterns, it requires less time and computation to adapt to a new task.
+A compatible GPU was available for deep learning workloads.
 
-Better Generalization: Pre-trained models, trained on large and varied datasets, capture general features that work well even with limited new data.
+CUDA was properly configured to enable GPU support.
 
-Avoids Poor Convergence: Starting with optimized weights helps the model avoid poor local minima and reach better performance more reliably.
+Step 2: Listing GPUs and Enabling Memory Growth
+Since TensorFlow often pre-allocates all GPU memory, which can cause issues in multi-task environments, I listed all detected GPUs and enabled memory growth. This allows TensorFlow to allocate memory as needed rather than all at once.
 
-Lower Annotation Effort: It reduces the need for large amounts of labeled data, making it ideal when labeling is costly or time-intensive.
+Code used:
 
+python
+Copy
+Edit
+gpus = tf.config.list_physical_devices('GPU')
+if gpus:
+    for gpu in gpus:
+        print("GPU Name:", gpu)
+
+    try:
+        for gpu in gpus:
+            tf.config.experimental.set_memory_growth(gpu, True)
+        print("GPU memory growth enabled.")
+    except RuntimeError as e:
+        print(e)
+What I did:
+
+Listed all available GPUs on the system.
+
+Printed out each GPU's name to verify detection.
+
+Enabled dynamic memory allocation to prevent potential memory conflicts.
+
+Step 3: Confirming cuDNN Availability and Checking GPU Details
+cuDNN is a key library for efficient deep learning on NVIDIA GPUs. I checked if it was available and retrieved detailed information about my GPU, including its memory and compute specs.
+
+Code used:
+
+python
+Copy
+Edit
+print("Is cuDNN available?", tf.test.is_built_with_cuda())
+print("GPU Details:", tf.config.experimental.get_device_details(tf.config.list_physical_devices('GPU')[0]))
+What I learned:
+
+Confirmed TensorFlow had CUDA and cuDNN support.
+
+Retrieved and reviewed hardware details of the detected GPU.
+
+Step 4: Clearing GPU Memory with Numba
+After using TensorFlow, I freed up GPU memory using Numba to avoid memory allocation errors during future processes.
+
+Code used:
+
+python
+Copy
+Edit
+from numba import cuda
+cuda.select_device(0)
+cuda.close()
+print("Cleared GPU memory.")
+What I did:
+
+Selected the GPU device.
+
+Released its memory to make resources available for subsequent tasks.
+
+Summary
+Through these steps, I successfully configured TensorFlow to leverage GPU acceleration, verified that CUDA and cuDNN were functioning, and implemented strategies to manage GPU memory effectively. This ensures a smooth and efficient environment for training deep learning models.
