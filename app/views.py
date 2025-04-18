@@ -4,7 +4,8 @@ from . models import *
 from . forms import *
 from django.contrib import messages
 from django.contrib.auth.models import User
-from user.models import UserProfile  
+from user.models import *
+from django.http import JsonResponse 
 from user.auth import *
 from .utils import *
 from datetime import datetime, timedelta, time
@@ -373,3 +374,5 @@ def notifications_view(request):
     notifications.filter(is_read=False).update(is_read=True)
 
     return render(request, 'artists/notifications.html', {'notifications': notifications})
+
+
