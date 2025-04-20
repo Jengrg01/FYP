@@ -4,6 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.http import JsonResponse
 from .forms import *
 from .models import *
 from .auth import *
@@ -166,18 +169,12 @@ def artist_detail(request, artist_id):
         existing_review = Review.objects.filter(user=request.user, artist=artist).first()
 
     form = ReviewForm(instance=existing_review) if request.user.is_authenticated else None
-    
-    chat_room = None
-    if request.user.is_authenticated:
-        chat_room, created = ChatRoom.objects.get_or_create(user=request.user, artist=artist)
-    
     context = {
         'artist': artist,
         'gallery_images': gallery_images,
         'reviews': reviews,
         'form': form,
         'existing_review': existing_review,
-        'chat_room': chat_room,
     }
     return render(request, "user/artistdetail.html", context)
 
@@ -418,6 +415,8 @@ def submit_review(request, artist_id):
             review.user = request.user
             review.artist = artist
             review.save()
+            message = f"{request.user.username} has left you a review."
+            create_notification(artist, message)
             messages.success(request, "Your review has been published.")
             return redirect('artistDetail', artist_id=artist.id)
         else:
@@ -433,32 +432,3 @@ def submit_review(request, artist_id):
     }
     return render(request, 'user/submit_review.html', context)
 
-@user_required
-def user_chat_list(request):
-    chat_rooms = ChatRoom.objects.filter(user=request.user).order_by('-created_at')
-    for room in chat_rooms:
-        # Fetch the latest message in the room
-        latest_message = room.messages.last()
-        room.latest_message = latest_message.content if latest_message else "No messages yet"
-        room.last_message_time = latest_message.timestamp if latest_message else None
-    return render(request, 'user/user_chat_list.html', {'chat_rooms': chat_rooms})
-
-@artist_required
-def artist_chat_list(request):
-    chat_rooms = ChatRoom.objects.filter(artist__user=request.user).order_by('-created_at')
-    for room in chat_rooms:
-        # Fetch the latest message in the room
-        latest_message = room.messages.last()
-        room.latest_message = latest_message.content if latest_message else "No messages yet"
-        room.last_message_time = latest_message.timestamp if latest_message else None
-    return render(request, 'user/artist_chat_list.html', {'chat_rooms': chat_rooms})
-
-@user_required
-def chat_room_user(request, room_id):
-    room = get_object_or_404(ChatRoom, id=room_id, user=request.user)
-    return render(request, 'user/chatroom_user.html', {'room': room})
-
-@artist_required
-def chat_room_artist(request, room_id):
-    room = get_object_or_404(ChatRoom, id=room_id, artist__user=request.user)
-    return render(request, 'user/chatroom_artist.html', {'room': room})

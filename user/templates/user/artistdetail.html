@@ -65,17 +65,7 @@
           <a href="{%  url 'booking' artist.id %}">
             <button class="button-color px-4 py-1 mt-1 rounded-sm text-white custom-font_1 text-lg font-normal absolute right-[8%]">Hire me</button>
           </a>
-        </div>
-        <button onclick="openChatModal('{{ chat_room.id }}', '{{ user.id }}')" class="bg-pink-500 px-4 py-1 mt-1 rounded-sm text-white custom-font_1 text-lg font-normal absolute right-[16%]">
-          Chat with Artist
-      </button>        
-    </div>
-    <div id="chatModal" class="hidden fixed bottom-5 right-5 bg-white rounded-lg shadow-lg w-80 h-96 flex flex-col">
-      <div class="p-3 border-b font-semibold bg-pink-100">Chat</div>
-      <div id="chatMessages" class="flex-1 overflow-y-auto p-3 space-y-2"></div>
-      <div class="p-2 border-t">
-        <input id="chatInput" class="w-full border rounded px-2 py-1" placeholder="Type a message..." />
-      </div>
+        </div>      
     </div>
   </div>
     <div class="artist-portfolio-section flex justify-center">
@@ -119,39 +109,4 @@
     </div>
 </section>
 </section>
-<script>
-   let chatSocket = null;
-  function openChatModal(roomId, senderId) {
-    roomId = parseInt(roomId);
-    senderId = parseInt(senderId);
-
-    document.getElementById("chatModal").classList.remove("hidden");
-
-    chatSocket = new WebSocket(`ws://${window.location.host}/ws/chat/${roomId}/`);
-
-    chatSocket.onmessage = function(e) {
-      const data = JSON.parse(e.data);
-      const msgBox = document.getElementById("chatMessages");
-      msgBox.innerHTML += `<div class="bg-gray-100 p-2 rounded">${data.message}</div>`;
-    };
-
-    document.getElementById("chatInput").addEventListener("keypress", function(e) {
-      if (e.key === 'Enter') {
-        const message = this.value;
-        chatSocket.send(JSON.stringify({ message: message, sender_id: senderId }));
-        this.value = '';
-      }
-    });
-  }
-  function openModal(imageUrl) {
-    document.getElementById('lightboxImage').src = imageUrl;
-    document.getElementById('lightboxModal').classList.remove('hidden');
-    document.getElementById('lightboxModal').classList.add('flex');
-  }
-
-  function closeModal() {
-    document.getElementById('lightboxModal').classList.add('hidden');
-    document.getElementById('lightboxModal').classList.remove('flex');
-  }
-</script>
 {% endblock %}

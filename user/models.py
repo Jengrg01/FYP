@@ -11,21 +11,4 @@ class UserProfile(models.Model):
         return self.user.username if self.user else "No User Assigned"
  
 
-class ChatRoom(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_rooms')
-    artist = models.ForeignKey(Makeup, on_delete=models.CASCADE, related_name='artist_rooms')
-    created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return f"Chat between {self.user.username} and {self.artist.user.username}"
-    
-
-class Message(models.Model):
-    room = models.ForeignKey(ChatRoom, on_delete=models.CASCADE, related_name='messages')
-    sender = models.ForeignKey(User, on_delete=models.CASCADE)
-    content = models.TextField()
-    timestamp = models.DateTimeField(auto_now_add=True)
-    is_read = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f"Message from {self.sender.username} at {self.timestamp}"

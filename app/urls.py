@@ -1,7 +1,6 @@
 # must make urls in app by yourself, it is not a given file by django in app
 from django.urls import path
-from . import views
-from .consumers import ChatConsumer  
+from . import views 
 # from .views import *
 
 urlpatterns = [
@@ -29,5 +28,4 @@ urlpatterns = [
     path('deleteslot/<int:slot_id>/', views.delete_time_slot, name='delete_slot'),
     path('notifications/', views.notifications_view, name='artist_notifications'),
     path('guidelines/', views.guidelines, name='guidelines'),
-    path('ws/chat/<int:room_id>/',ChatConsumer.as_asgi()),  # WebSocket URL for a specific room
 ]

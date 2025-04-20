@@ -20,8 +20,4 @@ urlpatterns = [
     path('completebooking/<int:booking_id>/', complete_booking, name='complete_booking'),
     path('activate/<uidb64>/<token>/', activate_account, name='activate_account'),
     path('review/<int:artist_id>/', submit_review, name='submit_review'),
-    path('userchat/', user_chat_list, name='user_chat_list'),  # User chat list
-    path('artistchat/', artist_chat_list, name='artist_chat_list'),  # Artist chat list
-    path('chat/user/<int:room_id>/', chat_room_user, name='chat_room_user'),
-    path('chat/artist/<int:room_id>/', chat_room_artist, name='chat_room_artist'),
 ]
