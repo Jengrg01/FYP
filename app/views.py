@@ -32,8 +32,16 @@ def aboutus(request):
 def services(request):
     return render(request,"artists/services.html")
 
+@user_required
 def contactpage(request):
-    return render(request,"artists/contact.html")
+    user = request.user
+    user_profile = get_object_or_404(UserProfile, user=user) 
+    # Pass the user's data to the template
+    context = {
+        'user':user,
+        'current_user': user_profile,
+    }
+    return render(request,"artists/contact.html",context)
 
 def home(request):
     user = request.user

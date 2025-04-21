@@ -8,12 +8,12 @@
 {% for msg in messages %}
 <div class="msg absolute top-20 left-[47%] flex justify-center">
   {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-  <span class=" bg-blue-800  py-2 px-3 text-white text-center">
+  <span class=" bg-[#e091a9] fade-msg  py-2 px-3 text-white text-center">
   {{msg}}
 </span>
 {% endif %}
 {% if msg.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-  <span class=" bg-red-800  py-2 px-3 text-white text-center">
+  <span class=" bg-red-800 fade-msg py-2 px-3 text-white text-center">
     {{msg}}
   </span>
   {% endif %}
@@ -116,7 +116,15 @@
       {% endif %}
     </div>
   </div>
-  
-  
 </section>
+<script>
+  // Wait 3 seconds then fade out and remove messages
+  setTimeout(() => {
+    document.querySelectorAll('.fade-msg').forEach(el => {
+      el.style.transition = 'opacity 0.5s ease';
+      el.style.opacity = '0';
+      setTimeout(() => el.remove(), 500); // remove after fade-out
+    });
+  }, 3000);
+</script>
 {% endblock %}

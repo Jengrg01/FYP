@@ -5,12 +5,18 @@
 <title>Lumiere | Booking History</title>
 {% endblock %}
 {% block main_content %} 
+
 {% for msg in messages %}
 <div class="msg flex justify-center">
   {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-  <span class="bg-green-600 py-2 px-3 text-white text-center"> {{ msg }} </span>
-  {% elif msg.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-  <span class="bg-red-600 py-2 px-3 text-white text-center"> {{ msg }} </span>
+    <span class="fade-msg bg-[#e091a9] py-2 px-3 text-white text-center">
+      {{ msg }}
+    </span>
+  {% endif %}
+  {% if msg.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+    <span class="fade-msg bg-red-800 py-2 px-3 text-white text-center">
+      {{ msg }}
+    </span>
   {% endif %}
 </div>
 {% endfor %}
@@ -59,5 +65,14 @@
   <p>You have no bookings yet.</p>
   {% endfor %}
 </section>
-
+<script>
+  // Wait 3 seconds then fade out and remove messages
+  setTimeout(() => {
+    document.querySelectorAll('.fade-msg').forEach(el => {
+      el.style.transition = 'opacity 0.5s ease';
+      el.style.opacity = '0';
+      setTimeout(() => el.remove(), 500); // remove after fade-out
+    });
+  }, 3000);
+</script>
 {% endblock %}
