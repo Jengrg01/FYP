@@ -23,7 +23,7 @@ urlpatterns = [
     path('',include("app.urls")),
     path('', include("user.urls")),
     path('leader/', include("leader.urls")),
-    path('',include("prediction.urls"))
+    path('',include("prediction.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
