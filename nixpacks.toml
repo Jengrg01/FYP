@@ -1,2 +1,2 @@
 [phases.setup]
-nixPkgs = ["libmysqlclient.dev", "pkg-config"]
+nixPkgs = ["python310", "libmysqlclient.dev", "pkg-config"]
