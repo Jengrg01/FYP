@@ -1,8 +1,7 @@
 [phases.setup]
 nixPkgs = [
   "pkg-config",
-  "libmysqlclient",
-  "mariadb",  
+  "mariadb-connector-c", 
   "gcc",
   "python310Full"
 ]
