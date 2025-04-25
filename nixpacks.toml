@@ -2,6 +2,7 @@
 nixPkgs = [
   "pkg-config",
   "mariadb-connector-c", 
+  "mariadb-connector-c.dev",
   "gcc",
   "python310Full"
 ]
