@@ -2,7 +2,7 @@
 nixPkgs = [
   "pkg-config",
   "libmysqlclient",
-  "mysql",
+  "mariadb",  
   "gcc",
   "python310Full"
 ]
