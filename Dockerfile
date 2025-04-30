@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
     libxext6 \
     libsm6 \
     libxrender1 \
-    libmysqlclient-dev \
+    libmariadb-dev \  
     pkg-config \
     curl \
     git \
