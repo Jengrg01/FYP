@@ -1,0 +1,60 @@
+ /* -------card slider-------- */
+ @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+ *{
+   font-family: "Poppins", sans-serif;
+ }
+ .card-body{
+   display: flex;
+   align-items: center;
+   justify-content:center ;
+   min-height: 30vh;
+ }
+ .container{
+   padding: 40px 0;
+   max-width: 1380px;
+   width: 100%;
+   
+ }
+ .card-list .card-item{
+   border-radius: 8px;
+   width: 400px;
+   padding: 35px;
+   list-style: none;
+ }
+ .card-list .card-item .image-box {
+   height: 300px;
+   width: 100%;
+ }
+ .card-list .card-item .image-box .card-link img{
+   width: 100%;
+   object-fit: cover;
+   height: 100%;
+   border-radius: 8px 8px 0 0;
+ }
+ .card-list .card-item .artist-details{
+   background-color:#efefef;
+   border-radius: 0 0 8px 8px;
+ }
+ .card-list .card-item .artist-details .name{
+   font-size: 16px;
+   font-weight: 500;
+   text-align: center;
+   
+ }
+ .swiper-pagination-bullet {
+    background-color: #686e8e; /* Custom color for bullets */
+    opacity: 0.5; /* Default opacity */
+  }
+  
+  /* Change the color when a bullet is active */
+  .swiper-pagination-bullet-active {
+    background-color: #5f6cb7; /* Custom color for active bullet */
+    opacity: 1; /* Fully opaque */
+  }
+  .swiper-button-next,
+.swiper-button-prev {
+  color: #5f6cb7; /* Default button color */
+  transition: 0.3s ease;
+}
+
