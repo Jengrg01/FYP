@@ -4,6 +4,9 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from . models import *
 from app.models import *
+from django.utils import timezone
+from django.db.models import Q
+
 
 class UserRegistrationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True)
@@ -76,10 +79,22 @@ class BookingForm(forms.Form):
     def __init__(self, artist=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if artist:
-            # this is to filter the available time slots for the specific artist
-            self.fields['time_slot'].queryset = TimeSlot.objects.filter(artist=artist, is_booked=False)
+            current_time = timezone.now()
 
+            # Filter out past and booked time slots
+            available_slots = TimeSlot.objects.filter(
+                artist=artist,
+                is_booked=False
+            ).filter(
+                Q(date__gt=current_time.date()) |
+                Q(date=current_time.date(), start_time__gt=current_time.time())
+            ).order_by('date', 'start_time')
 
+            self.fields['time_slot'].queryset = available_slots
+
+            # Optional user-friendly empty label if no slots exist
+            if not available_slots.exists():
+                self.fields['time_slot'].empty_label = "No available time slots"
 
 
 #for user to leave review

@@ -13,7 +13,7 @@
   
   .left {
     width: 40%;
-    background: linear-gradient(135deg, #e091a9 0%, #c06c85 100%);
+    background: linear-gradient(135deg, #e091a9 0%, #eca4a9 100%);
     color: white;
     padding: 2.5rem;
     display: flex;
@@ -106,8 +106,8 @@
     font-family: inherit;
   }
   
-  button {
-    background: #e091a9;
+  .sub-btn {
+    background: #eca4a9 !important;
     color: white;
     padding: 0.875rem;
     border: none;
@@ -122,12 +122,12 @@
     gap: 0.5rem;
   }
   
-  button:hover {
-    background: #c06c85;
+  .sub-btn:hover {
+    background: #c06c85 !important;
     transform: translateY(-1px);
   }
   
-  button:active {
+  .sub-btn:active {
     transform: translateY(0);
   }
   
@@ -222,7 +222,7 @@
               <option value="others">Others</option>
           </select>
           <textarea id="message" placeholder="*Message" required></textarea>
-          <button type="submit" class="py-2">Submit</button>
+          <button type="submit" class=" sub-btn py-2">Submit</button>
           <p id="errorMessage" class="error"></p>
       </form>
       </div>

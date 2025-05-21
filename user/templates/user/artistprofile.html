@@ -126,5 +126,21 @@
       setTimeout(() => el.remove(), 500); // remove after fade-out
     });
   }, 3000);
+  function openModal(imageUrl) {
+    const modal = document.getElementById('lightboxModal');
+    const lightboxImage = document.getElementById('lightboxImage');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    lightboxImage.src = imageUrl;
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('lightboxModal');
+    const lightboxImage = document.getElementById('lightboxImage');
+    modal.classList.remove('flex');
+    modal.classList.add('hidden');
+    lightboxImage.src = '';
+  }
+
 </script>
 {% endblock %}

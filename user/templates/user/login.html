@@ -1,5 +1,45 @@
-<style>
-    #id_username_helptext, #id_password1_helptext{
+{% load static %}
+<script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=Playwrite+IE+Guides&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'css/landingpage.css' %}"/>
+    <style>
+      .custom-font_1 {
+            font-family: "Poppins";
+            font-weight: 400;
+        }
+       .custom-font {
+            font-family: "Lavishly Yours";
+            font-weight: 400;
+        }
+        .button-color{
+          background-color: #663DC6;
+        }
+        .footer-color{
+          background: linear-gradient(180deg,#FFFFFF, #eadde9);
+        }
+        #id_username, #id_password{
+            display: inline-flex;
+            height: 50px;
+            padding: 10px 246px 10px 22px;
+            border-radius: 10px;
+            border: 1px solid #FFB8BD;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        #id_username label, #id_password label{
+            color: #000;
+            font-family: "Poppins";
+            font-size: 24px;
+            font-weight: 400;
+            line-height: normal;
+        }
+        #id_username_helptext, #id_password1_helptext{
         display: none;
     }
     .vertical-line {
@@ -31,16 +71,60 @@
         font-family: "Poppins";
         font-weight: 400;
     }
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+    outline: none;
+    border-color: #FFB8BD !important;
+    box-shadow: 0 0 0 1px #FFB8BD;
+  }
+    .custom-radio {
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    user-select: none;
+  }
+
+  .custom-radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .custom-radio .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+  }
+
+  .custom-radio input:checked ~ .checkmark {
+    border-color: #FFB8BD;
+  }
+
+  .custom-radio input:checked ~ .checkmark::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #FFB8BD;
+  }
 </style>
-{% extends 'index.html' %} 
-{% load static %} 
 {% load crispy_forms_tags %} 
 {% block title %}
 <title>Lumiere | Login Page</title>
 {% endblock %} 
 {% block main_content %}
 {% for msg in messages %}
-<div class="msg flex justify-center">
+<div class="msg flex justify-center relative top-4">
 {% if msg.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
   <span class=" fade-msg bg-red-800  py-2 px-3 text-white text-center">
     {{msg}}
@@ -50,41 +134,36 @@
 {% endfor %}
 <section class="h-screen bg-white flex">
     <div class="w-[50%]">
-        <div class="flex flex-col items-center justify-center px-6 pb-8 mx-auto md:h-screen lg:py-0">
-            <div class="w-full bg-white shadow 2xl:relative 2xl:-left-20 rounded-lg md:mt-0 sm:max-w-md xl:p-0 2xl:-mt-30">
+        <div class="logo-login h-10 absolute left-[9.8%] top-[4%]">
+            <a href="{% url 'home' %}" class="h-full flex relative items-start space-x-0 rtl:space-x-reverse">
+          <span class="self-center text-6xl font-normal whitespace-nowrap custom-font"
+            >Lumiere</span
+          >
+          </a>
+        </div>
+        <div class="flex flex-col items-center justify-center px-6 pb-8 mx-auto md:h-screen lg:py-0 mt-6">
+            <div class="w-full bg-white 2xl:relative 2xl:-left-10 rounded-lg md:mt-0 sm:max-w-md xl:p-0 2xl:-mt-30">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 class="text-xl -mb-5 font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                    <h1 class="text-xl -mb-5 font-normal custom-font_1 leading-tight tracking-tight text-gray-900 md:text-2xl">
                         Login to your Account
                     </h1>
-                    <p class="text-sm font-normal text-gray-400">Enter your credentials to access your account!</p>
-                    <form class="space-y-4 md:space-y-6" method="POST">
+                    <p class="text-sm font-normal custom-font_1 text-gray-400">Enter your credentials to access your account!</p>
+                    <form class="space-y-4 md:space-y-6 custom-font_1 font-normal" method="POST">
                         {% csrf_token %}
                         {{ form | crispy }}
                         
-                        <h3 class="text-md font-bold custom-font_1">Are you a ....?</h3>
-                        <div class="flex gap-4">
-                            <label>
-                                <input type="radio" name="user_type" value="user" checked> Regular User
+                        <h3 class="text-sm font-normal custom-font_1">Are you a ....?</h3>
+                        <div class="flex gap-4 text-sm relative -top-2">
+                            <label class="custom-radio">
+                                <input type="radio" name="user_type" value="user" checked> Regular User <span class="checkmark"></span>
                             </label>
-                            <label>
-                                <input type="radio" name="user_type" value="artist"> Artist
+                            <label class="custom-radio">
+                                <input type="radio" name="user_type" value="artist"> Artist <span class="checkmark"></span>
                             </label>
                         </div>
-
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-start">
-                                <div class="flex items-center h-5">
-                                  <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300" required>
-                                </div>
-                                <div class="ml-3 text-sm">
-                                  <label for="remember" class="text-gray-500">Remember me</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="w-full text-white focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-xl text-sm px-5 py-2.5 text-center" style="background-color: #663DC6;">Sign in</button>
+                        <button type="submit" class="w-full text-white focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-2xl text-sm px-5 py-2.5 text-center" style="background-color:#FFB8BD;">Sign in</button>
                         <p class="text-sm font-light text-gray-500">
-                            Don’t have an account yet? <a href="{% url 'register' %}" class="font-medium text-primary-600 hover:underline" style="color: #663DC6;">Sign up</a>
+                            Don’t have an account yet? <a href="{% url 'register' %}" class="font-medium text-primary-600 hover:underline" style="color: #FFB8BD;">Sign up !</a>
                         </p>
                     </form>
                 </div>
@@ -92,19 +171,19 @@
         </div>
     </div>
     <div class="vertical-line"></div>
-    <div class="w-[45%] absolute right-0 h-[85%]">
-        <h1 class="text-xl font-semibold mt-5 login-font">Welcome to Lumiere!</h1>
-        <h1 class="text-xl font-semibold login-font">Find the new you!</h1>
-        <p class="text-sm login-font font-light mb-5">Your one place for makeup and self care!</p>
+    <div class="w-[45%] absolute right-0 top-14 h-[85%]">
+        <h1 class="text-xl font-semibold mt-5 login-font custom-font_1">Welcome to Lumiere!</h1>
+        <h1 class="text-xl font-semibold login-font custom-font_1">Find the new you!</h1>
+        <p class="text-sm login-font font-light mb-5 custom-font_1">Your one place for makeup and self care!</p>
         <div class="grid-gallery h-[90%] w-full">
             <div class="gallery1">
-                <img class="h-full w-full object-cover" src="{% static 'uploads/loginimg.jpg' %}" alt="image">
+                <img class="h-full w-full object-cover" src="{% static 'uploads/loginimage1.jpg' %}" alt="image">
             </div>
             <div class="gallery2">
-                <img class="h-full w-full object-cover" src="{% static 'uploads/loginimg1.jpg' %}" alt="image1">
+                <img class="h-full w-full object-cover" src="{% static 'uploads/loginimg_1.jpg' %}" alt="image1">
             </div>
             <div class="gallery3">
-                <img class="h-full w-full object-cover" src="{% static 'uploads/loginimg2.jpg' %}" alt="image2">
+                <img class="h-full w-full object-cover" src="{% static 'uploads/loginimg.jpeg' %}" alt="image2">
             </div>
         </div>
     </div>

@@ -36,10 +36,17 @@
   .animate-spin {
     animation: spin 1s linear infinite;
   }
+  .custom-font_1 {
+            font-family: "Poppins";
+            font-weight: 400;
+        }
 </style>
 
 <!-- ------------Image Slider Section !!!!!!--------------------- -->
-{% include 'artists/imageslider.html' %}
+ <div class="mb-16">
+  {% include 'artists/imageslider.html' %}
+ </div>
+
 <!-- ------------Image Slider Section END !!!!!!--------------------- -->
 <!-- Latest artist card content section !!!! -->
 
@@ -57,15 +64,16 @@
   </svg>
 </div>
 
-<div class="flex justify-evenly gap-5 flex-wrap mb-2">
+<div class="flex justify-center">
+  <div class="flex justify-evenly gap-2 flex-wrap mb-2 w-[90%] flex justify-center">
   {% for m in makeup %}
   <div
     class="w-[280px] bg-white border border-gray-200 rounded-lg shadow"
     style="box-shadow: 2px 4px 6px #cecece"
   >
-    <div class="w-full h-52">
+    <div class="w-full h-52 flex justify-center rounded-lg">
       <img
-        class="rounded-t-lg w-full h-full object-cover"
+        class="rounded-sm pt-2 w-[95%] h-[95%] flex justify-around object-cover"
         src="{{m.image.url}}"
         alt="{{m.artist_name}}"
       />
@@ -90,30 +98,13 @@
           {{m.category}}
         </p>
       </div>
-      <div class="mb-2 px-2 rounded-md">
-        <p class="text-left font-normal text-gray-700">
-          <strong>Description: </strong>
-        </p>
-        <p
-          class="mb-1 font-normal text-justify text-gray-700 w-full h-20 overflow-hidden"
-          style="font-size: 13.7px; font-family: Poppins"
-        >
-          {{m.artist_description}}
-        </p>
-        <p
-          class="mb-3 text-left text-md font-normal text-gray-700"
-          style="font-family: Lora"
-        >
-          <strong>Rate: </strong>{{m.rate}} per session
-        </p>
-      </div>
 
       <div class="text-center">
         <a
           href="{% url 'artistDetail' m.id %}"
-          class="inline-flex items-center px-3 py-2 text-sm font-medium text-center border-2 rounded-md bg-transparent rounded-lg text-[#5f6cb7] border-[#5f6cb7] hover:text-white hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300"
+          class="inline-flex items-center justify-center py-1 w-[90%] text-sm font-medium text-center rounded-md bg-[#FFC6CA] rounded-lg text-white hover:text-white hover:bg-[#e091a9]"
         >
-          View Portfolio
+         View More
         </a>
       </div>
     </div>
@@ -121,11 +112,34 @@
 
   {% endfor %}
 </div>
+</div>
+
+<div class="flex justify-center">
+  <a href="{% url 'artist' %}"class="mt-8 inline-flex items-center justify-center py-2 px-3 w-40 text-sm font-medium text-center rounded-md bg-[#FFC6CA] rounded-lg text-white hover:text-white hover:bg-[#e091a9]"> View All </a>
+</div>
+
+<!-- VIDEO BANNER START !!!!!!!!!-->
+
+<div class="relative h-[350px] w-full mt-12 overflow-hidden">
+  <!-- Background Video -->
+  <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0">
+    <source src="{% static 'uploads/landing_banner.mp4' %}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Foreground Content -->
+  <div class="relative z-20 flex-col items-center justify-center h-full top-[35%]">
+    <h1 class="text-white text-5xl font-bold flex justify-center text-center" style="font-family: 'Times New Roman', Times, serif;">Behind the Lens</h1>
+    <p class="text-xl text-white font-normal custom-font_1 flex justify-center text-center">Experience the artistry and passion that goes into every photo shoot.</p>
+  </div>
+</div>
+
+<!-- VIDEO BANNER END !!!!!!!!!-->
 
 <!-- Latest artist card content section END!!!! -->
 <!-- Makeup styles -->
 <h1
-  class="text-3xl text-center text-black mt-20 font-normal"
+  class="text-3xl text-center text-black mt-16 font-normal"
   style="font-family: Lora"
 >
   MAKEUP STYLES TO CHOOSE FROM
@@ -138,9 +152,75 @@
   </svg>
 </div>
 {% include 'artists/cardslider.html' %}
+
+<!-- DUMMY REVIEWS START!!!!!!!!! -->
+<div class="h-[488px] w-full bg-[#F9FAFB] mb-20 flex flex-col justify-center items-center">
+  <h1 class="font-normal text-3xl text-center  pb-3" style="font-family: Lora;">What Our Clients Say</h1>
+  <div class="flex justify-center justify-evenly items-center w-[85%] h-2/3 mt-5">
+    <div class=" w-[30%] h-full rounded-lg bg-white" style="box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
+      <div class="flex-col h-full w-full">
+        <div class="flex h-[25%]">
+          <div class="h-full w-1/4 flex justify-center">
+            <img src="{% static 'uploads/loginimage1.jpg' %}" alt="dummy_picture" class="w-[80%] rounded-full object-fit">
+          </div>
+          <div class="h-full w-3/4 flex-col">
+            <div class=" h-1/2 w-full">
+              <h3 class="font-normal text-lg custom-font_1 pt-2 pl-4"> Layla</h3>
+            </div>
+            <div class="h-1/2 w-full">
+              <h3 class="font-normal text-md text-gray-400 custom-font_1 pt-2 pl-4"> Makeup Enthusiast</h3>
+            </div>
+          </div>
+        </div>
+        <div class="bg-yellow-200 h-[75%]"></div>
+      </div>
+    </div>
+    <div class=" w-[30%] h-full rounded-lg bg-white" style="box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
+      <div class="flex-col h-full w-full">
+        <div class=" flex h-[25%]">
+          <div class="h-full w-1/4 flex justify-center">
+            <img src="{% static 'uploads/loginimg.jpeg' %}" alt="dummy_picture" class="w-[80%] rounded-full object-fit">
+          </div>
+          <div class="h-full w-3/4">
+            <div class="h-1/2 w-full">
+              <h3 class="font-normal text-lg custom-font_1 pt-2 pl-4"> Miya </h3>
+            </div>
+            <div class="h-1/2 w-full">
+              <h3 class="font-normal text-md text-gray-400 custom-font_1 pt-2 pl-4"> Makeup Enthusiast</h3>
+            </div>
+          </div>
+        </div>
+        <div class="bg-yellow-200 h-[75%]"></div>
+      </div>
+    </div>
+    <div class="w-[30%] h-full rounded-lg bg-white" style="box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
+      <div class="flex-col h-full w-full">
+        <div class="flex h-[25%]">
+          <div class="h-full w-1/4 flex justify-center">
+            <img src="{% static 'uploads/loginimg_1.jpg' %}" alt="dummy_picture" class="w-[80%] rounded-full object-fit">
+          </div>
+          <div class="h-full w-3/4">
+            <div class="h-1/2 w-full">
+              <h3 class="font-normal text-lg custom-font_1 pt-2 pl-4"> Kadita </h3>
+            </div>
+            <div class="h-1/2 w-full">
+              <h3 class="font-normal text-md text-gray-400 custom-font_1 pt-2 pl-4"> Makeup Enthusiast</h3>
+            </div>
+          </div>
+        </div>
+        <div class="bg-yellow-200 h-[75%]"></div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+<!-- DUMMY REVIEWS END!!!!!!!!! -->
+
 <!-- ---------Camera Upload-------- -->
 <h1
-  class="text-3xl text-center text-black mt-20 font-normal"
+  class="text-3xl text-center text-black mt-10 font-normal"
   style="font-family: Lora"
 >
   Want to learn what suits you the best?
