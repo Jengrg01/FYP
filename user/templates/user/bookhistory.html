@@ -1,3 +1,14 @@
+<style>
+  .glasscard {
+  background: linear-gradient(
+    45deg,
+    rgba(255, 184, 189, 0.2),
+    rgba(255, 255, 255, 0.05)
+  );
+  backdrop-filter: blur(12px);
+}
+
+</style>
 {% extends 'index.html' %} 
 {% load static %} 
 {% load crispy_forms_tags %}
@@ -22,10 +33,11 @@
 {% endfor %}
 
 <section class="bg-white min-h-screen max-w-[1920px] p-5">
-  <h2 class="text-xl font-semibold mb-5">Your Booking History</h2>
-
-  {% for booking in bookings %}
-  <div class="booking-entry mb-4 p-4 border rounded shadow-sm">
+  <h2 class="text-xl text-center text-gray-500 custom-font_1 font-semibold my-5">Your Booking History</h2>
+  <div class="flex justify-center w-full">
+    <div class="flex-col w-[90%]">
+      {% for booking in bookings %}
+  <div class="booking-entry mb-4 p-4 border border-[#FFB8BD] rounded shadow-sm w-full glasscard">
     <p><strong>Artist:</strong> {{ booking.artist.artist_name }}</p>
     <p><strong>Date:</strong> {{ booking.time_slot.date }}</p>
     <p>
@@ -59,11 +71,15 @@
             Mark as Completed
         </a>
     </div>
-{% endif %}
+    {% endif %}
   </div>
   {% empty %}
   <p>You have no bookings yet.</p>
   {% endfor %}
+    </div>
+    
+  </div>
+  
 </section>
 <script>
   // Wait 3 seconds then fade out and remove messages

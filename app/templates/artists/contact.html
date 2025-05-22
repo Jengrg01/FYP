@@ -71,13 +71,21 @@
     display: flex;
     gap: 1rem;
   }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    #topic:focus,
+    #message:focus{
+    outline: none;
+    border-color: #FFB8BD !important;
+    box-shadow: 0 0 0 1px #FFB8BD;
+  }
   
   input,
   select,
   textarea {
     width: 100%;
     padding: 0.75rem 1rem;
-    border: 1px solid #e9d8de;
+    border: 1px solid #FFB8BD;
     border-radius: 6px;
     font-size: 1rem;
     transition: all 0.2s ease;
@@ -105,6 +113,11 @@
     height: 120px;
     font-family: inherit;
   }
+  #message{
+      height: 120px;
+      resize: none;
+      overflow-y: auto;
+    }
   
   .sub-btn {
     background: #eca4a9 !important;

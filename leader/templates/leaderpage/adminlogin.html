@@ -6,13 +6,18 @@
             font-family: "Poppins";
             font-weight: 400;
         }
-    .custom-font {
+     .custom-font {
             font-family: "Lavishly Yours";
             font-weight: 400;
         }
     .button-color{
-          background-color: #663DC6;
+          background-color: #FFB8BD;
         }
+    .vertical-line {
+      width: 1px;
+      height: 100vh;
+      background-color: lightgray;
+    }
 </style>
 {% load static %}
 {% load crispy_forms_tags %}
@@ -20,25 +25,38 @@
 <title>Lumiere | Admin Login</title>
 {% endblock %}
 {% block main_content %}
-<section class="h-screen flex">
-    <div class="w-full flex justify-center items-center ">
-        <div class="border-2 border-gray-200 rounded-lg w-[30%] h-[45%]">
-            <div class="w-full h-full">
-                <h1 class="text-xl font-semibold mb-4 custom-font_1 text-center mt-4">Admin Login</h1>
-                <div class="flex justify-center">
-                    <form method="POST" class="w-[90%]">
+<section class="h-screen bg-white flex">
+    <div class="w-[50%]">
+        <div class="logo-login h-10 absolute left-[9.8%] top-[15%]">
+            <a href="#" class="h-full flex relative items-start space-x-0 rtl:space-x-reverse">
+          <span class="self-center text-6xl font-normal whitespace-nowrap custom-font"
+            >Lumiere</span
+          >
+          </a>
+        </div>
+        <div class="flex flex-col items-center justify-center px-6 pb-8 mx-auto md:h-screen lg:py-0 mt-6">
+            <div class="w-full bg-white 2xl:relative 2xl:-left-10 rounded-lg md:mt-0 sm:max-w-md xl:p-0 2xl:-mt-30">
+                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                     <h1 class="text-xl -mb-5 font-normal custom-font_1 leading-tight tracking-tight text-gray-900 md:text-2xl">
+                        Login to your Account
+                    </h1>
+                    <p class="text-sm font-normal custom-font_1 text-gray-400">Enter your credentials to access your account!</p>
+                    <form class="space-y-4 md:space-y-6 custom-font_1 font-normal" method="POST">
                         {% csrf_token %}
                         {{ form | crispy }}
-                        <div class="flex justify-center">
-                            <button type="submit" class="w-[50%] text-white focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-xl text-sm px-5 py-2.5 text-center flex justify-center mt-6" style="background-color: #663DC6;">Sign in</button>
-                        </div>
-                       
+                        <button type="submit" class="w-full text-white focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-2xl text-sm px-5 py-2.5 text-center" style="background-color:#FFB8BD;">Sign in</button>
                     </form>
                 </div>
-                
             </div>
         </div>
-        
+    </div>
+    <div class="vertical-line"></div>
+    <div class="w-[45%] absolute right-0 top-14 h-[85%]">
+        <h1 class="text-2xl font-semibold mt-5  mb-4 custom-font_1">Welcome Admin!</h1>
+        <p class="text-sm font-light mb-5 custom-font_1">“With great power comes responsibilities”</p>
+        <div class="h-[80%] w-[75%]">
+            <img src="{% static 'uploads/adminlogin.png' %}" alt="adminlogin picture" class="w-full h-full object-fit">
+        </div>
     </div>
 </section>
 {% endblock %}

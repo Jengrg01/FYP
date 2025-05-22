@@ -11,11 +11,15 @@ from .utils import *
 from datetime import datetime, timedelta, time
 from django.utils import timezone
 from django.utils.timezone import make_aware, is_naive, now
+from django.db.models import Avg
 
 # Create your views here.
 # write functions for database, based on function or class based views(api creations get easier), we apure working on mvt pattern
 def guidelines(request):
     return render(request,"artists/guidelines.html")
+
+def community(request):
+    return render(request,"artists/community.html")
 
 def faq(request):
     return render(request,"artists/faq.html")
@@ -54,8 +58,10 @@ def home(request):
 
 
 def artist(request):
-    makeup = Makeup.objects.all()#no limitations
-    
+    makeup = (
+    Makeup.objects
+    .annotate(avg_rating=Avg('reviews__rating')))
+    featured = Makeup.objects.annotate(avg_rating=Avg('reviews__rating')).order_by('-avg_rating')[:3]
     categories = Category.objects.all()
     specialities = Speciality.objects.all()
 
@@ -79,6 +85,7 @@ def artist(request):
     # Pass everything to the template
     context = {
         "artist": makeup,
+        "featured" : featured,
         "sort_by": sort_by,
         'categories': categories,
         'specialities': specialities,

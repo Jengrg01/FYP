@@ -1,146 +1,405 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 {% extends 'index.html' %}
 {% load static %}
 {% block title %}
 <title>Lumiere | ArtistsPage</title>
 {% endblock %}
-
+<style>
+ .curve{
+  color: white;
+  text-align: center;
+ }
+ .curve svg{
+  display: block;
+ }
+</style>
 {% block main_content %}
  <section class="artist-part">
-    <div class="flex h-60 w-full" style="background-color: #3771c8;">
-      <div class="w-2/3 h-full">
-        <h1 class="text-4xl font-bold text-white ml-28 pt-16">Hire the best makeup artist</h1>
-        <p class="text-xl font-normal text-white ml-28 pt-3">Work with top-quality artists who will get your makeup done just right</p>
-      </div>
-      <div class="artistpage-img">
-        <img src="{% static 'uploads/makeup-salon.png' %}" class="pt-6 ml-16" width="220px" alt="">
+  <!-- Container for curve and overlapping form -->
+<div class="relative h-[285px] w-full bg-[#FFC6CA] mb-10 border-b">
+  <div class="text-center pt-14 px-4">
+    <h1 class="text-4xl custom-font_1 font-semibold text-white">Find Your Perfect Makeup Artist</h1>
+    <p class="text-white mt-2 text-md">Work with top-quality artists who will get your makeup done just right</p>
+  </div>
+
+  <svg class="absolute bottom-0 left-0 w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 300">
+    <path fill="#fff" fill-opacity="1" d="M0,192L48,170.7C96,149,192,107,288,128C384,149,480,235,576,272C672,309,768,299,864,272C960,245,1056,203,1152,176C1248,149,1344,139,1392,133.3L1440,128L1440,320L0,320Z"></path>
+  </svg>
+
+  <form method="get"
+        class="absolute -bottom-2 -right-28 transform -translate-x-1/2 px-5 py-3 flex gap-3 flex-wrap justify-center z-20 w-full sm:w-auto">
+    
+    <!-- Filter Button -->
+    <div class="relative">
+      <button type="button" id="filterBtn" class="flex items-center gap-1 bg-gray-200 text-black px-3 py-1.5 rounded-md text-sm hover:bg-gray-300">
+        <i class="fas fa-filter text-sm"></i> Filter
+      </button>
+      <div id="filterDropdown" class="hidden absolute top-10 left-0 bg-white border shadow-md rounded-md p-4 z-50 w-64 space-y-3">
+        <select name="category" class="border rounded-md h-9 text-sm p-2 w-full">
+          <option value="">Filter by Category</option>
+          {% for c in categories %}
+          <option value="{{ c.category_name }}" {% if category_filter == c.category_name %}selected{% endif %}>{{ c.category_name }}</option>
+          {% endfor %}
+        </select>
+        <select name="speciality" class="border rounded-md h-9 text-sm p-2 w-full">
+          <option value="">Filter by Speciality</option>
+          {% for s in specialities %}
+          <option value="{{ s.speciality_name }}" {% if speciality_filter == s.speciality_name %}selected{% endif %}>{{ s.speciality_name }}</option>
+          {% endfor %}
+        </select>
       </div>
     </div>
-    <!-- HTML -->
-<form method="get" class="flex w-1/3 gap-4 mb-5 mt-3 2xl:relative 2xl:left-[780px] lg:relative lg:left-[340px]">
-  <!-- Sort By -->
-  <select name="sort_by" class="border rounded-md h-9 text-sm p-2 custom-select">
-      <option value="" disabled selected>Sort By</option>
-      <option value="artist_name" {% if sort_by == "artist_name" %}selected{% endif %}>Name (A-Z)</option>
-      <option value="-artist_name" {% if sort_by == "-artist_name" %}selected{% endif %}>Name (Z-A)</option>
-      <option value="rate" {% if sort_by == "rate" %}selected{% endif %}>Rate (Low to High)</option>
-      <option value="-rate" {% if sort_by == "-rate" %}selected{% endif %}>Rate (High to Low)</option>
-  </select>
 
-  <!-- Filter by Category -->
-  <!-- Filter by Category -->
-<select name="category" class="border rounded-md h-9 text-sm p-2">
-  <option value="" disabled selected>Filter by Category</option>
-  {% for c in categories %}
-  <option value="{{ c.category_name }}" {% if category_filter == c.category_name %}selected{% endif %}>{{ c.category_name }}</option>
-  {% endfor %}
-</select>
+    <!-- Sort Button -->
+    <div class="relative">
+      <button type="button" id="sortBtn" class="flex items-center gap-1 bg-gray-200 text-black px-3 py-1.5 rounded-md text-sm hover:bg-gray-300">
+        <i class="fas fa-sort text-sm"></i> Sort
+      </button>
+      <div id="sortDropdown" class="hidden absolute top-10 left-0 bg-white border shadow-md rounded-md p-4 z-50 w-64">
+        <select name="sort_by" class="border rounded-md h-9 text-sm p-2 w-full">
+          <option value="">Sort By</option>
+          <option value="artist_name" {% if sort_by == "artist_name" %}selected{% endif %}>Name (A-Z)</option>
+          <option value="-artist_name" {% if sort_by == "-artist_name" %}selected{% endif %}>Name (Z-A)</option>
+          <option value="rate" {% if sort_by == "rate" %}selected{% endif %}>Rate (Low to High)</option>
+          <option value="-rate" {% if sort_by == "-rate" %}selected{% endif %}>Rate (High to Low)</option>
+        </select>
+      </div>
+    </div>
 
-<!-- Filter by Speciality -->
-<select name="speciality" class="border rounded-md h-9 text-sm p-2">
-  <option value="" disabled selected>Filter by Speciality</option>
-  {% for s in specialities %}
-  <option value="{{ s.speciality_name }}" {% if speciality_filter == s.speciality_name %}selected{% endif %}>{{ s.speciality_name }}</option>
-  {% endfor %}
-</select>
+    <!-- Submit & Reset -->
+    <button type="submit" class="py-1 px-3 text-white custom-font_1 font-normal rounded-md h-8 text-sm bg-[#FFB8BD] hover:bg-[#FFC6CA]">Apply</button>
+    <a href="{% url 'artist' %}" class="pt-2 px-3 bg-gray-300 custom-font_1 font-normal text-black rounded-md h-8 text-sm hover:bg-gray-400">Reset</a>
+  </form>
+</div>
 
 
-  <button type="submit" class="py-2 px-3 text-white rounded-md h-9 text-sm" style="background-color: #3771c8;">Apply</button>
-  <a href="{% url 'artist' %}" class="py-2 px-3 bg-gray-300 text-black rounded-md h-9 text-sm">Reset</a>
-</form>
-
-  
- <div class="flex justify-evenly gap-5 flex-wrap mb-2 px-6 py-7">
-    {% for a in artist %}
+<div class="h-[500px] w-full bg-[#F9F5FF] mb-10 flex-col flex justify-center items-center" style="border: 1px solid rgba(0, 0, 0, 0.05);">
+  <div class="w-[90%] h-[11%] mb-5 flex">
+    <div class="w-[5%] h-full">
+      <img src="{% static 'uploads/Sparkling.png' %}" class="ml-2 object-cover" alt="sparkle">
+    </div>
+    <p class="text-3xl custom-font_1 font-bold pt-3 pl-2">Featured Artists</p>
+  </div>
+  <div class="flex justify-center w-full">
+    <div class="flex justify-around w-[95%]">
+    {% for f in featured %}
     <div
-      class="w-[300px] bg-white border border-gray-200 rounded-lg shadow"
-      style="box-shadow: 2px 4px 6px #cecece;"
+      class="w-[400px] h-[350px] bg-[#FFF] border border-gray-200 rounded-xl shadow"
+      style="box-shadow: 1px solid rgba(176, 152, 152, 0.30);"
     >
-      <a href="#">
-        <div class="relative w-full h-52 ">
-            <!-- Remember that without / the image cannot be accessed. -->
-              <img
-            class="rounded-t-lg w-full h-full object-cover"
-            src="{{a.image.url}}"
-            alt="{{a.artist_name}}"
-          />
+     <div class="h-full w-full rounded-xl flex-col">
+      <div class="h-[25%] flex">
+        <div class="w-[25%] h-full flex justify-center items-center">
+          <div class="w-[70%] h-[85%] rounded-full">
+            <img src="{{f.image.url}}" alt="{{f.artist_name}}" class="w-full h-full object-cover rounded-full">
+          </div>
         </div>
-      </a>
-      <div class="p-5">
-        <a href="#">
-          <h5
-            style="color: #5f6cb7; font-weight: 600"
-            class="mb-2 text-2xl text-center font-bold tracking-tight text-gray-900"
-          >
-            {{a.artist_name}}
-          </h5>
-        </a>
-        <div class="flex justify-evenly mb-3">
-          <p
-            class="font-normal border-2 px-2 text-sm rounded-md text-gray-700 bg-gray-100"
-          >
-            {{a.speciality}}
-          </p>
-          <p
-            class="font-normal border-2 px-2 text-sm rounded-md text-gray-700 bg-gray-100"
-          >
-            {{a.category}}
-          </p>
-        </div>
-        <div class=" mb-2 px-2 rounded-md" >
-          <p class="text-left font-normal text-gray-700">
-              <strong>Description: </strong>
-            </p>
-            <p class="font-normal text-gray-700 w-full h-20 mb-2 overflow-hidden" style="font-size: 13.7px;">
-              {{a.artist_description}}
-            </p>
-            <p class="mb-3 text-left text-md font-normal text-gray-700" style="font-family: Lora;">
-              <strong>Rate: </strong>{{a.rate}} per session
-            </p>
-        </div>
-       
-        <div class="text-center">
-          <a
-            href="{% url 'artistDetail' a.id %}"
-            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center border-2 rounded-md bg-transparent rounded-lg text-[#5f6cb7] border-[#5f6cb7] hover:text-white hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300"
-          >
-            View Portfolio
-          </a>
+        <div class="w-[75%] h-full flex-col">
+          <div class="h-[50%]">
+            <h2 class="text-xl custom-font_1 font-semibold pt-2">{{f.artist_name}}</h2>
+          </div>
+          <div class="h-[50%] flex gap-3 pt-2">
+            <p
+          class="font-normal px-1 border-2 h-6 text-xs rounded-md text-gray-700 bg-gray-100"
+        >
+          {{f.speciality}}
+        </p>
+        <p
+          class="font-normal px-1 border-2 h-6 text-xs rounded-md text-gray-700 bg-gray-100"
+        >
+          {{f.category}}
+        </p>
+          </div>
         </div>
       </div>
+      <div class="h-[50%]">
+        <img src="{{f.cover_pic.url}}" class="w-full h-full object-cover" alt="{{f.artist_name}}">
+      </div>
+      <div class="h-[25%] flex">
+        <div class="w-[50%] h-full">
+          <p class="custom-font_1 font-semibold text-md text-[#FFC6CA] text-center pt-8"> From Rs. {{f.rate}}</p>
+        </div>
+        <div class="w-[50%] h-full mt-8">
+          <a href="{% url 'artistDetail' f.id %}" class="px-3 py-2 custom-font_1 font-normal text-md rounded-md bg-[#FFC6CA] text-white ml-16 hover:bg-[#eca4a9]"> See Profile</a>
+        </div>
+      </div>
+     </div>  
+
+    </div>
+  
+  {% endfor %}
+  </div>
+  </div>
+  
+  
+</div>
+
+<!-- ALL MAKEUP ARTIST !!!!!!!!!!!!!!! -->
+<p class="text-3xl font-bold custom-font_1 ml-24 text-gray-800 my-2">All Makeup Artists</p>
+ <div class="flex justify-evenly gap-x-5 gap-y-12 flex-wrap mb-10 px-6 py-7">
+    {% for a in artist %}
+    <div
+      class="w-[400px] h-[350px] bg-[#FFF] border border-gray-200 rounded-xl shadow"
+      style="box-shadow: 1px solid rgba(176, 152, 152, 0.30);"
+    >
+     <div class="h-full w-full rounded-xl flex-col">
+      <div class="h-[25%] flex">
+        <div class="w-[25%] h-full flex justify-center items-center">
+          <div class="w-[70%] h-[85%] rounded-full">
+            <img src="{{a.image.url}}" alt="{{a.artist_name}}" class="w-full h-full object-cover rounded-full">
+          </div>
+        </div>
+        <div class="w-[75%] h-full flex-col">
+          <div class="h-[50%] flex relative">
+            <h2 class="text-xl custom-font_1 font-semibold pt-2">{{a.artist_name}}</h2>
+            <p class="mt-2 text-lg custom-font_1 font-normal absolute right-5">⭐ {{ a.avg_rating|floatformat:1|default:"0.0" }}</p>
+          </div>
+          <div class="h-[50%] flex gap-3 pt-2">
+            <p
+          class="font-normal px-1 border-2 h-6 text-xs rounded-md text-gray-700 bg-gray-100"
+        >
+          {{a.speciality}}
+        </p>
+        <p
+          class="font-normal px-1 border-2 h-6 text-xs rounded-md text-gray-700 bg-gray-100"
+        >
+          {{a.category}}
+        </p>
+          </div>
+        </div>
+      </div>
+      <div class="h-[50%]">
+        <img src="{{a.cover_pic.url}}" class="w-full h-full object-cover" alt="{{a.artist_name}}">
+      </div>
+      <div class="h-[25%] flex">
+        <div class="w-[50%] h-full">
+          <p class="custom-font_1 font-semibold text-md text-[#FFC6CA] text-center pt-8"> From Rs. {{a.rate}}</p>
+        </div>
+        <div class="w-[50%] h-full mt-8">
+          <a href="{% url 'artistDetail' a.id %}" class="px-3 py-2 custom-font_1 font-normal text-md rounded-md bg-[#FFC6CA] text-white ml-16 hover:bg-[#eca4a9]"> See Profile</a>
+        </div>
+      </div>
+     </div>  
+
     </div>
   
     {% endfor %}
   </div>
-  <div class="flex justify-center mt-10 mb-20">
-    <div class="h-32 w-[91%] rounded-lg flex" style="box-shadow: 2px 2px 5px gray;">
-      <div class="w-1/4 h-full"><p class="text-center text-3xl font-light py-10" style="font-family: Lora">Follow us on :</p></div>
-      <div class="w-3/4 h-full flex justify-around">
-        <a href="#"><img src="{% static 'uploads/facebook.png' %}" width="150px" class="pt-5" alt="facebook"></a>
-        <a href="#"><img src="{% static 'uploads/instagram.png' %}" width="205px" class="pt-3" alt="instagram"></a>
-        <a href="#"><img src="{% static 'uploads/twitter.png' %}" width="91px" class="pt-5" alt="twitter"></a>
-        <a href="#"><img src="{% static 'uploads/Tiktok.png' %}" width="90px" class="pt-5" alt="tiktok"></a>
+<!-- ALL MAKEUP ARTIST !!!!!!!!!!!!!!! -->
+
+
+<!-- WHY CHOOSE MAKEUP ARTIST  START !!!!!!!!!!!!!!!!!!!!!!! -->
+<div class="h-[450px] w-full bg-[#FFDEE0] mb-10">
+  <div class="text-center pt-16 pb-12 text-3xl custom-font_1 text-gray-800 font-semibold">Why Choose Our Makeup Artists</div>
+  <div class="flex justify-center items-center w-full h-[55%]">
+    <div class="flex justify-between w-[90%] h-full">
+      <div class="bg-white w-[30%] h-full rounded-xl">
+        <div class="flex-col">
+          <div class="h-[35%] w-full">
+            <img src="{% static 'uploads/checkmark.png' %}" alt="checkmark" class="h-full w-[24%] object-cover pt-5 pl-4"></div>
+          </div>
+           <div class="flex justify-center w-full h-[65%]">
+            <div class="w-[90%] h-[90%] mt-2 flex-col">
+              <h2 class="text-lg text-gray-700 custom-font_1 font-bold">Vetted Professionals</h2>
+              <p class="text-md text-gray-600 custom-font_1 font-normal">All our makeup artists undergo  a huge vetting process to ensure they meet high standards of quality</p>
+            </div>
+          </div>
+        </div>
+      <div class="bg-white w-[30%] h-full rounded-xl">
+        <div class="flex-col">
+          <div class="h-[35%] w-full">
+            <img src="{% static 'uploads/checkmark.png' %}" alt="checkmark" class="h-full w-[24%] object-cover pt-5 pl-4"></div>
+          </div>
+           <div class="flex justify-center w-full h-[65%]">
+            <div class="w-[90%] h-[90%] mt-2 flex-col">
+              <h2 class="text-lg text-gray-700 custom-font_1 font-bold">Quality Products</h2>
+              <p class="text-md text-gray-600 custom-font_1 font-normal">Our artists use premium, hypoallergenic products suitable for all skin types, ensuring  a flawless finish..</p>
+            </div>
+          </div>
+        </div>
+      <div class="bg-white w-[30%] h-full rounded-xl">
+        <div class="flex-col">
+          <div class="h-[35%] w-full">
+            <img src="{% static 'uploads/checkmark.png' %}" alt="checkmark" class="h-full w-[24%] object-cover pt-5 pl-4"></div>
+          </div>
+          <div class="flex justify-center w-full h-[65%]">
+            <div class="w-[90%] h-[90%] mt-2 flex-col">
+              <h2 class="text-lg text-gray-700 custom-font_1 font-bold">Satisfaction Guarantee</h2>
+              <p class="text-md text-gray-600 custom-font_1 font-normal">We stand behind our artists' work with a 100% satisfaction guarantee. If you're not happy, we'll make it right.</p>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  
+</div>
+
+<!-- WHY CHOOSE MAKEUP ARTIST  END!!!!!!!!!!!!!!!!!!!!!!! -->
+
+<!-- FOLLOW US !!!!!!!!!!!!!!!!! -->
+  <div class="flex justify-center mt-16 mb-16">
+    <div class="h-24 w-[91%] rounded-lg flex" style="box-shadow: 2px 2px 5px gray;">
+      <div class="w-[55%] h-full"><p class="text-xl font-bold text-gray-700 ml-12 custom-font_1 py-8">Follow us on :</p></div>
+      <div class="w-[45%] h-full flex justify-around">
+        <a href="#"><img src="{% static 'uploads/facebook.png' %}" width="100px" class="pt-5" alt="facebook"></a>
+        <a href="#"><img src="{% static 'uploads/instagram.png' %}" width="150px" class="pt-3" alt="instagram"></a>
+        <a href="#"><img src="{% static 'uploads/twitter.png' %}" width="70px" class="pt-4" alt="twitter"></a>
+        <a href="#"><img src="{% static 'uploads/Tiktok.png' %}" width="70px" class="pt-4" alt="tiktok"></a>
       </div>
     </div>
   </div>
-  <div class="flex justify-center mb-16 ">
-    <div class="h-96 w-[91%] flex">
-      <div class="h-full w-3/4 ">
-        <h1 class="font-semibold text-3xl mb-2">How to hire a makeup artist in 2025 ?</h1>
-        <p class="text-md font-normal mb-5">Hiring a makeup artist is very easy if you know what you are looking for. Learn about the type of makeup required, your skin tone compatibility and pricings.</p>
-        <h1 class="font-semibold text-3xl mb-2">What is a makeup artist?</h1>
-        <p class="text-md font-normal mb-6">A makeup artist is a professional who applies cosmetics to enhance or alter a person’s appearance, typically for events, photo shoots, theater, film, or everyday beauty. They can specialize in various styles, including bridal, editorial, special effects (SFX), or glam makeup.</p>
-        <h1 class="font-semibold text-3xl mb-2">Questions to Ask When Hiring a Makeup Artist</h1>
-        <ul class="list-disc text-md font-normal pl-6" >
-          <li>What products and brands do you use, and are they suitable for sensitive skin or allergies?</li>
-          <li>How do you ensure the makeup lasts throughout the event or shoot?</li>
-          <li>How do you handle unexpected issues, such as last-minute changes or specific skin concerns?</li>
-        </ul>
+
+<!-- FOLLOW US END !!!!!!!!!!!!!!!!! -->
+
+
+
+<!-- QUESTIONARREEE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<div class="border-t h-[500px] w-full border-[#D9D9D9] mb-10 flex">
+  <div class="w-[50%] h-full flex justify-center">
+    <div class="w-[95%] h-[90%] pl-8 mt-12 flex-col">
+      <div class=" h-[30%] w-full flex">
+        <div class="w-[20%] h-full">
+          <img src="{% static 'uploads/question1.png' %}" class="w-[80%] h-[80%] ml-4 rounded-full object-fit" alt="">
+        </div>
+        <div class="w-[80%] h-full">
+          <div class="h-[40%] w-full">
+            <h1 class="text-gray-700 custom-font_1 font-bold text-2xl pt-5">How to hire a makeup artist in 2025?</h1>
+          </div>
+          <div class="h-[60%] w-full">
+            <p class="text-gray-500 custom-font_1 font-normal text-md pt-1">Hiring a makeup artist is very easy if you know what you are looking for Learn about the type of makeup required, your skin tone compatibility and pricings.</p>
+          </div>
+        </div>
       </div>
-      <div class="h-full w-1/4">
-        <img src="{% static 'uploads/question.png' %}" width="450px" alt="question">
+      <div class="h-[70%] w-full pt-5 relative">
+        <div class="w-[80%] h-[93%] border-t border-gray-200 shadow rounded-lg absolute right-0">
+          <h1 class="text-xl custom-font_1 font-normal text-gray-500 pt-4 pl-4 mb-2">The Hiring Process</h1>
+          <div class="flex-col flex gap-y-3 w-[95%] h-[80%] ml-4 pb-3">
+            <div class="flex w-full h-[30%]">
+              <div class="w-[20%] h-full">
+                <img src="{% static 'uploads\num1.png' %}" alt="numbers" class="w-[80%] h-[95%] pl-2 object-cover rounded-full">
+              </div>
+              <div class="h-full w-[80%]">
+                <div class="flex-col">
+                  <p class="text-md text-gray-800 custom-font_1 font-normal">Browse Profiles</p>
+                  <p class="text-sm text-gray-600 custom-font_1 font-normal">Look through artist portfolios to find styles that match your choices and your preferences.</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex w-full h-[30%]">
+              <div class="w-[20%] h-full">
+                <img src="{% static 'uploads\num2.png' %}" alt="numbers" class="w-[80%] h-[95%] pl-2 object-cover rounded-full">
+              </div>
+              <div class="h-full w-[80%]">
+                <div class="flex-col">
+                  <p class="text-md text-gray-800 custom-font_1 font-normal">Contact & Consult</p>
+                  <p class="text-sm text-gray-600 custom-font_1 font-normal">Reach out to discuss your needs, timing, and get a personalized and required quote.</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex w-full h-[30%]">
+              <div class="w-[20%] h-full">
+                <img src="{% static 'uploads\num3.png' %}" alt="numbers" class="w-[80%] h-[95%] pl-2 object-cover rounded-full">
+              </div>
+              <div class="h-full w-[80%]">
+                <div class="flex-col">
+                  <p class="text-md text-gray-800 custom-font_1 font-normal">Book & Confirm</p>
+                  <p class="text-sm text-gray-600 custom-font_1 font-normal">Secure your appointment, once you find the artist that you want and 
+book accordingly.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <div class="w-[45%] h-full flex justify-center">
+    <div class="w-[95%] h-[90%] mt-12 flex-col">
+      <div class="h-[53%] w-full flex">
+        <div class="w-[20%] h-[60%]">
+          <img src="{% static 'uploads/info.png' %}" class="w-[80%] h-[70%] ml-4 rounded-full object-fit" alt="">
+        </div>
+        <div class="w-[82%] h-full">
+          <div class="h-[30%] w-full">
+            <h1 class="text-gray-700 custom-font_1 font-bold text-2xl pt-5">What is a makeup artist?</h1>
+          </div>
+          <div class="h-[55%] w-full">
+            <p class="text-gray-500 custom-font_1 font-normal text-md pt-1">A makeup artist is a professional who applies cosmetics to enhance or alter a person's appearance, typically for events, photo shoots, theater, film, or everyday beauty. They can specialize in various styles, including bridal, editorial, special effects (SFX), or glam makeup.</p>
+          </div>
+          <div class="h-[10%] w-full">
+            <h1 class="text-xl custom-font_1 font-normal text-gray-500 pl-2 mb-2">Questions to Ask When Hiring a Makeup Artist</h1>
+          </div>
+        </div>
+      </div>
+      <div class="h-[47%] w-full pt-5 relative">
+        <div class="w-[80%] h-[90%] border-t border-gray-200 shadow rounded-lg absolute right-0">
+          <div class="flex-col flex gap-y-3 w-[95%] h-full ml-4">
+            <div class="flex w-full h-[30%]">
+              <div class="w-[20%] h-full">
+                <img src="{% static 'uploads\num1.png' %}" alt="numbers" class="w-[40%] h-[75%] ml-5 object-cover rounded-full">
+              </div>
+              <div class="h-[90%] w-[80%]">
+                <p class="text-sm text-gray-600 custom-font_1 font-normal pt-1">What products and brands do you use, and are they suitable for sensitive skin or allergies?</p>
+              </div>
+            </div>
+            <div class="flex w-full h-[30%]">
+              <div class="w-[20%] h-full">
+                <img src="{% static 'uploads\num2.png' %}" alt="numbers" class="w-[40%] h-[75%] ml-5 object-cover rounded-full">
+              </div>
+              <div class="h-full w-[80%]">
+                <p class="text-sm text-gray-600 custom-font_1 font-normal">How do you ensure the makeup lasts throughout the event and 
+shoots?</p>
+              </div>
+            </div>
+            <div class="flex w-full h-[30%]">
+              <div class="w-[20%] h-full">
+                <img src="{% static 'uploads\num3.png' %}" alt="numbers" class="w-[40%] h-[75%] ml-5 object-cover rounded-full">
+              </div>
+              <div class="h-full w-[80%]">
+                <p class="text-sm text-gray-600 custom-font_1 font-normal">How do you handle unexpected issues, such as last-minute 
+changes or specific skin concerns?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- QUESTIONARREEE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+<!-- BANNER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+ <div class="w-full h-[300px] bg-[#FFA8AE] mb-20 flex">
+  <div class="w-1/2 h-full flex flex-col justify-center">
+    <h1 class="text-white custom-font_1 text-3xl font-bold text-center">Ready to book your makeup session?</h1>
+    <p class="text-white custom-font_1 text-lg font-normal text-center">Join thousands of satisfied clients who have found their perfect makeup artist through Lumiere.</p>
+  </div>
+  <div class="w-1/2 h-full relative">
+    <a href="{% url 'artist' %}" class="px-3 py-2 border-4 rounded-md absolute right-[13%] top-[42%] border-white bg-transparent text-white custom-font_1 font-normal text-md">Book an Artist</a>
+  </div>
+ </div>
+
  </section>
- 
+ <script>
+  document.getElementById("filterBtn").addEventListener("click", function () {
+    document.getElementById("filterDropdown").classList.toggle("hidden");
+    document.getElementById("sortDropdown").classList.add("hidden");
+  });
+
+  document.getElementById("sortBtn").addEventListener("click", function () {
+    document.getElementById("sortDropdown").classList.toggle("hidden");
+    document.getElementById("filterDropdown").classList.add("hidden");
+  });
+
+  // Close dropdowns when clicking outside
+  window.addEventListener("click", function (e) {
+    if (!e.target.closest("#filterBtn") && !e.target.closest("#filterDropdown")) {
+      document.getElementById("filterDropdown").classList.add("hidden");
+    }
+    if (!e.target.closest("#sortBtn") && !e.target.closest("#sortDropdown")) {
+      document.getElementById("sortDropdown").classList.add("hidden");
+    }
+  });
+</script>
+
 {% endblock %}

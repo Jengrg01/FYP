@@ -15,7 +15,7 @@
 {% endif %}
 </div>
 {% endfor %}
-<div class="border-4 border-[rgba(176,152,152,0.3)] rounded-lg w-[98%] mx-auto mb-5">
+<div class="border border-[#FFB8BD] rounded-lg w-[98%] mx-auto mb-5">
     <h1 class="font-semibold text-2xl text-black my-5 ml-5">Category List</h1>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-[99%] mx-auto text-sm text-left rtl:text-right text-gray-500 mb-4">
@@ -36,7 +36,7 @@
                         {{c.category_name}}
                     </th>
                     <td class="px-6 py-4 flex gap-5 font-normal text-black whitespace-nowrap">
-                        <a href="{% url 'updatecategory' c.id %}" class="font-medium bg-[#663DC6] text-white font-normal px-3 rounded-md py-0.5">Update</a>
+                        <a href="{% url 'updatecategory' c.id %}" class="font-medium bg-[#FFB8BD] text-white font-normal px-3 rounded-md py-0.5">Update</a>
                         <a href="{% url 'deletecategory' c.id %}" class="font-medium bg-[#FF543E] text-white font-normal px-3 rounded-md py-0.5">Delete</a>
                     </td>
                 </tr>
@@ -48,7 +48,7 @@
 
 <div class="flex justify-end w-[98%] mx-auto">
     <a href="{% url 'addcategory' %}">
-        <button class="mb-20 px-20 py-2 text-md bg-[#663DC6] text-white text-center font-semibold rounded-sm">
+        <button class="mb-20 px-20 py-2 text-md bg-[#FFB8BD] text-white text-center font-semibold rounded-sm">
             + Add Category
         </button>
     </a>

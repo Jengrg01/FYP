@@ -1,97 +1,279 @@
 <style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+
+  body {
+    background-color: #f9f9f9;
+    color: #333;
+  }
+
+  .hero-faq {
+    background-color: #ffa8ae;
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+  }
+
+  .herofaq-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .hero-faq h1 {
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+
+  .hero-faq p {
+    font-size: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .faq-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  .faq-section-title {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+  }
+
+  .faq-section-title h2 {
+    font-size: 42px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+  .faq-section-title p {
+    font-size: 18px;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .faq-section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #ffa8ae;
+  }
+
+  .faq-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .faq {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    border-left: 4px solid #ffa8ae;
+  }
+
+  .faq:hover {
+    transform: translateY(-5px);
+  }
+
+  .accordion {
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    padding: 25px 30px;
+    border: none;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    text-align: left;
+  }
+
+  .accordion i {
+    font-size: 20px;
+    color: #ffa8ae;
+    transition: transform 0.3s ease-in-out;
+    min-width: 24px;
+    text-align: center;
+    margin-left: 15px;
+  }
+
+  .faq.active .accordion {
+    background: #fff5f6;
+  }
+
+  .faq.active i {
+    transform: rotate(180deg);
+  }
+
+  .pannel {
+    padding: 0 30px;
+    background: #f9f9f9;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    border-top: 1px solid #ffd1d5;
+  }
+
+  .pannel p {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.8;
+    padding: 25px 0;
+  }
+
+  .contact-section {
+    background-color: #f5f5f5;
+    padding: 80px 0;
+    text-align: center;
+  }
+
+  .contact-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .contact-title {
+    margin-bottom: 40px;
+  }
+
+  .contact-title h2 {
+    font-size: 36px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+
+  .contact-title p {
+    font-size: 18px;
+    color: #666;
+  }
+
+  .contact-button {
+    display: inline-block;
+    background-color: #ffa8ae;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid #ffa8ae;
+  }
+
+  .contact-button:hover {
+    background-color: transparent;
+    color: #ffa8ae;
+  }
+  @media (max-width: 992px) {
+    .hero-faq h1 {
+      font-size: 48px;
     }
 
-    body {
-      background-color: #f8f9fa;
+    .faq-section {
+      padding: 60px 30px;
     }
 
-    .wrapper {
-      max-width: 70%;
-      margin: auto;
-      padding: 2rem 0;
+    .faq-section-title h2 {
+      font-size: 36px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-faq {
+      padding: 80px 0;
     }
 
-    .wrapper > h1 {
-      margin-bottom: 2rem;
-      text-align: center;
-      letter-spacing: 2px;
-      font-size: 2rem;
-      color: #333;
+    .hero-faq h1 {
+      font-size: 40px;
+    }
+
+    .hero-faq p {
+      font-size: 18px;
+    }
+
+    .faq-section {
+      padding: 50px 20px;
     }
 
     .accordion {
-      background-color: white;
-      color: #333;
-      cursor: pointer;
-      font-size: 1.1rem;
-      width: 100%;
-      padding: 1.5rem 2rem;
-      border: none;
-      outline: none;
-      transition: all 0.3s ease-in-out;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 500;
-    }
-
-    .accordion i {
-      font-size: 1.4rem;
-      transition: transform 0.3s ease-in-out;
-    }
-
-    .faq {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      margin-bottom: 10px;
-      overflow: hidden;
-    }
-
-    .faq.active .accordion {
-      background: #f1f7f5;
-    }
-
-    .faq.active i {
-      transform: rotate(180deg);
-    }
-
-    .pannel {
-      padding: 0 2rem;
-      background: #f9f9f9;
-      display: none;
-      border-top: 1px solid #ddd;
-      transition: all 0.3s ease-in-out;
+      padding: 20px 25px;
+      font-size: 16px;
     }
 
     .pannel p {
-      color: #555;
-      font-size: 1rem;
-      line-height: 1.6;
-      padding: 1rem 0;
+      padding: 20px 0;
     }
+  }
+
+  @media (max-width: 576px) {
+    .hero-faq h1 {
+      font-size: 32px;
+    }
+
+    .faq-section-title h2 {
+      font-size: 28px;
+    }
+  }
 </style>
 {% extends 'index.html' %} {% load static %} {% block title %}
-<title>Lumiere | FAQ </title>
+<title>Lumiere | FAQ</title>
 {% endblock %}
 <link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-crossorigin="anonymous"
-referrerpolicy="no-referrer"
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+  integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
 />
 {% block main_content %}
-<div class="wrapper">
+<!-- Hero Section -->
+<section class="hero-faq">
+  <div class="herofaq-container">
     <h1>Frequently Asked Questions</h1>
+    <p>
+      Find answers to common questions about Lumiere's makeup artist platform
+      and services
+    </p>
+  </div>
+</section>
 
+<!-- FAQ Section -->
+<section class="faq-section">
+  <div class="faq-section-title">
+    <h2>How Can We Help You?</h2>
+    <p>
+      Browse through our most commonly asked questions to learn more about our
+      services
+    </p>
+  </div>
+
+  <div class="faq-container">
     <div class="faq">
       <button class="accordion">
         What is Lumiere?
@@ -101,7 +283,8 @@ referrerpolicy="no-referrer"
         <p>
           Lumiere is a platform that connects users with professional makeup
           artists and provides AI-powered makeup style suggestions based on
-          uploaded images.
+          uploaded images. Our mission is to make professional makeup services
+          accessible to everyone.
         </p>
       </div>
     </div>
@@ -115,7 +298,8 @@ referrerpolicy="no-referrer"
         <p>
           Users can browse through verified makeup artists, book appointments,
           and upload images to receive AI-generated makeup recommendations.
-          Artists are added and managed by the admin.
+          Artists are added and managed by the admin. Our platform makes it easy
+          to find the perfect makeup artist for any occasion.
         </p>
       </div>
     </div>
@@ -128,7 +312,9 @@ referrerpolicy="no-referrer"
       <div class="pannel">
         <p>
           Yes! Lumiere allows users to upload images, and our AI analyzes them
-          to suggest makeup styles that best suit their facial features.
+          to suggest makeup styles that best suit their facial features. This
+          helps you discover makeup looks that enhance your natural beauty
+          before booking an artist.
         </p>
       </div>
     </div>
@@ -140,8 +326,10 @@ referrerpolicy="no-referrer"
       </button>
       <div class="pannel">
         <p>
-          Yes, all makeup artists on Lumiere are verified by our team to
-          ensure quality service and professionalism.
+          Yes, all makeup artists on Lumiere are verified by our team to ensure
+          quality service and professionalism. We carefully review each artist's
+          portfolio, experience, and credentials before they can join our
+          platform.
         </p>
       </div>
     </div>
@@ -153,8 +341,10 @@ referrerpolicy="no-referrer"
       </button>
       <div class="pannel">
         <p>
-          Simply browse the available artists, check their profiles, and book
-          an appointment at your convenience through the Lumiere platform.
+          Simply browse the available artists, check their portfolios and
+          reviews, and book an appointment at your convenience through the
+          Lumiere platform. You can filter artists by location, specialty, price
+          range, and availability to find the perfect match for your needs.
         </p>
       </div>
     </div>
@@ -168,30 +358,45 @@ referrerpolicy="no-referrer"
         <p>
           Currently, artists can only be added by the admin. If you're a
           professional makeup artist interested in joining, please contact us
-          for verification.
+          for verification. We'll review your portfolio and professional
+          experience to ensure you meet our quality standards.
         </p>
       </div>
     </div>
   </div>
+</section>
 
-  <script>
-    var acc = document.getElementsByClassName("accordion");
-    var i;
+<section class="contact-section">
+  <div class="contact-container">
+    <div class="contact-title">
+      <h2>Still Have Questions?</h2>
+      <p>
+        Our team is here to help with any additional questions you might have
+        about our services
+      </p>
+    </div>
+    <a href="{% url 'contact' %}" class="contact-button">Contact Us</a>
+  </div>
+</section>
 
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function () {
-        this.classList.toggle("active");
-        this.parentElement.classList.toggle("active");
+<script>
+  var acc = document.getElementsByClassName("accordion");
+  var i;
 
-        var pannel = this.nextElementSibling;
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+      this.classList.toggle("active");
+      this.parentElement.classList.toggle("active");
 
-        if (pannel.style.display === "block") {
-          pannel.style.display = "none";
-        } else {
-          pannel.style.display = "block";
-        }
-      });
-    }
-  </script>
+      var pannel = this.nextElementSibling;
+
+      if (pannel.style.maxHeight) {
+        pannel.style.maxHeight = null;
+      } else {
+        pannel.style.maxHeight = pannel.scrollHeight + "px";
+      }
+    });
+  }
+</script>
 
 {% endblock %}

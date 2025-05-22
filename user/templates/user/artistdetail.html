@@ -27,7 +27,15 @@
 <title>Lumiere | Artist Detail</title>
 {% endblock %} 
 {% block main_content %}
-
+{% for msg in messages %}
+<div class="msg flex justify-center absolute left-[45%] top-16 z-[99]">
+  {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+<span class=" bg-[#e091a9] fade-msg py-2 px-3 text-white text-center">
+  {{msg}}
+</span>
+{% endif %}
+</div>
+{% endfor %}
 <section
   class="bg-white h-screen max-w-[1920px] p-0 m-0"
   style="width: 100% !important; height: auto !important"
@@ -86,7 +94,7 @@
             <p class="text-center text-sm custom-font_1">{{ image.caption }}</p>
           </div>
         {% empty %}
-          <p class="text-lg custom-font_1 font-normal col-span-full">No images in gallery yet.</p>
+          <p class="text-lg text-center text-gray-500 custom-font_1 font-normal col-span-full">No images in gallery yet.</p>
         {% endfor %}
       </div>
       <!-- Lightbox Modal -->
@@ -110,6 +118,13 @@
 </section>
 </section>
 <script>
+  setTimeout(() => {
+    document.querySelectorAll('.fade-msg').forEach(el => {
+      el.style.transition = 'opacity 0.5s ease';
+      el.style.opacity = '0';
+      setTimeout(() => el.remove(), 500); 
+    });
+  }, 3000);
   function openModal(imageUrl) {
     const modal = document.getElementById('lightboxModal');
     const lightboxImage = document.getElementById('lightboxImage');

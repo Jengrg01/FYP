@@ -1,7 +1,14 @@
+<style>
+    #div_id_review_text textarea{
+       height: 120px;
+       resize: none;
+       overflow-y: auto;
+    }
+</style>
 {% load static %}
 {% load crispy_forms_tags %}
 
-<div class="review-section w-[87%] mx-auto my-8">
+<div class="review-section w-[100%] mx-auto my-8">
     <h2 class="text-2xl font-semibold mb-4">Reviews</h2>
     
     <!-- Average Rating -->
@@ -75,7 +82,7 @@
                 {{ form.review_text|as_crispy_field }}
             </div>
             
-            <button type="submit" class="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600 transition">
+            <button type="submit" class="bg-[#FFB8BD] text-white px-4 py-2 rounded hover:bg-[#e091a9] transition">
                 Submit Review
             </button>
         </form>

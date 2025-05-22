@@ -168,7 +168,8 @@ def artist_detail(request, artist_id):
     if request.user.is_authenticated:
         existing_review = Review.objects.filter(user=request.user, artist=artist).first()
 
-    form = ReviewForm(instance=existing_review) if request.user.is_authenticated else None
+    form = ReviewForm() if request.user.is_authenticated else None  # ✅ Always new form
+
     context = {
         'artist': artist,
         'gallery_images': gallery_images,
@@ -259,7 +260,6 @@ def user_acc_settings(request):
 def book_time_slot(request, artist_id):
     artist = Makeup.objects.get(id=artist_id)
 
-    # Prevent double booking only if there's an active booking for any artist
     if Booking.objects.filter(user=request.user, status='active', time_slot__isnull=False).exists():
         messages.error(request, "You already have an active booking. Complete or cancel it before booking another.")
         return redirect('bookhistory')
@@ -269,17 +269,14 @@ def book_time_slot(request, artist_id):
         if form.is_valid():
             time_slot = form.cleaned_data['time_slot']
 
-            # Check if the selected time slot is already booked by another active booking
             existing_active_booking = Booking.objects.filter(time_slot=time_slot, status='active').exists()
             if existing_active_booking:
                 messages.error(request, "This time slot has already been booked.")
                 return redirect('booking', artist_id=artist_id)
 
-            # Mark the time slot as booked
             time_slot.is_booked = True
             time_slot.save()
 
-            # Create a new active booking
             Booking.objects.create(
                 user=request.user,
                 artist=artist,
@@ -294,7 +291,14 @@ def book_time_slot(request, artist_id):
     else:
         form = BookingForm(artist=artist)
 
-    return render(request, 'user/booking.html', {'form': form, 'artist': artist})
+    
+    user_profile = request.user.userprofile 
+
+    return render(request, 'user/booking.html', {
+        'form': form,
+        'artist': artist,
+        'current_user': user_profile 
+    })
 
 @user_required
 def booking_history(request):
@@ -415,10 +419,10 @@ def submit_review(request, artist_id):
             review.user = request.user
             review.artist = artist
             review.save()
-            message = f"{request.user.username} has left you a review."
-            create_notification(artist, message)
+            create_notification(artist, f"{request.user.username} has left you a review.")
             messages.success(request, "Your review has been published.")
-            return redirect('artistDetail', artist_id=artist.id)
+            return redirect('artistDetail', artist_id=artist.id)  
+
         else:
             print("Form errors:", form.errors)
             messages.error(request, "There was an error with your review.")

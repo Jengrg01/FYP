@@ -1,408 +1,483 @@
 <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-    .about-body {
-      font-family: 'Poppins', sans-serif;
-      line-height: 1.7;
-      color: #333333;
-      background-color: #f9f9f9;
-      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    }
+  .about-body {
+    font-family: "Poppins", sans-serif;
+    line-height: 1.7;
+    color: #333333;
+    background-color: #fff5f6;
+  }
 
-    .about-page-wrapper {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 80px 20px;
-    }
+  .about-page-wrapper {
+    max-width: 1600px;
+    margin: 0 auto;
+  }
 
-    .about-container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
+  h1,
+  h2,
+  h3 {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #111111;
+  }
 
-    h1, h2, h3 {
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      color: #111111;
-    }
+  p {
+    margin-bottom: 24px;
+    font-size: 17px;
+    color: #444444;
+    font-weight: 400;
+  }
 
-    h1 {
-      font-size: 48px;
-      line-height: 1.2;
-      margin-bottom: 24px;
-    }
+  .about-hero {
+    background-color: #ffa8ae;
+    color: white;
+    padding: 120px 0;
+    text-align: center;
+  }
 
-    h2 {
-      font-size: 30px;
-      margin-bottom: 24px;
-      position: relative;
-    }
+  .about-hero-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
 
-    h3 {
-      font-size: 22px;
-      margin-bottom: 16px;
-    }
+  .about-hero-title {
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+    color: white;
+  }
 
-    p {
-      margin-bottom: 24px;
-      font-size: 16px;
-      color: #444444;
-      font-weight: 400;
-    }
+  .about-hero-description {
+    font-size: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-weight: 300;
+    color: white;
+  }
 
-    .text-lg {
-      font-size: 18px;
-      line-height: 1.7;
-    }
+  .about-content-wrapper {
+    padding: 80px 40px;
+  }
 
-    .text-accent {
-      font-weight: 500;
-      font-size: 18px;
-      color: #555555;
-      line-height: 1.6;
-      margin: 40px 0;
-      padding-left: 24px;
-      border-left: 3px solid #222222;
-    }
+  .about-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
 
-    /* Header */
-    .header {
-      text-align: center;
-      margin-bottom: 80px;
-      position: relative;
-    }
+  .text-lg {
+    font-size: 20px;
+    line-height: 1.7;
+  }
 
-    .header::after {
-      content: '';
-      display: block;
-      width: 1px;
-      height: 60px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0));
-      position: absolute;
-      bottom: -60px;
-      left: 50%;
-    }
+  .text-accent {
+    font-weight: 500;
+    font-size: 20px;
+    color: #555555;
+    line-height: 1.6;
+    margin: 40px 0;
+    padding-left: 24px;
+    border-left: 3px solid #ffa8ae;
+  }
 
-    .header h1 {
-      position: relative;
-      display: inline-block;
-      margin-bottom: 40px;
-    }
+  .main-content {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(255, 168, 174, 0.2);
+    overflow: hidden;
+    position: relative;
+    margin-top: -40px;
+  }
 
-    .header h1::after {
-      content: '';
-      position: absolute;
-      bottom: -16px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 80px;
-      height: 2px;
-      background-color: #222222;
-    }
+  .main-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: linear-gradient(to right, #ffa8ae, #ffd1d5);
+  }
 
-    .subtitle {
-      font-size: 18px;
-      color: #666666;
-      max-width: 700px;
-      margin: 0 auto;
-      font-weight: 300;
-      line-height: 1.6;
-    }
+  .content-inner {
+    padding: 80px;
+  }
 
-    .main-content {
-      background-color: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      position: relative;
-    }
+  .intro {
+    margin-bottom: 80px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-    .main-content::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 6px;
-      background: linear-gradient(to right, #222222, #666666);
+  .services-title {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+  }
+
+  .services-title::after {
+    content: "";
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #ffa8ae;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin-bottom: 80px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 1024px) {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .service-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(255, 168, 174, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(255, 168, 174, 0.1);
+  }
+
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(255, 168, 174, 0.2);
+  }
+
+  .service-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(to right, #ffa8ae, #ffd1d5);
+    z-index: 2;
+  }
+
+  .service-header {
+    padding: 40px 40px 25px;
+    position: relative;
+  }
+
+  .service-icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+    display: inline-block;
+  }
+
+  .service-title {
+    font-size: 26px;
+    margin-bottom: 0;
+  }
+
+  .service-content {
+    padding: 0 40px 40px;
+  }
+
+  .feature-list {
+    list-style: none;
+    margin-bottom: 24px;
+  }
+
+  .feature-list li {
+    margin-bottom: 16px;
+    padding-left: 32px;
+    position: relative;
+    font-size: 17px;
+  }
+
+  .feature-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #ffa8ae;
+    font-size: 18px;
+  }
+
+  .commitment {
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 70px;
+    margin-top: 80px;
+    position: relative;
+    overflow: hidden;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 10px 30px rgba(255, 168, 174, 0.1);
+    border: 1px solid rgba(255, 168, 174, 0.1);
+  }
+
+  .commitment-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .commitment h2 {
+    margin-top: 0;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 30px;
+  }
+
+  .commitment h2::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: #ffa8ae;
+  }
+
+  .decorative-line {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0),
+      rgba(255, 168, 174, 0.3),
+      rgba(0, 0, 0, 0)
+    );
+    margin: 80px 0;
+  }
+
+  .about-footer {
+    text-align: center;
+    padding: 40px 0;
+    background-color: #fff5f6;
+    border-top: 1px solid #ffd1d5;
+    margin-top: 80px;
+  }
+
+  .about-footer p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 1200px) {
+    .about-content-wrapper {
+      padding: 60px 30px;
     }
 
     .content-inner {
       padding: 60px;
     }
 
-    .intro {
-      margin-bottom: 60px;
+    .about-hero-title {
+      font-size: 48px;
     }
 
-    .services-title {
-      text-align: center;
-      margin-bottom: 50px;
-      position: relative;
+    .commitment {
+      padding: 50px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about-content-wrapper {
+      padding: 40px 20px;
     }
 
-    .services-title::after {
-      content: '';
-      position: absolute;
-      bottom: -16px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 60px;
-      height: 2px;
-      background-color: #222222;
+    .about-hero {
+      padding: 80px 0;
     }
 
-    .services-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 40px;
-      margin-bottom: 60px;
+    .about-hero-title {
+      font-size: 36px;
     }
 
-    @media (min-width: 768px) {
-      .services-grid {
-        grid-template-columns: 1fr 1fr;
-      }
+    .about-hero-description {
+      font-size: 18px;
     }
 
-    .service-card {
-      background-color: #ffffff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      z-index: 1;
+    h2 {
+      font-size: 26px;
     }
 
-    .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    h3 {
+      font-size: 20px;
     }
 
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(to right, #222222, #666666);
-      z-index: 2;
+    .content-inner {
+      padding: 40px 30px;
+    }
+
+    .commitment {
+      padding: 30px;
+    }
+
+    .text-accent {
+      font-size: 16px;
+      margin: 30px 0;
     }
 
     .service-header {
       padding: 30px 30px 20px;
-      position: relative;
-    }
-
-    .service-icon {
-      font-size: 32px;
-      margin-bottom: 16px;
-      display: inline-block;
-    }
-
-    .service-title {
-      font-size: 22px;
-      margin-bottom: 0;
     }
 
     .service-content {
       padding: 0 30px 30px;
     }
-
-    .feature-list {
-      list-style: none;
-      margin-bottom: 24px;
-    }
-
-    .feature-list li {
-      margin-bottom: 12px;
-      padding-left: 28px;
-      position: relative;
-    }
-
-    .feature-list li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: #222222;
-    }
-
-    .commitment {
-      background-color: #f5f5f5;
-      border-radius: 12px;
-      padding: 50px;
-      margin-top: 60px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .commitment::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.03' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
-      opacity: 0.5;
-    }
-
-    .commitment-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .commitment h2 {
-      margin-top: 0;
-    }
-
-    .decorative-line {
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.1), rgba(0,0,0,0));
-      margin: 60px 0;
-    }
-
-    @media (max-width: 768px) {
-      .about-page-wrapper {
-        padding: 40px 20px;
-      }
-
-      .header {
-        margin-bottom: 60px;
-      }
-
-      .header::after {
-        height: 40px;
-        bottom: -40px;
-      }
-
-      h1 {
-        font-size: 36px;
-      }
-
-      h2 {
-        font-size: 26px;
-      }
-
-      h3 {
-        font-size: 20px;
-      }
-
-      .content-inner {
-        padding: 40px 30px;
-      }
-
-      .commitment {
-        padding: 30px;
-      }
-
-      .text-accent {
-        font-size: 16px;
-        margin: 30px 0;
-      }
-    }
-  </style>
-{% extends 'index.html' %} 
-{% load static %} 
-{% block title %}
-<title>Lumiere | About Us </title>
+  }
+</style>
+{% extends 'index.html' %} {% load static %} {% block title %}
+<title>Lumiere | About Us</title>
 {% endblock %}
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+/>
 {% block main_content %}
 <div class="about-body">
-    <div class="about-page-wrapper">
-        <header class="header">
-          <div class="about-container">
-            <h1>About Lumiere</h1>
-            <p class="subtitle">A platform connecting clients with professional makeup artists and providing personalized makeup style recommendations.</p>
-          </div>
-        </header>
-    
-        <div class="about-container">
-          <main class="main-content">
-            <div class="content-inner">
-              <section class="intro">
-                <p class="text-lg">
-                  Lumiere is a modern beauty platform designed to simplify the process of finding and booking professional makeup artists while also helping users discover makeup styles that enhance their natural features.
-                </p>
-                
-                <p class="text-accent">
-                  We believe that everyone deserves to feel confident and beautiful, and the right makeup can be a powerful tool for self-expression.
-                </p>
-                
-                <p>
-                  Our platform makes professional makeup services accessible to everyone, regardless of their experience with makeup or knowledge of beauty trends. Through innovative technology and a curated network of talented artists, we're transforming how people approach beauty.
-                </p>
-              </section>
-    
-              <div class="decorative-line"></div>
-    
-              <section class="services">
-                <h2 class="services-title">What We Offer</h2>
-                
-                <div class="services-grid">
-                  <div class="service-card">
-                    <div class="service-header">
-                      <span class="service-icon">✨</span>
-                      <h3 class="service-title">Makeup Artist Booking</h3>
-                    </div>
-                    <div class="service-content">
-                      <p>
-                        Our platform connects clients with verified, professional makeup artists for any occasion. Whether you need makeup for a wedding, photoshoot, special event, or everyday look, Lumiere makes it easy to:
-                      </p>
-                      <ul class="feature-list">
-                        <li>Browse portfolios of talented makeup artists</li>
-                        <li>View availability in real-time</li>
-                        <li>Communicate your preferences directly with artists</li>
-                      </ul>
-                    </div>
-                  </div>
-                  
-                  <div class="service-card">
-                    <div class="service-header">
-                      <span class="service-icon">🔍</span>
-                      <h3 class="service-title">Style Recommendations</h3>
-                    </div>
-                    <div class="service-content">
-                      <p>
-                        Not sure which makeup styles would look best on you? Our innovative technology allows you to upload a photo and receive personalized recommendations tailored to your unique features:
-                      </p>
-                      <ul class="feature-list">
-                        <li>Our system analyzes your facial structure and features</li>
-                        <li>Receive customized makeup style suggestions</li>
-                        <li>Book artists who specialize in your preferred style</li>
-                      </ul>
-                    </div>
-                  </div>
+  <!-- Hero Section -->
+  <section class="about-hero">
+    <div class="about-hero-container">
+      <h1 class="about-hero-title">About Lumiere</h1>
+      <p class="about-hero-description">
+        A platform connecting clients with professional makeup artists and
+        providing personalized makeup style recommendations.
+      </p>
+    </div>
+  </section>
+
+  <div class="about-content-wrapper">
+    <div class="about-container">
+      <main class="main-content">
+        <div class="content-inner">
+          <section class="intro">
+            <p class="text-lg">
+              Lumiere is a modern beauty platform designed to simplify the
+              process of finding and booking professional makeup artists while
+              also helping users discover makeup styles that enhance their
+              natural features.
+            </p>
+
+            <p class="text-accent">
+              We believe that everyone deserves to feel confident and beautiful,
+              and the right makeup can be a powerful tool for self-expression.
+            </p>
+
+            <p>
+              Our platform makes professional makeup services accessible to
+              everyone, regardless of their experience with makeup or knowledge
+              of beauty trends. Through innovative technology and a curated
+              network of talented artists, we're transforming how people
+              approach beauty.
+            </p>
+          </section>
+
+          <div class="decorative-line"></div>
+
+          <section class="services">
+            <h2 class="services-title">What We Offer</h2>
+
+            <div class="services-grid">
+              <div class="service-card">
+                <div class="service-header">
+                  <span class="service-icon">✨</span>
+                  <h3 class="service-title">Makeup Artist Booking</h3>
                 </div>
-              </section>
-    
-              <section class="commitment">
-                <div class="commitment-content">
-                  <h2>Our Commitment</h2>
+                <div class="service-content">
                   <p>
-                    At Lumiere, we're committed to:
+                    Our platform connects clients with verified, professional
+                    makeup artists for any occasion. Whether you need makeup for
+                    a wedding, photoshoot, special event, or everyday look,
+                    Lumiere makes it easy to:
                   </p>
                   <ul class="feature-list">
-                    <li>Providing a seamless, user-friendly experience for both clients and makeup artists</li>
-                    <li>Maintaining high standards for all artists on our platform</li>
-                    <li>Respecting user privacy and securely handling all uploaded photos</li>
-                    <li>Continuously improving our recommendation technology</li>
-                    <li>Creating an inclusive platform that celebrates diversity in beauty</li>
+                    <li>Browse portfolios of talented makeup artists</li>
+                    <li>View availability in real-time</li>
+                    <li>Communicate your preferences directly with artists</li>
+                    <li>Book and pay securely through our platform</li>
+                    <li>Leave and read reviews from other clients</li>
                   </ul>
                 </div>
-              </section>
+              </div>
+
+              <div class="service-card">
+                <div class="service-header">
+                  <span class="service-icon">🔍</span>
+                  <h3 class="service-title">Style Recommendations</h3>
+                </div>
+                <div class="service-content">
+                  <p>
+                    Not sure which makeup styles would look best on you? Our
+                    innovative technology allows you to upload a photo and
+                    receive personalized recommendations tailored to your unique
+                    features:
+                  </p>
+                  <ul class="feature-list">
+                    <li>
+                      Our system analyzes your facial structure and features
+                    </li>
+                    <li>Receive customized makeup style suggestions</li>
+                    <li>Book artists who specialize in your preferred style</li>
+                    <li>Save and compare different style recommendations</li>
+                    <li>Get product recommendations that match your style</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-          </main>
+          </section>
+
+          <section class="commitment">
+            <div class="commitment-content">
+              <h2>Our Commitment</h2>
+              <p>At Lumiere, we're committed to:</p>
+              <ul class="feature-list">
+                <li>
+                  Providing a seamless, user-friendly experience for both
+                  clients and makeup artists
+                </li>
+                <li>
+                  Maintaining high standards for all artists on our platform
+                </li>
+                <li>
+                  Respecting user privacy and securely handling all uploaded
+                  photos
+                </li>
+                <li>Continuously improving our recommendation technology</li>
+                <li>
+                  Creating an inclusive platform that celebrates diversity in
+                  beauty
+                </li>
+                <li>
+                  Supporting makeup artists in building their business and
+                  client base
+                </li>
+                <li>
+                  Making professional makeup services accessible to everyone
+                </li>
+              </ul>
+            </div>
+          </section>
         </div>
-      </div>
+      </main>
+    </div>
+  </div>
 </div>
 
 {% endblock %}

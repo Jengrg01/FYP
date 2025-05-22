@@ -28,4 +28,5 @@ urlpatterns = [
     path('deleteslot/<int:slot_id>/', views.delete_time_slot, name='delete_slot'),
     path('notifications/', views.notifications_view, name='artist_notifications'),
     path('guidelines/', views.guidelines, name='guidelines'),
+    path('community/', views.community, name='community'),
 ]

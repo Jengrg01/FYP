@@ -1,3 +1,14 @@
+<style>
+     .glasscard {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 184, 189, 0.2),
+    rgba(234, 205, 205, 0.05)
+    
+  );
+  backdrop-filter: blur(12px);
+}
+</style>
 {% extends 'artistindex.html' %} 
 {% load static %}
  {% load crispy_forms_tags %} 
@@ -78,7 +89,7 @@
             <p class="text-center text-sm custom-font_1">{{ image.caption }}</p>
           </div>
         {% empty %}
-          <p class="text-lg custom-font_1 font-normal col-span-full">No images in gallery yet.</p>
+          <p class="text-lg text-center text-gray-500 custom-font_1 font-normal col-span-full">No images in gallery yet.</p>
         {% endfor %}
       </div>
       <!-- Lightbox Modal -->
@@ -99,7 +110,7 @@
       {% if reviews %}
         <div class="space-y-4">
           {% for review in reviews %}
-            <div class="bg-gray-100 p-4 rounded-md shadow-sm">
+            <div class="glasscard p-4 rounded-md shadow">
               <h3 class="text-md font-semibold text-gray-800">
                 {{ review.user.username }} reviewed you
               </h3>

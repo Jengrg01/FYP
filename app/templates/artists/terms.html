@@ -1,430 +1,775 @@
 <style>
-    .body-font {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background-color: #fff;
+
+  .lumiere-body-font {
+    font-family: "Poppins", sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff5f6;
+  }
+
+  .lumiere-hero {
+    background-color: #ffa8ae;
+    color: white;
+    padding: 70px 0 120px;
+    text-align: center;
+  }
+
+  .lumiere-hero-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .lumiere-hero-title {
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+
+  .lumiere-hero-description {
+    font-size: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .lumiere-terms-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 80px 40px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255, 168, 174, 0.15);
+  }
+
+  .lumiere-space-y-6 > * + * {
+    margin-top: 1.5rem;
+  }
+
+  .lumiere-space-y-4 > * + * {
+    margin-top: 1rem;
+  }
+
+  .lumiere-space-y-2 > * + * {
+    margin-top: 0.5rem;
+  }
+
+  .lumiere-text-center {
+    text-align: center;
+  }
+
+  .lumiere-text-muted {
+    color: #6b7280;
+  }
+
+  .lumiere-text-sm {
+    font-size: 0.875rem;
+  }
+
+  .lumiere-mt-8 {
+    margin-top: 2rem;
+  }
+
+  .lumiere-mb-6 {
+    margin-bottom: 1.5rem;
+  }
+
+  .lumiere-pt-6 {
+    padding-top: 1.5rem;
+  }
+
+  .lumiere-terms-heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.025em;
+    color: #333;
+  }
+
+  .lumiere-terms-subheading {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #333;
+  }
+
+  .lumiere-terms-paragraph {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.7;
+  }
+
+  .lumiere-list {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .lumiere-list-item {
+    margin-bottom: 0.5rem;
+    color: #444;
+  }
+
+  .lumiere-border-t {
+    border-top: 1px solid #ffd1d5;
+  }
+
+  .lumiere-accordion {
+    width: 100%;
+    margin-top: 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(255, 168, 174, 0.1);
+  }
+
+  .lumiere-accordion-item {
+    border-bottom: 1px solid #ffd1d5;
+    background-color: white;
+  }
+
+  .lumiere-accordion-item:last-child {
+    border-bottom: none;
+  }
+
+  .lumiere-accordion-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1.25rem 1.5rem;
+    text-align: left;
+    font-size: 1.125rem;
+    font-weight: 600;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #333;
+  }
+
+  .lumiere-accordion-trigger:hover {
+    color: #ffa8ae;
+    background-color: #fff5f6;
+  }
+
+  .lumiere-accordion-trigger::after {
+    content: "+";
+    font-size: 1.5rem;
+    color: #ffa8ae;
+    transition: transform 0.3s ease;
+  }
+
+  .lumiere-accordion-trigger.active {
+    background-color: #fff5f6;
+  }
+
+  .lumiere-accordion-trigger.active::after {
+    content: "−";
+    transform: rotate(0deg);
+  }
+
+  .lumiere-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: #fff5f6;
+  }
+
+  .lumiere-accordion-content-inner {
+    padding: 1.5rem 1.5rem;
+    border-top: 1px solid #ffd1d5;
+  }
+
+  .lumiere-button-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  @media (min-width: 640px) {
+    .lumiere-button-group {
+      flex-direction: row;
+    }
+  }
+
+  .lumiere-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+  }
+
+  .lumiere-button-primary {
+    background-color: #ffa8ae;
+    color: white;
+    border: 2px solid #ffa8ae;
+  }
+
+  .lumiere-button-primary:hover {
+    background-color: #ff95a0;
+  }
+
+  .lumiere-button-outline {
+    background-color: transparent;
+    color: #ffa8ae;
+    border: 2px solid #ffa8ae;
+  }
+
+  .lumiere-button-outline:hover {
+    background-color: rgba(255, 168, 174, 0.1);
+  }
+
+  .lumiere-footer-section {
+    background-color: #fff5f6;
+    padding: 30px 0;
+    border-top: 1px solid #ffd1d5;
+  }
+
+  @media (min-width: 640px) {
+    .lumiere-terms-heading {
+      font-size: 3rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .lumiere-terms-heading {
+      font-size: 3.5rem;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .lumiere-hero-title {
+      font-size: 48px;
     }
 
-    .terms-container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 3rem 1rem;
+    .lumiere-terms-container {
+      padding: 60px 30px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .lumiere-hero {
+      padding: 80px 0;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.025em;
+    .lumiere-hero-title {
+      font-size: 40px;
     }
 
-    @media (min-width: 640px) {
-      h1 {
-        font-size: 3rem;
-      }
+    .lumiere-hero-description {
+      font-size: 18px;
     }
 
-    @media (min-width: 768px) {
-      h1 {
-        font-size: 3.5rem;
-      }
+    .lumiere-accordion-trigger {
+      padding: 1rem 1.25rem;
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .lumiere-hero-title {
+      font-size: 32px;
     }
 
-    h4 {
-      font-size: 1.125rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
+    .lumiere-terms-container {
+      padding: 40px 20px;
+      margin-top: -20px;
     }
-
-    p {
-      margin-bottom: 1rem;
-    }
-
-    .text-center {
-      text-align: center;
-    }
-
-    .text-muted {
-      color: #6b7280;
-    }
-
-    .text-sm {
-      font-size: 0.875rem;
-    }
-
-    /* Spacing */
-    .space-y-2 > * + * {
-      margin-top: 0.5rem;
-    }
-
-    .space-y-4 > * + * {
-      margin-top: 1rem;
-    }
-
-    .space-y-6 > * + * {
-      margin-top: 1.5rem;
-    }
-
-    .mt-8 {
-      margin-top: 2rem;
-    }
-
-    .mb-6 {
-      margin-bottom: 1.5rem;
-    }
-
-    .pt-6 {
-      padding-top: 1.5rem;
-    }
-
-    /* Lists */
-    ul {
-      list-style-type: disc;
-      padding-left: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    ul li {
-      margin-bottom: 0.5rem;
-    }
-
-    /* Borders */
-    .border-t {
-      border-top: 1px solid #e5e7eb;
-    }
-
-    /* Accordion */
-    .accordion {
-      width: 100%;
-      margin-top: 1.5rem;
-    }
-
-    .accordion-item {
-      border-bottom: 1px solid #e5e7eb;
-    }
-
-    .accordion-trigger {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      padding: 1rem 0;
-      text-align: left;
-      font-size: 1.125rem;
-      font-weight: 600;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-
-    .accordion-trigger:hover {
-      color: #4f46e5;
-    }
-
-    .accordion-trigger::after {
-      content: '+';
-      font-size: 1.5rem;
-      transition: transform 0.2s ease;
-    }
-
-    .accordion-trigger.active::after {
-      content: '−';
-    }
-
-    .accordion-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-
-    .accordion-content-inner {
-      padding: 0 0 1.5rem 0;
-    }
-
-    /* Buttons */
-    .button-group {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    @media (min-width: 640px) {
-      .button-group {
-        flex-direction: row;
-      }
-    }
-
-    .button {
-      display: inline-block;
-      padding: 0.5rem 1rem;
-      font-weight: 500;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 0.25rem;
-      transition: background-color 0.2s ease;
-    }
-
-    .button-primary {
-      background-color: #875af1;
-      color: white;
-    }
-
-    .button-primary:hover {
-      background-color: #4338ca;
-    }
-
-    .button-outline {
-      background-color: transparent;
-      color: #875af1;
-      border: 1px solid #875af1;
-    }
-
-    .button-outline:hover {
-      background-color: rgba(79, 70, 229, 0.1);
-    }
+  }
 </style>
-{% extends 'index.html' %} 
-{% load static %} 
-{% block title %}
-<title>Lumiere | Terms and Conditions </title>
-{% endblock %}
-{% block main_content %}
-<div class="terms-container body-font">
-    <div class="space-y-6">
-      <div class="space-y-2 text-center">
-        <h1>Terms and Conditions</h1>
-        <p class="text-muted" id="last-updated">
-          Last updated: <script>document.write(new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }))</script>
+{% extends 'index.html' %} {% load static %} {% block title %}
+<title>Lumiere | Terms and Conditions</title>
+{% endblock %} {% block main_content %}
+<!-- Hero Section -->
+<section class="lumiere-hero">
+  <div class="lumiere-hero-container">
+    <h1 class="lumiere-hero-title">Terms and Conditions</h1>
+    <p class="lumiere-hero-description">
+      Please read our terms and conditions carefully before using Lumiere's
+      services
+    </p>
+  </div>
+</section>
+
+<div class="lumiere-body-font">
+  <div class="lumiere-terms-container">
+    <div class="lumiere-space-y-6">
+      <div class="lumiere-space-y-2 lumiere-text-center">
+        <p class="lumiere-text-muted" id="last-updated">
+          Last updated:
+          <script>
+            document.write(
+              new Date().toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })
+            );
+          </script>
         </p>
       </div>
-      
-      <div class="space-y-4">
-        <p>
-          Welcome to Lumiere. These Terms and Conditions govern your use of the Lumiere website and services, 
-          including our makeup artist booking platform and our makeup style recommendation feature.
+
+      <div class="lumiere-space-y-4">
+        <p class="lumiere-terms-paragraph">
+          Welcome to Lumiere. These Terms and Conditions govern your use of the
+          Lumiere website and services, including our makeup artist booking
+          platform and our makeup style recommendation feature.
         </p>
-        
-        <p>
-          By accessing or using our services, you agree to be bound by these Terms. Please read them carefully.
+
+        <p class="lumiere-terms-paragraph">
+          By accessing or using our services, you agree to be bound by these
+          Terms. Please read them carefully.
         </p>
-        
-        <div class="accordion">
-          <div class="accordion-item">
-            <button class="accordion-trigger">1. Definitions</button>
-            <div class="accordion-content">
-              <div class="accordion-content-inner space-y-4">
-                <p><strong>"Lumiere"</strong>, <strong>"we"</strong>, <strong>"us"</strong>, or <strong>"our"</strong> refers to Lumiere Beauty Services.</p>
-                <p><strong>"Services"</strong> refers to all services provided by Lumiere, including the website, makeup artist booking platform, and makeup style recommendation feature.</p>
-                <p><strong>"User"</strong>, <strong>"you"</strong>, or <strong>"your"</strong> refers to any individual who accesses or uses our Services.</p>
-                <p><strong>"Makeup Artist"</strong> refers to any professional who offers their services through our platform.</p>
-                <p><strong>"Content"</strong> refers to any information, text, graphics, photos, or other materials uploaded, downloaded, or appearing on our Services.</p>
+
+        <div class="lumiere-accordion">
+          <div class="lumiere-accordion-item">
+            <button class="lumiere-accordion-trigger">1. Definitions</button>
+            <div class="lumiere-accordion-content">
+              <div class="lumiere-accordion-content-inner lumiere-space-y-4">
+                <p class="lumiere-terms-paragraph">
+                  <strong>"Lumiere"</strong>, <strong>"we"</strong>,
+                  <strong>"us"</strong>, or <strong>"our"</strong> refers to
+                  Lumiere Beauty Services.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  <strong>"Services"</strong> refers to all services provided by
+                  Lumiere, including the website, makeup artist booking
+                  platform, and makeup style recommendation feature.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  <strong>"User"</strong>, <strong>"you"</strong>, or
+                  <strong>"your"</strong> refers to any individual who accesses
+                  or uses our Services.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  <strong>"Makeup Artist"</strong> refers to any professional
+                  who offers their services through our platform.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  <strong>"Content"</strong> refers to any information, text,
+                  graphics, photos, or other materials uploaded, downloaded, or
+                  appearing on our Services.
+                </p>
               </div>
             </div>
           </div>
-          
-          <div class="accordion-item">
-            <button class="accordion-trigger">2. User Accounts</button>
-            <div class="accordion-content">
-              <div class="accordion-content-inner space-y-4">
-                <p>To access certain features of our Services, you may need to create an account. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p>
-                <p>You must provide accurate, current, and complete information during the registration process and keep your account information updated.</p>
-                <p>We reserve the right to suspend or terminate your account if any information provided proves to be inaccurate, outdated, or incomplete.</p>
-                <p>You must be at least 18 years old to create an account. If you are under 18, you may only use our Services with the involvement and consent of a parent or guardian.</p>
+
+          <div class="lumiere-accordion-item">
+            <button class="lumiere-accordion-trigger">2. User Accounts</button>
+            <div class="lumiere-accordion-content">
+              <div class="lumiere-accordion-content-inner lumiere-space-y-4">
+                <p class="lumiere-terms-paragraph">
+                  To access certain features of our Services, you may need to
+                  create an account. You are responsible for maintaining the
+                  confidentiality of your account credentials and for all
+                  activities that occur under your account.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  You must provide accurate, current, and complete information
+                  during the registration process and keep your account
+                  information updated.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  We reserve the right to suspend or terminate your account if
+                  any information provided proves to be inaccurate, outdated, or
+                  incomplete.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  You must be at least 18 years old to create an account. If you
+                  are under 18, you may only use our Services with the
+                  involvement and consent of a parent or guardian.
+                </p>
               </div>
             </div>
           </div>
-          
-          <div class="accordion-item">
-            <button class="accordion-trigger">3. Services Description</button>
-            <div class="accordion-content">
-              <div class="accordion-content-inner space-y-4">
-                <h4>3.1 Makeup Artist Booking</h4>
-                <p>Lumiere provides a platform connecting users with makeup artists. We do not employ makeup artists directly; we facilitate connections between independent makeup artists and clients.</p>
-                <p>While we strive to verify the credentials and quality of makeup artists on our platform, we do not guarantee their services. Users book makeup artists at their own risk.</p>
-                
-                <h4>3.2 Makeup Style Recommendation Feature</h4>
-                <p>Our makeup style recommendation feature uses technology to analyze user-uploaded photos and suggest suitable makeup styles.</p>
-                <p>Recommendations are provided for informational purposes only and do not constitute professional advice.</p>
-                <p>The accuracy of recommendations depends on various factors, including photo quality, lighting, and other technical considerations.</p>
+
+          <div class="lumiere-accordion-item">
+            <button class="lumiere-accordion-trigger">
+              3. Services Description
+            </button>
+            <div class="lumiere-accordion-content">
+              <div class="lumiere-accordion-content-inner lumiere-space-y-4">
+                <h4 class="lumiere-terms-subheading">
+                  3.1 Makeup Artist Booking
+                </h4>
+                <p class="lumiere-terms-paragraph">
+                  Lumiere provides a platform connecting users with makeup
+                  artists. We do not employ makeup artists directly; we
+                  facilitate connections between independent makeup artists and
+                  clients.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  While we strive to verify the credentials and quality of
+                  makeup artists on our platform, we do not guarantee their
+                  services. Users book makeup artists at their own risk.
+                </p>
+
+                <h4 class="lumiere-terms-subheading">
+                  3.2 Makeup Style Recommendation Feature
+                </h4>
+                <p class="lumiere-terms-paragraph">
+                  Our makeup style recommendation feature uses technology to
+                  analyze user-uploaded photos and suggest suitable makeup
+                  styles.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  Recommendations are provided for informational purposes only
+                  and do not constitute professional advice.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  The accuracy of recommendations depends on various factors,
+                  including photo quality, lighting, and other technical
+                  considerations.
+                </p>
               </div>
             </div>
           </div>
-          
-          <div class="accordion-item">
-            <button class="accordion-trigger">4. User Content and Privacy</button>
-            <div class="accordion-content">
-              <div class="accordion-content-inner space-y-4">
-                <h4>4.1 User-Uploaded Photos</h4>
-                <p>When you upload photos to our Services, particularly for the makeup style recommendation feature, you retain ownership of your content.</p>
-                <p>By uploading photos, you grant Lumiere a non-exclusive, worldwide, royalty-free license to use, store, display, reproduce, and analyze your photos solely for the purpose of providing and improving our Services.</p>
-                <p>We will not use your photos for marketing or promotional purposes without your explicit consent.</p>
-                
-                <h4>4.2 Data Processing</h4>
-                <p>Photos uploaded for makeup style recommendations are processed using automated systems. We may retain these photos temporarily to improve our recommendation algorithms.</p>
-                <p>You can request deletion of your photos at any time through your account settings or by contacting our support team.</p>
-                
-                <h4>4.3 Privacy</h4>
-                <p>Our collection and use of personal information is governed by our Privacy Policy, which is incorporated into these Terms by reference.</p>
+
+          <div class="lumiere-accordion-item">
+            <button class="lumiere-accordion-trigger">
+              4. User Content and Privacy
+            </button>
+            <div class="lumiere-accordion-content">
+              <div class="lumiere-accordion-content-inner lumiere-space-y-4">
+                <h4 class="lumiere-terms-subheading">
+                  4.1 User-Uploaded Photos
+                </h4>
+                <p class="lumiere-terms-paragraph">
+                  When you upload photos to our Services, particularly for the
+                  makeup style recommendation feature, you retain ownership of
+                  your content.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  By uploading photos, you grant Lumiere a non-exclusive,
+                  worldwide, royalty-free license to use, store, display,
+                  reproduce, and analyze your photos solely for the purpose of
+                  providing and improving our Services.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  We will not use your photos for marketing or promotional
+                  purposes without your explicit consent.
+                </p>
+
+                <h4 class="lumiere-terms-subheading">4.2 Data Processing</h4>
+                <p class="lumiere-terms-paragraph">
+                  Photos uploaded for makeup style recommendations are processed
+                  using automated systems. We may retain these photos
+                  temporarily to improve our recommendation algorithms.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  You can request deletion of your photos at any time through
+                  your account settings or by contacting our support team.
+                </p>
+
+                <h4 class="lumiere-terms-subheading">4.3 Privacy</h4>
+                <p class="lumiere-terms-paragraph">
+                  Our collection and use of personal information is governed by
+                  our Privacy Policy, which is incorporated into these Terms by
+                  reference.
+                </p>
               </div>
             </div>
           </div>
-          
-          <div class="accordion-item">
-            <button class="accordion-trigger">5. Bookings and Payments</button>
-            <div class="accordion-content">
-              <div class="accordion-content-inner space-y-4">
-                <h4>5.1 Booking Process</h4>
-                <p>When you book a makeup artist through our platform, you enter into a direct agreement with the makeup artist.</p>
-                <p>Lumiere acts as an intermediary and is not responsible for the services provided by makeup artists.</p>
-                
-                <h4>5.2 Payments</h4>
-                <p>All payments are processed through our secure payment system. We may charge a service fee for facilitating bookings.</p>
-                <p>Prices for makeup artist services are set by the individual artists and may vary.</p>
-                
-                <h4>5.3 Cancellations and Refunds</h4>
-                <p>Cancellation policies are set by individual makeup artists and will be clearly displayed before booking.</p>
-                <p>Refunds are processed according to the applicable cancellation policy.</p>
-                <p>Lumiere reserves the right to issue refunds at our discretion in exceptional circumstances.</p>
+
+          <div class="lumiere-accordion-item">
+            <button class="lumiere-accordion-trigger">
+              5. Bookings and Payments
+            </button>
+            <div class="lumiere-accordion-content">
+              <div class="lumiere-accordion-content-inner lumiere-space-y-4">
+                <h4 class="lumiere-terms-subheading">5.1 Booking Process</h4>
+                <p class="lumiere-terms-paragraph">
+                  When you book a makeup artist through our platform, you enter
+                  into a direct agreement with the makeup artist.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  Lumiere acts as an intermediary and is not responsible for the
+                  services provided by makeup artists.
+                </p>
+
+                <h4 class="lumiere-terms-subheading">5.2 Payments</h4>
+                <p class="lumiere-terms-paragraph">
+                  All payments are processed through our secure payment system.
+                  We may charge a service fee for facilitating bookings.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  Prices for makeup artist services are set by the individual
+                  artists and may vary.
+                </p>
+
+                <h4 class="lumiere-terms-subheading">
+                  5.3 Cancellations and Refunds
+                </h4>
+                <p class="lumiere-terms-paragraph">
+                  Cancellation policies are set by individual makeup artists and
+                  will be clearly displayed before booking.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  Refunds are processed according to the applicable cancellation
+                  policy.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  Lumiere reserves the right to issue refunds at our discretion
+                  in exceptional circumstances.
+                </p>
               </div>
             </div>
           </div>
-          
-          <div class="accordion-item">
-            <button class="accordion-trigger">6. Makeup Artists</button>
-            <div class="accordion-content">
-              <div class="accordion-content-inner space-y-4">
-                <h4>6.1 Artist Verification</h4>
-                <p>While we make efforts to verify the credentials and quality of makeup artists on our platform, we cannot guarantee their services or conduct.</p>
-                <p>Makeup artists are independent contractors and not employees of Lumiere.</p>
-                
-                <h4>6.2 Artist Obligations</h4>
-                <p>Makeup artists using our platform agree to provide professional services, maintain accurate profiles, and honor bookings made through our platform.</p>
-                <p>Artists are responsible for complying with all applicable laws and regulations related to their services.</p>
+
+          <div class="lumiere-accordion-item">
+            <button class="lumiere-accordion-trigger">6. Makeup Artists</button>
+            <div class="lumiere-accordion-content">
+              <div class="lumiere-accordion-content-inner lumiere-space-y-4">
+                <h4 class="lumiere-terms-subheading">
+                  6.1 Artist Verification
+                </h4>
+                <p class="lumiere-terms-paragraph">
+                  While we make efforts to verify the credentials and quality of
+                  makeup artists on our platform, we cannot guarantee their
+                  services or conduct.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  Makeup artists are independent contractors and not employees
+                  of Lumiere.
+                </p>
+
+                <h4 class="lumiere-terms-subheading">6.2 Artist Obligations</h4>
+                <p class="lumiere-terms-paragraph">
+                  Makeup artists using our platform agree to provide
+                  professional services, maintain accurate profiles, and honor
+                  bookings made through our platform.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  Artists are responsible for complying with all applicable laws
+                  and regulations related to their services.
+                </p>
               </div>
             </div>
           </div>
-          
-          <div class="accordion-item">
-            <button class="accordion-trigger">7. Prohibited Conduct</button>
-            <div class="accordion-content">
-              <div class="accordion-content-inner space-y-4">
-                <p>You agree not to:</p>
-                <ul>
-                  <li>Use our Services for any illegal purpose or in violation of any laws</li>
-                  <li>Upload false, misleading, or fraudulent content</li>
-                  <li>Impersonate any person or entity</li>
-                  <li>Harass, abuse, or harm another person</li>
-                  <li>Upload content that infringes on intellectual property rights</li>
-                  <li>Attempt to gain unauthorized access to our systems</li>
-                  <li>Interfere with or disrupt our Services</li>
-                  <li>Use our Services to collect or harvest user data</li>
+
+          <div class="lumiere-accordion-item">
+            <button class="lumiere-accordion-trigger">
+              7. Prohibited Conduct
+            </button>
+            <div class="lumiere-accordion-content">
+              <div class="lumiere-accordion-content-inner lumiere-space-y-4">
+                <p class="lumiere-terms-paragraph">You agree not to:</p>
+                <ul class="lumiere-list">
+                  <li class="lumiere-list-item">
+                    Use our Services for any illegal purpose or in violation of
+                    any laws
+                  </li>
+                  <li class="lumiere-list-item">
+                    Upload false, misleading, or fraudulent content
+                  </li>
+                  <li class="lumiere-list-item">
+                    Impersonate any person or entity
+                  </li>
+                  <li class="lumiere-list-item">
+                    Harass, abuse, or harm another person
+                  </li>
+                  <li class="lumiere-list-item">
+                    Upload content that infringes on intellectual property
+                    rights
+                  </li>
+                  <li class="lumiere-list-item">
+                    Attempt to gain unauthorized access to our systems
+                  </li>
+                  <li class="lumiere-list-item">
+                    Interfere with or disrupt our Services
+                  </li>
+                  <li class="lumiere-list-item">
+                    Use our Services to collect or harvest user data
+                  </li>
                 </ul>
               </div>
             </div>
           </div>
-          
-          <div class="accordion-item">
-            <button class="accordion-trigger">8. Limitation of Liability</button>
-            <div class="accordion-content">
-              <div class="accordion-content-inner space-y-4">
-                <p>To the maximum extent permitted by law, Lumiere shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use or inability to use our Services.</p>
-                <p>We specifically disclaim liability for:</p>
-                <ul>
-                  <li>Any actions or omissions of makeup artists booked through our platform</li>
-                  <li>Accuracy of makeup style recommendations</li>
-                  <li>Any allergic reactions or adverse effects from makeup application</li>
-                  <li>Loss or unauthorized access to user-uploaded photos</li>
-                  <li>Service interruptions or technical issues</li>
+
+          <div class="lumiere-accordion-item">
+            <button class="lumiere-accordion-trigger">
+              8. Limitation of Liability
+            </button>
+            <div class="lumiere-accordion-content">
+              <div class="lumiere-accordion-content-inner lumiere-space-y-4">
+                <p class="lumiere-terms-paragraph">
+                  To the maximum extent permitted by law, Lumiere shall not be
+                  liable for any indirect, incidental, special, consequential,
+                  or punitive damages resulting from your use or inability to
+                  use our Services.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  We specifically disclaim liability for:
+                </p>
+                <ul class="lumiere-list">
+                  <li class="lumiere-list-item">
+                    Any actions or omissions of makeup artists booked through
+                    our platform
+                  </li>
+                  <li class="lumiere-list-item">
+                    Accuracy of makeup style recommendations
+                  </li>
+                  <li class="lumiere-list-item">
+                    Any allergic reactions or adverse effects from makeup
+                    application
+                  </li>
+                  <li class="lumiere-list-item">
+                    Loss or unauthorized access to user-uploaded photos
+                  </li>
+                  <li class="lumiere-list-item">
+                    Service interruptions or technical issues
+                  </li>
                 </ul>
-                <p>Our total liability for any claims related to these Terms shall not exceed the amount you paid to us in the six months preceding the claim.</p>
+                <p class="lumiere-terms-paragraph">
+                  Our total liability for any claims related to these Terms
+                  shall not exceed the amount you paid to us in the six months
+                  preceding the claim.
+                </p>
               </div>
             </div>
           </div>
-          
-          <div class="accordion-item">
-            <button class="accordion-trigger">9. Disclaimers</button>
-            <div class="accordion-content">
-              <div class="accordion-content-inner space-y-4">
-                <p>Our Services are provided "as is" and "as available" without warranties of any kind, either express or implied.</p>
-                <p>We do not guarantee that our Services will be uninterrupted, secure, or error-free.</p>
-                <p>Makeup style recommendations are generated by automated systems and are for informational purposes only. We do not guarantee their suitability for any particular user.</p>
-                <p>We do not endorse any specific makeup products or techniques recommended through our Services.</p>
+
+          <div class="lumiere-accordion-item">
+            <button class="lumiere-accordion-trigger">9. Disclaimers</button>
+            <div class="lumiere-accordion-content">
+              <div class="lumiere-accordion-content-inner lumiere-space-y-4">
+                <p class="lumiere-terms-paragraph">
+                  Our Services are provided "as is" and "as available" without
+                  warranties of any kind, either express or implied.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  We do not guarantee that our Services will be uninterrupted,
+                  secure, or error-free.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  Makeup style recommendations are generated by automated
+                  systems and are for informational purposes only. We do not
+                  guarantee their suitability for any particular user.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  We do not endorse any specific makeup products or techniques
+                  recommended through our Services.
+                </p>
               </div>
             </div>
           </div>
-          
-          <div class="accordion-item">
-            <button class="accordion-trigger">10. Changes to Terms</button>
-            <div class="accordion-content">
-              <div class="accordion-content-inner space-y-4">
-                <p>We may modify these Terms at any time by posting the revised terms on our website. Your continued use of our Services after such changes constitutes your acceptance of the new Terms.</p>
-                <p>We will make reasonable efforts to notify users of significant changes to these Terms.</p>
+
+          <div class="lumiere-accordion-item">
+            <button class="lumiere-accordion-trigger">
+              10. Changes to Terms
+            </button>
+            <div class="lumiere-accordion-content">
+              <div class="lumiere-accordion-content-inner lumiere-space-y-4">
+                <p class="lumiere-terms-paragraph">
+                  We may modify these Terms at any time by posting the revised
+                  terms on our website. Your continued use of our Services after
+                  such changes constitutes your acceptance of the new Terms.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  We will make reasonable efforts to notify users of significant
+                  changes to these Terms.
+                </p>
               </div>
             </div>
           </div>
-          
-          <div class="accordion-item">
-            <button class="accordion-trigger">11. Termination</button>
-            <div class="accordion-content">
-              <div class="accordion-content-inner space-y-4">
-                <p>We may terminate or suspend your access to our Services immediately, without prior notice or liability, for any reason, including if you breach these Terms.</p>
-                <p>Upon termination, your right to use our Services will immediately cease.</p>
-                <p>All provisions of these Terms which by their nature should survive termination shall survive, including ownership provisions, warranty disclaimers, indemnity, and limitations of liability.</p>
+
+          <div class="lumiere-accordion-item">
+            <button class="lumiere-accordion-trigger">11. Termination</button>
+            <div class="lumiere-accordion-content">
+              <div class="lumiere-accordion-content-inner lumiere-space-y-4">
+                <p class="lumiere-terms-paragraph">
+                  We may terminate or suspend your access to our Services
+                  immediately, without prior notice or liability, for any
+                  reason, including if you breach these Terms.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  Upon termination, your right to use our Services will
+                  immediately cease.
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  All provisions of these Terms which by their nature should
+                  survive termination shall survive, including ownership
+                  provisions, warranty disclaimers, indemnity, and limitations
+                  of liability.
+                </p>
               </div>
             </div>
           </div>
-          
-          <div class="accordion-item">
-            <button class="accordion-trigger">12. Contact Information</button>
-            <div class="accordion-content">
-              <div class="accordion-content-inner space-y-4">
-                <p>If you have any questions about these Terms, please contact us at:</p>
-                <p>Email: jengrg003@gmail.com</p>
-                <p>Address: Kumarigal-07, boudha</p>
+
+          <div class="lumiere-accordion-item">
+            <button class="lumiere-accordion-trigger">
+              12. Contact Information
+            </button>
+            <div class="lumiere-accordion-content">
+              <div class="lumiere-accordion-content-inner lumiere-space-y-4">
+                <p class="lumiere-terms-paragraph">
+                  If you have any questions about these Terms, please contact us
+                  at:
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  Email: jengrg003@gmail.com
+                </p>
+                <p class="lumiere-terms-paragraph">
+                  Address: Kumarigal-07, boudha
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
-      <div class="border-t pt-6 text-center">
-        <p class="text-sm text-muted mb-6">
-          By using Lumiere's services, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions.
+
+      <div class="lumiere-border-t lumiere-pt-6 lumiere-text-center">
+        <p class="lumiere-text-sm lumiere-text-muted lumiere-mb-6">
+          By using Lumiere's services, you acknowledge that you have read,
+          understood, and agree to be bound by these Terms and Conditions.
         </p>
-        
-        <div class="button-group">
-          <a href="{% url 'home' %}" class="button button-primary">Return to Home</a>
-          <a href="{% url 'policy' %}" class="button button-outline">Privacy Policy</a>
+
+        <div class="lumiere-button-group">
+          <a
+            href="{% url 'home' %}"
+            class="lumiere-button lumiere-button-primary"
+            >Return to Home</a
+          >
+          <a
+            href="{% url 'policy' %}"
+            class="lumiere-button lumiere-button-outline"
+            >Privacy Policy</a
+          >
         </div>
-        
-        <p class="text-sm text-muted mt-8">
-          © <script>document.write(new Date().getFullYear())</script> Lumiere Beauty Services. All rights reserved.
-        </p>
       </div>
     </div>
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const accordionTriggers = document.querySelectorAll('.accordion-trigger');
-      
-      accordionTriggers.forEach(trigger => {
-        trigger.addEventListener('click', function() {
-          this.classList.toggle('active');
-          
+    document.addEventListener("DOMContentLoaded", function () {
+      const accordionTriggers = document.querySelectorAll(
+        ".lumiere-accordion-trigger"
+      );
+
+      accordionTriggers.forEach((trigger) => {
+        trigger.addEventListener("click", function () {
+          this.classList.toggle("active");
+
           const content = this.nextElementSibling;
-          
-          if (this.classList.contains('active')) {
-            content.style.maxHeight = content.scrollHeight + 'px';
+
+          if (this.classList.contains("active")) {
+            content.style.maxHeight = content.scrollHeight + "px";
           } else {
-            content.style.maxHeight = '0';
+            content.style.maxHeight = "0";
           }
         });
       });
     });
   </script>
-{% endblock %}
+  {% endblock %}
+</div>

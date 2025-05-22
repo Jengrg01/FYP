@@ -11,6 +11,8 @@
   rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
 />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
 {% block main_content %}
 {% for msg in messages %}
 <div class="msg flex justify-center absolute left-[45%] top-16 z-[99]">
@@ -38,8 +40,11 @@
   }
   .custom-font_1 {
             font-family: "Poppins";
-            font-weight: 400;
+            
         }
+  .custom-font_2{
+    font-family: "Cormorant Garamond";
+  }
 </style>
 
 <!-- ------------Image Slider Section !!!!!!--------------------- -->
@@ -154,204 +159,293 @@
 {% include 'artists/cardslider.html' %}
 
 <!-- DUMMY REVIEWS START!!!!!!!!! -->
-<div class="h-[488px] w-full bg-[#F9FAFB] mb-20 flex flex-col justify-center items-center">
+<div class="h-[488px] w-full bg-[#F9FAFB] pb-10 flex flex-col justify-center items-center">
   <h1 class="font-normal text-3xl text-center  pb-3" style="font-family: Lora;">What Our Clients Say</h1>
-  <div class="flex justify-center justify-evenly items-center w-[85%] h-2/3 mt-5">
-    <div class=" w-[30%] h-full rounded-lg bg-white" style="box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
+  <div class="flex justify-center justify-evenly items-center w-[85%] h-2/3 mt-3">
+    <div class=" w-[30%] h-[90%] rounded-lg bg-white" style="box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
       <div class="flex-col h-full w-full">
-        <div class="flex h-[25%]">
+        <div class="flex h-[25%] pt-3">
           <div class="h-full w-1/4 flex justify-center">
-            <img src="{% static 'uploads/loginimage1.jpg' %}" alt="dummy_picture" class="w-[80%] rounded-full object-fit">
+            <img src="{% static 'uploads/loginimage1.jpg' %}" alt="dummy_picture" class="w-[60%] rounded-full object-fit">
           </div>
           <div class="h-full w-3/4 flex-col">
             <div class=" h-1/2 w-full">
               <h3 class="font-normal text-lg custom-font_1 pt-2 pl-4"> Layla</h3>
             </div>
             <div class="h-1/2 w-full">
-              <h3 class="font-normal text-md text-gray-400 custom-font_1 pt-2 pl-4"> Makeup Enthusiast</h3>
+              <h3 class="font-normal text-md text-gray-400 custom-font_1 pl-4"> Makeup Enthusiast</h3>
             </div>
           </div>
         </div>
-        <div class="bg-yellow-200 h-[75%]"></div>
+        <div class=" h-[75%] flex justify-center">
+          <div class="w-[89%] h-[90%] mt-6">
+            <p class="text-lg custom-font_1 font-normal text-gray-700">"Absolutely stunning work! The makeup lasted all day and looked flawless in every photo. She perfectly understood my vision and brought it to life."</p>
+          </div>
+        </div>
       </div>
     </div>
-    <div class=" w-[30%] h-full rounded-lg bg-white" style="box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
+    <div class=" w-[30%] h-[90%] rounded-lg bg-white" style="box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
       <div class="flex-col h-full w-full">
-        <div class=" flex h-[25%]">
+        <div class=" flex h-[25%] pt-3">
           <div class="h-full w-1/4 flex justify-center">
-            <img src="{% static 'uploads/loginimg.jpeg' %}" alt="dummy_picture" class="w-[80%] rounded-full object-fit">
+            <img src="{% static 'uploads/loginimg.jpeg' %}" alt="dummy_picture" class="w-[60%] rounded-full object-fit">
           </div>
           <div class="h-full w-3/4">
             <div class="h-1/2 w-full">
               <h3 class="font-normal text-lg custom-font_1 pt-2 pl-4"> Miya </h3>
             </div>
             <div class="h-1/2 w-full">
-              <h3 class="font-normal text-md text-gray-400 custom-font_1 pt-2 pl-4"> Makeup Enthusiast</h3>
+              <h3 class="font-normal text-md text-gray-400 custom-font_1 pl-4"> Makeup Enthusiast</h3>
             </div>
           </div>
         </div>
-        <div class="bg-yellow-200 h-[75%]"></div>
+        <div class="h-[75%] flex justify-center">
+          <div class="w-[89%] h-[90%] mt-6">
+            <p class="text-lg custom-font_1 font-normal text-gray-700">"I went for a soft glam look and she nailed it. So professional and friendly — I got so many compliments at the event!"</p>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="w-[30%] h-full rounded-lg bg-white" style="box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
+    <div class="w-[30%] h-[90%] rounded-lg bg-white" style="box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
       <div class="flex-col h-full w-full">
-        <div class="flex h-[25%]">
+        <div class="flex h-[25%] pt-3">
           <div class="h-full w-1/4 flex justify-center">
-            <img src="{% static 'uploads/loginimg_1.jpg' %}" alt="dummy_picture" class="w-[80%] rounded-full object-fit">
+            <img src="{% static 'uploads/loginimg_1.jpg' %}" alt="dummy_picture" class="w-[60%] rounded-full object-fit">
           </div>
           <div class="h-full w-3/4">
             <div class="h-1/2 w-full">
               <h3 class="font-normal text-lg custom-font_1 pt-2 pl-4"> Kadita </h3>
             </div>
             <div class="h-1/2 w-full">
-              <h3 class="font-normal text-md text-gray-400 custom-font_1 pt-2 pl-4"> Makeup Enthusiast</h3>
+              <h3 class="font-normal text-md text-gray-400 custom-font_1 pl-4"> Makeup Enthusiast</h3>
             </div>
           </div>
         </div>
-        <div class="bg-yellow-200 h-[75%]"></div>
+        <div class="h-[75%] flex justify-center">
+          <div class="w-[89%] h-[90%] mt-6">
+            <p class="text-lg custom-font_1 font-normal text-gray-700">"Amazing attention to detail. She chose shades that matched my skin tone perfectly. Felt confident and beautiful the whole day!"</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   
 </div>
-
-
 <!-- DUMMY REVIEWS END!!!!!!!!! -->
+
+<!-- BANNER START !!!!!!!!!!!!!!!! -->
+<div class="h-[220px] w-full bg-[#FFC6CA] mb-20 flex justify-evenly">
+  <div class="mt-14 h-[50%] w-[10%] flex-col justify-center">
+    <h1 class="text-4xl font-bold text-white custom-font_1 pt-5 text-center">10+</h1>
+    <p class="text-md font-normal text-white text-center custom-font_1">Years Experience</p>
+  </div>
+  <div class="mt-14 h-[50%] w-[10%] flex-col justify-center">
+    <h1 class="text-4xl font-bold text-white custom-font_1 pt-5 text-center">500+</h1>
+    <p class="text-md font-normal text-white text-center custom-font_1">Photo Sessions</p>
+  </div>
+  <div class="mt-14 h-[50%] w-[10%] flex-col justify-center">
+    <h1 class="text-4xl font-bold text-white custom-font_1 pt-5 text-center">50+</h1>
+    <p class="text-md font-normal text-white text-center custom-font_1">Magazine Features</p>
+  </div>
+  <div class="mt-14 h-[50%] w-[10%] flex-col justify-center">
+    <h1 class="text-4xl font-bold text-white custom-font_1 pt-5 text-center">200+</h1>
+    <p class="text-md font-normal text-white text-center custom-font_1">Happy Clients</p>
+  </div>
+</div>
+
+
+<!-- BANNER END !!!!!!!!!!!!!!!! -->
+
+<!-- FOLLOW US ON OUR JOURNEY START !!!!!!!!!!!!!!!! -->
+<div class="h-[388px] w-full bg-[#F9FAFB] pb-10 mb-20 flex flex-col justify-center items-center">
+  <div class="h-[30%] w-full flex-col justify-center items-center">
+    <h1 class="text-3xl font-thin text-center custom-font_2 pt-5 pb-1">Follow our Journey</h1>
+    <p class="text-gray-500 text-sm font-normal custom-font_1 text-center">Stay updated with our latest work and behind-the-scenes moments on Instagram.</p>
+  </div>
+  <div class=" h-[60%] w-full flex justify-evenly">
+    <div class="bg-white w-[16%] h-[85%] mt-4"><img src="{% static 'uploads/journey1.jpeg' %}" alt="artist pictures" class="w-full h-full object-cover"></div>
+    <div class="bg-white w-[16%] h-[85%] mt-4"><img src="{% static 'uploads/journey2.jpeg' %}" alt="artist pictures" class="w-full h-full object-cover"></div>
+    <div class="bg-white w-[16%] h-[85%] mt-4"><img src="{% static 'uploads/journey3.jpeg' %}" alt="artist pictures" class="w-full h-full object-cover"></div>
+    <div class="bg-white w-[16%] h-[85%] mt-4"><img src="{% static 'uploads/journey4.jpeg' %}" alt="artist pictures" class="w-full h-full object-cover"></div>
+    <div class="bg-white w-[16%] h-[85%] mt-4"><img src="{% static 'uploads/journey5.jpeg' %}" alt="artist pictures" class="w-full h-full object-cover"></div>
+  </div>
+  <div class="h-[10%] w-full flex justify-center items-center gap-3">
+    <div class="bg-[#FFC6CA] w-7 h-7 rounded-full">
+      <img src="{% static 'uploads/insta.png' %}" class="w-[90%] h-[90%] ml-[1px] mt-[1px]" alt="instagram">
+    </div>
+    <p class="text-sm custom-font_1 font-semibold text-[#FFC6CA]">@lumiere_makeup</p>
+  </div>
+</div>
+<!-- FOLLOW US END !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
 <!-- ---------Camera Upload-------- -->
 <h1
-  class="text-3xl text-center text-black mt-10 font-normal"
-  style="font-family: Lora"
+  class="text-3xl text-center text-black mt-10 font-normal font-extrathin custom-font_2"
 >
-  Want to learn what suits you the best?
+  Want to learn what suits you best?
 </h1>
 <div class="flex justify-center mt-3 ml-20">
-  <svg height="80" width="300" xmlns="http://www.w3.org/2000/svg">
-    <g fill="none" stroke="black">
-      <path stroke-width="3" d="M5 20 l215 0" />
-    </g>
-  </svg>
+  <p class="text-center text-md font-light custom-font_1 text-gray-500 mb-10 w-[55%]">
+    Upload your photo and our system will analyze your features to recommend
+    the perfect makeup style that highlights your unique characteristics.
+  </p>
 </div>
+
 <div class="flex items-center justify-center h-96 w-full bg-white mb-24">
-  <div
-    style="box-shadow: 0px 1px 5px grey"
-    class="flex justify-center items-center h-full w-4/5 border-2 rounded-lg"
-  >
   {% if user.is_authenticated %}
-    <div class="border-2 border-dashed h-5/6 w-[90%] border-gray-400">
-      <div class="flex flex-col justify-center items-center mt-20">
-        <div class="camera-icon h-24 w-24 mb-5">
-          <img
-            class="w-full h-full"
-            src="{% static 'uploads/camera.png' %}"
-            alt="camera icon"
-          />
-        </div>
-
-        <form
-          id="imageForm"
-          enctype="multipart/form-data"
-          class="flex flex-col items-center gap-4"
-        >
-          {% csrf_token %}
-          <input type="file" id="imageInput" name="image" class="hidden" />
-          <button
-            type="button"
-            id="upload-btn"
-            class="px-4 py-2 bg-[#663DC6] rounded-md font-medium text-white hover:bg-[#875af1]"
+    <div
+      style="box-shadow: 0px 1px 2px grey"
+      class="flex justify-center items-center h-full w-[70%] border-2 rounded-lg"
+    >
+      <div class="border-2 border-dashed h-5/6 w-[90%] border-gray-400">
+        <div class="flex flex-col justify-center items-center mt-20">
+          <div class="camera-icon h-24 w-24">
+            <img
+              class="w-full h-full"
+              src="{% static 'uploads/camera_1.png' %}"
+              alt="camera icon"
+            />
+          </div>
+          <p class="text-sm font-light custom-font_1 text-gray-500 text-center mb-3">
+            Upload a clear photo of yourself to get recommendations
+          </p>
+          <form
+            id="imageForm"
+            enctype="multipart/form-data"
+            class="flex flex-col items-center gap-4 relative -left-24 mt-3"
           >
-            Upload Image
-          </button>
-        </form>
-
-        <!-- Capture Image Section -->
-        <div class="flex justify-evenly gap-2 mt-4">
-          <button
-            id="capture-btn"
-            class="px-4 py-2 bg-[#663DC6] rounded-md font-medium text-white hover:bg-[#875af1]"
-          >
-            Capture Image
-          </button>
-        </div>
-
-        <!-- Camera Access -->
-        <div
-          id="cameraModal"
-          class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden overflow-hidden"
-        >
-          <div
-            class="bg-white p-4 rounded-lg shadow-lg flex flex-col items-center"
-          >
-            <video
-              id="video"
-              width="320"
-              height="240"
-              autoplay
-              class="border rounded-md"
-            ></video>
-            <canvas
-              id="canvas"
-              width="320"
-              height="240"
-              class="hidden"
-            ></canvas>
+            {% csrf_token %}
+            <input type="file" id="imageInput" name="image" class="hidden" />
             <button
-              id="take-photo"
-              class="mt-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500"
+              type="button"
+              id="upload-btn"
+              class="px-4 py-2 bg-[#FFC6CA] rounded-md font-medium text-white hover:bg-[#eca4a9]"
             >
-              Take Photo
+              Upload Image
             </button>
+          </form>
+          <p class="text-md font-light custom-font_1 text-gray-500 relative -top-8 -left-1">
+            or
+          </p>
+          <!-- Capture Image Section -->
+          <div class="flex justify-evenly gap-2 relative -top-16 left-24">
             <button
-              id="upload-photo"
-              class="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 hidden"
+              id="capture-btn"
+              class="px-4 py-2 bg-[#FFC6CA] rounded-md font-medium text-white hover:bg-[#eca4a9]"
             >
-              Upload Photo
-            </button>
-            <button
-              id="close-camera"
-              class="mt-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500"
-            >
-              Close
+              Capture Image
             </button>
           </div>
-        </div>
 
-        <!-- Result Popup -->
-        <div
-          id="resultPopup"
-          class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden overflow-hidden"
-        >
+          <!-- Camera Access -->
           <div
-            class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center w-[90%] sm:w-[500px]"
+            id="cameraModal"
+            class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden overflow-hidden"
           >
-            <img
-              id="resultImage"
-              class="w-48 h-48 object-cover rounded-lg mb-4"
-              src=""
-              alt="Processed Image"
-            />
-            <p
-              id="resultText"
-              class="text-lg font-semibold w-full text-center"
-            ></p>
-            <button
-              id="close-result"
-              class="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500"
+            <div class="bg-white p-4 rounded-lg shadow-lg flex flex-col items-center">
+              <video
+                id="video"
+                width="320"
+                height="240"
+                autoplay
+                class="border rounded-md"
+              ></video>
+              <canvas
+                id="canvas"
+                width="320"
+                height="240"
+                class="hidden"
+              ></canvas>
+              <button
+                id="take-photo"
+                class="mt-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500"
+              >
+                Take Photo
+              </button>
+              <button
+                id="upload-photo"
+                class="mt-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 hidden"
+              >
+                Upload Photo
+              </button>
+              <button
+                id="close-camera"
+                class="mt-2 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+
+          <!-- Result Popup -->
+          <div
+            id="resultPopup"
+            class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden overflow-hidden"
+          >
+            <div
+              class="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center w-[90%] sm:w-[500px]"
             >
-              Close
-            </button>
+              <img
+                id="resultImage"
+                class="w-48 h-48 object-cover rounded-lg mb-4"
+                src=""
+                alt="Processed Image"
+              />
+              <p
+                id="resultText"
+                class="text-lg font-semibold w-full text-center"
+              ></p>
+              <button
+                id="close-result"
+                class="mt-4 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
+  {% else %}
+    <div
+      style="box-shadow: 0px 1px 2px grey"
+      class="flex justify-center items-center h-full w-[70%] border-2 rounded-lg"
+    >
+    <div class="border-2 border-dashed h-5/6 w-[90%] border-gray-400">
+      <div class="text-center">
+        <p class="text-xl custom-font_1 font-semibold text-gray-700 pt-36">
+          In order to access this feature.
+        </p>
+        <a href="{% url 'login' %}" class="text-[#FFC6CA] font-bold custom-font_1 text-lg underline">Login here</a>
+      </div>
+    </div>
+    </div>
+  {% endif %}
+</div>
+
+
+<!-- PHOTO BANNER START!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<div class="relative h-[388px] w-full bg-no-repeat bg-cover bg-center pb-10 mb-20 flex flex-col justify-center items-center"
+    style="background-image: url('{% static "uploads/makeupbag2.jpg" %}');">
+
+  <!-- Semi-transparent  overlay -->
+  <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+  <div class="relative z-10 text-white custom-font_2 ">
+    <h2 class="text-5xl font-bold custom-font_2 text-center mb-6">Ready to Look Beautiful ?</h2>
+    <div class="flex justify-center items-center mb-5">
+      <p class="custom-font_1 text-md text-white text-center font-light w-[90%]">Book a consultation with our makeup experts and start your journey to capturing unforgettable moments.</p>
+    </div>
+    <div class="flex justify-center items-center gap-3 -ml-10">
+      <a href="{% url 'artist' %}" class="px-3 py-2 bg-[#FFC6CA] border-2 border-[#FFC6CA] text-white text-md custom-font_1 font-normal hover:bg-[#eca4a9]">Book a Session</a>
+      <a href="{% url 'contact' %}" class="px-3 py-2 bg-transparent border-2 text-md border-[#FFC6CA] text-[#FFC6CA] custom-font_1 font-normal hover:bg-[#eca4a9] hover:text-white">Contact Us</a>
+    </div>
   </div>
+
 </div>
-{% else %}
-<div class="text-center mt-10">
-  <p class="text-xl custom-font_1 font-semibold text-red-500">In order to access this feature.</p>
-  <a href="{% url 'login' %}" class="text-blue-500 text-lg underline">Login here</a>
-</div>
-{% endif %}
+
+
+
+<!-- PHOTO BANNER END!!!!!!!!!!!!!!!!!!!!!!!! -->
 <script>
    setTimeout(() => {
     document.querySelectorAll('.fade-msg').forEach(el => {

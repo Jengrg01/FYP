@@ -70,10 +70,6 @@ class ArtistProfileForm(forms.ModelForm):
 
 #For user to book an artist
 class BookingForm(forms.Form):
-    first_name = forms.CharField(max_length=30, label="First Name")
-    last_name = forms.CharField(max_length=30, label="Last Name")
-    phone_number = forms.CharField(max_length=15, label="Phone Number")
-    email = forms.EmailField(label="Email Address")
     time_slot = forms.ModelChoiceField(queryset=None, label="Select Time Slot", empty_label=None)
 
     def __init__(self, artist=None, *args, **kwargs):

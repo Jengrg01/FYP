@@ -138,10 +138,10 @@
   .thumbnail .item.active{
     filter: brightness(1.5);
     transform: scale(1.05);
-    color: #000;
+    color: #fff;
   }
   .thumbnail .item.active .thumbnail-content{
-    color: #000;
+    color: #fff;
   }
   .thumbnail-content{
     position: absolute;
